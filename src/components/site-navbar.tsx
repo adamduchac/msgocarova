@@ -57,8 +57,10 @@ export function SiteNavbar() {
 
       <div
         id="mobile-nav"
-        className={`mobile-nav-panel lg:hidden border-t border-border/60 bg-background origin-top overflow-hidden transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-          open ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"
+        className={`mobile-nav-panel lg:hidden border-t border-border/60 bg-background origin-top overflow-y-auto overscroll-contain transition-[opacity,transform,max-height] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          open
+            ? "opacity-100 translate-y-0 max-h-[calc(100dvh-5rem)] pointer-events-auto"
+            : "opacity-0 -translate-y-1 max-h-0 pointer-events-none"
         }`}
         aria-hidden={!open}
       >

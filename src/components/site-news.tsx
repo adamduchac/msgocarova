@@ -56,7 +56,7 @@ export function SiteNews() {
           {news.map((n, i) => (
             <article
               key={n.title}
-              className="reveal-up group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card transition-[box-shadow,transform] duration-[280ms] ease-out hover:-translate-y-0.5 hover:shadow-[0_22px_45px_-22px_rgba(16,15,16,0.22)]"
+              className="reveal-up group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card transition-[box-shadow,transform] duration-200 ease-out transform-gpu hover:-translate-y-0.5 hover:shadow-[0_22px_45px_-22px_rgba(16,15,16,0.22)]"
               style={{ ["--reveal-delay" as string]: `${i * 110}ms` }}
             >
               <div className="relative aspect-[5/3] w-full overflow-hidden">

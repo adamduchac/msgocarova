@@ -206,9 +206,9 @@
 :where(.reveal-up, .reveal-right, .reveal-fade, .reveal-scale) {
   opacity: 0;
   will-change: opacity, transform;
-  transition:
-    opacity 720ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-property: opacity, transform;
+  transition-duration: 720ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: var(--reveal-delay, 0ms);
 }
 .reveal-up    { transform: translate3d(0, 14px, 0); }
@@ -219,6 +219,7 @@
 :where(.reveal-up, .reveal-right, .reveal-fade, .reveal-scale).is-visible {
   opacity: 1;
   transform: none;
+  will-change: auto;
 }
 
 /* Slightly faster + shorter travel on mobile for smoother feel. */
