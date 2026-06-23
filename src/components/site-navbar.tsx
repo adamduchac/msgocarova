@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import logoAsset from "@/assets/logo.svg.asset.json";
 
 const navLinks = [
-  { label: "O nás", href: "#o-nas" },
-  { label: "Naše třídy", href: "#tridy" },
+  { label: "O školce", href: "#o-skolce" },
+  { label: "Třídy", href: "#tridy" },
   { label: "Pro rodiče", href: "#rodice" },
   { label: "Aktuality", href: "#aktuality" },
-  { label: "Galerie", href: "#galerie" },
   { label: "Kontakt", href: "#kontakt" },
 ];
 
@@ -35,10 +34,11 @@ export function SiteNavbar() {
           </nav>
 
           <a
-            href="#nase-ms"
-            className="hidden h-11 items-center rounded-md bg-brand-green px-5 text-[15px] font-semibold text-white transition-colors duration-200 hover:bg-brand-green-hover lg:inline-flex"
+            href="#zapis"
+            className="group hidden h-11 items-center gap-2 rounded-md bg-brand-blue px-5 text-[15px] font-semibold text-white transition-colors duration-200 hover:bg-brand-blue/90 lg:inline-flex"
           >
-            Naše MŠ
+            Přihlásit dítě
+            <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
           </a>
 
           <button
@@ -49,14 +49,8 @@ export function SiteNavbar() {
             aria-label={open ? "Zavřít menu" : "Otevřít menu"}
             className="relative inline-flex h-11 w-11 items-center justify-center rounded-md bg-news-pinned text-ink transition-colors duration-200 hover:brightness-95 lg:hidden"
           >
-            <Menu
-              className={`h-5 w-5 absolute transition-opacity duration-200 ${open ? "opacity-0" : "opacity-100"}`}
-              aria-hidden="true"
-            />
-            <X
-              className={`h-5 w-5 absolute transition-opacity duration-200 ${open ? "opacity-100" : "opacity-0"}`}
-              aria-hidden="true"
-            />
+            <Menu className={`h-5 w-5 absolute transition-opacity duration-200 ${open ? "opacity-0" : "opacity-100"}`} aria-hidden />
+            <X className={`h-5 w-5 absolute transition-opacity duration-200 ${open ? "opacity-100" : "opacity-0"}`} aria-hidden />
           </button>
         </div>
       </div>
@@ -64,9 +58,7 @@ export function SiteNavbar() {
       <div
         id="mobile-nav"
         className={`mobile-nav-panel lg:hidden border-t border-border/60 bg-background origin-top overflow-hidden transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-          open
-            ? "opacity-100 translate-y-0 pointer-events-auto"
-            : "opacity-0 -translate-y-1 pointer-events-none"
+          open ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"
         }`}
         aria-hidden={!open}
       >
@@ -84,13 +76,13 @@ export function SiteNavbar() {
             </a>
           ))}
           <a
-            href="#nase-ms"
+            href="#zapis"
             onClick={() => setOpen(false)}
             tabIndex={open ? 0 : -1}
-            className="mobile-nav-item mt-2 inline-flex h-12 items-center justify-center rounded-md bg-brand-green px-5 text-base font-semibold text-white transition-colors duration-200 hover:bg-brand-green-hover"
+            className="mobile-nav-item mt-2 inline-flex h-12 items-center justify-center rounded-md bg-brand-blue px-5 text-base font-semibold text-white transition-colors duration-200 hover:bg-brand-blue/90"
             style={{ ["--mobile-nav-delay" as string]: `${navLinks.length * 40}ms` }}
           >
-            Naše MŠ
+            Přihlásit dítě
           </a>
         </nav>
       </div>

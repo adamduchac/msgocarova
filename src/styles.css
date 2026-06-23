@@ -296,3 +296,4 @@
   .mobile-nav-item { opacity: 1 !important; transform: none !important; }
   .nav-link::after { transition: none !important; }
 }
+html { scroll-behavior: smooth; }
