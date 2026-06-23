@@ -237,21 +237,23 @@
    Uses CSS `translate` (Tailwind v4 maps `hover:-translate-y-*` to this same
    property), and is wrapped in `:where()` so any Tailwind utility can still
    override. Reveal animation drives `transform`; hover drives `translate`. */
-:where(.card-hover, .card-hover-soft) {
+.card-hover,
+.card-hover-soft {
   transition-property: box-shadow, border-color, background-color, translate;
   transition-duration: 220ms;
   transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   translate: 0 0;
 }
 
-:where(.card-hover):hover {
+.card-hover:hover {
   translate: 0 -2px;
   box-shadow: 0 22px 45px -22px rgba(16, 15, 16, 0.22);
 }
-:where(.card-hover-soft):hover {
+.card-hover-soft:hover {
   translate: 0 -1px;
   box-shadow: 0 14px 30px -18px rgba(16, 15, 16, 0.18);
 }
+
 
 
 /* Vertical rhythm ----------------------------------------------------- */
