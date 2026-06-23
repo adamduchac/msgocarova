@@ -274,6 +274,10 @@
     opacity: 1 !important;
     transform: none !important;
   }
+  :where(.card-hover, .card-hover-soft):hover {
+    translate: 0 0 !important;
+  }
+
 }
 
 /* Navbar — animated underline on desktop nav items ------------------- */

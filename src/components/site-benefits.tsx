@@ -61,7 +61,7 @@ export function SiteBenefits() {
           {benefits.map((b, i) => (
             <article
               key={b.title}
-              className="reveal-up group flex flex-col rounded-2xl border border-border/60 bg-card p-7 transition-[box-shadow,transform] duration-200 ease-out transform-gpu hover:-translate-y-0.5 hover:shadow-[0_22px_45px_-22px_rgba(16,15,16,0.22)]"
+              className="card-hover reveal-up group flex flex-col rounded-2xl border border-border/60 bg-card p-7"
               style={{ ["--reveal-delay" as string]: `${i * 110}ms` }}
             >
               <div className={`mb-6 flex h-40 items-center justify-center rounded-xl ${b.tint}`}>
