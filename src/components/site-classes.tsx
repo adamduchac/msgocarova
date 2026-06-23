@@ -1,137 +1,101 @@
-import cubeBlue from "@/assets/cube-blue.png.asset.json";
-import cubeYellow from "@/assets/cube-yellow.png.asset.json";
-import cubeRed from "@/assets/cube-red.png.asset.json";
-import cubeGreen from "@/assets/cube-green.png.asset.json";
+import herofoto from "@/assets/kosticky-herofoto.webp.asset.json";
+import { ArrowRight } from "lucide-react";
 
 type ClassItem = {
-  name: string;
-  colorLabel: string;
+  color: string;
   age: string;
-  image: string;
-  alt: string;
-  rotate: string;
-  colorClass: string;
-  arrowBg: string;
+  text: string;
+  borderColor: string;
+  textColor: string;
+  dot: string;
 };
 
 const classes: ClassItem[] = [
   {
-    name: "Modráčci",
-    colorLabel: "Modrá kostička",
+    color: "Červená kostička",
     age: "2–3 roky",
-    image: cubeBlue.url,
-    alt: "Modrá plastelínová kostička s obličejem",
-    rotate: "-rotate-[8deg]",
-    colorClass: "text-brand-blue",
-    arrowBg: "bg-brand-blue",
+    text: "Pro nejmenší objevitele. Bezpečné prostředí a klidná adaptace.",
+    borderColor: "before:bg-brand-red",
+    textColor: "text-brand-red",
+    dot: "bg-brand-red",
   },
   {
-    name: "Žluťásci",
-    colorLabel: "Žlutá kostička",
+    color: "Modrá kostička",
     age: "3–4 roky",
-    image: cubeYellow.url,
-    alt: "Žlutá plastelínová kostička s obličejem",
-    rotate: "rotate-[5deg]",
-    colorClass: "text-brand-yellow",
-    arrowBg: "bg-brand-yellow",
+    text: "Pro zvídavé děti. Rozvoj řeči, tvoření a první velká kamarádství.",
+    borderColor: "before:bg-brand-blue",
+    textColor: "text-brand-blue",
+    dot: "bg-brand-blue",
   },
   {
-    name: "Červenáčci",
-    colorLabel: "Červená kostička",
+    color: "Zelená kostička",
     age: "4–5 let",
-    image: cubeRed.url,
-    alt: "Červená plastelínová kostička s obličejem",
-    rotate: "-rotate-[4deg]",
-    colorClass: "text-brand-red",
-    arrowBg: "bg-brand-red",
+    text: "Pro šikovné parťáky. Logické myšlení, pokusy a objevování přírody.",
+    borderColor: "before:bg-brand-green",
+    textColor: "text-brand-green",
+    dot: "bg-brand-green",
   },
   {
-    name: "Zelenáčci",
-    colorLabel: "Zelená kostička",
+    color: "Žlutá kostička",
     age: "5–6 let",
-    image: cubeGreen.url,
-    alt: "Zelená plastelínová kostička s obličejem",
-    rotate: "rotate-[7deg]",
-    colorClass: "text-brand-green",
-    arrowBg: "bg-brand-green",
+    text: "Pro budoucí školáky. Předškolní příprava, angličtina a samostatnost.",
+    borderColor: "before:bg-brand-yellow",
+    textColor: "text-brand-yellow",
+    dot: "bg-brand-yellow",
   },
 ];
 
 export function SiteClasses() {
   return (
-    <section
-      className="section-y"
-      style={{
-        background:
-          "linear-gradient(145deg, #002356 0%, #002356 35%, #002047 100%)",
-      }}
-    >
+    <section id="tridy" className="section-y">
       <div className="container mx-auto px-6">
         <div className="reveal-up section-header-gap mx-auto max-w-2xl text-center">
-          <h2 className="font-display text-3xl font-semibold text-white md:text-4xl">
+          <p className="text-sm font-medium uppercase tracking-[0.18em] text-brand-blue">
             Naše třídy
-          </h2>
-          <p className="mt-3 text-base text-white/70 md:text-lg">
-            Čtyři kostičky, čtyři světy plné objevování.
           </p>
+          <h2 className="mt-3 font-display text-3xl font-semibold text-ink md:text-[40px]">
+            Čtyři třídy, jeden skvělý <span className="text-brand-green">tým</span>
+          </h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-x-6 gap-y-20 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8">
+        {/* Hero "class photo" */}
+        <div
+          className="reveal-fade mx-auto mb-12 max-w-4xl"
+          style={{ ["--reveal-delay" as string]: "120ms" }}
+        >
+          <img
+            src={herofoto.url}
+            alt="Čtyři barevné plastelínové kostičky s obličeji — červená, modrá, zelená a žlutá"
+            className="h-auto w-full select-none"
+            loading="lazy"
+            decoding="async"
+            draggable={false}
+          />
+        </div>
+
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {classes.map((c, i) => (
-            <div
-              key={c.name}
-              className="reveal-up relative pt-16"
-              style={{ ["--reveal-delay" as string]: `${i * 100}ms` }}
+            <article
+              key={c.color}
+              className={`reveal-up group relative overflow-hidden rounded-2xl border border-border/60 bg-card p-6 transition-[box-shadow,transform] duration-[280ms] ease-out hover:-translate-y-0.5 hover:shadow-[0_22px_45px_-22px_rgba(16,15,16,0.22)] before:absolute before:inset-x-0 before:top-0 before:h-1.5 ${c.borderColor} before:content-['']`}
+              style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}
             >
+              <div className="flex items-center gap-2 pt-2">
+                <span className={`inline-block h-2.5 w-2.5 rounded-full ${c.dot}`} aria-hidden />
+                <p className={`text-xs font-semibold uppercase tracking-[0.14em] ${c.textColor}`}>
+                  {c.color}
+                </p>
+              </div>
+              <h3 className="mt-3 font-display text-xl font-bold text-ink">{c.age}</h3>
+              <p className="mt-3 text-[15px] leading-relaxed text-body">{c.text}</p>
               <a
                 href="#"
-                className="group relative block transition-transform duration-[250ms] ease-out hover:-translate-y-0.5"
+                className={`mt-5 inline-flex items-center gap-1.5 text-sm font-semibold ${c.textColor} transition-[gap] duration-200 hover:gap-2.5`}
               >
-                <img
-                  src={c.image}
-                  alt={c.alt}
-                  className={`pointer-events-none absolute left-1/2 z-0 w-auto -translate-x-1/2 select-none ${
-                    c.name === "Zelenáčci" ? "h-36 -top-24" : "h-24 -top-16"
-                  } ${c.rotate}`}
-                  loading="lazy"
-                />
-                <div className="relative z-10 rounded-2xl bg-white p-6 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.25)] transition-shadow duration-[250ms] ease-out group-hover:shadow-[0_18px_40px_-14px_rgba(0,0,0,0.32)]">
-                  <p className={`text-xs font-medium uppercase tracking-[0.16em] ${c.colorClass}`}>
-                    {c.colorLabel}
-                  </p>
-                  <h3 className={`mt-2 font-display text-2xl font-bold ${c.colorClass}`}>
-                    {c.name}
-                  </h3>
-                  <p className="mt-1 text-sm text-body">{c.age}</p>
-
-                  <div className="mt-6 flex items-center gap-2">
-                    <span className={`text-sm font-medium ${c.colorClass}`}>
-                      Více o třídě
-                    </span>
-                    <span
-                      className={`inline-flex h-6 w-6 items-center justify-center rounded-full text-white transition-transform duration-[250ms] ease-out group-hover:translate-x-1 ${c.arrowBg}`}
-                      aria-hidden
-                    >
-                      <svg
-                        width="12"
-                        height="12"
-                        viewBox="0 0 12 12"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M2 6h8m0 0L6.5 2.5M10 6l-3.5 3.5"
-                          stroke="currentColor"
-                          strokeWidth="1.75"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </span>
-                  </div>
-                </div>
+                Detail třídy
+                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
               </a>
-            </div>
+            </article>
           ))}
         </div>
       </div>

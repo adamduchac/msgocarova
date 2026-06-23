@@ -1,10 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteHero } from "@/components/site-hero";
-import { SiteNewsCarousel } from "@/components/site-news-carousel";
+import { SiteQuickLinks } from "@/components/site-quick-links";
+import { SiteAbout } from "@/components/site-about";
 import { SiteBenefits } from "@/components/site-benefits";
 import { SiteClasses } from "@/components/site-classes";
-import { SiteTeam } from "@/components/site-team";
+import { SiteActivities } from "@/components/site-activities";
+import { SiteNews } from "@/components/site-news";
+import { SiteCtaBanner } from "@/components/site-cta-banner";
 import { SiteFooter } from "@/components/site-footer";
 
 export const Route = createFileRoute("/")({
@@ -14,13 +17,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Mateřská škola Josefa Gočára v centru Hradce Králové. Místo, kde děti objevují svět vlastním tempem a dny jsou plné her i opravdových zážitků.",
+          "Mateřská škola Josefa Gočára v centru Hradce Králové. Místo, kde si děti hrají, objevují a rostou — bezpečné zázemí, velká zahrada a respektující přístup.",
       },
       { property: "og:title", content: "MŠ Josefa Gočára — Mateřská škola v centru Hradce Králové" },
       {
         property: "og:description",
         content:
-          "Mateřská škola v centru Hradce Králové, kde vaše dítě objevuje svět vlastním tempem.",
+          "Místo, kde si děti hrají, objevují a rostou. Velká zahrada, respektující přístup, hravá angličtina.",
       },
       { property: "og:url", content: "/" },
     ],
@@ -35,13 +38,15 @@ function Index() {
       <SiteNavbar />
       <main>
         <SiteHero />
-        <SiteNewsCarousel />
+        <SiteQuickLinks />
+        <SiteAbout />
         <SiteBenefits />
         <SiteClasses />
-        <SiteTeam />
-        <SiteFooter />
-        {/* Další sekce budou doplněny v dalších krocích. */}
+        <SiteActivities />
+        <SiteNews />
+        <SiteCtaBanner />
       </main>
+      <SiteFooter />
     </div>
   );
 }
