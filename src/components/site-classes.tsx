@@ -77,7 +77,7 @@ export function SiteClasses() {
           {classes.map((c, i) => (
             <article
               key={c.color}
-              className={`reveal-up group relative overflow-hidden rounded-2xl border border-border/60 bg-card p-6 transition-[box-shadow,transform] duration-[280ms] ease-out hover:-translate-y-0.5 hover:shadow-[0_22px_45px_-22px_rgba(16,15,16,0.22)] before:absolute before:inset-x-0 before:top-0 before:h-1.5 ${c.borderColor} before:content-['']`}
+              className={`reveal-up group relative overflow-hidden rounded-2xl border border-border/60 bg-card p-6 transition-[box-shadow,transform] duration-200 ease-out transform-gpu hover:-translate-y-0.5 hover:shadow-[0_22px_45px_-22px_rgba(16,15,16,0.22)] before:absolute before:inset-x-0 before:top-0 before:h-1.5 ${c.borderColor} before:content-['']`}
               style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}
             >
               <div className="flex items-center gap-2 pt-2">
