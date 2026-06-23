@@ -27,7 +27,7 @@ export function SiteQuickLinks() {
               <a
                 key={l.href}
                 href={l.href}
-                className="reveal-up group flex items-center gap-4 rounded-2xl border border-border/70 bg-card px-5 py-4 transition-[box-shadow,transform,border-color] duration-200 ease-out transform-gpu hover:-translate-y-0.5 hover:border-border hover:shadow-[0_14px_30px_-18px_rgba(16,15,16,0.18)]"
+                className="card-hover-soft reveal-up group flex items-center gap-4 rounded-2xl border border-border/70 bg-card px-5 py-4 hover:border-border"
                 style={{ ["--reveal-delay" as string]: `${i * 80}ms` }}
               >
                 <span className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${l.tint}`} aria-hidden>
