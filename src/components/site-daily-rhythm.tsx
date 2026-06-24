@@ -103,58 +103,69 @@ export function SiteDailyRhythm() {
             ))}
           </ol>
 
-          {/* Wavy line with small dots */}
-          <div className="relative mt-2 h-10">
-            <div className="reveal-up absolute left-[10%] right-[10%] top-1/2 -translate-y-1/2">
+          {/* Wavy line with dots ON the line */}
+          <div className="relative mt-2 h-12">
+            <div className="reveal-up absolute left-[10%] right-[10%] top-0 h-12">
               <svg
-                viewBox="0 0 1200 40"
+                viewBox="0 0 1200 48"
                 preserveAspectRatio="none"
-                className="block h-10 w-full overflow-visible"
+                className="block h-12 w-full overflow-visible"
                 aria-hidden
               >
-                {/* base wavy track */}
-                <path
-                  d="M0,20 C80,8 160,32 240,20 S400,8 480,20 S640,32 720,20 S880,8 960,20 S1120,32 1200,20"
-                  fill="none"
-                  stroke="#9CC8A6"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  vectorEffect="non-scaling-stroke"
-                />
-                {/* gradient progress wave */}
                 <defs>
                   <linearGradient id="daily-grad" x1="0" y1="0" x2="1" y2="0">
                     <stop offset="0%" stopColor="#2563EB" />
                     <stop offset="100%" stopColor="#38BDF8" />
                   </linearGradient>
                 </defs>
+                {/* base wavy track */}
+                <path
+                  d="M0,28 C40,36 80,12 120,20 C180,26 280,42 360,36 C440,32 520,6 600,12 C680,18 770,40 840,32 C920,26 1010,14 1080,22 C1130,26 1170,30 1200,26"
+                  fill="none"
+                  stroke="#9CC8A6"
+                  strokeWidth="5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  vectorEffect="non-scaling-stroke"
+                />
+                {/* gradient progress wave */}
                 <path
                   className="daily-progress-path"
-                  d="M0,20 C80,8 160,32 240,20 S400,8 480,20 S640,32 720,20 S880,8 960,20 S1120,32 1200,20"
+                  d="M0,28 C40,36 80,12 120,20 C180,26 280,42 360,36 C440,32 520,6 600,12 C680,18 770,40 840,32 C920,26 1010,14 1080,22 C1130,26 1170,30 1200,26"
                   fill="none"
                   stroke="url(#daily-grad)"
-                  strokeWidth="4"
+                  strokeWidth="5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   pathLength={1}
                   vectorEffect="non-scaling-stroke"
                 />
               </svg>
-            </div>
 
-            {/* small dots positioned over each column */}
-            <ol className="absolute inset-0 grid grid-cols-5">
-              {moments.map((m, i) => (
-                <li
-                  key={`d-${m.time}`}
-                  className="reveal-up flex items-center justify-center"
-                  style={{ ["--reveal-delay" as string]: delays[i] }}
-                >
-                  <span className="block h-2.5 w-2.5 rounded-full bg-brand-blue" />
-                </li>
-              ))}
-            </ol>
+              {/* dots positioned ON the wavy line */}
+              {moments.map((m, i) => {
+                const positions = [
+                  { left: "10%", top: "20px" },
+                  { left: "30%", top: "36px" },
+                  { left: "50%", top: "12px" },
+                  { left: "70%", top: "32px" },
+                  { left: "90%", top: "22px" },
+                ];
+                const p = positions[i];
+                return (
+                  <span
+                    key={`d-${m.time}`}
+                    className="reveal-up absolute block h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-blue"
+                    style={{
+                      left: p.left,
+                      top: p.top,
+                      ["--reveal-delay" as string]: delays[i],
+                    }}
+                    aria-hidden
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
 
