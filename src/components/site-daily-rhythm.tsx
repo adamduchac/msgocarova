@@ -142,32 +142,33 @@ export function SiteDailyRhythm() {
                 />
               </svg>
 
-              {/* dots positioned ON the wavy line */}
+            </div>
+
+            {/* dots aligned to columns (same 5-col grid as times/polaroids) */}
+            <ol className="pointer-events-none absolute inset-0 grid grid-cols-5">
               {moments.map((m, i) => {
-                const positions = [
-                  { left: "10%", top: "20px" },
-                  { left: "30%", top: "36px" },
-                  { left: "50%", top: "12px" },
-                  { left: "70%", top: "32px" },
-                  { left: "90%", top: "22px" },
-                ];
-                const p = positions[i];
+                const tops = ["28px", "36px", "12px", "26px", "26px"];
                 return (
-                  <span
+                  <li
                     key={`d-${m.time}`}
-                    className="reveal-up absolute block h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-blue"
-                    style={{
-                      left: p.left,
-                      top: p.top,
-                      ["--reveal-delay" as string]: delays[i],
-                    }}
-                    aria-hidden
-                  />
+                    className="relative"
+                    style={{ ["--reveal-delay" as string]: delays[i] }}
+                  >
+                    <span
+                      className="reveal-up absolute left-1/2 block h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-blue"
+                      style={{
+                        top: tops[i],
+                        ["--reveal-delay" as string]: delays[i],
+                      }}
+                      aria-hidden
+                    />
+                  </li>
                 );
               })}
-            </div>
+            </ol>
           </div>
         </div>
+
 
         {/* Polaroids — md+: grid 5 cols / mobile: horizontal scroll-snap */}
         <ol className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 pt-6 md:mx-0 md:grid md:grid-cols-5 md:gap-6 md:overflow-visible md:px-0 md:pt-8">
