@@ -95,7 +95,7 @@ export function SiteHero() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden">
+    <section ref={sectionRef} className="relative overflow-hidden">
       <div className="hero-y container mx-auto grid items-center gap-12 px-6 lg:grid-cols-12 lg:gap-10">
         {/* Text */}
         <div className="reveal-up lg:col-span-5">
