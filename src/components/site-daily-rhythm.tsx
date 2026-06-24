@@ -203,15 +203,18 @@ export function SiteDailyRhythm() {
       </div>
 
       <style>{`
-        .daily-progress {
-          transform: scaleX(0);
-          transition: transform 2200ms cubic-bezier(0.22, 1, 0.36, 1);
+        .daily-progress-path {
+          stroke-dasharray: 1;
+          stroke-dashoffset: 1;
+          transition: stroke-dashoffset 2200ms cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .reveal-up.is-visible .daily-progress {
-          transform: scaleX(1);
+        .reveal-up.is-visible .daily-progress-path,
+        .is-visible .daily-progress-path {
+          stroke-dashoffset: 0;
         }
+        /* trigger progress when section is in view via any ancestor reveal */
         @media (prefers-reduced-motion: reduce) {
-          .daily-progress { transform: scaleX(1) !important; transition: none !important; }
+          .daily-progress-path { stroke-dashoffset: 0 !important; transition: none !important; }
         }
       `}</style>
     </section>
