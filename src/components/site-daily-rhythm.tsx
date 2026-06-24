@@ -155,7 +155,7 @@ export function SiteDailyRhythm() {
                 return (
                   <span
                     key={`d-${m.time}`}
-                    className="reveal-up absolute block h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-blue ring-4 ring-background"
+                    className="reveal-up absolute block h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-blue"
                     style={{
                       left: p.left,
                       top: p.top,
