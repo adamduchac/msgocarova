@@ -1,24 +1,30 @@
-Zjistil jsem konkrétní příčinu: karty mají na stejném elementu `reveal-up` i hover utility. V prohlížeči se u karet pořád počítá `transition-property: opacity, transform` a `duration: 0.72s` z reveal animace, ne očekávaný `box-shadow/transform` hover. Navíc Tailwind v4 pro `hover:-translate-y-0.5` používá CSS vlastnost `translate`, ale aktuální transition animuje jen `transform`, takže posun na hover skáče. V Inflow akcenta je to řešené samostatnou třídou pro kartu (`card-white-hover`) s explicitním CSS přechodem stínu a bez konfliktu s reveal transformací.
+## Cíl
+Hero fotka bude oříznutá organickým "blob" tvarem z `hero_shape.svg` místo zaoblených rohů.
 
-Plán opravy:
+## Kroky
+1. **Nahrát assety** přes lovable-assets:
+   - `user-uploads://hero_shape.svg` → `src/assets/hero-shape.svg.asset.json` (pro CSS `mask-image: url(...)`)
+   - `user-uploads://hero_A.webp` → `src/assets/hero-kids.jpg.asset.json` (přepsat — nová fotka venkovní hry s kostkami; lépe ladí s tématem)
 
-1. Přidám globální utility pro hover karet ve `src/styles.css`
-   - např. `interactive-card` / `interactive-card-link`
-   - explicitně nastaví `transition: box-shadow ..., border-color ..., background-color ...` a případně jemný `transform: translate3d(0, -1px až -2px, 0)` přes CSS, ne přes Tailwind `translate`
-   - bude respektovat `prefers-reduced-motion`
-   - žádný scale/zoom ani bouncy efekt
+2. **`src/components/site-hero.tsx`** — wrapper s fotkou:
+   - Odstranit `rounded-[36px]` + `overflow-hidden` + box-shadow z `<div>` kolem `<img>`.
+   - Aplikovat CSS masku přes inline style nebo utility třídu:
+     ```
+     style={{
+       WebkitMaskImage: `url(${heroShape.url})`,
+       maskImage: `url(${heroShape.url})`,
+       WebkitMaskSize: "100% 100%",
+       maskSize: "100% 100%",
+       WebkitMaskRepeat: "no-repeat",
+       maskRepeat: "no-repeat",
+     }}
+     ```
+   - `<img>` zůstane `object-cover`, aspect ratio přizpůsobit SVG (1000×979 ≈ 1:0.98) přes `aspect-[1000/979]`.
+   - Drop-shadow se na maskovaný prvek aplikuje přes wrapper s `filter: drop-shadow(...)` (box-shadow nefunguje na masce).
 
-2. Oddělím reveal animaci od hover animace tam, kde je potřeba
-   - u karet, kde se má hýbat celý box, buď nechám hover jen na stínu jako v Inflow, nebo použiju stabilní CSS třídu s transformem až po `is-visible`
-   - odstraním konfliktní kombinace `transition-[box-shadow,transform]`, `hover:-translate-y-0.5` a podobné z karet
+3. **Kostičky** zůstávají jak jsou — vystupují z dolního okraje blob tvaru přirozeněji než z obdélníku.
 
-3. Aplikuji opravu na všechny problematické karty
-   - rychlé odkazy
-   - výhody
-   - třídy
-   - aktivity
-   - aktuality
+4. **Ověření**: Playwright screenshot hero sekce na 1280×1800 viewport, zkontrolovat tvar masky, že fotka není oříznutá špatně, a že drop-shadow funguje.
 
-4. Ověřím v prohlížeči na živém preview
-   - zkontroluji computed styles: hover transition musí obsahovat `box-shadow` a/nebo stabilní CSS transform, ne jen reveal `opacity, transform`
-   - vizuálně ověřím, že hover je plynulý a že reveal animace zůstává zachovaná
+## Poznámka
+SVG je 1000×979, fotka 1:1 (1024×1024). Maska se roztáhne na `100% 100%` wrapperu, takže poměr stran wrapperu musí kopírovat SVG (1000/979), jinak se tvar deformuje. Použiju `aspect-[1000/979]`.
