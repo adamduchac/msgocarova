@@ -44,9 +44,9 @@ function Index() {
       </div>
       <main>
         <SiteBenefits />
+        <SiteDailyRhythm />
         <SiteQuickLinks />
         <SiteAbout />
-        <SiteDailyRhythm />
         <SiteClasses />
         <SiteActivities />
         <SiteNews />

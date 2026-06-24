@@ -68,19 +68,19 @@ const delays = ["0ms", "440ms", "880ms", "1320ms", "1760ms"];
 
 export function SiteDailyRhythm() {
   return (
-    <section id="bezny-den" className="section-y">
+    <section
+      id="bezny-den"
+      className="section-y"
+      style={{
+        background:
+          "linear-gradient(to bottom, var(--mint-soft) 0%, var(--mint-soft) 12%, #ffffff 70%, #ffffff 100%)",
+      }}
+    >
       <div className="container mx-auto px-6">
-        <header className="reveal-up section-header-gap max-w-2xl">
-          <p className="text-sm font-medium uppercase tracking-[0.18em] text-brand-blue">
-            Jeden den u nás
-          </p>
-          <h2 className="mt-3 font-display text-3xl font-semibold leading-[1.15] text-ink md:text-[40px]">
+        <header className="reveal-up section-header-gap mx-auto max-w-2xl text-center">
+          <h2 className="font-display text-3xl font-semibold leading-[1.15] text-ink md:text-[40px]">
             Běžný den v MŠ Gočárova
           </h2>
-          <p className="mt-6 text-lg leading-relaxed text-body">
-            Klidný rytmus, na který se děti můžou spolehnout — od ranního
-            přivítání po odpolední zahradu.
-          </p>
         </header>
 
         {/* Desktop timeline: track + gradient progress + time nodes */}
