@@ -1,44 +1,180 @@
-import { useState } from "react";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Menu, X, ArrowRight, ChevronDown, ExternalLink } from "lucide-react";
 import logoAsset from "@/assets/logo.svg.asset.json";
 
-const navLinks = [
-  { label: "O školce", href: "#o-skolce" },
-  { label: "Třídy", href: "#tridy" },
-  { label: "Pro rodiče", href: "#rodice" },
-  { label: "Aktuality", href: "#aktuality" },
-  { label: "Kontakt", href: "#kontakt" },
+type NavChild = { label: string; href: string };
+type NavItem =
+  | { label: string; href: string; external?: boolean }
+  | { label: string; children: NavChild[] };
+
+const navItems: NavItem[] = [
+  {
+    label: "O školce",
+    children: [
+      { label: "Představení a vize", href: "#predstaveni" },
+      { label: "Náš tým", href: "#tym" },
+      { label: "Veřejné hřiště", href: "#hriste" },
+      { label: "Školní jídelna", href: "#jidelna" },
+    ],
+  },
+  {
+    label: "Barevné třídy",
+    children: [
+      { label: "Modrá kostička", href: "#trida-modra" },
+      { label: "Červená kostička", href: "#trida-cervena" },
+      { label: "Zelená kostička", href: "#trida-zelena" },
+      { label: "Žlutá kostička", href: "#trida-zluta" },
+    ],
+  },
+  {
+    label: "Pro rodiče",
+    children: [
+      { label: "Zápis do MŠ", href: "#zapis" },
+      { label: "Organizace a Platby", href: "#organizace" },
+      { label: "Program a aktivity", href: "#program" },
+      { label: "Dokumenty ke stažení", href: "#dokumenty" },
+    ],
+  },
+  {
+    label: "ZŠ Josefa Gočára",
+    href: "https://zsgocarova.cz/",
+    external: true,
+  },
 ];
 
 export function SiteNavbar() {
   const [open, setOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const navRef = useRef<HTMLDivElement>(null);
+
+  const scheduleClose = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setOpenMenu(null), 140);
+  };
+  const cancelClose = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  };
+  const openNow = (label: string) => {
+    cancelClose();
+    setOpenMenu(label);
+  };
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpenMenu(null);
+    };
+    const onClick = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setOpenMenu(null);
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("mousedown", onClick);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("mousedown", onClick);
+    };
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 w-full px-6 pt-3 sm:pt-4">
-      <div className="container mx-auto overflow-hidden rounded-2xl border border-white/60 bg-background/95 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.25)] backdrop-blur-lg">
+      <div className="container mx-auto overflow-visible rounded-2xl border border-white/60 bg-background/95 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.25)] backdrop-blur-lg">
         <div className="flex h-20 items-center justify-between px-6 lg:px-8">
           <a href="/" className="flex items-center" aria-label="MŠ Josefa Gočára — domů">
             <img src={logoAsset.url} alt="MŠ Josefa Gočára" className="h-10 w-auto" />
           </a>
 
           <div className="flex items-center gap-8">
-            <nav className="hidden items-center gap-8 lg:flex" aria-label="Hlavní navigace">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="nav-link relative text-[15px] font-medium text-ink/85 transition-colors duration-200 hover:text-ink focus-visible:text-ink"
-                >
-                  {link.label}
-                </a>
-              ))}
+            <nav ref={navRef} className="hidden items-center gap-7 lg:flex" aria-label="Hlavní navigace">
+              {navItems.map((item) => {
+                if ("children" in item) {
+                  const isOpen = openMenu === item.label;
+                  return (
+                    <div
+                      key={item.label}
+                      className="relative"
+                      onMouseEnter={() => openNow(item.label)}
+                      onMouseLeave={scheduleClose}
+                    >
+                      <button
+                        type="button"
+                        aria-haspopup="true"
+                        aria-expanded={isOpen}
+                        onFocus={() => openNow(item.label)}
+                        onClick={() => setOpenMenu(isOpen ? null : item.label)}
+                        className="nav-link inline-flex items-center gap-1 text-[15px] font-medium text-ink/85 transition-colors duration-200 hover:text-ink focus-visible:text-ink"
+                      >
+                        {item.label}
+                        <ChevronDown
+                          className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                          aria-hidden
+                        />
+                      </button>
+
+                      <div
+                        role="menu"
+                        aria-label={item.label}
+                        className={`absolute left-1/2 top-full z-50 mt-3 min-w-56 -translate-x-1/2 origin-top rounded-2xl border border-border/60 bg-background p-2 shadow-[0_18px_40px_-20px_rgba(15,23,42,0.25)] motion-reduce:transition-none ${
+                          isOpen
+                            ? "pointer-events-auto opacity-100 translate-y-0 scale-100"
+                            : "pointer-events-none opacity-0 -translate-y-1 scale-[0.98]"
+                        }`}
+                        style={{
+                          transitionProperty: "opacity, transform",
+                          transitionDuration: "260ms",
+                          transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
+                        }}
+                      >
+                        <div
+                          aria-hidden
+                          className="absolute -top-3 left-0 right-0 h-3"
+                        />
+                        <ul className="flex flex-col">
+                          {item.children.map((child) => (
+                            <li key={child.href}>
+                              <a
+                                href={child.href}
+                                role="menuitem"
+                                tabIndex={isOpen ? 0 : -1}
+                                onClick={() => setOpenMenu(null)}
+                                className="block rounded-lg px-3 py-2 text-[15px] font-medium text-ink/85 transition-colors duration-200 hover:bg-offwhite hover:text-brand-blue focus-visible:bg-offwhite focus-visible:text-brand-blue"
+                              >
+                                {child.label}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  );
+                }
+
+                return (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    {...(item.external
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                    className="nav-link inline-flex items-center gap-1 text-[15px] font-medium text-ink/85 transition-colors duration-200 hover:text-ink focus-visible:text-ink"
+                  >
+                    {item.label}
+                    {item.external && <ExternalLink className="h-3.5 w-3.5" aria-hidden />}
+                  </a>
+                );
+              })}
             </nav>
 
             <a
               href="#zapis"
               className="group hidden h-11 items-center gap-2 rounded-md bg-brand-blue px-5 text-[15px] font-semibold text-white transition-colors duration-200 hover:bg-brand-blue/90 lg:inline-flex"
             >
-              Přihlásit dítě
+              Naše školka
               <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
             </a>
 
@@ -66,26 +202,80 @@ export function SiteNavbar() {
           aria-hidden={!open}
         >
           <nav className="flex flex-col gap-1 px-6 py-4" aria-label="Mobilní navigace">
-            {navLinks.map((link, i) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                tabIndex={open ? 0 : -1}
-                className="mobile-nav-item rounded-lg px-3 py-3 text-base font-medium text-ink/90 transition-colors duration-200 hover:bg-offwhite hover:text-brand-blue"
-                style={{ ["--mobile-nav-delay" as string]: `${i * 40}ms` }}
-              >
-                {link.label}
-              </a>
-            ))}
+            {navItems.map((item, i) => {
+              if ("children" in item) {
+                const isOpen = mobileSubmenu === item.label;
+                return (
+                  <div
+                    key={item.label}
+                    className="mobile-nav-item"
+                    style={{ ["--mobile-nav-delay" as string]: `${i * 40}ms` }}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setMobileSubmenu(isOpen ? null : item.label)}
+                      aria-expanded={isOpen}
+                      tabIndex={open ? 0 : -1}
+                      className="flex w-full items-center justify-between rounded-lg px-3 py-3 text-base font-medium text-ink/90 transition-colors duration-200 hover:bg-offwhite hover:text-brand-blue"
+                    >
+                      <span>{item.label}</span>
+                      <ChevronDown
+                        className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                        aria-hidden
+                      />
+                    </button>
+                    <div
+                      className="grid overflow-hidden transition-[grid-template-rows,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                      style={{
+                        gridTemplateRows: isOpen ? "1fr" : "0fr",
+                        opacity: isOpen ? 1 : 0,
+                      }}
+                    >
+                      <div className="min-h-0">
+                        <div className="flex flex-col gap-0.5 pl-6 pr-3 py-1">
+                          {item.children.map((child) => (
+                            <a
+                              key={child.href}
+                              href={child.href}
+                              onClick={() => setOpen(false)}
+                              tabIndex={open && isOpen ? 0 : -1}
+                              className="rounded-lg px-3 py-2 text-[15px] font-medium text-ink/80 transition-colors duration-200 hover:bg-offwhite hover:text-brand-blue"
+                            >
+                              {child.label}
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
+              return (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  {...(item.external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  onClick={() => setOpen(false)}
+                  tabIndex={open ? 0 : -1}
+                  className="mobile-nav-item inline-flex items-center justify-between rounded-lg px-3 py-3 text-base font-medium text-ink/90 transition-colors duration-200 hover:bg-offwhite hover:text-brand-blue"
+                  style={{ ["--mobile-nav-delay" as string]: `${i * 40}ms` }}
+                >
+                  <span>{item.label}</span>
+                  {item.external && <ExternalLink className="h-4 w-4" aria-hidden />}
+                </a>
+              );
+            })}
             <a
               href="#zapis"
               onClick={() => setOpen(false)}
               tabIndex={open ? 0 : -1}
               className="mobile-nav-item mt-2 inline-flex h-12 items-center justify-center rounded-md bg-brand-blue px-5 text-base font-semibold text-white transition-colors duration-200 hover:bg-brand-blue/90"
-              style={{ ["--mobile-nav-delay" as string]: `${navLinks.length * 40}ms` }}
+              style={{ ["--mobile-nav-delay" as string]: `${navItems.length * 40}ms` }}
             >
-              Přihlásit dítě
+              Naše školka
             </a>
           </nav>
         </div>
@@ -93,4 +283,3 @@ export function SiteNavbar() {
     </header>
   );
 }
-
