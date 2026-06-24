@@ -1,7 +1,7 @@
-import vyhoda1 from "@/assets/vyhoda1.webp.asset.json";
-import vyhoda2 from "@/assets/vyhoda2.webp.asset.json";
-import vyhoda3 from "@/assets/vyhoda3.webp.asset.json";
-import vyhoda4 from "@/assets/vyhoda4.webp.asset.json";
+import zahrada from "@/assets/vyhoda-zahrada.webp.asset.json";
+import robot from "@/assets/vyhoda-robot.webp.asset.json";
+import komunikace from "@/assets/vyhoda-komunikace.webp.asset.json";
+import srdce from "@/assets/vyhoda-srdce.webp.asset.json";
 
 type Benefit = {
   title: string;
@@ -9,36 +9,34 @@ type Benefit = {
   image: string;
   alt: string;
   tint: string;
-  flip?: boolean;
 };
 
 const benefits: Benefit[] = [
   {
     title: "Velká zahrada s dopravním hřištěm",
     text: "Naše vlastní zelená oáza v centru města. Děti tu jezdí na koloběžkách, skáčou na zemní trampolíně a v létě se chladí v bazénku. Ven chodíme za každého počasí.",
-    image: vyhoda1.url,
+    image: zahrada.url,
     alt: "Plastelínový strom a malé hřiště se skluzavkou",
     tint: "bg-mint",
   },
   {
     title: "Angličtina a moderní technologie",
     text: "Jdeme s dobou. Tradiční hru doplňujeme o interaktivní tabule, základy programování s robotickými myšmi a předškoláky hravou formou seznamujeme s angličtinou.",
-    image: vyhoda2.url,
+    image: robot.url,
     alt: "Plastelínový robot s britskou vlajkou",
     tint: "bg-sky",
   },
   {
     title: "Respektující a individuální přístup",
     text: "Inspirujeme se Montessori a programem Začít spolu. Respektujeme tempo každého dítěte, komunikujeme partnersky a vedeme děti k přirozené samostatnosti.",
-    image: vyhoda3.url,
+    image: komunikace.url,
     alt: "Plastelínová bublina s usměvavým smajlíkem",
     tint: "bg-cream",
-    flip: true,
   },
   {
     title: "Otevřená a snadná komunikace",
     text: "Žádné papírové vzkazy na šatních skříňkách. Omluvenky i fotky z akcí máte v mobilní aplikaci. O víkendech navíc naši zahradu otevíráme veřejnosti.",
-    image: vyhoda4.url,
+    image: srdce.url,
     alt: "Plastelínové červené srdce",
     tint: "bg-blush",
   },
@@ -51,33 +49,29 @@ export function SiteBenefits() {
       className="section-y"
       style={{
         background:
-          "linear-gradient(to bottom, #ffffff 0%, #ffffff 12%, var(--offwhite) 66%, var(--offwhite) 100%)",
+          "linear-gradient(to bottom, #ffffff 0%, #ffffff 10%, var(--mint-soft) 55%, var(--mint-soft) 100%)",
       }}
     >
       <div className="container mx-auto px-6">
-        <div className="reveal-up section-header-gap mx-auto max-w-2xl text-center">
-          <p className="text-sm font-medium uppercase tracking-[0.18em] text-brand-blue">
-            Proč k nám
-          </p>
-          <h2 className="mt-3 font-display text-3xl font-semibold text-ink md:text-[40px]">
-            Proč si nás rodiče vybírají?
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
+        <div
+          className="grid grid-cols-1 md:grid-cols-2"
+          style={{ gap: "clamp(56px, 8vw, 112px)" }}
+        >
           {benefits.map((b, i) => (
             <article
               key={b.title}
-              className={`card-hover reveal-up group flex flex-col gap-5 rounded-3xl border border-white/60 p-5 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] sm:flex-row sm:items-center sm:gap-6 sm:p-6 ${b.tint}`}
+              className="card-hover reveal-up group flex flex-col gap-5 rounded-3xl border border-white/60 bg-background p-5 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] sm:flex-row sm:items-center sm:gap-6 sm:p-6"
               style={{ ["--reveal-delay" as string]: `${i * 110}ms` }}
             >
-              <div className="relative aspect-square w-full shrink-0 overflow-hidden rounded-2xl bg-white ring-1 ring-black/[0.04] sm:w-[40%]">
+              <div
+                className={`relative aspect-square w-full shrink-0 overflow-hidden rounded-2xl ring-1 ring-black/[0.04] sm:w-[40%] ${b.tint}`}
+              >
                 <img
                   src={b.image}
                   alt={b.alt}
                   width={640}
                   height={640}
-                  className={`absolute inset-0 m-auto h-[75%] w-[75%] object-contain ${b.flip ? "-scale-x-100" : ""}`}
+                  className="absolute inset-0 m-auto h-[75%] w-[75%] object-contain"
                   loading="lazy"
                   decoding="async"
                 />
