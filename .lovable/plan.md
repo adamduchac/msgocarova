@@ -1,53 +1,28 @@
-## 1. Footer — prohození sloupců
+## Plovoucí menu nad hero
 
-V `src/components/site-footer.tsx` přehodit pořadí sloupců v gridu:
-**Vedení školky → Kontakt → Jednotlivé třídy** (tj. velký mail/telefon vlevo, adresa uprostřed, třídy vpravo).
+### Cíl
+Menu bude plovoucí nad stránkou. Hero sekce sahe až k samotnému vršku viewportu. Menu zůstane v současném boxu s mírně průhledným pozadím a blurem – nemění se jeho vzhled, jen jeho pozice na stránce.
 
-## 2. Sub-footer (copyright bar)
+### Změny
 
-Místo aktuálního rozdělení (text vlevo, ADDU odkaz vpravo) jeden centrovaný řádek s pipe separátory:
+1. **site-navbar.tsx**
+   - `<header>`: změnit `sticky top-0` → `fixed top-0 left-0 right-0 z-50`.
+   - Odstranit `bg-offwhite` z `<header>` (pozadí menu je už ve vnitřním boxu).
+   - Ponechat `px-6` pro odsazení od okrajů.
+   - Přidat `mt-3 sm:mt-4` na vnitřní `.container` box, aby box s menu „plaval“ a nelepil se k hornímu okraji.
+   - Ponechat všechny ostatní styly vnitřního boxu beze změny (`bg-background/95`, `backdrop-blur-lg`, `shadow-[…]`, `border-white/60`, `rounded-2xl`).
 
-`© 2026 MŠ Josefa Gočára. Všechna práva vyhrazena. | Používáme pouze technické cookies | Design a realizace ADDU.cz`
+2. **index.tsx**
+   - Na `<div className="min-h-screen bg-background">` nebo na samotný `<SiteHero />` přidat horní padding, který vykompenzuje výšku plovoucího menu (`h-20` + horní mezera `mt-3/4`).
+   - Přidat např. `pt-28` (≈ 112 px), aby obsah hero začínal pod menu a nebyl překrytý.
+   - Gradient wrapper `#FEF8E7 → #FFFFFF` zůstává; díky fixed headeru začíná gradient už na samém vršku viewportu a menu plave nad ním.
 
-„ADDU.cz" zůstane jako odkaz (`target="_blank"`, `rel="noopener noreferrer"`) na https://www.addu.cz. Na mobilu se text zalomí přirozeně; na desktopu jeden řádek.
+3. **site-hero.tsx**
+   - Upravit/přizpůsobit horní padding (`hero-y` utility) tak, aby celkový prostor nad textem hero odpovídal: výška menu + mezera nad menu + mezera pod menu + stávající hero padding.
+   - Alternativně řídit celé odsazení přes `index.tsx` (bod 2) a v hero ponechat současný padding.
 
-## 3. Menu — větší mezery mezi položkami (desktop)
-
-V `src/components/site-navbar.tsx` u desktopové navigace zvětšit mezeru mezi top-level položkami:
-- `<nav className="hidden items-center gap-9 lg:flex">` → `gap-9 xl:gap-12` (na lg ponecháme `gap-9`, na xl+ `gap-12`).
-- Mezera mezi nav blokem a CTA „Naše školka": vnější `gap-8` → `gap-8 xl:gap-10`.
-
-Mobilní menu beze změny.
-
-## 4. Krémové pozadí za menu (top stránky)
-
-Navbar je `sticky` s průhledným paddingem nad ním (`px-6 pt-3 sm:pt-4`) — pod ním prosvítá bílé pozadí stránky. Přidám za navbar (resp. nad něj a po jeho stranách v rámci sticky paddingu) krémový (`bg-offwhite`) tón, aby horní pruh stránky ladil se zbytkem brandu:
-
-- V `src/routes/__root.tsx` (nebo v layoutu kde se body renderuje) změnit globální `background` celé stránky na `bg-offwhite` **pouze pro horní zónu** — nejjednodušší: dát `body`/wrapper `bg-offwhite` a sekce, které mají být bílé, ponechat s `bg-background`. Aby to bylo cílené, navrhuji menší krok:
-  - Obalit navbar do divu s `bg-offwhite` (rozšířeným přes celou šíři) tak, aby krémová byla viditelná v pruhu nad/za navbar boxem a hladce navazovala na hero (které už má jiný podklad).
-
-Pokud preferuješ globálně krémové pozadí celé stránky (a sekce si pozadí řeší samy), řekni — udělám to v jednom kroku v `src/styles.css` (`body { background: var(--offwhite) }`).
-
-## 5. Sekce „Barevné kostičky" — vrátit box
-
-V `src/components/site-classes.tsx` vrátit vnější box ve stylu rychlých rozcestníků (linka + jemný stín), ale na **šířku normálních sekcí** (tj. uvnitř `container`, bez vlastního `max-w-6xl`):
-
-```tsx
-<div className="container mx-auto px-6">
-  <div className="rounded-3xl border border-white/60 bg-background shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] px-6 py-12 md:px-12 md:py-16 lg:px-16 lg:py-20">
-    {/* eyebrow + nadpis + ilustrace + 4×1 grid */}
-  </div>
-</div>
-```
-
-Vnitřní padding: `px-6 py-12` na mobilu, `md:px-12 md:py-16`, `lg:px-16 lg:py-20` — vzdušné, sedí k velikosti ilustrace a 4 karet.
-
----
-
-## Drobná otázka k bodu 4
-
-Krémové pozadí má být:
-- **(a)** pouze v horním pruhu za menu (cca do konce hero), nebo
-- **(b)** globálně přes celou stránku (a bílé jen tam, kde je to potřeba)?
-
-Pokud neodpovíš, jdu cestou **(a)** — bezpečnější, nezasahuje do ostatních sekcí.
+### Výsledek
+- Hero gradient začíná přímo na vršku stránky (žádný krémový pruh nad ním).
+- Menu je plovoucí box s glass efektem, který viditelně plave nad hero obsahem.
+- Při scrollu se chová stejně – zůstává přilepené nahoře jako plovoucí panel.
+- Žádné řešení pozadí podle scrollu; menu má své vlastní pozadí pořád.
