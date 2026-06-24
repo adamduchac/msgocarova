@@ -1,4 +1,5 @@
 import heroKids from "@/assets/hero-kids.jpg.asset.json";
+import heroShape from "@/assets/hero-shape.svg.asset.json";
 import cubeBlue from "@/assets/cube-blue.png.asset.json";
 import cubeRed from "@/assets/cube-red.png.asset.json";
 import cubeGreen from "@/assets/cube-green.png.asset.json";
