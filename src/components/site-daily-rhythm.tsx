@@ -4,10 +4,7 @@ import denPohyb from "@/assets/den-pohyb.webp.asset.json";
 import denSvacina from "@/assets/den-svacina.webp.asset.json";
 import denStezka from "@/assets/den-stezka.webp.asset.json";
 
-const GRADIENT = "linear-gradient(105deg, #2563EB 0%, #38BDF8 100%)";
-
 type Moment = {
-  time: string;
   title: string;
   desc: string;
   img: { url: string };
@@ -18,7 +15,6 @@ type Moment = {
 
 const moments: Moment[] = [
   {
-    time: "8:00",
     title: "Ranní přivítání",
     desc: "Přivítáme se a naladíme na to, co nás čeká.",
     img: denRano,
@@ -27,7 +23,6 @@ const moments: Moment[] = [
     offset: "md:-translate-y-2",
   },
   {
-    time: "9:00",
     title: "Tvoření a hry",
     desc: "Kreslíme a objevujeme svět vlastním tempem.",
     img: denTvoreni,
@@ -36,7 +31,6 @@ const moments: Moment[] = [
     offset: "md:translate-y-3",
   },
   {
-    time: "10:00",
     title: "Pohyb a dobrodružství",
     desc: "Šplháme, balancujeme a vybíjíme energii.",
     img: denPohyb,
@@ -45,7 +39,6 @@ const moments: Moment[] = [
     offset: "md:-translate-y-3",
   },
   {
-    time: "11:30",
     title: "Svačinka",
     desc: "Ve třídě si dáme něco zdravého a dobrého.",
     img: denSvacina,
@@ -54,7 +47,6 @@ const moments: Moment[] = [
     offset: "md:translate-y-2",
   },
   {
-    time: "13:00",
     title: "Smyslová stezka",
     desc: "Naboso poznáváme přírodu na naší stezce.",
     img: denStezka,
@@ -65,7 +57,6 @@ const moments: Moment[] = [
 ];
 
 const delays = ["0ms", "440ms", "880ms", "1320ms", "1760ms"];
-const dotColors = ["#276CEC", "#2B7EEF", "#2F90F2", "#32A2F4", "#36B4F7"];
 
 
 export function SiteDailyRhythm() {
@@ -88,99 +79,8 @@ export function SiteDailyRhythm() {
           </h2>
         </header>
 
-        {/* Desktop timeline: times above, wavy line with small dots */}
-        <div className="relative hidden md:block">
-          {/* Times above the line */}
-          <ol className="grid grid-cols-5">
-            {moments.map((m, i) => (
-              <li
-                key={`t-${m.time}`}
-                className="reveal-up text-center"
-                style={{ ["--reveal-delay" as string]: delays[i] }}
-              >
-                <span
-                  className="font-display text-base font-bold"
-                  style={{ color: dotColors[i] }}
-                >
-                  {m.time}
-                </span>
-
-              </li>
-            ))}
-          </ol>
-
-          {/* Wavy line with dots ON the line */}
-          <div className="relative mt-2 h-12">
-            <div className="reveal-up absolute left-[10%] right-[10%] top-0 h-12">
-              <svg
-                viewBox="0 0 1200 48"
-                preserveAspectRatio="none"
-                className="block h-12 w-full overflow-visible"
-                aria-hidden
-              >
-                <defs>
-                  <linearGradient id="daily-grad" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stopColor="#2563EB" />
-                    <stop offset="100%" stopColor="#38BDF8" />
-                  </linearGradient>
-                </defs>
-                {/* base wavy track */}
-                <path
-                  d="M0,28 C40,36 80,12 120,20 C180,26 280,42 360,36 C440,32 520,6 600,12 C680,18 770,40 840,32 C920,26 1010,14 1080,22 C1130,26 1170,30 1200,26"
-                  fill="none"
-                  stroke="#9CC8A6"
-                  strokeWidth="2.5"
-
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  vectorEffect="non-scaling-stroke"
-                />
-                {/* gradient progress wave */}
-                <path
-                  className="daily-progress-path"
-                  d="M0,28 C40,36 80,12 120,20 C180,26 280,42 360,36 C440,32 520,6 600,12 C680,18 770,40 840,32 C920,26 1010,14 1080,22 C1130,26 1170,30 1200,26"
-                  fill="none"
-                  stroke="url(#daily-grad)"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  pathLength={1}
-                  vectorEffect="non-scaling-stroke"
-                />
-              </svg>
-
-            </div>
-
-            {/* dots aligned to columns (same 5-col grid as times/polaroids) */}
-            <ol className="pointer-events-none absolute inset-0 grid grid-cols-5">
-              {moments.map((m, i) => {
-                const tops = ["28px", "36px", "12px", "26px", "26px"];
-                return (
-                  <li
-                    key={`d-${m.time}`}
-                    className="relative"
-                    style={{ ["--reveal-delay" as string]: delays[i] }}
-                  >
-                    <span
-                      className="reveal-up absolute left-1/2 block h-[7px] w-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full"
-                      style={{
-                        top: tops[i],
-                        backgroundColor: dotColors[i],
-                        ["--reveal-delay" as string]: delays[i],
-                      }}
-                      aria-hidden
-                    />
-
-                  </li>
-                );
-              })}
-            </ol>
-          </div>
-        </div>
-
-
         {/* Polaroids — md+: grid 5 cols / mobile: horizontal scroll-snap */}
-        <ol className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 pt-6 md:mx-0 md:grid md:grid-cols-5 md:gap-6 md:overflow-visible md:px-0 md:pt-8">
+        <ol className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 pt-10 md:mx-0 md:grid md:grid-cols-5 md:gap-6 md:overflow-visible md:px-0 md:pt-14">
           {moments.map((m, i) => (
             <li
               key={m.title}
@@ -199,19 +99,7 @@ export function SiteDailyRhythm() {
                     className="aspect-[4/5] h-auto w-full object-cover"
                   />
                 </figure>
-                {/* time chip — primary on mobile, redundant accent on desktop */}
-                <p
-                  className="mt-4 font-display text-xs font-bold uppercase tracking-[0.14em] md:hidden"
-                  style={{
-                    backgroundImage: GRADIENT,
-                    WebkitBackgroundClip: "text",
-                    backgroundClip: "text",
-                    color: "transparent",
-                  }}
-                >
-                  {m.time}
-                </p>
-                <h3 className="mt-2 font-display text-lg font-bold text-ink md:mt-4">
+                <h3 className="mt-4 font-display text-lg font-bold text-ink">
                   {m.title}
                 </h3>
                 <p className="mt-1 text-sm leading-relaxed text-body">
@@ -222,22 +110,6 @@ export function SiteDailyRhythm() {
           ))}
         </ol>
       </div>
-
-      <style>{`
-        .daily-progress-path {
-          stroke-dasharray: 1;
-          stroke-dashoffset: 1;
-          transition: stroke-dashoffset 2200ms cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .reveal-up.is-visible .daily-progress-path,
-        .is-visible .daily-progress-path {
-          stroke-dashoffset: 0;
-        }
-        /* trigger progress when section is in view via any ancestor reveal */
-        @media (prefers-reduced-motion: reduce) {
-          .daily-progress-path { stroke-dashoffset: 0 !important; transition: none !important; }
-        }
-      `}</style>
     </section>
   );
 }
