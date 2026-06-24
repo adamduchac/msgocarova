@@ -93,24 +93,25 @@ export function SiteBenefits() {
         <DoodleFajfka
           color="var(--brand-green)"
           className="absolute hidden sm:block"
-          style={{ top: "8%", left: "5%", width: "clamp(64px, 7vw, 112px)", height: "auto", transform: "rotate(-14deg)", opacity: 0.35 }}
+          style={{ top: "7%", left: "5%", width: "clamp(60px, 6.5vw, 104px)", height: "auto", transform: "rotate(-14deg)", opacity: 0.38 }}
         />
         <DoodleHvezda
           color="var(--brand-yellow)"
           className="absolute"
-          style={{ top: "4%", right: "5%", width: "clamp(56px, 6.5vw, 104px)", height: "auto", transform: "rotate(14deg)", opacity: 0.55 }}
-        />
-        <DoodleSrdce
-          color="var(--coral)"
-          className="absolute hidden md:block"
-          style={{ top: "28%", left: "3%", width: "clamp(64px, 6.5vw, 104px)", height: "auto", transform: "rotate(-10deg)", opacity: 0.45 }}
+          style={{ top: "3%", right: "5%", width: "clamp(56px, 6vw, 96px)", height: "auto", transform: "rotate(14deg)", opacity: 0.55 }}
         />
         <DoodleSipka
           color="var(--brand-blue)"
           className="absolute hidden sm:block"
-          style={{ top: "22%", right: "3.5%", width: "clamp(90px, 10vw, 156px)", height: "auto", transform: "rotate(8deg)", opacity: 0.45 }}
+          style={{ top: "16%", right: "7%", width: "clamp(80px, 9vw, 140px)", height: "auto", transform: "rotate(6deg)", opacity: 0.4 }}
+        />
+        <DoodleSrdce
+          color="var(--coral)"
+          className="absolute hidden md:block"
+          style={{ bottom: "6%", left: "4%", width: "clamp(64px, 6.5vw, 104px)", height: "auto", transform: "rotate(-10deg)", opacity: 0.45 }}
         />
       </div>
+
 
 
 
