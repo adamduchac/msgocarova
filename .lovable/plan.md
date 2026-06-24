@@ -1,39 +1,16 @@
-## Sekce „Proč k nám" — úpravy
+**1. Sekce „Proč k nám" — vrátit titulek a zmenšit gap**
+V `src/components/site-benefits.tsx`:
+- Vrátit jen titulek (bez eyebrow, bez podnadpisu): `<h2>To pravé místo pro vaše děti</h2>`, použít existující `section-header-gap` wrapper, zarovnání na střed.
+- Gap mezi kartami: vrátit na `gap-6 lg:gap-8` (jako původně).
+- Titulky karet (`<h3>`) zvětšit: `text-xl sm:text-[22px]` → `text-[22px] sm:text-2xl` (24px → ~26px).
 
-**1. Odebrat header**
-V `src/components/site-benefits.tsx` smažu celý blok s eyebrow „Proč k nám" + nadpisem „Proč si nás rodiče vybírají?" (řádky 58–65).
+**2. Přesun sekce „Běžný den" hned za Benefits**
+V `src/routes/index.tsx` přesunout `<SiteDailyRhythm />` z aktuální pozice (po `SiteAbout`) hned za `<SiteBenefits />`. Nové pořadí: Hero → Benefits → DailyRhythm → QuickLinks → About → Classes → Activities → News → CTA.
 
-**2. Sjednotit mezery (gap = vertikální rytmus sekce)**
-Mezera mezi sekcí news a touto sekcí je dána `section-y` paddingem (`clamp(56px, 8vw, 112px)`). Aby gap mezi kartami v 2×2 gridu byl stejný, změním:
-- `grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8` → `grid grid-cols-1 md:grid-cols-2`
-- přidám inline `style={{ gap: "clamp(56px, 8vw, 112px)" }}`
+**3. Sekce „Běžný den" — úprava headeru a pozadí**
+V `src/components/site-daily-rhythm.tsx`:
+- Header: odstranit eyebrow „Jeden den u nás" i podnadpis. Ponechat jen titulek `Běžný den v MŠ Gočárova`, centrovaný (stejný styling jako titulek Benefits).
+- Pozadí sekce: zelený gradient z `--mint-soft` (kde Benefits končí) plynule do bílé dolů:
+  `background: linear-gradient(to bottom, var(--mint-soft) 0%, var(--mint-soft) 12%, #ffffff 70%, #ffffff 100%)`.
 
-**3. Karty — bílé pozadí, barevný jen obrázek**
-- Karta: nahradit `${b.tint}` za `bg-background`, ponechat border, radius a stín.
-- Obrázkový rámeček: nahradit `bg-white` za `${b.tint}` (barevný čtverec za ilustrací).
-
-**4. Výměna ilustrací**
-Nahraju 4 nové asset pointery a přepíšu importy v `site-benefits.tsx`:
-- `vyhoda1` → `zahrada.webp` (zahrada/hřiště) — mint
-- `vyhoda2` → `robot.webp` (robot s vlajkou) — sky
-- `vyhoda3` → `komunikace.webp` (bublina se smajlíkem) — cream (zde sundám `flip: true`, ilustrace má smysluplnou orientaci)
-- `vyhoda4` → `srdce.webp` (srdce) — blush
-
-Asset CLI:
-```
-lovable-assets create --file /mnt/user-uploads/zahrada.webp --filename vyhoda-zahrada.webp > src/assets/vyhoda-zahrada.webp.asset.json
-# stejně pro robot/komunikace/srdce
-```
-Staré `vyhoda1–4.webp.asset.json` smažu přes `delete_asset`.
-
-**5. Pozadí sekce — jemně zelené místo modré (offwhite)**
-V brand paletě je `--brand-green: #3DA35D` a za hero je krémová `#FEF1D0` (news-pinned). Sjednotím tón — vytvořím jemný zelený gradient kompatibilní s krémovou:
-- definuju nový token `--mint-soft: #EAF5EC` (světle zelený, sytě sladěný s mint kartou).
-- styl sekce: `linear-gradient(to bottom, #ffffff 0%, #ffffff 10%, var(--mint-soft) 55%, var(--mint-soft) 100%)`.
-
-Soubory:
-- `src/components/site-benefits.tsx`
-- `src/styles.css` (přidat `--mint-soft` token)
-- `src/assets/` (nové asset pointery + delete starých)
-
-Žádné nové npm balíčky.
+Soubory: `src/components/site-benefits.tsx`, `src/components/site-daily-rhythm.tsx`, `src/routes/index.tsx`.
