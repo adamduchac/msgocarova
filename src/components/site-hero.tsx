@@ -171,34 +171,39 @@ export function SiteHero() {
           </div>
 
           {/* Floating cube A — top-left, closer to centre */}
-          <img
-            src={cubeA.url}
-            alt=""
-            aria-hidden
-            className={`hero-cube pointer-events-none absolute left-[4%] top-[2%] z-10 w-24 sm:w-28 lg:w-40 ${
-              cubesFloating ? "is-floating" : "is-entering"
-            }`}
-            style={{
-              ["--cube-delay" as string]: `${cubeAStart}ms`,
-              ["--cube-float" as string]: "hero-cube-float-a",
-              ["--cube-float-duration" as string]: "7s",
-            }}
-          />
+          <div
+            ref={cubeAWrapRef}
+            className="hero-cube-wrap pointer-events-none absolute left-[4%] top-[2%] z-10 w-[6.3rem] sm:w-[7.35rem] lg:w-[10.5rem]"
+          >
+            <img
+              src={cubeA.url}
+              alt=""
+              aria-hidden
+              className={`hero-cube ${cubesFloating ? "is-floating" : "is-entering"}`}
+              style={{
+                ["--cube-delay" as string]: `${cubeAStart}ms`,
+                ["--cube-float" as string]: "hero-cube-float-a",
+                ["--cube-float-duration" as string]: "5s",
+              }}
+            />
+          </div>
           {/* Floating cube B — lower-right, pulled in toward centre */}
-          <img
-            src={cubeB.url}
-            alt=""
-            aria-hidden
-            className={`hero-cube pointer-events-none absolute bottom-[6%] right-[-3%] z-10 w-[6.3rem] sm:w-[7.2rem] lg:w-[9.9rem] ${
-              cubesFloating ? "is-floating" : "is-entering"
-            }`}
-            style={{
-              ["--cube-delay" as string]: `${cubeAStart + cubeBDelay}ms`,
-              ["--cube-float" as string]: "hero-cube-float-b",
-              ["--cube-float-duration" as string]: "8.5s",
-              
-            }}
-          />
+          <div
+            ref={cubeBWrapRef}
+            className="hero-cube-wrap pointer-events-none absolute bottom-[6%] right-[-3%] z-10 w-[6.6rem] sm:w-[7.55rem] lg:w-[10.4rem]"
+          >
+            <img
+              src={cubeB.url}
+              alt=""
+              aria-hidden
+              className={`hero-cube ${cubesFloating ? "is-floating" : "is-entering"}`}
+              style={{
+                ["--cube-delay" as string]: `${cubeAStart + cubeBDelay}ms`,
+                ["--cube-float" as string]: "hero-cube-float-b",
+                ["--cube-float-duration" as string]: "6.5s",
+              }}
+            />
+          </div>
 
         </div>
       </div>
