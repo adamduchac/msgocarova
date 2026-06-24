@@ -131,7 +131,7 @@ export function SiteHero() {
             src={cubeB.url}
             alt=""
             aria-hidden
-            className={`hero-cube pointer-events-none absolute bottom-[6%] right-[10%] z-10 w-28 sm:w-32 lg:w-44 ${
+            className={`hero-cube pointer-events-none absolute bottom-[6%] right-[15%] z-10 w-[6.3rem] sm:w-[7.2rem] lg:w-[9.9rem] ${
               cubesFloating ? "is-floating" : "is-entering"
             }`}
             style={{
