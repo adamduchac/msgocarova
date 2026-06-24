@@ -78,44 +78,80 @@ export function SiteDailyRhythm() {
     >
       <div className="container mx-auto px-6">
         <header className="reveal-up section-header-gap mx-auto max-w-2xl text-center">
-          <h2 className="font-display text-3xl font-semibold leading-[1.15] text-ink md:text-[40px]">
+          <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
+            Zažijte to s námi
+          </p>
+          <h2 className="mt-3 font-display text-3xl text-ink md:text-[40px]">
             Běžný den v MŠ Gočárova
           </h2>
         </header>
 
-        {/* Desktop timeline: track + gradient progress + time nodes */}
+        {/* Desktop timeline: times above, wavy line with small dots */}
         <div className="relative hidden md:block">
-          <div className="relative h-16">
-            {/* base track */}
-            <div
-              aria-hidden
-              className="absolute left-[10%] right-[10%] top-1/2 h-px -translate-y-1/2 bg-border"
-            />
-            {/* gradient progress — reveal-up wrapper toggles .is-visible */}
-            <div
-              aria-hidden
-              className="reveal-up absolute left-[10%] right-[10%] top-1/2 h-[2px] -translate-y-1/2 overflow-hidden"
-              style={{ ["--reveal-delay" as string]: "0ms" }}
-            >
-              <div
-                className="daily-progress h-full w-full origin-left rounded-full"
-                style={{ backgroundImage: GRADIENT }}
-              />
+          {/* Times above the line */}
+          <ol className="grid grid-cols-5">
+            {moments.map((m, i) => (
+              <li
+                key={`t-${m.time}`}
+                className="reveal-up text-center"
+                style={{ ["--reveal-delay" as string]: delays[i] }}
+              >
+                <span className="font-display text-base font-bold text-brand-blue">
+                  {m.time}
+                </span>
+              </li>
+            ))}
+          </ol>
+
+          {/* Wavy line with small dots */}
+          <div className="relative mt-2 h-10">
+            <div className="reveal-up absolute left-[10%] right-[10%] top-1/2 -translate-y-1/2">
+              <svg
+                viewBox="0 0 1200 40"
+                preserveAspectRatio="none"
+                className="block h-10 w-full overflow-visible"
+                aria-hidden
+              >
+                {/* base wavy track */}
+                <path
+                  d="M0,20 C80,8 160,32 240,20 S400,8 480,20 S640,32 720,20 S880,8 960,20 S1120,32 1200,20"
+                  fill="none"
+                  stroke="#9CC8A6"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  vectorEffect="non-scaling-stroke"
+                />
+                {/* gradient progress wave */}
+                <defs>
+                  <linearGradient id="daily-grad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stopColor="#2563EB" />
+                    <stop offset="100%" stopColor="#38BDF8" />
+                  </linearGradient>
+                </defs>
+                <path
+                  className="daily-progress-path"
+                  d="M0,20 C80,8 160,32 240,20 S400,8 480,20 S640,32 720,20 S880,8 960,20 S1120,32 1200,20"
+                  fill="none"
+                  stroke="url(#daily-grad)"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  pathLength={1}
+                  vectorEffect="non-scaling-stroke"
+                />
+              </svg>
             </div>
-            {/* nodes */}
+
+            {/* small dots positioned over each column */}
             <ol className="absolute inset-0 grid grid-cols-5">
               {moments.map((m, i) => (
                 <li
-                  key={m.time}
+                  key={`d-${m.time}`}
                   className="reveal-up flex items-center justify-center"
                   style={{ ["--reveal-delay" as string]: delays[i] }}
                 >
-                  <span
-                    className="inline-flex h-12 min-w-12 items-center justify-center rounded-full px-3 font-display text-sm font-bold text-white shadow-[0_8px_20px_-10px_rgba(37,99,235,0.6)]"
-                    style={{ backgroundImage: GRADIENT }}
-                  >
-                    {m.time}
-                  </span>
+                  <span className="block h-2.5 w-2.5 rounded-full bg-brand-blue" />
                 </li>
               ))}
             </ol>
@@ -167,15 +203,18 @@ export function SiteDailyRhythm() {
       </div>
 
       <style>{`
-        .daily-progress {
-          transform: scaleX(0);
-          transition: transform 2200ms cubic-bezier(0.22, 1, 0.36, 1);
+        .daily-progress-path {
+          stroke-dasharray: 1;
+          stroke-dashoffset: 1;
+          transition: stroke-dashoffset 2200ms cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .reveal-up.is-visible .daily-progress {
-          transform: scaleX(1);
+        .reveal-up.is-visible .daily-progress-path,
+        .is-visible .daily-progress-path {
+          stroke-dashoffset: 0;
         }
+        /* trigger progress when section is in view via any ancestor reveal */
         @media (prefers-reduced-motion: reduce) {
-          .daily-progress { transform: scaleX(1) !important; transition: none !important; }
+          .daily-progress-path { stroke-dashoffset: 0 !important; transition: none !important; }
         }
       `}</style>
     </section>

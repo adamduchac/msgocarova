@@ -38,7 +38,7 @@ export function SiteActivities() {
           <p className="text-sm font-medium uppercase tracking-[0.18em] text-brand-blue">
             Aktivity a život
           </p>
-          <h2 className="mt-3 font-display text-3xl font-semibold text-ink md:text-[40px]">
+          <h2 className="mt-3 font-display text-3xl font-extrabold text-ink md:text-[40px]">
             Zážitky, které si děti odnesou <span className="text-brand-green">do školy</span>
           </h2>
         </div>

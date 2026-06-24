@@ -99,6 +99,9 @@ export function SiteHero() {
       <div className="hero-y container mx-auto grid items-center gap-12 px-6 lg:grid-cols-12 lg:gap-10">
         {/* Text */}
         <div className="reveal-up lg:col-span-5">
+          <p className="mb-4 font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
+            MŠ Gočárova
+          </p>
           <h1 className="font-display text-[44px] font-extrabold leading-[1.04] tracking-tight text-ink sm:text-5xl lg:text-[58px]">
             Místo, kde si děti{" "}
             <span
