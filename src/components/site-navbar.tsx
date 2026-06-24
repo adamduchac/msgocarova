@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Menu, X, ArrowRight, ChevronDown, ExternalLink } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import logoAsset from "@/assets/logo.svg.asset.json";
 
 type NavChild = { label: string; href: string };
