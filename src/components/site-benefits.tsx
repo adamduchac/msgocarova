@@ -90,26 +90,28 @@ export function SiteBenefits() {
       }}
     >
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
-        {doodles.map((d, i) => (
-          <span
-            key={i}
-            className={`absolute block ${d.className}`}
-            style={{
-              ...d.style,
-              backgroundColor: d.color,
-              WebkitMaskImage: `url(${d.src})`,
-              maskImage: `url(${d.src})`,
-              WebkitMaskRepeat: "no-repeat",
-              maskRepeat: "no-repeat",
-              WebkitMaskSize: "contain",
-              maskSize: "contain",
-              WebkitMaskPosition: "center",
-              maskPosition: "center",
-              aspectRatio: "1 / 1",
-            }}
-          />
-        ))}
+        <DoodleFajfka
+          color="var(--brand-green)"
+          className="absolute hidden sm:block"
+          style={{ top: "14%", left: "4%", width: "clamp(72px, 8vw, 128px)", height: "auto", transform: "rotate(-12deg)", opacity: 0.45 }}
+        />
+        <DoodleHvezda
+          color="var(--brand-yellow)"
+          className="absolute"
+          style={{ top: "6%", right: "6%", width: "clamp(56px, 7vw, 110px)", height: "auto", transform: "rotate(14deg)", opacity: 0.6 }}
+        />
+        <DoodleSrdce
+          color="var(--coral)"
+          className="absolute hidden md:block"
+          style={{ top: "30%", left: "1.5%", width: "clamp(70px, 7.5vw, 116px)", height: "auto", transform: "rotate(-8deg)", opacity: 0.5 }}
+        />
+        <DoodleSipka
+          color="var(--brand-blue)"
+          className="absolute hidden sm:block"
+          style={{ top: "33%", right: "2%", width: "clamp(90px, 10vw, 160px)", height: "auto", transform: "rotate(10deg)", opacity: 0.5 }}
+        />
       </div>
+
 
       <div className="container relative z-10 mx-auto px-6">
         <div className="reveal-up section-header-gap mx-auto max-w-2xl text-center">
