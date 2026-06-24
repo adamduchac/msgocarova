@@ -12,7 +12,7 @@ export function SiteAnnouncementBar() {
         >
           <div
             className="grid items-center gap-4 sm:gap-6 px-3 sm:px-5 py-3 sm:py-3.5"
-            style={{ gridTemplateColumns: "auto minmax(0,1fr) auto" }}
+            style={{ gridTemplateColumns: "auto minmax(0,1fr) 12rem" }}
           >
             {/* Levá ikona */}
             <div className="grid h-[72px] w-[72px] sm:h-20 sm:w-20 shrink-0 place-items-center rounded-full bg-white">
@@ -26,32 +26,34 @@ export function SiteAnnouncementBar() {
             </div>
 
             {/* Sdělení */}
-            <p className="min-w-0 text-sm sm:text-base text-ink font-medium text-center px-1 sm:px-3">
+            <p className="min-w-0 text-base sm:text-lg leading-relaxed text-ink font-medium text-center px-1 sm:px-3">
               <span className="font-semibold">Poslední den školky 26. 6. 2026.</span>{" "}
               <span className="hidden sm:inline text-body font-normal">
                 Těšíme se na viděnou v novém školním roce. Užijte si prázdniny!
               </span>
             </p>
 
-            {/* CTA pill: kruh se šipkou, rozbalí se vlevo na „Podrobnosti →" */}
-            <span
-              className="inline-flex items-center h-[72px] sm:h-20 rounded-full bg-ink text-white overflow-hidden"
-              aria-hidden="true"
-            >
+            {/* CTA pill: kruh se šipkou, rozbalí se vlevo na „Podrobnosti →" — pevný sloupec, sdělení se nehne */}
+            <span className="flex justify-end">
               <span
-                className="overflow-hidden whitespace-nowrap text-sm sm:text-base font-medium max-w-0 opacity-0 group-hover:max-w-[180px] group-hover:opacity-100 group-focus-visible:max-w-[180px] group-focus-visible:opacity-100"
-                style={{
-                  transitionProperty: "max-width, opacity, padding",
-                  transitionDuration: "300ms",
-                  transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
-                  paddingLeft: "1.25rem",
-                  paddingRight: "0.25rem",
-                }}
+                className="inline-flex items-center h-11 sm:h-12 rounded-full bg-ink text-white overflow-hidden"
+                aria-hidden="true"
               >
-                Podrobnosti
-              </span>
-              <span className="grid place-items-center h-[72px] w-[72px] sm:h-20 sm:w-20 shrink-0">
-                <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6" />
+                <span
+                  className="overflow-hidden whitespace-nowrap text-sm sm:text-base font-medium max-w-0 opacity-0 group-hover:max-w-[180px] group-hover:opacity-100 group-focus-visible:max-w-[180px] group-focus-visible:opacity-100"
+                  style={{
+                    transitionProperty: "max-width, opacity, padding",
+                    transitionDuration: "300ms",
+                    transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
+                    paddingLeft: "1rem",
+                    paddingRight: "0.25rem",
+                  }}
+                >
+                  Podrobnosti
+                </span>
+                <span className="grid place-items-center h-11 w-11 sm:h-12 sm:w-12 shrink-0">
+                  <ArrowRight className="h-4 w-4" />
+                </span>
               </span>
             </span>
           </div>
