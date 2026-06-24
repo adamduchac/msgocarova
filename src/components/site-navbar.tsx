@@ -82,8 +82,8 @@ export function SiteNavbar() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-offwhite px-6 pt-3 sm:pt-4">
-      <div className="container mx-auto overflow-visible rounded-2xl border border-white/60 bg-background/95 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.25)] backdrop-blur-lg">
+    <header className="fixed left-0 right-0 top-0 z-50 w-full px-6 pt-3 sm:pt-4">
+      <div className="container mx-auto overflow-visible rounded-2xl border border-white/60 bg-background/70 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.25)] backdrop-blur-lg">
         <div className="flex h-20 items-center justify-between px-6 lg:px-8">
           <a href="/" className="flex items-center" aria-label="MŠ Josefa Gočára — domů">
             <img src={logoAsset.url} alt="MŠ Josefa Gočára" className="h-10 w-auto" />
