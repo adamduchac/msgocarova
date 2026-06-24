@@ -5,6 +5,7 @@ import { SiteQuickLinks } from "@/components/site-quick-links";
 import { SiteAbout } from "@/components/site-about";
 import { SiteBenefits } from "@/components/site-benefits";
 import { SiteDailyRhythm } from "@/components/site-daily-rhythm";
+import { SiteAnnouncementBar } from "@/components/site-announcement-bar";
 import { SiteClasses } from "@/components/site-classes";
 import { SiteActivities } from "@/components/site-activities";
 import { SiteNews } from "@/components/site-news";
