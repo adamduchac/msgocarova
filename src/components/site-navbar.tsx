@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Menu, X, ArrowRight, ChevronDown, ExternalLink } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import logoAsset from "@/assets/logo.svg.asset.json";
 
 type NavChild = { label: string; href: string };
@@ -107,13 +107,9 @@ export function SiteNavbar() {
                         aria-expanded={isOpen}
                         onFocus={() => openNow(item.label)}
                         onClick={() => setOpenMenu(isOpen ? null : item.label)}
-                        className="nav-link inline-flex items-center gap-1 text-[15px] font-medium text-ink/85 transition-colors duration-200 hover:text-ink focus-visible:text-ink"
+                        className="nav-link inline-flex items-center text-[15px] font-medium text-ink/85 transition-colors duration-200 hover:text-ink focus-visible:text-ink"
                       >
                         {item.label}
-                        <ChevronDown
-                          className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-                          aria-hidden
-                        />
                       </button>
 
                       <div
@@ -161,10 +157,9 @@ export function SiteNavbar() {
                     {...(item.external
                       ? { target: "_blank", rel: "noopener noreferrer" }
                       : {})}
-                    className="nav-link inline-flex items-center gap-1 text-[15px] font-medium text-ink/85 transition-colors duration-200 hover:text-ink focus-visible:text-ink"
+                    className="nav-link inline-flex items-center text-[15px] font-medium text-ink/85 transition-colors duration-200 hover:text-ink focus-visible:text-ink"
                   >
                     {item.label}
-                    {item.external && <ExternalLink className="h-3.5 w-3.5" aria-hidden />}
                   </a>
                 );
               })}
@@ -172,10 +167,9 @@ export function SiteNavbar() {
 
             <a
               href="#zapis"
-              className="group hidden h-11 items-center gap-2 rounded-md bg-brand-blue px-5 text-[15px] font-semibold text-white transition-colors duration-200 hover:bg-brand-blue/90 lg:inline-flex"
+              className="hidden h-11 items-center rounded-md bg-brand-blue px-5 text-[15px] font-semibold text-white transition-colors duration-200 hover:bg-brand-blue/90 lg:inline-flex"
             >
               Naše školka
-              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
             </a>
 
             <button
@@ -219,10 +213,6 @@ export function SiteNavbar() {
                       className="flex w-full items-center justify-between rounded-lg px-3 py-3 text-base font-medium text-ink/90 transition-colors duration-200 hover:bg-offwhite hover:text-brand-blue"
                     >
                       <span>{item.label}</span>
-                      <ChevronDown
-                        className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-                        aria-hidden
-                      />
                     </button>
                     <div
                       className="grid overflow-hidden transition-[grid-template-rows,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
@@ -260,11 +250,10 @@ export function SiteNavbar() {
                     : {})}
                   onClick={() => setOpen(false)}
                   tabIndex={open ? 0 : -1}
-                  className="mobile-nav-item inline-flex items-center justify-between rounded-lg px-3 py-3 text-base font-medium text-ink/90 transition-colors duration-200 hover:bg-offwhite hover:text-brand-blue"
+                  className="mobile-nav-item rounded-lg px-3 py-3 text-base font-medium text-ink/90 transition-colors duration-200 hover:bg-offwhite hover:text-brand-blue"
                   style={{ ["--mobile-nav-delay" as string]: `${i * 40}ms` }}
                 >
-                  <span>{item.label}</span>
-                  {item.external && <ExternalLink className="h-4 w-4" aria-hidden />}
+                  {item.label}
                 </a>
               );
             })}

@@ -8,7 +8,7 @@ export function SiteAnnouncementBar() {
         <a
           href="#aktuality"
           aria-label="Podrobnosti k poslednímu dni školky 26. 6. 2026"
-          className="group relative block rounded-2xl bg-cream shadow-[0_8px_24px_-18px_rgba(16,15,16,0.25)] card-hover-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background px-3 sm:px-5 py-3 sm:py-3.5"
+          className="group relative block rounded-2xl bg-cream shadow-[0_8px_24px_-18px_rgba(16,15,16,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background px-3 sm:px-5 py-3 sm:py-3.5"
         >
           {/* Levá ikona — absolutně, aby nevychylovala střed textu */}
           <div className="pointer-events-none absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 grid h-[72px] w-[72px] sm:h-20 sm:w-20 shrink-0 place-items-center rounded-full bg-white">
@@ -38,13 +38,11 @@ export function SiteAnnouncementBar() {
               aria-hidden="true"
             >
               <span
-                className="overflow-hidden whitespace-nowrap text-sm sm:text-base font-medium max-w-0 opacity-0 group-hover:max-w-[180px] group-hover:opacity-100 group-focus-visible:max-w-[180px] group-focus-visible:opacity-100"
+                className="overflow-hidden whitespace-nowrap text-sm sm:text-base font-medium max-w-0 opacity-0 px-0 group-hover:max-w-[180px] group-hover:opacity-100 group-hover:pl-4 group-hover:pr-1 group-focus-visible:max-w-[180px] group-focus-visible:opacity-100 group-focus-visible:pl-4 group-focus-visible:pr-1"
                 style={{
                   transitionProperty: "max-width, opacity, padding",
                   transitionDuration: "560ms",
                   transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
-                  paddingLeft: "1rem",
-                  paddingRight: "0.25rem",
                 }}
               >
                 Podrobnosti
