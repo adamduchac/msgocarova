@@ -88,9 +88,9 @@ export function SiteBenefits() {
                 />
               </div>
               <div className="flex-1">
-                <h3 className="font-display text-[22px] font-semibold leading-snug text-ink sm:text-2xl">
-                  <span className="block">{b.titleMain}</span>
-                  <span className="block text-base font-medium opacity-80">
+                <h3 className="font-display font-semibold leading-tight text-ink">
+                  <span className="block text-3xl md:text-[36px]">{b.titleMain}</span>
+                  <span className="mt-1 block text-lg font-medium opacity-80 sm:text-xl">
                     {b.titleSub}
                   </span>
                 </h3>

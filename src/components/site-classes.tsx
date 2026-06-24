@@ -75,20 +75,14 @@ export function SiteClasses() {
                   key={c.name}
                   href="#"
                   aria-label={`Vstupte do třídy — ${c.name}`}
-                  className="card-hover reveal-up group relative block overflow-hidden rounded-3xl border border-white/60 bg-background p-5 pb-16 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:p-6 sm:pb-16"
+                  className="reveal-up group relative block overflow-hidden rounded-3xl border border-white/60 bg-background p-5 pb-16 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:p-6 sm:pb-16"
                   style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}
                 >
-                  <div className="flex items-center gap-2">
-                    <span
-                      className={`inline-block h-2.5 w-2.5 rounded-full ${c.dot}`}
-                      aria-hidden
-                    />
-                    <p
-                      className={`text-xs font-semibold uppercase tracking-[0.14em] ${c.textColor}`}
-                    >
-                      {c.name}
-                    </p>
-                  </div>
+                  <p
+                    className={`font-display text-xl font-semibold ${c.textColor}`}
+                  >
+                    {c.name}
+                  </p>
                   <h3 className="mt-2 font-display text-lg font-bold text-ink">
                     {c.age}
                   </h3>
