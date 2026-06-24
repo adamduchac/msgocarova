@@ -203,7 +203,6 @@ function SlideLayer({
 
   return (
     <img
-      ref={ref}
       src={url}
       alt={alt}
       width={1024}
