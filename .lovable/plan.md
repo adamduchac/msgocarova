@@ -1,30 +1,21 @@
-## Barevné kostičky — border, nový obrázek + přepínač ven/dovnitř
+## Větší ilustrace v Barevných kostičkách + sladění mezer mezi sekcemi
 
-### Změny v `src/components/site-classes.tsx`
+### 1. Větší obrázek v `site-classes.tsx`
+Wrapper ilustrace (řádek 75) zvětšit:
+- `max-w-3xl` → `max-w-4xl` (768 → 896 px)
+- na velkých rozlišeních ještě o něco větší přes `lg:max-w-[1024px]`
+- aspect ratio ponechat `4/3` (obě verze obrázku mají stejný poměr 4:3)
+- přepínač zůstane ukotvený `right-0 top-0 -translate-y-2/3`, jen logicky narůstá s obrázkem
 
-1. **Border boxu**: změnit `border-white/60` na `border-border/70` (stejný jako 4 rychlá tlačítka v site-quick-links). Případně mírně sjednotit shadow.
+### 2. Sjednocení vertikálních mezer mezi sekcemi
+Většina sekcí (`SiteBenefits`, `SiteDailyRhythm`, `SiteClasses`, `SiteActivities`, `SiteAbout`, `SiteNews`) používá utility `section-y` → padding `clamp(56px, 8vw, 112px)`. Drobné odchylky:
 
-2. **Nahrazení obrázku**: 
-   - Smazat starý asset `src/assets/kosticky-doma.webp.asset.json` (delete_asset).
-   - Nahrát `kosticky_tridyA.webp` a `kosticky_tridyB.webp` jako Lovable assets přes CLI z `/mnt/user-uploads/`.
-   - Importovat oba pointery do `site-classes.tsx`.
+- **`site-quick-links.tsx`** používá `relative -mt-2` bez `section-y` — visí těsně na předchozí Classes sekci a vůbec nemá vlastní spodní mezeru. Sjednotit:
+  - odstranit `-mt-2`
+  - dát sekci `py-12 md:py-16` (kompaktnější než plné `section-y`, protože jde o rozcestník – ale s viditelným dýchajícím prostorem ke Classes nad ní i k další sekci pod ní)
+- **Gradient wrapper hero**: `pt-28 sm:pt-32` (kompenzace fixed menu) je OK; spodní okraj wrapperu plynule navazuje přes `SiteAnnouncementBar` (`pt-2 pb-6`). Bez změny.
+- **Gradient wrapper okolo Activities + Footer**: nechat beze změny — Activities má `section-y`, Footer si nese vlastní padding.
 
-3. **Přepínač "Vem kostičky ven / dovnitř"**:
-   - Stav `const [outside, setOutside] = useState(false)`.
-   - Umístění: nad obrázkem, zarovnaný doprava (`flex justify-end`), mírně překrývá pravý horní roh obrázku.
-   - Vizuál: pill button v glass stylu (`rounded-full border border-border/70 bg-background/80 backdrop-blur shadow-…`), uvnitř text + animovaný switch (track 44×24, knob 18×18). Track barva přepíná mezi `bg-mint` (dovnitř) a `bg-sky` (ven). Knob s drobnou ikonkou (🏠 ↔ 🌳) – použijeme lucide `Home` / `TreePine`.
-   - `aria-pressed`, `role="switch"`, fokus ring.
-
-4. **Crossfade + lehký scale obrázků**:
-   - Wrapper s `position: relative`, oba obrázky absolutně přes sebe, řízené `data-active`.
-   - Přechod `opacity 600ms` + `transform: scale(0.98) → 1` `cubic-bezier(0.22,1,0.36,1)`.
-   - Druhý obrázek `loading="lazy"` ale předem v DOM, aby nebylo flicker.
-   - Respekt `prefers-reduced-motion` (jen swap bez animace).
-   - Alt texty: A = „Plastelínové kostičky doma — červená, modrá, zelená a žlutá"; B = „Plastelínové kostičky venku na zahradě se skluzavkou a stromem".
-
-5. **Drobnosti**:
-   - Wrapper obrázku zachovat `w-[70%] max-w-3xl mx-auto`, výška dle aspect-ratio (~4:3) přes `aspect-[4/3]`.
-   - Přepínač má `whitespace-nowrap` a min šířku, aby se text neměnil skokově při přepnutí — buď fixed width na nejdelší variantu, nebo plynulá šířka přes `transition: width`.
-
-### Bez zásahu do dat / textů tříd
-Karty 4 tříd zůstávají beze změny.
+### 3. Žádné další změny obsahu
+- Žádné karty, texty, animace ani přepínač se nemění.
+- Border boxu (`border-border/70`) zůstává.

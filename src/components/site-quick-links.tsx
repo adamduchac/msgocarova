@@ -18,7 +18,7 @@ const links: Link[] = [
 
 export function SiteQuickLinks() {
   return (
-    <section aria-label="Rychlý rozcestník pro rodiče" className="relative -mt-2">
+    <section aria-label="Rychlý rozcestník pro rodiče" className="relative py-12 md:py-16">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {links.map((l, i) => {
