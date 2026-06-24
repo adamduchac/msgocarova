@@ -56,20 +56,21 @@ export function SiteFooter() {
         src={cubeRed.url}
         alt=""
         aria-hidden
-        className="pointer-events-none absolute left-[4%] top-0 z-0 w-[6.3rem] -translate-y-1/2 select-none sm:w-[7.35rem] lg:w-[10.5rem]"
+        className="pointer-events-none absolute left-[4%] top-[-10px] z-0 w-[6.3rem] select-none sm:w-[7.35rem] lg:w-[10.5rem]"
         loading="lazy"
         decoding="async"
       />
       <div className="container mx-auto px-6 relative z-10">
-        <div className="relative overflow-hidden rounded-2xl bg-ink text-white">
+        <div className="relative rounded-2xl bg-ink text-white">
           <img
             src={cubeYellow.url}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute bottom-[-1rem] right-[-1.5rem] z-0 w-[5rem] select-none sm:w-[6rem] lg:w-[7.5rem]"
+            className="pointer-events-none absolute bottom-[-1.5rem] right-[-1.5rem] z-20 w-[5rem] select-none sm:w-[6rem] lg:w-[7.5rem]"
             loading="lazy"
             decoding="async"
           />
+
           <div className="relative z-10 px-6 py-14 md:px-12 md:py-16">
             <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-12">
           {/* Brand */}
