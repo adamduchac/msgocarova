@@ -53,7 +53,7 @@ export function SiteActivities() {
             <article
               key={a.title}
               className="card-hover reveal-up group relative overflow-hidden rounded-2xl bg-card"
-              style={{ ["--reveal-delay" as string]: `${i * 110}ms`, minHeight: "440px" }}
+              style={{ ["--reveal-delay" as string]: `${i * 60}ms`, minHeight: "440px" }}
             >
               <div className="activity-shift flex h-full flex-col transition-transform duration-300 ease-out motion-reduce:transform-none group-hover:-translate-y-14 group-focus-within:-translate-y-14">
                 <div className="aspect-[5/3] w-full overflow-hidden">
