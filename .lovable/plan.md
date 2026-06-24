@@ -1,28 +1,26 @@
-# Plán: drobné úpravy menu + hero + oznamovací box
+## Plán — živější kostičky v hero sekci
 
-## 1) Menu — odebrat ikony
+### 1. Výraznější a rychlejší float animace
+- Upravit `@keyframes hero-cube-float-a` a `@keyframes hero-cube-float-b` v `src/styles.css`:
+  - Zvětšit amplitudu pohybu (`translateY` a `rotate`) o ~30–50 %.
+  - Zkrátit dobu trvání cyklu z 7 s / 8,5 s na cca 5 s / 6,5 s.
+- Upravit vstupní animaci `hero-cube-in` — mírně zrychlit overshoot bounce (např. `scale(1.14)` místo `1.12` a rychlejší settle).
 
-V `src/components/site-navbar.tsx`:
-- Odstranit `ChevronDown` u submenu triggerů (desktop i mobil).
-- Odstranit `ExternalLink` u odkazu na ZŠ Josefa Gočára (desktop i mobil) — chování `target="_blank"` zůstává.
-- Odstranit `ArrowRight` u CTA „Naše školka" (desktop i mobil).
-- Import `ChevronDown, ExternalLink, ArrowRight` z `lucide-react` odstranit (zůstane jen `Menu, X`).
-- Submenu se nadále otvírá na hover/focus/click; rotace caretu jen odpadá (caret tam není).
+### 2. Parallax reakce na kurzor v hero sekci
+- V `src/components/site-hero.tsx` přidat `useEffect` pro sledování `mousemove` nad hero sekcí.
+- Vypočítat relativní offset myši ke středu hero a aplikovat jemný `translate` na kostičky (opačný směr než myš, aby vytvořily hloubku):
+  - Kostička A: ~6–10 px posunu na ose X i Y.
+  - Kostička B: ~4–8 px posunu (slabší, aby působila dál).
+- Při opuštění hero sekce se kostičky vrátí do výchozí pozice.
+- Respektovat `prefers-reduced-motion` — parallax se vypne.
 
-## 2) Hero nadpis — bez pevných zalomení
+### 3. Zvětšení kostiček o 5 %
+- Upravit šířky v `site-hero.tsx`:
+  - Kostička A: `w-24 sm:w-28 lg:w-40` → `w-[6.3rem] sm:w-[7.35rem] lg:w-[10.5rem]` (cca +5 %).
+  - Kostička B: `w-[6.3rem] sm:w-[7.2rem] lg:w-[9.9rem]` → `w-[6.6rem] sm:w-[7.55rem] lg:w-[10.4rem]` (cca +5 %).
 
-V `src/components/site-hero.tsx`:
-- Odstranit `<br className="hidden sm:block" />`.
-- Místo mezery mezi „a" a „rostou" vložit pevnou mezeru (`\u00A0`) v textu, aby se „a rostou" nikdy nerozdělilo.
-- Výsledek: `Místo, kde si děti hrají, objevují a\u00A0rostou` — řádky se zalomí dle šířky, jen „a rostou" drží spolu.
+### Soubory ke změně
+- `src/styles.css` — keyframes
+- `src/components/site-hero.tsx` — velikosti + parallax logika
 
-## 3) Oznamovací box — bez hover efektu karty, kulatý arrow
-
-V `src/components/site-announcement-bar.tsx`:
-- Odstranit třídu `card-hover-soft` z `<a>` (zůstane stín + focus ring; rozjetí šipky „Podrobnosti" beze změny).
-- Arrow pill v default stavu má být **dokonalý kruh**:
-  - `inline-flex items-center h-11 sm:h-12 rounded-full bg-ink` zůstává.
-  - Vnitřní text span: výchozí `px-0` (nikoli pevné `padding-left:1rem; padding-right:0.25rem`), na hover/focus `group-hover:pl-4 group-hover:pr-1 group-focus-visible:pl-4 group-focus-visible:pr-1`. Padding doplnit do `transitionProperty` (už tam je).
-  - Tím při zavřeném stavu vidíme jen čtvereček 44×44 / 48×48 px se `rounded-full` = kruh, plně dle reference.
-
-Žádné jiné změny, žádné nové závislosti.
+Žádné nové závislosti. CSS transformace + nativní React hooky.

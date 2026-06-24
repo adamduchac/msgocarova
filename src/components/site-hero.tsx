@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import heroKids from "@/assets/hero-kids.jpg.asset.json";
 import heroKids2 from "@/assets/hero-kids-2.webp.asset.json";
 import heroKids3 from "@/assets/hero-kids-3.webp.asset.json";
@@ -20,6 +20,9 @@ const SLIDES = [
 export function SiteHero() {
   const [index, setIndex] = useState(0);
   const [cubesFloating, setCubesFloating] = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const cubeAWrapRef = useRef<HTMLDivElement | null>(null);
+  const cubeBWrapRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const reduce =
@@ -44,8 +47,55 @@ export function SiteHero() {
     return () => window.clearTimeout(t);
   }, []);
 
+  // Subtle cursor parallax on the cubes (hero section only)
+  useEffect(() => {
+    const reduce =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    const section = sectionRef.current;
+    if (!section) return;
+
+    let raf = 0;
+    let targetX = 0;
+    let targetY = 0;
+
+    const handleMove = (e: MouseEvent) => {
+      const rect = section.getBoundingClientRect();
+      const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1; // -1..1
+      const ny = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+      targetX = Math.max(-1, Math.min(1, nx));
+      targetY = Math.max(-1, Math.min(1, ny));
+      if (!raf) {
+        raf = window.requestAnimationFrame(apply);
+      }
+    };
+
+    const apply = () => {
+      raf = 0;
+      const a = cubeAWrapRef.current;
+      const b = cubeBWrapRef.current;
+      if (a) a.style.transform = `translate3d(${(-targetX * 9).toFixed(2)}px, ${(-targetY * 9).toFixed(2)}px, 0)`;
+      if (b) b.style.transform = `translate3d(${(-targetX * 6).toFixed(2)}px, ${(-targetY * 6).toFixed(2)}px, 0)`;
+    };
+
+    const handleLeave = () => {
+      targetX = 0;
+      targetY = 0;
+      if (!raf) raf = window.requestAnimationFrame(apply);
+    };
+
+    section.addEventListener("mousemove", handleMove);
+    section.addEventListener("mouseleave", handleLeave);
+    return () => {
+      section.removeEventListener("mousemove", handleMove);
+      section.removeEventListener("mouseleave", handleLeave);
+      if (raf) window.cancelAnimationFrame(raf);
+    };
+  }, []);
+
   return (
-    <section className="relative overflow-hidden">
+    <section ref={sectionRef} className="relative overflow-hidden">
       <div className="hero-y container mx-auto grid items-center gap-12 px-6 lg:grid-cols-12 lg:gap-10">
         {/* Text */}
         <div className="reveal-up lg:col-span-5">
@@ -121,34 +171,39 @@ export function SiteHero() {
           </div>
 
           {/* Floating cube A — top-left, closer to centre */}
-          <img
-            src={cubeA.url}
-            alt=""
-            aria-hidden
-            className={`hero-cube pointer-events-none absolute left-[4%] top-[2%] z-10 w-24 sm:w-28 lg:w-40 ${
-              cubesFloating ? "is-floating" : "is-entering"
-            }`}
-            style={{
-              ["--cube-delay" as string]: `${cubeAStart}ms`,
-              ["--cube-float" as string]: "hero-cube-float-a",
-              ["--cube-float-duration" as string]: "7s",
-            }}
-          />
+          <div
+            ref={cubeAWrapRef}
+            className="hero-cube-wrap pointer-events-none absolute left-[4%] top-[2%] z-10 w-[6.3rem] sm:w-[7.35rem] lg:w-[10.5rem]"
+          >
+            <img
+              src={cubeA.url}
+              alt=""
+              aria-hidden
+              className={`hero-cube ${cubesFloating ? "is-floating" : "is-entering"}`}
+              style={{
+                ["--cube-delay" as string]: `${cubeAStart}ms`,
+                ["--cube-float" as string]: "hero-cube-float-a",
+                ["--cube-float-duration" as string]: "5s",
+              }}
+            />
+          </div>
           {/* Floating cube B — lower-right, pulled in toward centre */}
-          <img
-            src={cubeB.url}
-            alt=""
-            aria-hidden
-            className={`hero-cube pointer-events-none absolute bottom-[6%] right-[-3%] z-10 w-[6.3rem] sm:w-[7.2rem] lg:w-[9.9rem] ${
-              cubesFloating ? "is-floating" : "is-entering"
-            }`}
-            style={{
-              ["--cube-delay" as string]: `${cubeAStart + cubeBDelay}ms`,
-              ["--cube-float" as string]: "hero-cube-float-b",
-              ["--cube-float-duration" as string]: "8.5s",
-              
-            }}
-          />
+          <div
+            ref={cubeBWrapRef}
+            className="hero-cube-wrap pointer-events-none absolute bottom-[6%] right-[-3%] z-10 w-[6.6rem] sm:w-[7.55rem] lg:w-[10.4rem]"
+          >
+            <img
+              src={cubeB.url}
+              alt=""
+              aria-hidden
+              className={`hero-cube ${cubesFloating ? "is-floating" : "is-entering"}`}
+              style={{
+                ["--cube-delay" as string]: `${cubeAStart + cubeBDelay}ms`,
+                ["--cube-float" as string]: "hero-cube-float-b",
+                ["--cube-float-duration" as string]: "6.5s",
+              }}
+            />
+          </div>
 
         </div>
       </div>
