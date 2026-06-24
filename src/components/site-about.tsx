@@ -8,9 +8,10 @@ export function SiteAbout() {
           <p className="text-sm font-medium uppercase tracking-[0.18em] text-brand-green">
             O školce
           </p>
-          <h2 className="mt-3 font-display text-3xl font-extrabold leading-[1.15] text-ink md:text-[40px]">
+          <h2 className="mt-3 font-display text-[34px] font-extrabold leading-[1.15] text-ink md:text-[40px]">
             Školka, která si z každého přístupu bere to&nbsp;nejlepší
           </h2>
+
           <p className="mt-6 text-lg leading-relaxed text-body">
             Najdete nás v klidném a bezpečném vnitrobloku v centru Hradce Králové,
             jen pár kroků od nábřeží Labe. Děti nedržíme v jedné šabloně. Bereme

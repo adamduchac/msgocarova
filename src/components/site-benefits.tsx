@@ -62,9 +62,10 @@ export function SiteBenefits() {
           <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
             Přijďte se podívat
           </p>
-          <h2 className="mt-3 font-display text-3xl text-ink md:text-[40px]">
+          <h2 className="mt-3 font-display text-[34px] text-ink md:text-[40px]">
             To pravé místo pro vaše děti
           </h2>
+
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">

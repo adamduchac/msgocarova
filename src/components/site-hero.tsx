@@ -96,7 +96,7 @@ export function SiteHero() {
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden">
-      <div className="hero-y container mx-auto grid items-center gap-12 px-6 lg:grid-cols-12 lg:gap-10">
+      <div className="hero-y container mx-auto grid items-center gap-16 px-6 lg:grid-cols-12 lg:gap-10">
         {/* Text */}
         <div className="reveal-up lg:col-span-5">
           <p className="mb-4 font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
@@ -176,7 +176,7 @@ export function SiteHero() {
           {/* Floating cube A — top-left, closer to centre */}
           <div
             ref={cubeAWrapRef}
-            className="hero-cube-wrap pointer-events-none absolute left-[4%] top-[2%] z-10 w-[6.3rem] sm:w-[7.35rem] lg:w-[10.5rem]"
+            className="hero-cube-wrap pointer-events-none absolute left-[-4%] top-[-3%] z-10 w-[6.3rem] sm:left-[4%] sm:top-[2%] sm:w-[7.35rem] lg:w-[10.5rem]"
           >
             <img
               src={cubeA.url}
@@ -193,7 +193,7 @@ export function SiteHero() {
           {/* Floating cube B — lower-right, pulled in toward centre */}
           <div
             ref={cubeBWrapRef}
-            className="hero-cube-wrap pointer-events-none absolute bottom-[6%] right-[-3%] z-10 w-[6.6rem] sm:w-[7.55rem] lg:w-[10.4rem]"
+            className="hero-cube-wrap pointer-events-none absolute bottom-[2%] right-[-9%] z-10 w-[6.6rem] sm:bottom-[6%] sm:right-[-3%] sm:w-[7.55rem] lg:w-[10.4rem]"
           >
             <img
               src={cubeB.url}

@@ -47,9 +47,10 @@ export function SiteNews() {
           <p className="text-sm font-medium uppercase tracking-[0.18em] text-brand-blue">
             Aktuálně
           </p>
-          <h2 className="mt-3 font-display text-3xl font-extrabold text-ink md:text-[40px]">
+          <h2 className="mt-3 font-display text-[34px] font-extrabold text-ink md:text-[40px]">
             Aktuali<span className="text-brand-yellow">ty</span>
           </h2>
+
         </div>
 
         <div className="grid grid-cols-1 gap-7 md:grid-cols-3">
