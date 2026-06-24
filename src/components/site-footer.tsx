@@ -1,5 +1,4 @@
 import { ArrowUpRight, MapPin } from "lucide-react";
-import logoAsset from "@/assets/logo.svg.asset.json";
 import cubeRed from "@/assets/cube-red.png.asset.json";
 import cubeYellow from "@/assets/cube-yellow.png.asset.json";
 
@@ -40,17 +39,7 @@ export function SiteFooter() {
           />
 
           <div className="relative z-10 px-6 py-14 md:px-12 md:py-16">
-            {/* Brand */}
-            <div className="flex flex-col items-start gap-5 border-b border-white/10 pb-10 md:flex-row md:items-center md:justify-between md:gap-8">
-              <a href="/" className="inline-flex items-center" aria-label="MŠ Josefa Gočára — domů">
-                <img src={logoAsset.url} alt="MŠ Josefa Gočára" className="h-10 w-auto brightness-0 invert" />
-              </a>
-              <p className="max-w-md text-[15px] leading-relaxed text-white/70 md:text-right">
-                Místo, kde děti rostou v bezpečí, hře a radosti.
-              </p>
-            </div>
-
-            <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
+            <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8 lg:gap-12">
               {/* Kontakt */}
               <div>
                 <h3 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-white/60">
@@ -65,25 +54,27 @@ export function SiteFooter() {
                     <span className="block">500 02 Hradec Králové 2</span>
                   </address>
                 </div>
+              </div>
 
-                <div className="mt-8">
-                  <p className="font-display text-xs font-semibold uppercase tracking-[0.16em] text-white/50">
-                    Vedení školky
-                  </p>
-                  <div className="mt-3 flex flex-col gap-2">
-                    <a
-                      href="mailto:kosticky@msjghk.cz"
-                      className="font-display text-2xl font-semibold text-white transition-colors duration-200 hover:text-brand-yellow md:text-[28px]"
-                    >
-                      kosticky@msjghk.cz
-                    </a>
-                    <a
-                      href="tel:+420495444421"
-                      className="font-display text-2xl font-semibold text-white transition-colors duration-200 hover:text-brand-yellow md:text-[28px]"
-                    >
-                      495 444 421
-                    </a>
-                  </div>
+              {/* Vedení školky */}
+              <div>
+                <h3 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-white/60">
+                  Vedení školky
+                </h3>
+
+                <div className="mt-6 flex flex-col gap-2">
+                  <a
+                    href="mailto:kosticky@msjghk.cz"
+                    className="font-display text-2xl font-semibold text-white transition-colors duration-200 hover:text-brand-yellow md:text-[28px]"
+                  >
+                    kosticky@msjghk.cz
+                  </a>
+                  <a
+                    href="tel:+420495444421"
+                    className="font-display text-2xl font-semibold text-white transition-colors duration-200 hover:text-brand-yellow md:text-[28px]"
+                  >
+                    495 444 421
+                  </a>
                 </div>
               </div>
 
@@ -93,21 +84,21 @@ export function SiteFooter() {
                   Jednotlivé třídy
                 </h3>
 
-                <ul className="mt-6 flex flex-col divide-y divide-white/10 rounded-2xl border border-white/10 bg-white/[0.03]">
+                <ul className="mt-6 flex flex-col gap-3">
                   {classes.map((c) => (
                     <li key={c.name}>
                       <a
                         href={c.href}
-                        className="group flex items-center gap-4 px-5 py-4 transition-colors duration-200 hover:bg-white/[0.05] focus-visible:bg-white/[0.05] focus-visible:outline-none"
+                        className="group flex items-center gap-3 transition-colors duration-200 hover:text-brand-yellow focus-visible:outline-none"
                         aria-label={`${c.name} — telefon ${c.phone}, vstup do třídy`}
                       >
                         <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${c.dotClass}`} aria-hidden />
-                        <span className="flex-1 font-display text-[16px] font-medium text-white">
+                        <span className="flex-1 font-display text-[15px] font-medium text-white group-hover:text-brand-yellow transition-colors duration-200">
                           {c.name}
                         </span>
-                        <span className="text-[15px] tabular-nums text-white/75">{c.phone}</span>
+                        <span className="text-[15px] tabular-nums text-white/75 group-hover:text-brand-yellow transition-colors duration-200">{c.phone}</span>
                         <ArrowUpRight
-                          className="h-4 w-4 text-white/40 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white"
+                          className="h-4 w-4 text-white/40 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-brand-yellow"
                           aria-hidden
                         />
                       </a>
@@ -120,10 +111,18 @@ export function SiteFooter() {
 
           {/* Bottom bar */}
           <div className="relative z-10 border-t border-white/10">
-            <div className="px-6 py-5 md:px-12">
-              <p className="text-center text-sm text-white/55">
-                © 2026 MŠ Josefa Gočára. Všechna práva vyhrazena.
+            <div className="px-6 py-5 md:px-12 flex flex-col items-center gap-2 text-center md:flex-row md:justify-between md:text-left">
+              <p className="text-sm text-white/55">
+                © 2026 MŠ Josefa Gočára. Všechna práva vyhrazena. | Používáme pouze technické cookies
               </p>
+              <a
+                href="https://www.addu.cz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-white/55 transition-colors duration-200 hover:text-brand-yellow"
+              >
+                Design a realizace ADDU.cz
+              </a>
             </div>
           </div>
         </div>
