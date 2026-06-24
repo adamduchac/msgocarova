@@ -49,9 +49,11 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
 
 export function SiteFooter() {
   return (
-    <footer style={{ backgroundColor: "#1B2B4D" }} className="text-white">
-      <div className="container mx-auto px-6 py-14 md:py-20">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-12">
+    <footer className="bg-background py-10 md:py-14">
+      <div className="container mx-auto px-6">
+        <div className="rounded-2xl bg-ink text-white">
+          <div className="px-6 py-14 md:px-12 md:py-16">
+            <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-12">
           {/* Brand */}
           <div className="lg:col-span-4">
             <a href="/" className="inline-flex items-center" aria-label="MŠ Josefa Gočára — domů">
@@ -148,15 +150,17 @@ export function SiteFooter() {
               </nav>
             </FooterColumn>
           </div>
-        </div>
-      </div>
+            </div>
+          </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-white/10">
-        <div className="container mx-auto px-6 py-5">
-          <p className="text-center text-sm text-white/55">
-            © 2026 MŠ Josefa Gočára. Všechna práva vyhrazena.
-          </p>
+          {/* Bottom bar */}
+          <div className="border-t border-white/10">
+            <div className="px-6 py-5 md:px-12">
+              <p className="text-center text-sm text-white/55">
+                © 2026 MŠ Josefa Gočára. Všechna práva vyhrazena.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
