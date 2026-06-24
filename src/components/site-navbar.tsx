@@ -116,7 +116,7 @@ export function SiteNavbar() {
                         role="menu"
                         aria-label={item.label}
                         data-open={isOpen}
-                        className="nav-submenu absolute left-1/2 top-full z-50 mt-3 min-w-56 -translate-x-1/2 rounded-2xl border border-border/60 bg-background p-2 shadow-[0_18px_40px_-20px_rgba(15,23,42,0.25)]"
+                        className="nav-submenu absolute left-0 top-full z-50 mt-3 min-w-56 rounded-2xl border border-border/60 bg-background p-1.5 shadow-[0_18px_40px_-20px_rgba(15,23,42,0.25)]"
                       >
                         <div
                           aria-hidden
