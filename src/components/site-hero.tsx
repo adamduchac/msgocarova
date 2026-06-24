@@ -8,6 +8,8 @@ import cubeA from "@/assets/cube-hero-a.png.asset.json";
 import cubeB from "@/assets/cube-hero-b.png.asset.json";
 import { ArrowRight } from "lucide-react";
 
+const NBSP = "\u00A0";
+
 const SLIDES = [
   { url: heroKids.url, alt: "Děti si hrají s dřevěnými kostkami na školní zahradě" },
   { url: heroKids2.url, alt: "Paní učitelka čte dětem pohádku v útulné herně" },
