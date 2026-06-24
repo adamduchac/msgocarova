@@ -37,11 +37,7 @@ const activities: Activity[] = [
 
 export function SiteActivities() {
   return (
-    <section
-      id="aktuality"
-      className="section-y"
-      style={{ background: "linear-gradient(to bottom, #FFFFFF 0%, #FCE4E1 100%)" }}
-    >
+    <section id="aktuality" className="section-y">
       <div className="container mx-auto px-6">
         <div className="reveal-up section-header-gap mx-auto max-w-2xl text-center">
           <p className="text-sm font-medium uppercase tracking-[0.18em] text-brand-blue">

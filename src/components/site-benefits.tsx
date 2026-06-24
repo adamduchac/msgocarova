@@ -54,7 +54,7 @@ export function SiteBenefits() {
       className="section-y"
       style={{
         background:
-          "linear-gradient(to bottom, #ffffff 0%, #ffffff 10%, var(--mint-soft) 55%, var(--mint-soft) 100%)",
+          "linear-gradient(to bottom, #ffffff 0%, #ffffff 10%, var(--blue-soft) 55%, var(--blue-soft) 100%)",
       }}
     >
       <div className="container mx-auto px-6">
