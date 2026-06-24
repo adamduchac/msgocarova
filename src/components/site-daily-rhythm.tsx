@@ -65,6 +65,8 @@ const moments: Moment[] = [
 ];
 
 const delays = ["0ms", "440ms", "880ms", "1320ms", "1760ms"];
+const dotColors = ["#276CEC", "#2B7EEF", "#2F90F2", "#32A2F4", "#36B4F7"];
+
 
 export function SiteDailyRhythm() {
   return (
@@ -96,9 +98,13 @@ export function SiteDailyRhythm() {
                 className="reveal-up text-center"
                 style={{ ["--reveal-delay" as string]: delays[i] }}
               >
-                <span className="font-display text-base font-bold text-brand-blue">
+                <span
+                  className="font-display text-base font-bold"
+                  style={{ color: dotColors[i] }}
+                >
                   {m.time}
                 </span>
+
               </li>
             ))}
           </ol>
@@ -123,7 +129,8 @@ export function SiteDailyRhythm() {
                   d="M0,28 C40,36 80,12 120,20 C180,26 280,42 360,36 C440,32 520,6 600,12 C680,18 770,40 840,32 C920,26 1010,14 1080,22 C1130,26 1170,30 1200,26"
                   fill="none"
                   stroke="#9CC8A6"
-                  strokeWidth="5"
+                  strokeWidth="2.5"
+
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   vectorEffect="non-scaling-stroke"
@@ -134,7 +141,7 @@ export function SiteDailyRhythm() {
                   d="M0,28 C40,36 80,12 120,20 C180,26 280,42 360,36 C440,32 520,6 600,12 C680,18 770,40 840,32 C920,26 1010,14 1080,22 C1130,26 1170,30 1200,26"
                   fill="none"
                   stroke="url(#daily-grad)"
-                  strokeWidth="5"
+                  strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   pathLength={1}
@@ -155,13 +162,15 @@ export function SiteDailyRhythm() {
                     style={{ ["--reveal-delay" as string]: delays[i] }}
                   >
                     <span
-                      className="reveal-up absolute left-1/2 block h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-blue"
+                      className="reveal-up absolute left-1/2 block h-[7px] w-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full"
                       style={{
                         top: tops[i],
+                        backgroundColor: dotColors[i],
                         ["--reveal-delay" as string]: delays[i],
                       }}
                       aria-hidden
                     />
+
                   </li>
                 );
               })}
