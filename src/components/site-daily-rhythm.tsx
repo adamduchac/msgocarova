@@ -141,7 +141,7 @@ export function SiteDailyRhythm() {
                   d="M0,28 C40,36 80,12 120,20 C180,26 280,42 360,36 C440,32 520,6 600,12 C680,18 770,40 840,32 C920,26 1010,14 1080,22 C1130,26 1170,30 1200,26"
                   fill="none"
                   stroke="url(#daily-grad)"
-                  strokeWidth="5"
+                  strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   pathLength={1}
