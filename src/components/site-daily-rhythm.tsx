@@ -98,9 +98,13 @@ export function SiteDailyRhythm() {
                 className="reveal-up text-center"
                 style={{ ["--reveal-delay" as string]: delays[i] }}
               >
-                <span className="font-display text-base font-bold text-brand-blue">
+                <span
+                  className="font-display text-base font-bold"
+                  style={{ color: dotColors[i] }}
+                >
                   {m.time}
                 </span>
+
               </li>
             ))}
           </ol>
