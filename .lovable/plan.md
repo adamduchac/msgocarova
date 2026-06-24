@@ -1,40 +1,38 @@
-## Úprava sekce „Barevné kostičky"
+## Úprava sekce Barevné kostičky
 
-Přerovnat `src/components/site-classes.tsx` z dvousloupcového layoutu (text vlevo, ilustrace vpravo) do centrovaného obsahu uvnitř jednoho ohraničeného boxu — vizuálně sladěného s kartami v rychlém rozcestníku, jen ve velkém formátu.
+Odebrat vnitřní `max-w-6xl` box se stínem a borderem. Sekce bude mít stejnou šířku jako všechny ostatní — `container mx-auto px-6`. Nadpis, ilustrace i grid tříd zůstanou, jen bez ohraničujícího boxu.
 
-### Layout boxu (zhora dolů, vše na střed)
+```
+section (full-width, bg-background)
+  container mx-auto px-6
+    eyebrow + nadpis (centered, max-w-2xl)
+    ilustrace (70 % šířky, centered)
+    4×1 grid tříd (stejný styl karet)
+```
 
-1. **Eyebrow** — „Barevné kostičky" (uppercase, tracking, malý font), centrováno.
-2. **Nadpis H2** — „Čtyři třídy, jeden skvělý tým" s modrým gradientem na „skvělý tým", centrovaný, max-w-2xl.
-3. **Ilustrace** — `kosticky_doma.webp` (nahraji jako asset), šířka ~70 % šířky boxu (max-w cca `48rem`, `w-[70%]`), centrovaná, `loading="lazy"`, bez hover efektů.
-4. **Grid tříd** — 4×1 na desktopu (`lg:grid-cols-4`), 2×2 na tabletu (`sm:grid-cols-2`), 1 sloupec na mobilu. Karty zůstávají ve stávajícím stylu (barevný nadpis třídy, věk, učitelky, rozbalovací CTA pill se šipkou v rohu) — žádné změny v obsahu ani interakci jednotlivých karet.
+## Redesign footeru
 
-### Styl boxu
+Současný 5-sloupcý layout se kompletně nahradí čistým 2-sloupcým uspořádáním na desktopu:
 
-- `rounded-3xl border border-border/70 bg-card`
-- Měkký stín: `shadow-[0_20px_60px_-30px_rgba(15,23,42,0.18)]` (silnější než u malých rozcestníků, aby box „nesl" obsah)
-- Vnitřní padding: `p-6 sm:p-10 lg:p-14`
-- Šířka: `container mx-auto px-6`, uvnitř `max-w-6xl`
+**Levý sloupec — Kontakt**
+- Nadpis: "Kontakt"
+- Adresa:
+  Mateřská škola Josefa Gočára
+  Škroupova 693, 50002 Hradec Králové 2
+- Vedení školky (zvýrazněno jako hlavní kontakt):
+  kosticky@msjghk.cz
+  495 444 421
 
-### Vertikální rytmus uvnitř boxu
+**Pravý sloupec — Jednotlivé třídy**
+- Nadpis: "Jednotlivé třídy"
+- 4 řádky s názvem třídy, telefonem a proklikem (např. `#tridy` nebo kotva na konkrétní třídu):
+  Modrá kostička — 495 444 423
+  Červená kostička — 495 444 425
+  Žlutá kostička — 495 444 424
+  Zelená kostička — 495 444 426
 
-- Eyebrow → H2: `mt-3`
-- H2 → ilustrace: `mt-8 lg:mt-10`
-- Ilustrace → grid: `mt-10 lg:mt-12`
-
-### Drobnosti
-
-- Žádný hover scale, žádný bouncy efekt (per Core memory).
-- Scroll-reveal: eyebrow, H2, ilustrace a karty s jemným staggerem (`--reveal-delay`).
-- Karty v 4×1 gridu mohou mít vyšší/menší padding podle potřeby, aby se vešly do řady bez přetečení (`p-5` místo `p-6`, pill stejně velký).
-
-### Technické kroky
-
-1. `lovable-assets create --file /mnt/user-uploads/kosticky_doma.webp > src/assets/kosticky-doma.webp.asset.json`
-2. Přepsat `src/components/site-classes.tsx`:
-   - Odstranit dvousloupcový grid.
-   - Obalit obsah do `<div class="mx-auto max-w-6xl rounded-3xl border border-border/70 bg-card shadow-[...] p-6 sm:p-10 lg:p-14">`.
-   - Centrovat eyebrow + H2.
-   - Vložit `<img>` s `kosticky_doma`, `w-[70%] max-w-3xl mx-auto`.
-   - Grid tříd: `grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4`.
-3. Build check.
+**Vizuální zpracování**
+- Ponechat tmavé pozadí (`bg-ink`) a dekorativní kostičky.
+- Kontaktní telefon a e-mail vedení školky zvětšit pro lepší čitelnost.
+- Třídy stylizovat jako přehledný seznam s barevným prvkem (tečka nebo linka v barvě třídy) a šipkou pro proklik.
+- Zachovat spodní copyright bar.
