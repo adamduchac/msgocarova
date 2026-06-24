@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import heroKids from "@/assets/hero-kids.jpg.asset.json";
 import heroKids2 from "@/assets/hero-kids-2.webp.asset.json";
 import heroKids3 from "@/assets/hero-kids-3.webp.asset.json";
