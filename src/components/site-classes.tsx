@@ -1,5 +1,7 @@
-import { ArrowRight } from "lucide-react";
-import kostickyDoma from "@/assets/kosticky-doma.webp.asset.json";
+import { useState } from "react";
+import { ArrowRight, Home, Trees } from "lucide-react";
+import kostickyA from "@/assets/kosticky-tridy-a.webp.asset.json";
+import kostickyB from "@/assets/kosticky-tridy-b.webp.asset.json";
 
 type ClassItem = {
   name: string;
@@ -42,10 +44,12 @@ const classes: ClassItem[] = [
 ];
 
 export function SiteClasses() {
+  const [outside, setOutside] = useState(false);
+
   return (
     <section id="tridy" className="section-y bg-background">
       <div className="container mx-auto px-6">
-        <div className="rounded-3xl border border-white/60 bg-background px-6 py-12 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] md:px-12 md:py-16 lg:px-16 lg:py-20">
+        <div className="rounded-3xl border border-border/70 bg-background px-6 py-12 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] md:px-12 md:py-16 lg:px-16 lg:py-20">
 
           {/* Eyebrow + nadpis */}
           <div className="mx-auto max-w-3xl text-center">
@@ -66,19 +70,68 @@ export function SiteClasses() {
             </h2>
           </div>
 
-          {/* Ilustrace */}
+          {/* Ilustrace + přepínač */}
           <div
-            className="reveal-fade mt-8 lg:mt-10"
+            className="reveal-fade relative mx-auto mt-8 w-full max-w-3xl lg:mt-10"
             style={{ ["--reveal-delay" as string]: "120ms" }}
           >
-            <img
-              src={kostickyDoma.url}
-              alt="Plastelínové kostičky doma — červená, modrá, zelená a žlutá"
-              className="mx-auto h-auto w-[70%] max-w-3xl select-none"
-              loading="lazy"
-              decoding="async"
-              draggable={false}
-            />
+            {/* Glass switch */}
+            <div className="pointer-events-none absolute right-0 top-0 z-10 -translate-y-2 sm:-translate-y-3 md:right-2">
+              <button
+                type="button"
+                role="switch"
+                aria-checked={outside}
+                onClick={() => setOutside((v) => !v)}
+                className="pointer-events-auto group inline-flex items-center gap-3 rounded-full border border-border/70 bg-background/80 px-2 py-2 pr-4 shadow-[0_8px_24px_-12px_rgba(15,23,42,0.25)] backdrop-blur-md transition-colors duration-200 hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              >
+                <span
+                  aria-hidden
+                  className={`relative inline-flex h-7 w-12 shrink-0 items-center rounded-full transition-colors duration-300 ${
+                    outside ? "bg-brand-green/85" : "bg-brand-blue/85"
+                  }`}
+                >
+                  <span
+                    className={`absolute top-1/2 grid h-5 w-5 -translate-y-1/2 place-items-center rounded-full bg-white shadow-[0_2px_6px_rgba(0,0,0,0.18)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                      outside ? "translate-x-[26px]" : "translate-x-[4px]"
+                    }`}
+                  >
+                    {outside ? (
+                      <Trees className="h-3 w-3 text-brand-green" strokeWidth={2.5} />
+                    ) : (
+                      <Home className="h-3 w-3 text-brand-blue" strokeWidth={2.5} />
+                    )}
+                  </span>
+                </span>
+                <span
+                  key={outside ? "out" : "in"}
+                  className="min-w-[9.5rem] text-left font-display text-[14px] font-semibold text-ink animate-fade-in"
+                >
+                  {outside ? "Vem kostičky dovnitř" : "Vem kostičky ven"}
+                </span>
+              </button>
+            </div>
+
+            {/* Crossfade obrázků */}
+            <div className="relative aspect-[4/3] w-full">
+              <img
+                src={kostickyA.url}
+                alt="Plastelínové kostičky doma — červená, modrá, zelená a žlutá"
+                data-active={!outside}
+                className="classes-illu absolute inset-0 h-full w-full select-none object-contain"
+                loading="lazy"
+                decoding="async"
+                draggable={false}
+              />
+              <img
+                src={kostickyB.url}
+                alt="Plastelínové kostičky venku na zahradě se skluzavkou a stromem"
+                data-active={outside}
+                className="classes-illu absolute inset-0 h-full w-full select-none object-contain"
+                loading="lazy"
+                decoding="async"
+                draggable={false}
+              />
+            </div>
           </div>
 
           {/* 4×1 grid tříd */}
@@ -88,7 +141,7 @@ export function SiteClasses() {
                 key={c.name}
                 href="#"
                 aria-label={`Vstupte do třídy — ${c.name}`}
-                className="reveal-up group relative block overflow-hidden rounded-3xl border border-white/60 bg-background p-5 pb-16 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="reveal-up group relative block overflow-hidden rounded-3xl border border-border/70 bg-background p-5 pb-16 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}
               >
                 <p
