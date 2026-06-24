@@ -181,17 +181,21 @@ function SlideLayer({
   state: string;
   isActive: boolean;
 }) {
-  const [resolvedState, setResolvedState] = useState(state);
-  const ref = useRef<HTMLImageElement>(null);
+  // First mount of the initial active slide should NOT animate in.
+  const firstMount = useRef(true);
+  const [resolvedState, setResolvedState] = useState(
+    state === "active" ? "active" : "entering",
+  );
 
   useEffect(() => {
-    if (state === "entering") {
-      // Force browser to apply 'entering' styles, then transition to 'active'
+    if (state === "entering" || (firstMount.current && state === "active")) {
+      firstMount.current = false;
       const raf = requestAnimationFrame(() => {
         requestAnimationFrame(() => setResolvedState("active"));
       });
       return () => cancelAnimationFrame(raf);
     }
+    firstMount.current = false;
     setResolvedState(state);
   }, [state]);
 
