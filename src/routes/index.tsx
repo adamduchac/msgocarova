@@ -37,8 +37,8 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div className="min-h-screen bg-background">
+      <SiteNavbar />
       <div style={{ background: "linear-gradient(to bottom, #FEF8E7 0%, #FFFFFF 100%)" }}>
-        <SiteNavbar />
         <SiteHero />
         <SiteAnnouncementBar />
       </div>
