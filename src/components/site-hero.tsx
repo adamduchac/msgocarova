@@ -43,10 +43,7 @@ export function SiteHero() {
   }, []);
 
   return (
-    <section
-      className="relative overflow-hidden"
-      style={{ background: "linear-gradient(to bottom, #FEF8E7 0%, #FFFFFF 100%)" }}
-    >
+    <section className="relative overflow-hidden">
       <div className="hero-y container mx-auto grid items-center gap-12 px-6 lg:grid-cols-12 lg:gap-10">
         {/* Text */}
         <div className="reveal-up lg:col-span-5">
@@ -56,7 +53,9 @@ export function SiteHero() {
               className="bg-clip-text text-transparent"
               style={{ backgroundImage: "linear-gradient(105deg, #2E7DF4 0%, #2FA39B 48%, #3DA35D 100%)" }}
             >
-              hrají, objevují a rostou
+              hrají, objevují
+              <br className="hidden sm:block" />
+              {" "}a rostou
             </span>
           </h1>
 
