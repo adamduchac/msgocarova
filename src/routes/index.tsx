@@ -4,6 +4,7 @@ import { SiteHero } from "@/components/site-hero";
 import { SiteQuickLinks } from "@/components/site-quick-links";
 import { SiteAbout } from "@/components/site-about";
 import { SiteBenefits } from "@/components/site-benefits";
+import { SiteDailyRhythm } from "@/components/site-daily-rhythm";
 import { SiteClasses } from "@/components/site-classes";
 import { SiteActivities } from "@/components/site-activities";
 import { SiteNews } from "@/components/site-news";
@@ -43,6 +44,7 @@ function Index() {
         <SiteBenefits />
         <SiteQuickLinks />
         <SiteAbout />
+        <SiteDailyRhythm />
         <SiteClasses />
         <SiteActivities />
         <SiteNews />
