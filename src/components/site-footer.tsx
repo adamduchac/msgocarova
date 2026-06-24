@@ -26,7 +26,7 @@ export function SiteFooter() {
             src={cubeRed.url}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute left-[6%] bottom-[calc(100%-10px)] z-0 w-[6.3rem] select-none sm:left-[4%] sm:w-[7.35rem] lg:w-[10.5rem]"
+            className="pointer-events-none absolute left-[6%] bottom-[calc(100%-20px)] z-0 w-[6.3rem] select-none sm:bottom-[calc(100%-10px)] sm:left-[4%] sm:w-[7.35rem] lg:w-[10.5rem]"
             loading="lazy"
             decoding="async"
           />
