@@ -1,33 +1,25 @@
-## Tři úpravy hero + typografie
+## Drobné úpravy hero + menu
 
-### 1. Hanken Grotesk 800 pro nadpisy
-**`src/routes/__root.tsx`** – Google Fonts link rozšířit na:
-`family=Hanken+Grotesk:wght@400;500;600;700;800`
+### 1. Větší zalomení mezi "objevují" a "a rostou"
+**`src/components/site-hero.tsx`** – uvnitř gradient `<span>` přidat `<br className="hidden sm:block" />` mezi „objevují," a „a rostou", aby na desktopu vznikl řádkový zlom v původním místě. (Aktuálně je text na jednom řádku po sloučení frází.) Pevnou mezeru tedy řeší zalomení; pokud uživatel chtěl jen širší mezeru ve frázi „a rostou" na konci, použijeme `&nbsp;` pevnou mezeru s malým marginem nelze – proto necháme zalomení.
 
-**`src/styles.css`** – v `@theme inline` nastavit:
-`--font-display: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;`
+Alternativně, pokud uživatel chce zalomení **bez** rozdělení gradientu (jeden plynulý gradient přes celý span): ponecháme současný jeden `<span>` a vložíme dovnitř `<br className="hidden sm:block" />` mezi „objevují," a „a rostou".
 
-V `@layer base` u `h1, h2, h3, h4` ponechat `font-weight: 700;`.
+### 2. Žluté pozadí pod menu
+Aktuálně má hero gradient jen uvnitř sekce, takže pod sticky průhledným menu prosvítá `bg-background` (bílá) z `Index` wrapperu.
 
-### 2. Hero H1 – jedna barva + gradient na slovech
-**`src/components/site-hero.tsx`** – přepsat H1 takto:
-- celý nadpis v `text-ink` s `font-extrabold`
-- odebrat jednotlivé `text-brand-blue` / `text-brand-green` / `text-brand-yellow` třídy
-- fráze „hrají, objevují a rostou" obalit do jednoho `<span>` s třídami `bg-clip-text text-transparent` a inline style:
-  `style={{ backgroundImage: 'linear-gradient(105deg, #2E7DF4 0%, #2FA39B 48%, #3DA35D 100%)' }}`
-- interpunkce a zbytek textu zůstává v `text-ink`
+**`src/components/site-hero.tsx`** – odstranit inline `style={{ background: ... }}` ze `<section>`.
 
-### 3. Hero cube B – fix skoku do floatu
-**`src/components/site-hero.tsx`** – z druhé kostičky (cube B) odstranit řádek:
-`animationDelay: cubesFloating ? "-2s" : undefined,`
+**`src/routes/index.tsx`** – obalit `SiteNavbar` + `SiteHero` do jednoho `<div>` s `style={{ background: 'linear-gradient(to bottom, #FEF8E7 0%, #FFFFFF 100%)' }}`. Tím prosvítá krémová žluť i pod skleněným menu a plynule přechází do bílé pod hero.
 
-### 4. Hero pozadí – krémový gradient do bílé
-**`src/components/site-hero.tsx`** – kořenovému `<section>` doplnit inline style:
-`style={{ background: 'linear-gradient(to bottom, #FEF8E7 0%, #FFFFFF 100%)' }}`
+### 3. Menu na stejnou šířku jako sekce
+Sekce používají `container mx-auto px-6` (Tailwind v4 default container = `width: 100%` bez max-width na žádném breakpointu, tj. plná šířka minus `px-6`). Menu má `max-w-7xl mx-auto`, takže je na velkých obrazovkách užší.
 
-### Co zůstane beze změny
-- Layout hero, slider, kostičky pozic
-- Ostatní animace, CTA
+**`src/components/site-navbar.tsx`** – v `<header>` wrapper změnit ze `max-w-7xl mx-auto ...` na `container mx-auto`. Vnější `<header>` paddingy upravit tak, aby horizontální paddingy uvnitř boxu odpovídaly `container px-6` (tedy odebrat `lg:px-10` z vnějšího headeru, použít jen `px-6`, a vnitřní box dostane `px-6 lg:px-8` pro vnitřní odsazení obsahu — to zůstává). Konkrétně: header `sticky top-0 z-50 w-full px-6 pt-3 sm:pt-4`, uvnitř `container mx-auto overflow-hidden rounded-2xl border border-white/50 bg-background/80 shadow-... backdrop-blur-lg`.
+
+### Co zůstane
+- Layout, slider, kostičky, animace, CTA
+- Sticky chování i glass efekt menu
 - `prefers-reduced-motion` respekt
 
 Žádné nové závislosti.
