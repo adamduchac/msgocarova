@@ -36,7 +36,7 @@ export function SiteFooter() {
               src={cubeYellow.url}
               alt=""
               aria-hidden
-              className="pointer-events-none absolute bottom-[-10px] right-[-10px] z-20 w-[8rem] select-none sm:w-[9.6rem] lg:w-[12rem] scale-x-[-1]"
+              className="pointer-events-none absolute bottom-3 right-3 z-20 w-[8rem] select-none sm:bottom-[-10px] sm:right-[-10px] sm:w-[9.6rem] lg:w-[12rem] scale-x-[-1]"
               loading="lazy"
               decoding="async"
             />
