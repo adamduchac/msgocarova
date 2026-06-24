@@ -1,21 +1,19 @@
-## Větší ilustrace v Barevných kostičkách + sladění mezer mezi sekcemi
+## Drobné úpravy: přepínač, subfooter, animace karet
 
-### 1. Větší obrázek v `site-classes.tsx`
-Wrapper ilustrace (řádek 75) zvětšit:
-- `max-w-3xl` → `max-w-4xl` (768 → 896 px)
-- na velkých rozlišeních ještě o něco větší přes `lg:max-w-[1024px]`
-- aspect ratio ponechat `4/3` (obě verze obrázku mají stejný poměr 4:3)
-- přepínač zůstane ukotvený `right-0 top-0 -translate-y-2/3`, jen logicky narůstá s obrázkem
+### 1. `site-classes.tsx` — větší přepínač vpravo vedle obrázku
+- Wrapper ilustrace přidat `lg:pr-40` (a `md:pr-32`), aby vpravo zbylo místo na svislý přepínač.
+- Přepínač přesunout z `absolute right-0 top-0` na `absolute top-1/2 -translate-y-1/2 right-[-1rem] md:right-0 lg:right-2` — vertikálně centrovaný vedle pravé hrany obrázku.
+- Layout přepínače změnit z horizontálního pillu (toggle + text vedle sebe) na **vertikální stack**:
+  - kontejner `flex flex-col items-center gap-3 cursor-pointer`
+  - samotný toggle větší: track `h-9 w-16`, knob `h-7 w-7`, posun knobu `translate-x-[28px]` v "on" stavu
+  - ikonky uvnitř knobu zvětšit na `h-4 w-4`
+  - text **pod přepínačem**, `text-[14px] font-semibold text-ink`, `text-center`, min šířka `min-w-[10rem]` aby se label neměnil skokově
+- `<button>` doplnit o `cursor-pointer` (interaktivní hand cursor; sjednocení s ostatními tlačítky/kartami).
+- Drobnost: kontejner přepínače dál `pointer-events-auto`.
 
-### 2. Sjednocení vertikálních mezer mezi sekcemi
-Většina sekcí (`SiteBenefits`, `SiteDailyRhythm`, `SiteClasses`, `SiteActivities`, `SiteAbout`, `SiteNews`) používá utility `section-y` → padding `clamp(56px, 8vw, 112px)`. Drobné odchylky:
+### 2. `site-footer.tsx` — subfooter zarovnat doleva
+- Bottom bar (řádek 115): `text-center` → `text-left`. Vše ostatní (separátory, odkaz na ADDU) zůstává.
 
-- **`site-quick-links.tsx`** používá `relative -mt-2` bez `section-y` — visí těsně na předchozí Classes sekci a vůbec nemá vlastní spodní mezeru. Sjednotit:
-  - odstranit `-mt-2`
-  - dát sekci `py-12 md:py-16` (kompaktnější než plné `section-y`, protože jde o rozcestník – ale s viditelným dýchajícím prostorem ke Classes nad ní i k další sekci pod ní)
-- **Gradient wrapper hero**: `pt-28 sm:pt-32` (kompenzace fixed menu) je OK; spodní okraj wrapperu plynule navazuje přes `SiteAnnouncementBar` (`pt-2 pb-6`). Bez změny.
-- **Gradient wrapper okolo Activities + Footer**: nechat beze změny — Activities má `section-y`, Footer si nese vlastní padding.
-
-### 3. Žádné další změny obsahu
-- Žádné karty, texty, animace ani přepínač se nemění.
-- Border boxu (`border-border/70`) zůstává.
+### 3. `site-activities.tsx` — rychlejší stagger karet "Zážitky, které si děti odnesou do školy"
+- Stagger karet: `i * 110ms` → `i * 60ms` (řádek 56). Snižuje celkové čekání mezi kartami z 220 ms (2. karta) a 330 ms (3. karta) na 60/120 ms — nástup působí svižněji a synchronněji.
+- Sama doba reveal animace (`600ms`) zůstává — definovaná globálně v `src/styles.css` a používaná i ostatními sekcemi.
