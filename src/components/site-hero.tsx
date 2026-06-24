@@ -20,6 +20,9 @@ const SLIDES = [
 export function SiteHero() {
   const [index, setIndex] = useState(0);
   const [cubesFloating, setCubesFloating] = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const cubeAWrapRef = useRef<HTMLDivElement | null>(null);
+  const cubeBWrapRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const reduce =
@@ -42,6 +45,53 @@ export function SiteHero() {
       cubeAStart + cubeBDelay + enterDuration + 100,
     );
     return () => window.clearTimeout(t);
+  }, []);
+
+  // Subtle cursor parallax on the cubes (hero section only)
+  useEffect(() => {
+    const reduce =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    const section = sectionRef.current;
+    if (!section) return;
+
+    let raf = 0;
+    let targetX = 0;
+    let targetY = 0;
+
+    const handleMove = (e: MouseEvent) => {
+      const rect = section.getBoundingClientRect();
+      const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1; // -1..1
+      const ny = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+      targetX = Math.max(-1, Math.min(1, nx));
+      targetY = Math.max(-1, Math.min(1, ny));
+      if (!raf) {
+        raf = window.requestAnimationFrame(apply);
+      }
+    };
+
+    const apply = () => {
+      raf = 0;
+      const a = cubeAWrapRef.current;
+      const b = cubeBWrapRef.current;
+      if (a) a.style.transform = `translate3d(${(-targetX * 9).toFixed(2)}px, ${(-targetY * 9).toFixed(2)}px, 0)`;
+      if (b) b.style.transform = `translate3d(${(-targetX * 6).toFixed(2)}px, ${(-targetY * 6).toFixed(2)}px, 0)`;
+    };
+
+    const handleLeave = () => {
+      targetX = 0;
+      targetY = 0;
+      if (!raf) raf = window.requestAnimationFrame(apply);
+    };
+
+    section.addEventListener("mousemove", handleMove);
+    section.addEventListener("mouseleave", handleLeave);
+    return () => {
+      section.removeEventListener("mousemove", handleMove);
+      section.removeEventListener("mouseleave", handleLeave);
+      if (raf) window.cancelAnimationFrame(raf);
+    };
   }, []);
 
   return (
