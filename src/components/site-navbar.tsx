@@ -115,24 +115,20 @@ export function SiteNavbar() {
                       <div
                         role="menu"
                         aria-label={item.label}
-                        className={`absolute left-1/2 top-full z-50 mt-3 min-w-56 -translate-x-1/2 origin-top rounded-2xl border border-border/60 bg-background p-2 shadow-[0_18px_40px_-20px_rgba(15,23,42,0.25)] motion-reduce:transition-none ${
-                          isOpen
-                            ? "pointer-events-auto opacity-100 translate-y-0 scale-100"
-                            : "pointer-events-none opacity-0 -translate-y-1 scale-[0.98]"
-                        }`}
-                        style={{
-                          transitionProperty: "opacity, transform",
-                          transitionDuration: "260ms",
-                          transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
-                        }}
+                        data-open={isOpen}
+                        className="nav-submenu absolute left-1/2 top-full z-50 mt-3 min-w-56 -translate-x-1/2 rounded-2xl border border-border/60 bg-background p-2 shadow-[0_18px_40px_-20px_rgba(15,23,42,0.25)]"
                       >
                         <div
                           aria-hidden
                           className="absolute -top-3 left-0 right-0 h-3"
                         />
                         <ul className="flex flex-col">
-                          {item.children.map((child) => (
-                            <li key={child.href}>
+                          {item.children.map((child, ci) => (
+                            <li
+                              key={child.href}
+                              className="nav-submenu-item"
+                              style={{ ["--i" as string]: ci }}
+                            >
                               <a
                                 href={child.href}
                                 role="menuitem"
