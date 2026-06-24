@@ -10,6 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import faviconAsset from "../assets/favicon-cube.png.asset.json";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { useRevealOnScroll } from "../hooks/use-reveal-on-scroll";
 
@@ -91,6 +92,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/69ae4cb1-a5da-4524-9f9f-0ccec7eecc46/id-preview-967e32c2--b19e21da-aa44-419d-8324-5aee1b4a669e.lovable.app-1782292510386.png" },
     ],
     links: [
+      { rel: "icon", type: "image/png", sizes: "any", href: faviconAsset.url },
+      { rel: "apple-touch-icon", href: faviconAsset.url },
+      { rel: "shortcut icon", href: faviconAsset.url },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
