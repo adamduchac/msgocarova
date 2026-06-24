@@ -10,9 +10,10 @@ export function SiteCtaBanner() {
         >
           <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12">
             <div className="lg:col-span-5">
-              <h2 className="font-display text-3xl font-extrabold leading-tight text-white md:text-4xl">
+              <h2 className="font-display text-[34px] font-extrabold leading-tight text-white md:text-4xl">
                 Přijďte nás navštívit!
               </h2>
+
               <p className="mt-3 max-w-md text-[15px] leading-relaxed text-white/85">
                 Rádi vás provedeme naší školkou a zodpovíme všechny vaše dotazy.
               </p>
