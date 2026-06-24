@@ -26,7 +26,7 @@ export function SiteHero() {
     if (reduce) return;
     const id = window.setInterval(() => {
       setIndex((i) => (i + 1) % SLIDES.length);
-    }, 6000);
+    }, 4500);
     return () => window.clearInterval(id);
   }, []);
 
