@@ -83,6 +83,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: "MŠ Josefa Gočára" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { property: "og:title", content: "MŠ Josefa Gočára" },
+      { name: "twitter:title", content: "MŠ Josefa Gočára" },
+      { property: "og:description", content: "Mateřská škola Josefa Gočára v centru Hradce Králové." },
+      { name: "twitter:description", content: "Mateřská škola Josefa Gočára v centru Hradce Králové." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/69ae4cb1-a5da-4524-9f9f-0ccec7eecc46/id-preview-967e32c2--b19e21da-aa44-419d-8324-5aee1b4a669e.lovable.app-1782292510386.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/69ae4cb1-a5da-4524-9f9f-0ccec7eecc46/id-preview-967e32c2--b19e21da-aa44-419d-8324-5aee1b4a669e.lovable.app-1782292510386.png" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
