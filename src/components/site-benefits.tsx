@@ -4,7 +4,8 @@ import komunikace from "@/assets/vyhoda-komunikace.webp.asset.json";
 import srdce from "@/assets/vyhoda-srdce.webp.asset.json";
 
 type Benefit = {
-  title: string;
+  titleMain: string;
+  titleSub: string;
   text: string;
   image: string;
   alt: string;
@@ -13,28 +14,32 @@ type Benefit = {
 
 const benefits: Benefit[] = [
   {
-    title: "Velká zahrada s dopravním hřištěm",
+    titleMain: "Velká zahrada",
+    titleSub: "s dopravním hřištěm",
     text: "Naše vlastní zelená oáza v centru města. Děti tu jezdí na koloběžkách, skáčou na zemní trampolíně a v létě se chladí v bazénku. Ven chodíme za každého počasí.",
     image: zahrada.url,
     alt: "Plastelínový strom a malé hřiště se skluzavkou",
     tint: "bg-mint",
   },
   {
-    title: "Angličtina a moderní technologie",
+    titleMain: "Angličtina",
+    titleSub: "a moderní technologie",
     text: "Jdeme s dobou. Tradiční hru doplňujeme o interaktivní tabule, základy programování s robotickými myšmi a předškoláky hravou formou seznamujeme s angličtinou.",
     image: robot.url,
     alt: "Plastelínový robot s britskou vlajkou",
     tint: "bg-sky",
   },
   {
-    title: "Respektující a individuální přístup",
+    titleMain: "Respektující",
+    titleSub: "a individuální přístup",
     text: "Inspirujeme se Montessori a programem Začít spolu. Respektujeme tempo každého dítěte, komunikujeme partnersky a vedeme děti k přirozené samostatnosti.",
     image: komunikace.url,
     alt: "Plastelínová bublina s usměvavým smajlíkem",
     tint: "bg-cream",
   },
   {
-    title: "Otevřená a snadná komunikace",
+    titleMain: "Otevřená",
+    titleSub: "a snadná komunikace",
     text: "Žádné papírové vzkazy na šatních skříňkách. Omluvenky i fotky z akcí máte v mobilní aplikaci. O víkendech navíc naši zahradu otevíráme veřejnosti.",
     image: srdce.url,
     alt: "Plastelínové červené srdce",
@@ -65,7 +70,7 @@ export function SiteBenefits() {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
           {benefits.map((b, i) => (
             <article
-              key={b.title}
+              key={b.titleMain}
               className="card-hover reveal-up group flex flex-col gap-5 rounded-3xl border border-white/60 bg-background p-5 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] sm:flex-row sm:items-center sm:gap-6 sm:p-6"
               style={{ ["--reveal-delay" as string]: `${i * 110}ms` }}
             >
@@ -84,7 +89,10 @@ export function SiteBenefits() {
               </div>
               <div className="flex-1">
                 <h3 className="font-display text-[22px] font-semibold leading-snug text-ink sm:text-2xl">
-                  {b.title}
+                  <span className="block">{b.titleMain}</span>
+                  <span className="block text-base font-medium opacity-80">
+                    {b.titleSub}
+                  </span>
                 </h3>
                 <p className="mt-3 text-[15px] leading-relaxed text-body">{b.text}</p>
               </div>
