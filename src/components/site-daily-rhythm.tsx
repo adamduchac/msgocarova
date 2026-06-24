@@ -4,8 +4,6 @@ import denPohyb from "@/assets/den-pohyb.webp.asset.json";
 import denSvacina from "@/assets/den-svacina.webp.asset.json";
 import denStezka from "@/assets/den-stezka.webp.asset.json";
 
-const GRADIENT = "linear-gradient(105deg, #2563EB 0%, #38BDF8 100%)";
-
 type Moment = {
   title: string;
   desc: string;
@@ -17,7 +15,6 @@ type Moment = {
 
 const moments: Moment[] = [
   {
-    time: "8:00",
     title: "Ranní přivítání",
     desc: "Přivítáme se a naladíme na to, co nás čeká.",
     img: denRano,
@@ -26,7 +23,6 @@ const moments: Moment[] = [
     offset: "md:-translate-y-2",
   },
   {
-    time: "9:00",
     title: "Tvoření a hry",
     desc: "Kreslíme a objevujeme svět vlastním tempem.",
     img: denTvoreni,
@@ -35,7 +31,6 @@ const moments: Moment[] = [
     offset: "md:translate-y-3",
   },
   {
-    time: "10:00",
     title: "Pohyb a dobrodružství",
     desc: "Šplháme, balancujeme a vybíjíme energii.",
     img: denPohyb,
@@ -44,7 +39,6 @@ const moments: Moment[] = [
     offset: "md:-translate-y-3",
   },
   {
-    time: "11:30",
     title: "Svačinka",
     desc: "Ve třídě si dáme něco zdravého a dobrého.",
     img: denSvacina,
@@ -53,7 +47,6 @@ const moments: Moment[] = [
     offset: "md:translate-y-2",
   },
   {
-    time: "13:00",
     title: "Smyslová stezka",
     desc: "Naboso poznáváme přírodu na naší stezce.",
     img: denStezka,
@@ -64,7 +57,6 @@ const moments: Moment[] = [
 ];
 
 const delays = ["0ms", "440ms", "880ms", "1320ms", "1760ms"];
-const dotColors = ["#276CEC", "#2B7EEF", "#2F90F2", "#32A2F4", "#36B4F7"];
 
 
 export function SiteDailyRhythm() {
@@ -87,10 +79,8 @@ export function SiteDailyRhythm() {
           </h2>
         </header>
 
-
-
         {/* Polaroids — md+: grid 5 cols / mobile: horizontal scroll-snap */}
-        <ol className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 pt-6 md:mx-0 md:grid md:grid-cols-5 md:gap-6 md:overflow-visible md:px-0 md:pt-8">
+        <ol className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 pt-10 md:mx-0 md:grid md:grid-cols-5 md:gap-6 md:overflow-visible md:px-0 md:pt-14">
           {moments.map((m, i) => (
             <li
               key={m.title}
@@ -109,19 +99,7 @@ export function SiteDailyRhythm() {
                     className="aspect-[4/5] h-auto w-full object-cover"
                   />
                 </figure>
-                {/* time chip — primary on mobile, redundant accent on desktop */}
-                <p
-                  className="mt-4 font-display text-xs font-bold uppercase tracking-[0.14em] md:hidden"
-                  style={{
-                    backgroundImage: GRADIENT,
-                    WebkitBackgroundClip: "text",
-                    backgroundClip: "text",
-                    color: "transparent",
-                  }}
-                >
-                  {m.time}
-                </p>
-                <h3 className="mt-2 font-display text-lg font-bold text-ink md:mt-4">
+                <h3 className="mt-4 font-display text-lg font-bold text-ink">
                   {m.title}
                 </h3>
                 <p className="mt-1 text-sm leading-relaxed text-body">
@@ -132,22 +110,6 @@ export function SiteDailyRhythm() {
           ))}
         </ol>
       </div>
-
-      <style>{`
-        .daily-progress-path {
-          stroke-dasharray: 1;
-          stroke-dashoffset: 1;
-          transition: stroke-dashoffset 2200ms cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .reveal-up.is-visible .daily-progress-path,
-        .is-visible .daily-progress-path {
-          stroke-dashoffset: 0;
-        }
-        /* trigger progress when section is in view via any ancestor reveal */
-        @media (prefers-reduced-motion: reduce) {
-          .daily-progress-path { stroke-dashoffset: 0 !important; transition: none !important; }
-        }
-      `}</style>
     </section>
   );
 }
