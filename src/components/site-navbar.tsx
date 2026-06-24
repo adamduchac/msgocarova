@@ -157,10 +157,9 @@ export function SiteNavbar() {
                     {...(item.external
                       ? { target: "_blank", rel: "noopener noreferrer" }
                       : {})}
-                    className="nav-link inline-flex items-center gap-1 text-[15px] font-medium text-ink/85 transition-colors duration-200 hover:text-ink focus-visible:text-ink"
+                    className="nav-link inline-flex items-center text-[15px] font-medium text-ink/85 transition-colors duration-200 hover:text-ink focus-visible:text-ink"
                   >
                     {item.label}
-                    {item.external && <ExternalLink className="h-3.5 w-3.5" aria-hidden />}
                   </a>
                 );
               })}
@@ -168,10 +167,9 @@ export function SiteNavbar() {
 
             <a
               href="#zapis"
-              className="group hidden h-11 items-center gap-2 rounded-md bg-brand-blue px-5 text-[15px] font-semibold text-white transition-colors duration-200 hover:bg-brand-blue/90 lg:inline-flex"
+              className="hidden h-11 items-center rounded-md bg-brand-blue px-5 text-[15px] font-semibold text-white transition-colors duration-200 hover:bg-brand-blue/90 lg:inline-flex"
             >
               Naše školka
-              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
             </a>
 
             <button
