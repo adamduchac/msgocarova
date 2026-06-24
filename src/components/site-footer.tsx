@@ -132,8 +132,10 @@ export function SiteFooter() {
             </div>
           </div>
 
+          </div>
         </div>
       </div>
     </footer>
+
   );
 }
