@@ -1,12 +1,54 @@
+import { useEffect, useRef, useState } from "react";
 import heroKids from "@/assets/hero-kids.jpg.asset.json";
+import heroKids2 from "@/assets/hero-kids-2.webp.asset.json";
 import heroShape from "@/assets/hero-shape.svg.asset.json";
-import cubeBlue from "@/assets/cube-blue.png.asset.json";
-import cubeRed from "@/assets/cube-red.png.asset.json";
-import cubeGreen from "@/assets/cube-green.png.asset.json";
-import cubeYellow from "@/assets/cube-yellow.png.asset.json";
+import cubeA from "@/assets/cube-hero-a.png.asset.json";
+import cubeB from "@/assets/cube-hero-b.png.asset.json";
 import { ArrowRight } from "lucide-react";
 
+const SLIDES = [
+  { url: heroKids.url, alt: "Děti si hrají s dřevěnými kostkami na školní zahradě" },
+  { url: heroKids2.url, alt: "Paní učitelka čte dětem pohádku v útulné herně" },
+];
+
 export function SiteHero() {
+  const [index, setIndex] = useState(0);
+  const [prevIndex, setPrevIndex] = useState<number | null>(null);
+  const [cubesFloating, setCubesFloating] = useState(false);
+
+  useEffect(() => {
+    const reduce =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    const id = window.setInterval(() => {
+      setIndex((i) => {
+        setPrevIndex(i);
+        return (i + 1) % SLIDES.length;
+      });
+    }, 6000);
+    return () => window.clearInterval(id);
+  }, []);
+
+  // Clear leaving slide after transition completes
+  useEffect(() => {
+    if (prevIndex === null) return;
+    const t = window.setTimeout(() => setPrevIndex(null), 1200);
+    return () => window.clearTimeout(t);
+  }, [prevIndex, index]);
+
+  // Start floating animation after entrance animation completes
+  const cubeBDelay = 500;
+  const cubeAStart = 300;
+  const enterDuration = 720;
+  useEffect(() => {
+    const t = window.setTimeout(
+      () => setCubesFloating(true),
+      cubeAStart + cubeBDelay + enterDuration + 50,
+    );
+    return () => window.clearTimeout(t);
+  }, []);
+
   return (
     <section className="relative overflow-hidden">
       <div className="hero-y container mx-auto grid items-center gap-12 px-6 lg:grid-cols-12 lg:gap-10">
@@ -48,29 +90,11 @@ export function SiteHero() {
           </div>
         </div>
 
-        {/* Photo with cubes */}
+        {/* Photo with floating cubes */}
         <div
           className="reveal-fade relative w-full lg:col-span-7"
           style={{ ["--reveal-delay" as string]: "260ms" }}
         >
-          {/* doodles */}
-          <svg
-            aria-hidden
-            className="pointer-events-none absolute -top-2 left-6 h-12 w-12 text-brand-green/70"
-            viewBox="0 0 48 48"
-            fill="none"
-          >
-            <path d="M6 24 C 14 8, 34 8, 42 24" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-          </svg>
-          <svg
-            aria-hidden
-            className="pointer-events-none absolute -top-4 right-10 h-7 w-7 text-brand-red/70"
-            viewBox="0 0 24 24"
-            fill="none"
-          >
-            <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2.5" />
-          </svg>
-
           <div
             className="relative aspect-[1000/979] w-full"
             style={{
@@ -83,31 +107,107 @@ export function SiteHero() {
               maskRepeat: "no-repeat",
             }}
           >
-            <img
-              src={heroKids.url}
-              alt="Děti si hrají s dřevěnými kostkami na školní zahradě"
-              width={1024}
-              height={1024}
-              className="h-full w-full select-none object-cover"
-              loading="eager"
-              decoding="async"
-              draggable={false}
-            />
+            {SLIDES.map((slide, i) => {
+              const state =
+                i === index
+                  ? prevIndex === null
+                    ? "active"
+                    : "entering"
+                  : i === prevIndex
+                  ? "leaving"
+                  : "hidden";
+              // Force entering -> active on next frame
+              return (
+                <SlideLayer
+                  key={i}
+                  url={slide.url}
+                  alt={i === index ? slide.alt : ""}
+                  hidden={state === "hidden"}
+                  state={state}
+                  isActive={i === index}
+                />
+              );
+            })}
           </div>
 
-
-          {/* Cubes breaking out of bottom */}
-          <div className="pointer-events-none absolute inset-x-0 -bottom-6 flex items-end justify-center gap-4 sm:gap-7 lg:-bottom-8 lg:gap-9">
-            <img src={cubeBlue.url} alt="" aria-hidden className="h-16 w-16 -rotate-[10deg] drop-shadow-[0_10px_20px_rgba(46,125,244,0.35)] sm:h-20 sm:w-20 lg:h-24 lg:w-24" />
-            <img src={cubeRed.url} alt="" aria-hidden className="h-20 w-20 rotate-[6deg] drop-shadow-[0_12px_22px_rgba(226,59,51,0.35)] sm:h-24 sm:w-24 lg:h-28 lg:w-28" />
-            <img src={cubeGreen.url} alt="" aria-hidden className="h-20 w-20 -rotate-[4deg] drop-shadow-[0_12px_22px_rgba(61,163,93,0.35)] sm:h-24 sm:w-24 lg:h-28 lg:w-28" />
-            <img src={cubeYellow.url} alt="" aria-hidden className="h-16 w-16 rotate-[8deg] drop-shadow-[0_10px_20px_rgba(245,184,30,0.4)] sm:h-20 sm:w-20 lg:h-24 lg:w-24" />
-          </div>
+          {/* Floating cube A — top-left, overflowing */}
+          <img
+            src={cubeA.url}
+            alt=""
+            aria-hidden
+            className={`hero-cube pointer-events-none absolute -left-[6%] -top-[6%] z-10 w-20 sm:w-24 lg:w-32 ${
+              cubesFloating ? "is-floating" : "is-entering"
+            }`}
+            style={{
+              ["--cube-delay" as string]: `${cubeAStart}ms`,
+              ["--cube-float" as string]: "hero-cube-float-a",
+              ["--cube-float-duration" as string]: "6s",
+            }}
+          />
+          {/* Floating cube B — bottom-right, overflowing */}
+          <img
+            src={cubeB.url}
+            alt=""
+            aria-hidden
+            className={`hero-cube pointer-events-none absolute -bottom-[8%] -right-[4%] z-10 w-24 sm:w-28 lg:w-36 ${
+              cubesFloating ? "is-floating" : "is-entering"
+            }`}
+            style={{
+              ["--cube-delay" as string]: `${cubeAStart + cubeBDelay}ms`,
+              ["--cube-float" as string]: "hero-cube-float-b",
+              ["--cube-float-duration" as string]: "7.5s",
+              animationDelay: cubesFloating ? "-2s" : undefined,
+            }}
+          />
         </div>
       </div>
 
-      {/* spacer so cubes don't collide with next section */}
-      <div className="h-10 lg:h-16" aria-hidden />
+      <div className="h-6 lg:h-10" aria-hidden />
     </section>
+  );
+}
+
+function SlideLayer({
+  url,
+  alt,
+  hidden,
+  state,
+  isActive,
+}: {
+  url: string;
+  alt: string;
+  hidden: boolean;
+  state: string;
+  isActive: boolean;
+}) {
+  const [resolvedState, setResolvedState] = useState(state);
+  const ref = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    if (state === "entering") {
+      // Force browser to apply 'entering' styles, then transition to 'active'
+      const raf = requestAnimationFrame(() => {
+        requestAnimationFrame(() => setResolvedState("active"));
+      });
+      return () => cancelAnimationFrame(raf);
+    }
+    setResolvedState(state);
+  }, [state]);
+
+  if (hidden) return null;
+
+  return (
+    <img
+      ref={ref}
+      src={url}
+      alt={alt}
+      width={1024}
+      height={1024}
+      className="hero-slide select-none object-cover"
+      data-state={resolvedState}
+      loading={isActive ? "eager" : "lazy"}
+      decoding="async"
+      draggable={false}
+    />
   );
 }
