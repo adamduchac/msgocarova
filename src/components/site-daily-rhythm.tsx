@@ -7,7 +7,6 @@ import denStezka from "@/assets/den-stezka.webp.asset.json";
 const GRADIENT = "linear-gradient(105deg, #2563EB 0%, #38BDF8 100%)";
 
 type Moment = {
-  time: string;
   title: string;
   desc: string;
   img: { url: string };
