@@ -213,10 +213,6 @@ export function SiteNavbar() {
                       className="flex w-full items-center justify-between rounded-lg px-3 py-3 text-base font-medium text-ink/90 transition-colors duration-200 hover:bg-offwhite hover:text-brand-blue"
                     >
                       <span>{item.label}</span>
-                      <ChevronDown
-                        className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-                        aria-hidden
-                      />
                     </button>
                     <div
                       className="grid overflow-hidden transition-[grid-template-rows,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
