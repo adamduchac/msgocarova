@@ -112,7 +112,7 @@ export function SiteFooter() {
 
           {/* Bottom bar */}
           <div className="relative z-10 border-t border-white/10">
-            <div className="px-6 py-5 md:px-12 text-center text-sm text-white/55">
+            <div className="px-6 py-5 md:px-12 text-left text-sm text-white/55">
               <span>© 2026 MŠ Josefa Gočára. Všechna práva vyhrazena.</span>
               <span className="mx-2 text-white/30" aria-hidden>|</span>
               <span>Používáme pouze technické cookies</span>
