@@ -162,13 +162,15 @@ export function SiteDailyRhythm() {
                     style={{ ["--reveal-delay" as string]: delays[i] }}
                   >
                     <span
-                      className="reveal-up absolute left-1/2 block h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-blue"
+                      className="reveal-up absolute left-1/2 block h-[7px] w-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full"
                       style={{
                         top: tops[i],
+                        backgroundColor: dotColors[i],
                         ["--reveal-delay" as string]: delays[i],
                       }}
                       aria-hidden
                     />
+
                   </li>
                 );
               })}
