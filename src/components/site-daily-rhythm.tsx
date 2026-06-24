@@ -167,9 +167,8 @@ export function SiteDailyRhythm() {
               })}
             </ol>
           </div>
-
-          </div>
         </div>
+
 
         {/* Polaroids — md+: grid 5 cols / mobile: horizontal scroll-snap */}
         <ol className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 pt-6 md:mx-0 md:grid md:grid-cols-5 md:gap-6 md:overflow-visible md:px-0 md:pt-8">
