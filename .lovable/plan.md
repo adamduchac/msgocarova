@@ -1,42 +1,31 @@
-# Hero – úpravy
+# Hero – doladění kostiček + slideru
 
-## 1) Vyčistit
-- Odstranit oba dekorativní SVG doodly (zelený oblouk, červené kolečko) nad fotkou.
-- Odstranit celý spodní pás čtyř kostiček (modrá/červená/zelená/žlutá) i spacer pod ním (pokud bude prázdný, zmenšit).
+## 1) Vyměnit zelenou kostičku
+- Nahrát novou `kosticky_hero_B.png` přes `lovable-assets` a přepsat `src/assets/cube-hero-b.png.asset.json` (nová verze – usměvavá, bez obrysu pusy).
 
-## 2) Slider pro hero fotku
-- Nahrát druhou fotku `hero_B.webp` přes `lovable-assets` jako `src/assets/hero-kids-2.jpg.asset.json`.
-- Uvnitř masky (drop-shadow zůstává na wrapperu) vytvořit crossfade+slide slider:
-  - Dvě absolutně pozicované `<img>` vrstvy přes sebe, obě `object-cover h-full w-full`.
-  - Stav `index` (0/1), `setInterval` ~6000 ms, čistí se v `useEffect` cleanup.
-  - Přechod ~1100 ms, easing `cubic-bezier(0.22, 1, 0.36, 1)` (expo-out).
-  - Odcházející slide: `translateY(0 → 6%)` + `opacity 1 → 0`.
-  - Přicházející slide: `translateY(-6% → 0)` + `opacity 0 → 1`.
-  - `will-change: transform, opacity`, GPU friendly, funguje i na mobilu.
-  - Respektovat `prefers-reduced-motion`: vypnout autoplay i animaci (statická první fotka).
-- Pod sliderem skrytý alt text se neztratí – `alt` na aktivní vrstvě, druhá `aria-hidden`.
+## 2) Větší + asymetrické umístění kostiček
+V `site-hero.tsx`:
+- Zvětšit obě kostičky o ~20 %:
+  - A (modrá): `w-24 sm:w-28 lg:w-40` (bylo w-20/24/32)
+  - B (zelená): `w-28 sm:w-32 lg:w-44` (bylo w-24/28/36)
+- Posunout blíž středu fotky a rozbít symetrii:
+  - A vlevo nahoře: z `-left-[6%] -top-[6%]` → `left-[4%] top-[2%]`
+  - B vpravo dole: z `-bottom-[8%] -right-[4%]` → `bottom-[6%] right-[10%]` (víc doleva, dál od rohu)
 
-## 3) Plovoucí kostičky A (modrá) a B (zelená)
-- Nahrát `kosticky_hero_A.png` → `src/assets/cube-hero-a.png.asset.json`, `kosticky_hero_B.png` → `src/assets/cube-hero-b.png.asset.json`.
-- Umístění (absolute vůči photo wrapperu, mimo masku, takže přesahují přes okraj):
-  - A (modrá): vlevo nahoře, cca `top: -6%`, `left: -6%`, mírně přesahuje ven.
-  - B (zelená): vpravo dole, cca `bottom: -8%`, `right: -4%`, mírně přesahuje ven.
-  - Velikost responzivní: ~`w-20` mobile → `w-28/32` desktop pro A, B o něco větší (`w-24` → `w-36`) protože je vyšší.
-- Vstupní animace (jednou, při mountu, synchronizovaná s prvním reveal):
-  - Z `opacity:0; scale:0.4` → `opacity:1; scale:1` s lehkým overshoot (`cubic-bezier(0.34, 1.56, 0.64, 1)` – back-out).
-  - Trvání ~700 ms, A startuje ~300 ms po hero reveal, B o 500 ms později.
-- Idle „float“ animace po skončení vstupu (loop, různá fáze a amplituda pro každou):
-  - A: `translateY ±6px`, `rotate -4° ↔ 3°`, perioda ~6 s.
-  - B: `translateY ±8px`, `rotate 5° ↔ -3°`, perioda ~7.5 s, offset start.
-  - Implementováno přes CSS keyframes (definice v `src/styles.css`, dvě varianty `cube-float-a`, `cube-float-b`).
-  - Spouští se až po vstupní animaci (přidat třídu `.is-floating` přes `setTimeout` nebo `onAnimationEnd`).
-- `prefers-reduced-motion`: kostičky se zobrazí staticky bez vstupu i bez floatu.
+## 3) Zviditelnit animaci slideru
+Současný stav: `transform/opacity` přechod 1100 ms se nestihne uplatnit, protože `SlideLayer` se mountuje s počátečním `resolvedState`, který už je často `active` → vypadá to jako problikávání.
+- V `SlideLayer` při mountu vždy inicializovat `resolvedState` na `"entering"` (když `state === "active"` a jde o první render nového slidu), pak rAF→`active`. Pro úplně první mount (initial slide 0) nechat rovnou `active`, aby nepřejížděl po loadu stránky → použít `useRef`/`useState(() => isInitialMount ? state : 'entering')`.
+- Prodloužit přechod na **1600 ms**, easing `cubic-bezier(0.22, 1, 0.36, 1)`.
+- Zvětšit posun pro lepší viditelnost: `translateY ±10%` (z 6 %).
+- Slide interval ponechat 6 s, ale snížit prevIndex cleanup na 1700 ms (po dokončení přechodu).
 
-## Technické poznámky
-- Vstupní animaci kostiček i slider stavy řešit v `site-hero.tsx` (`useState`, `useEffect`).
-- Keyframes a utility (`@keyframes cube-float-a/b`, `.hero-slide-enter/leave`, easing tokens) přidat do `src/styles.css`.
-- Žádné nové závislosti.
+## 4) Zviditelnit entrance animaci kostiček
+- Prodloužit `hero-cube-in` ze **720 ms → 1100 ms**, ponechat back-out easing s overshoot.
+- Větší kontrast: start `scale(0.3)` (bylo 0.4), overshoot peak `scale(1.12)` v 65 %.
+- Zvětšit prodlevy:
+  - A startuje 500 ms po mountu (bylo 300)
+  - B startuje 1100 ms po mountu (A + 600 ms odstup)
+- `cubesFloating` zapnout až `A_start + B_delay + duration + 100 ms` = ~2200 ms.
 
 ## Soubory
-- nové: `src/assets/hero-kids-2.jpg.asset.json`, `src/assets/cube-hero-a.png.asset.json`, `src/assets/cube-hero-b.png.asset.json`
-- upravit: `src/components/site-hero.tsx`, `src/styles.css`
+- upravit: `src/assets/cube-hero-b.png.asset.json` (nový upload), `src/components/site-hero.tsx`, `src/styles.css`

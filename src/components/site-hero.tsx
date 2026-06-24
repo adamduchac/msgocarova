@@ -38,13 +38,13 @@ export function SiteHero() {
   }, [prevIndex, index]);
 
   // Start floating animation after entrance animation completes
-  const cubeBDelay = 500;
-  const cubeAStart = 300;
-  const enterDuration = 720;
+  const cubeAStart = 1000;
+  const cubeBDelay = 600;
+  const enterDuration = 1100;
   useEffect(() => {
     const t = window.setTimeout(
       () => setCubesFloating(true),
-      cubeAStart + cubeBDelay + enterDuration + 50,
+      cubeAStart + cubeBDelay + enterDuration + 100,
     );
     return () => window.clearTimeout(t);
   }, []);
@@ -130,12 +130,12 @@ export function SiteHero() {
             })}
           </div>
 
-          {/* Floating cube A — top-left, overflowing */}
+          {/* Floating cube A — top-left, closer to centre */}
           <img
             src={cubeA.url}
             alt=""
             aria-hidden
-            className={`hero-cube pointer-events-none absolute -left-[6%] -top-[6%] z-10 w-20 sm:w-24 lg:w-32 ${
+            className={`hero-cube pointer-events-none absolute left-[4%] top-[2%] z-10 w-24 sm:w-28 lg:w-40 ${
               cubesFloating ? "is-floating" : "is-entering"
             }`}
             style={{
@@ -144,12 +144,12 @@ export function SiteHero() {
               ["--cube-float-duration" as string]: "6s",
             }}
           />
-          {/* Floating cube B — bottom-right, overflowing */}
+          {/* Floating cube B — lower-right, pulled in toward centre */}
           <img
             src={cubeB.url}
             alt=""
             aria-hidden
-            className={`hero-cube pointer-events-none absolute -bottom-[8%] -right-[4%] z-10 w-24 sm:w-28 lg:w-36 ${
+            className={`hero-cube pointer-events-none absolute bottom-[6%] right-[10%] z-10 w-28 sm:w-32 lg:w-44 ${
               cubesFloating ? "is-floating" : "is-entering"
             }`}
             style={{
@@ -159,6 +159,7 @@ export function SiteHero() {
               animationDelay: cubesFloating ? "-2s" : undefined,
             }}
           />
+
         </div>
       </div>
 
@@ -180,17 +181,21 @@ function SlideLayer({
   state: string;
   isActive: boolean;
 }) {
-  const [resolvedState, setResolvedState] = useState(state);
-  const ref = useRef<HTMLImageElement>(null);
+  // First mount of the initial active slide should NOT animate in.
+  const firstMount = useRef(true);
+  const [resolvedState, setResolvedState] = useState(
+    state === "active" ? "active" : "entering",
+  );
 
   useEffect(() => {
-    if (state === "entering") {
-      // Force browser to apply 'entering' styles, then transition to 'active'
+    if (state === "entering" || (firstMount.current && state === "active")) {
+      firstMount.current = false;
       const raf = requestAnimationFrame(() => {
         requestAnimationFrame(() => setResolvedState("active"));
       });
       return () => cancelAnimationFrame(raf);
     }
+    firstMount.current = false;
     setResolvedState(state);
   }, [state]);
 
@@ -198,7 +203,6 @@ function SlideLayer({
 
   return (
     <img
-      ref={ref}
       src={url}
       alt={alt}
       width={1024}
