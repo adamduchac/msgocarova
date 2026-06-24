@@ -2,6 +2,73 @@ import zahrada from "@/assets/vyhoda-zahrada.webp.asset.json";
 import robot from "@/assets/vyhoda-robot.webp.asset.json";
 import komunikace from "@/assets/vyhoda-komunikace.webp.asset.json";
 import srdce from "@/assets/vyhoda-srdce.webp.asset.json";
+import doodleSrdce from "@/assets/doodle-srdce.svg.asset.json";
+import doodleHvezda from "@/assets/doodle-hvezda.svg.asset.json";
+import doodleFajfka from "@/assets/doodle-fajfka.svg.asset.json";
+import doodleSipka from "@/assets/doodle-sipka.svg.asset.json";
+
+type Doodle = {
+  src: string;
+  color: string;
+  className: string;
+  style: React.CSSProperties;
+};
+
+const doodles: Doodle[] = [
+  {
+    // fajfka — vlevo nad gridem, mint/green
+    src: doodleFajfka.url,
+    color: "var(--brand-green)",
+    className: "hidden sm:block",
+    style: {
+      top: "14%",
+      left: "4%",
+      width: "clamp(72px, 8vw, 128px)",
+      transform: "rotate(-12deg)",
+      opacity: 0.45,
+    },
+  },
+  {
+    // hvězda — vpravo od nadpisu, yellow
+    src: doodleHvezda.url,
+    color: "var(--brand-yellow)",
+    className: "",
+    style: {
+      top: "6%",
+      right: "6%",
+      width: "clamp(64px, 8vw, 120px)",
+      transform: "rotate(14deg)",
+      opacity: 0.55,
+    },
+  },
+  {
+    // srdce — vlevo dole pod nadpisem, coral/blush
+    src: doodleSrdce.url,
+    color: "var(--coral)",
+    className: "hidden md:block",
+    style: {
+      top: "30%",
+      left: "1.5%",
+      width: "clamp(70px, 7.5vw, 116px)",
+      transform: "rotate(-8deg)",
+      opacity: 0.5,
+    },
+  },
+  {
+    // klikatá šipka — vpravo pod nadpisem, blue/sky
+    src: doodleSipka.url,
+    color: "var(--brand-blue)",
+    className: "hidden sm:block",
+    style: {
+      top: "33%",
+      right: "2%",
+      width: "clamp(80px, 9vw, 144px)",
+      transform: "rotate(10deg)",
+      opacity: 0.45,
+    },
+  },
+];
+
 
 type Benefit = {
   title: string;
@@ -46,18 +113,41 @@ export function SiteBenefits() {
   return (
     <section
       id="vyhody"
-      className="section-y"
+      className="section-y relative overflow-hidden"
       style={{
         background:
           "linear-gradient(to bottom, #ffffff 0%, #ffffff 10%, var(--mint-soft) 55%, var(--mint-soft) 100%)",
       }}
     >
-      <div className="container mx-auto px-6">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
+        {doodles.map((d, i) => (
+          <span
+            key={i}
+            className={`absolute block ${d.className}`}
+            style={{
+              ...d.style,
+              backgroundColor: d.color,
+              WebkitMaskImage: `url(${d.src})`,
+              maskImage: `url(${d.src})`,
+              WebkitMaskRepeat: "no-repeat",
+              maskRepeat: "no-repeat",
+              WebkitMaskSize: "contain",
+              maskSize: "contain",
+              WebkitMaskPosition: "center",
+              maskPosition: "center",
+              aspectRatio: "1 / 1",
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="container relative z-10 mx-auto px-6">
         <div className="reveal-up section-header-gap mx-auto max-w-2xl text-center">
           <h2 className="font-display text-3xl font-semibold text-ink md:text-[40px]">
             To pravé místo pro vaše děti
           </h2>
         </div>
+
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
           {benefits.map((b, i) => (
