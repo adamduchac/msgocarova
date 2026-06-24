@@ -35,7 +35,7 @@ function Index() {
   return (
     <div className="min-h-screen bg-background">
       <SiteNavbar />
-      <div style={{ background: "linear-gradient(to bottom, #FEF8E7 0%, #FFFFFF 100%)" }}>
+      <div style={{ background: "linear-gradient(to bottom, #FEF8E7 0%, #FFFFFF 100%)" }} className="pt-28 sm:pt-32">
         <SiteHero />
         <SiteAnnouncementBar />
       </div>
