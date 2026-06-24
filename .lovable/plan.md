@@ -1,22 +1,15 @@
-## Cíl
-Timeline „Jeden den": jemnější linka, menší body sladěné s gradientem, časy nad nimi ve stejné barvě.
+## Úpravy karet a kostiček
 
-## Změny v `src/components/site-daily-rhythm.tsx`
+### 1. Karty "Přijďte se podívat" (`site-benefits.tsx`)
+Zvětšit obě řádky nadpisu v každé ze 4 karet o jeden řád:
+- **Hlavní část** (např. "Velká zahrada") → `text-3xl md:text-[40px]` (blízko H2)
+- **Podnadpis** (např. "s dopravním hřištěm") → `text-lg` (blízko stávajícímu H3, 18 px)
 
-### 1) Tenčí linka
-- Oba `<path>` (base i progress): `strokeWidth="5"` → `strokeWidth="2.5"`.
-- Base track barva zůstane `#9CC8A6` (zelená pod gradientem).
+### 2. Barevné kostičky v boxech (`site-classes.tsx`)
+- Zmenšit nadpisy kostiček (např. "Modrá kostička") na `text-sm` nebo `text-base`.
+- Odebrat puntík (`<span>` s `h-2.5 w-2.5 rounded-full`) před nadpisem.
+- Odebrat třídu `card-hover` z karet — ponechat jen rozbalovací efekt tlačítka při `group-hover`.
 
-### 2) Menší body sladěné s gradientem
-- Třída teček: `h-3.5 w-3.5` → `h-[7px] w-[7px]` (50 %).
-- Odstranit `bg-brand-blue`, místo toho inline `style={{ backgroundColor: dotColors[i] }}`.
-- Předpočítané barvy = lineární interpolace gradientu `#2563EB → #38BDF8` v bodech 10/30/50/70/90 %:
-  - `#276CEC`, `#2B7EEF`, `#2F90F2`, `#32A2F4`, `#36B4F7`
-
-### 3) Časy ve stejné barvě
-- `<span>` s časem: nahradit `text-brand-blue` za inline `style={{ color: dotColors[i] }}`.
-- Stejné pole barev jako u teček (zarovnání 1:1 podle sloupců).
-
-## Bez vedlejších efektů
-- Vlnovka, animace, polaroidy beze změny.
-- Mobil beze změn (čip s časem v polaroidu drží svůj gradient).
+### Technické detaily
+- Jedná se pouze o změny Tailwind tříd, žádná logika.
+- Oba soubory: `src/components/site-benefits.tsx` a `src/components/site-classes.tsx`.
