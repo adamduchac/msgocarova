@@ -1,102 +1,140 @@
-import herofoto from "@/assets/kosticky-herofoto.webp.asset.json";
 import { ArrowRight } from "lucide-react";
+import kostickyTym from "@/assets/kosticky-tym.webp.asset.json";
 
 type ClassItem = {
-  color: string;
+  name: string;
   age: string;
-  text: string;
-  borderColor: string;
+  teachers: string;
   textColor: string;
   dot: string;
+  pillBg: string;
 };
 
 const classes: ClassItem[] = [
   {
-    color: "Červená kostička",
-    age: "2–3 roky",
-    text: "Pro nejmenší objevitele. Bezpečné prostředí a klidná adaptace.",
-    borderColor: "before:bg-brand-red",
-    textColor: "text-brand-red",
-    dot: "bg-brand-red",
-  },
-  {
-    color: "Modrá kostička",
-    age: "3–4 roky",
-    text: "Pro zvídavé děti. Rozvoj řeči, tvoření a první velká kamarádství.",
-    borderColor: "before:bg-brand-blue",
+    name: "Modrá kostička",
+    age: "pro děti od 3 do 5 let",
+    teachers: "paní učitelka Bc. Veronika Kremláčková a Elena Špicarová",
     textColor: "text-brand-blue",
     dot: "bg-brand-blue",
+    pillBg: "bg-brand-blue",
   },
   {
-    color: "Zelená kostička",
-    age: "4–5 let",
-    text: "Pro šikovné parťáky. Logické myšlení, pokusy a objevování přírody.",
-    borderColor: "before:bg-brand-green",
-    textColor: "text-brand-green",
-    dot: "bg-brand-green",
+    name: "Červená kostička",
+    age: "pro děti od 5 do 7 let",
+    teachers:
+      "paní učitelka Mgr. Nikola Šorfová, Mgr. Jitka Kouklíková a Hana Hloušková",
+    textColor: "text-brand-red",
+    dot: "bg-brand-red",
+    pillBg: "bg-brand-red",
   },
   {
-    color: "Žlutá kostička",
-    age: "5–6 let",
-    text: "Pro budoucí školáky. Předškolní příprava, angličtina a samostatnost.",
-    borderColor: "before:bg-brand-yellow",
+    name: "Žlutá kostička",
+    age: "pro děti od 3 do 5 let",
+    teachers: "paní učitelka Magdaléna Sováková a Milena Svobodová, DiS.",
     textColor: "text-brand-yellow",
     dot: "bg-brand-yellow",
+    pillBg: "bg-brand-yellow",
+  },
+  {
+    name: "Zelená kostička",
+    age: "pro děti od 5 do 7 let",
+    teachers: "paní učitelka Jana Tuharská a Kristýna Vaňátková, DiS.",
+    textColor: "text-brand-green",
+    dot: "bg-brand-green",
+    pillBg: "bg-brand-green",
   },
 ];
 
 export function SiteClasses() {
   return (
-    <section id="tridy" className="section-y">
+    <section id="tridy" className="section-y bg-background">
       <div className="container mx-auto px-6">
-        <div className="reveal-up section-header-gap mx-auto max-w-2xl text-center">
-          <p className="text-sm font-medium uppercase tracking-[0.18em] text-brand-blue">
-            Naše třídy
-          </p>
-          <h2 className="mt-3 font-display text-3xl font-extrabold text-ink md:text-[40px]">
-            Čtyři třídy, jeden skvělý <span className="text-brand-green">tým</span>
-          </h2>
-        </div>
-
-        {/* Hero "class photo" */}
-        <div
-          className="reveal-fade mx-auto mb-12 max-w-4xl"
-          style={{ ["--reveal-delay" as string]: "120ms" }}
-        >
-          <img
-            src={herofoto.url}
-            alt="Čtyři barevné plastelínové kostičky s obličeji — červená, modrá, zelená a žlutá"
-            className="h-auto w-full select-none"
-            loading="lazy"
-            decoding="async"
-            draggable={false}
-          />
-        </div>
-
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {classes.map((c, i) => (
-            <article
-              key={c.color}
-              className={`card-hover reveal-up group relative overflow-hidden rounded-2xl border border-border/60 bg-card p-6 before:absolute before:inset-x-0 before:top-0 before:h-1.5 ${c.borderColor} before:content-['']`}
-              style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}
-            >
-              <div className="flex items-center gap-2 pt-2">
-                <span className={`inline-block h-2.5 w-2.5 rounded-full ${c.dot}`} aria-hidden />
-                <p className={`text-xs font-semibold uppercase tracking-[0.14em] ${c.textColor}`}>
-                  {c.color}
-                </p>
-              </div>
-              <h3 className="mt-3 font-display text-xl font-bold text-ink">{c.age}</h3>
-              <p className="mt-3 text-[15px] leading-relaxed text-body">{c.text}</p>
-              <a
-                href="#"
-                className={`mt-5 inline-flex items-center gap-1.5 text-sm font-semibold ${c.textColor} transition-[gap] duration-200 hover:gap-2.5`}
+        <div className="grid items-center gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
+          {/* Levý sloupec — text + 2x2 karty */}
+          <div className="text-left">
+            <p className="reveal-up font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
+              Barevné kostičky
+            </p>
+            <h2 className="reveal-up mt-3 font-display text-3xl text-ink md:text-[40px]">
+              Čtyři třídy, jeden{" "}
+              <span
+                className="bg-clip-text text-transparent"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(105deg, #2563EB 0%, #38BDF8 100%)",
+                }}
               >
-                Detail třídy
-                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
-              </a>
-            </article>
-          ))}
+                skvělý tým
+              </span>
+            </h2>
+
+            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {classes.map((c, i) => (
+                <a
+                  key={c.name}
+                  href="#"
+                  aria-label={`Vstupte do třídy — ${c.name}`}
+                  className="card-hover reveal-up group relative block overflow-hidden rounded-3xl border border-white/60 bg-background p-5 pb-16 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:p-6 sm:pb-16"
+                  style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}
+                >
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={`inline-block h-2.5 w-2.5 rounded-full ${c.dot}`}
+                      aria-hidden
+                    />
+                    <p
+                      className={`text-xs font-semibold uppercase tracking-[0.14em] ${c.textColor}`}
+                    >
+                      {c.name}
+                    </p>
+                  </div>
+                  <h3 className="mt-2 font-display text-lg font-bold text-ink">
+                    {c.age}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-body">
+                    {c.teachers}
+                  </p>
+
+                  {/* Rozbalovací CTA pill */}
+                  <span
+                    className={`absolute bottom-4 right-4 inline-flex h-11 items-center overflow-hidden rounded-full text-white ${c.pillBg}`}
+                    aria-hidden
+                  >
+                    <span
+                      className="max-w-0 overflow-hidden whitespace-nowrap px-0 text-sm font-medium opacity-0 group-hover:max-w-[180px] group-hover:pl-4 group-hover:pr-1 group-hover:opacity-100 group-focus-visible:max-w-[180px] group-focus-visible:pl-4 group-focus-visible:pr-1 group-focus-visible:opacity-100"
+                      style={{
+                        transitionProperty: "max-width, opacity, padding",
+                        transitionDuration: "560ms",
+                        transitionTimingFunction:
+                          "cubic-bezier(0.22, 1, 0.36, 1)",
+                      }}
+                    >
+                      Vstupte do třídy
+                    </span>
+                    <span className="grid h-11 w-11 shrink-0 place-items-center">
+                      <ArrowRight className="h-4 w-4" />
+                    </span>
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Pravý sloupec — obrázek kostiček */}
+          <div
+            className="reveal-fade order-first md:order-last"
+            style={{ ["--reveal-delay" as string]: "120ms" }}
+          >
+            <img
+              src={kostickyTym.url}
+              alt="Čtyři plastelínové kostičky s obličeji — červená, modrá, zelená a žlutá"
+              className="mx-auto h-auto w-full max-w-xl select-none"
+              loading="lazy"
+              decoding="async"
+              draggable={false}
+            />
+          </div>
         </div>
       </div>
     </section>
