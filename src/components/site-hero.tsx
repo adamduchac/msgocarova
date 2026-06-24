@@ -55,9 +55,7 @@ export function SiteHero() {
               className="bg-clip-text text-transparent"
               style={{ backgroundImage: "linear-gradient(105deg, #2563EB 0%, #38BDF8 100%)" }}
             >
-              hrají, objevují
-              <br className="hidden sm:block" />
-              {" "}a rostou
+              hrají, objevují a{NBSP}rostou
             </span>
           </h1>
 
