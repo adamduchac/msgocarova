@@ -72,7 +72,7 @@ export function SiteClasses() {
 
           {/* Ilustrace + přepínač */}
           <div
-            className="reveal-fade relative mx-auto mt-8 w-full max-w-3xl lg:mt-10"
+            className="reveal-fade relative mx-auto mt-8 w-full max-w-4xl lg:mt-10 lg:max-w-[1024px]"
             style={{ ["--reveal-delay" as string]: "120ms" }}
           >
             {/* Glass switch */}
