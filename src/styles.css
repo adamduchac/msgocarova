@@ -334,25 +334,22 @@ html { scroll-behavior: smooth; }
   inset: 0;
   width: 100%;
   height: 100%;
-  will-change: transform, opacity;
+  opacity: 0;
+  transform: translateY(-8%);
   transition:
-    opacity 1600ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 1600ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 1400ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 1400ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
 }
-.hero-slide[data-state="active"] {
+.hero-slide[data-active="true"] {
   opacity: 1;
   transform: translateY(0);
   z-index: 2;
 }
-.hero-slide[data-state="leaving"] {
+.hero-slide[data-active="false"] {
   opacity: 0;
-  transform: translateY(10%);
+  transform: translateY(8%);
   z-index: 1;
-}
-.hero-slide[data-state="entering"] {
-  opacity: 0;
-  transform: translateY(-10%);
-  z-index: 2;
 }
 
 /* Hero cubes — enter + float ----------------------------------------- */
@@ -362,12 +359,14 @@ html { scroll-behavior: smooth; }
   100% { opacity: 1; transform: scale(1); }
 }
 @keyframes hero-cube-float-a {
-  0%, 100% { transform: translateY(0) rotate(-4deg); }
-  50%      { transform: translateY(-6px) rotate(3deg); }
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25%      { transform: translateY(-4px) rotate(-3deg); }
+  75%      { transform: translateY(-2px) rotate(2deg); }
 }
 @keyframes hero-cube-float-b {
-  0%, 100% { transform: translateY(0) rotate(5deg); }
-  50%      { transform: translateY(-9px) rotate(-3deg); }
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25%      { transform: translateY(-7px) rotate(4deg); }
+  75%      { transform: translateY(-3px) rotate(-2deg); }
 }
 .hero-cube {
   opacity: 0;
@@ -379,11 +378,12 @@ html { scroll-behavior: smooth; }
 }
 .hero-cube.is-floating {
   opacity: 1;
-  animation: var(--cube-float, hero-cube-float-a) var(--cube-float-duration, 6s) ease-in-out infinite;
+  animation: var(--cube-float, hero-cube-float-a) var(--cube-float-duration, 7s) ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-slide { transition: none !important; }
   .hero-cube { opacity: 1 !important; animation: none !important; transform: none !important; }
 }
+
 

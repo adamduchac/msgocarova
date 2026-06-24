@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import heroKids from "@/assets/hero-kids.jpg.asset.json";
 import heroKids2 from "@/assets/hero-kids-2.webp.asset.json";
 import heroShape from "@/assets/hero-shape.svg.asset.json";
@@ -13,7 +13,6 @@ const SLIDES = [
 
 export function SiteHero() {
   const [index, setIndex] = useState(0);
-  const [prevIndex, setPrevIndex] = useState<number | null>(null);
   const [cubesFloating, setCubesFloating] = useState(false);
 
   useEffect(() => {
@@ -22,20 +21,10 @@ export function SiteHero() {
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;
     const id = window.setInterval(() => {
-      setIndex((i) => {
-        setPrevIndex(i);
-        return (i + 1) % SLIDES.length;
-      });
+      setIndex((i) => (i + 1) % SLIDES.length);
     }, 6000);
     return () => window.clearInterval(id);
   }, []);
-
-  // Clear leaving slide after transition completes
-  useEffect(() => {
-    if (prevIndex === null) return;
-    const t = window.setTimeout(() => setPrevIndex(null), 1200);
-    return () => window.clearTimeout(t);
-  }, [prevIndex, index]);
 
   // Start floating animation after entrance animation completes
   const cubeAStart = 1000;
@@ -54,7 +43,7 @@ export function SiteHero() {
       <div className="hero-y container mx-auto grid items-center gap-12 px-6 lg:grid-cols-12 lg:gap-10">
         {/* Text */}
         <div className="reveal-up lg:col-span-5">
-          <h1 className="font-display text-[44px] font-bold leading-[1.04] tracking-tight text-ink sm:text-5xl lg:text-[58px]">
+          <h1 className="font-display text-[44px] font-extrabold leading-[1.04] tracking-tight text-ink sm:text-5xl lg:text-[58px]">
             Místo, kde si děti{" "}
             <span className="text-brand-blue">hrají</span>,{" "}
             <span className="text-brand-green">objevují</span>
@@ -107,27 +96,20 @@ export function SiteHero() {
               maskRepeat: "no-repeat",
             }}
           >
-            {SLIDES.map((slide, i) => {
-              const state =
-                i === index
-                  ? prevIndex === null
-                    ? "active"
-                    : "entering"
-                  : i === prevIndex
-                  ? "leaving"
-                  : "hidden";
-              // Force entering -> active on next frame
-              return (
-                <SlideLayer
-                  key={i}
-                  url={slide.url}
-                  alt={i === index ? slide.alt : ""}
-                  hidden={state === "hidden"}
-                  state={state}
-                  isActive={i === index}
-                />
-              );
-            })}
+            {SLIDES.map((slide, i) => (
+              <img
+                key={i}
+                src={slide.url}
+                alt={i === index ? slide.alt : ""}
+                width={1024}
+                height={1024}
+                className="hero-slide select-none object-cover"
+                data-active={i === index}
+                loading={i === 0 ? "eager" : "lazy"}
+                decoding="async"
+                draggable={false}
+              />
+            ))}
           </div>
 
           {/* Floating cube A — top-left, closer to centre */}
@@ -141,7 +123,7 @@ export function SiteHero() {
             style={{
               ["--cube-delay" as string]: `${cubeAStart}ms`,
               ["--cube-float" as string]: "hero-cube-float-a",
-              ["--cube-float-duration" as string]: "6s",
+              ["--cube-float-duration" as string]: "7s",
             }}
           />
           {/* Floating cube B — lower-right, pulled in toward centre */}
@@ -155,7 +137,7 @@ export function SiteHero() {
             style={{
               ["--cube-delay" as string]: `${cubeAStart + cubeBDelay}ms`,
               ["--cube-float" as string]: "hero-cube-float-b",
-              ["--cube-float-duration" as string]: "7.5s",
+              ["--cube-float-duration" as string]: "8.5s",
               animationDelay: cubesFloating ? "-2s" : undefined,
             }}
           />
@@ -165,53 +147,5 @@ export function SiteHero() {
 
       <div className="h-6 lg:h-10" aria-hidden />
     </section>
-  );
-}
-
-function SlideLayer({
-  url,
-  alt,
-  hidden,
-  state,
-  isActive,
-}: {
-  url: string;
-  alt: string;
-  hidden: boolean;
-  state: string;
-  isActive: boolean;
-}) {
-  // First mount of the initial active slide should NOT animate in.
-  const firstMount = useRef(true);
-  const [resolvedState, setResolvedState] = useState(
-    state === "active" ? "active" : "entering",
-  );
-
-  useEffect(() => {
-    if (state === "entering" || (firstMount.current && state === "active")) {
-      firstMount.current = false;
-      const raf = requestAnimationFrame(() => {
-        requestAnimationFrame(() => setResolvedState("active"));
-      });
-      return () => cancelAnimationFrame(raf);
-    }
-    firstMount.current = false;
-    setResolvedState(state);
-  }, [state]);
-
-  if (hidden) return null;
-
-  return (
-    <img
-      src={url}
-      alt={alt}
-      width={1024}
-      height={1024}
-      className="hero-slide select-none object-cover"
-      data-state={resolvedState}
-      loading={isActive ? "eager" : "lazy"}
-      decoding="async"
-      draggable={false}
-    />
   );
 }
