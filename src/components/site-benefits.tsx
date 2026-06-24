@@ -53,10 +53,13 @@ export function SiteBenefits() {
       }}
     >
       <div className="container mx-auto px-6">
-        <div
-          className="grid grid-cols-1 md:grid-cols-2"
-          style={{ gap: "clamp(56px, 8vw, 112px)" }}
-        >
+        <div className="reveal-up section-header-gap mx-auto max-w-2xl text-center">
+          <h2 className="font-display text-3xl font-semibold text-ink md:text-[40px]">
+            To pravé místo pro vaše děti
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
           {benefits.map((b, i) => (
             <article
               key={b.title}
@@ -77,7 +80,7 @@ export function SiteBenefits() {
                 />
               </div>
               <div className="flex-1">
-                <h3 className="font-display text-xl font-semibold leading-snug text-ink sm:text-[22px]">
+                <h3 className="font-display text-[22px] font-semibold leading-snug text-ink sm:text-2xl">
                   {b.title}
                 </h3>
                 <p className="mt-3 text-[15px] leading-relaxed text-body">{b.text}</p>
