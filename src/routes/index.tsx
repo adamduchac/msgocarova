@@ -45,11 +45,12 @@ function Index() {
       <main>
         <SiteBenefits />
         <SiteDailyRhythm />
+        <SiteClasses />
         <SiteQuickLinks />
         <SiteAbout />
-        <SiteClasses />
         <SiteActivities />
         <SiteNews />
+
         <SiteCtaBanner />
       </main>
       <SiteFooter />
