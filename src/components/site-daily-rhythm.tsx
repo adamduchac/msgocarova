@@ -75,7 +75,7 @@ export function SiteDailyRhythm() {
       className="section-y"
       style={{
         background:
-          "linear-gradient(to bottom, var(--mint-soft) 0%, var(--mint-soft) 12%, #ffffff 70%, #ffffff 100%)",
+          "linear-gradient(to bottom, var(--blue-soft) 0%, var(--blue-soft) 12%, #ffffff 70%, #ffffff 100%)",
       }}
     >
       <div className="container mx-auto px-6">

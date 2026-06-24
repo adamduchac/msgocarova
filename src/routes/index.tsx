@@ -44,9 +44,11 @@ function Index() {
         <SiteDailyRhythm />
         <SiteClasses />
         <SiteQuickLinks />
-        <SiteActivities />
+        <div style={{ background: "linear-gradient(to bottom, #FFFFFF 0%, #FEF8E7 40%, #FEF8E7 100%)" }}>
+          <SiteActivities />
+          <SiteFooter />
+        </div>
       </main>
-      <SiteFooter />
     </div>
   );
 }
