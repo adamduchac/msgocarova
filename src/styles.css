@@ -331,16 +331,16 @@
 /* Desktop submenu — box + staggered items ---------------------------- */
 .nav-submenu {
   opacity: 0;
-  transform: translate(-50%, -6px);
+  transform: translate3d(0, -6px, 0);
   pointer-events: none;
-  transform-origin: top center;
+  transform-origin: top left;
   transition:
     opacity 160ms cubic-bezier(0.4, 0, 1, 1),
     transform 160ms cubic-bezier(0.4, 0, 1, 1);
 }
 .nav-submenu[data-open="true"] {
   opacity: 1;
-  transform: translate(-50%, 0);
+  transform: translate3d(0, 0, 0);
   pointer-events: auto;
   transition:
     opacity 220ms cubic-bezier(0.22, 1, 0.36, 1),
