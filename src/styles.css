@@ -355,35 +355,43 @@ html { scroll-behavior: smooth; }
 /* Hero cubes — enter + float ----------------------------------------- */
 @keyframes hero-cube-in {
   0%   { opacity: 0; transform: scale(0.3); }
-  65%  { opacity: 1; transform: scale(1.12); }
+  65%  { opacity: 1; transform: scale(1.14); }
   100% { opacity: 1; transform: scale(1); }
 }
 @keyframes hero-cube-float-a {
   0%, 100% { transform: translateY(0) rotate(0deg); }
-  25%      { transform: translateY(-4px) rotate(-3deg); }
-  75%      { transform: translateY(-2px) rotate(2deg); }
+  25%      { transform: translateY(-7px) rotate(-5deg); }
+  75%      { transform: translateY(-3px) rotate(3deg); }
 }
 @keyframes hero-cube-float-b {
   0%, 100% { transform: translateY(0) rotate(0deg); }
-  25%      { transform: translateY(-7px) rotate(4deg); }
-  75%      { transform: translateY(-3px) rotate(-2deg); }
+  25%      { transform: translateY(-11px) rotate(6deg); }
+  75%      { transform: translateY(-5px) rotate(-3deg); }
+}
+.hero-cube-wrap {
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
 .hero-cube {
   opacity: 0;
   will-change: transform, opacity;
+  display: block;
+  width: 100%;
+  height: auto;
 }
 .hero-cube.is-entering {
-  animation: hero-cube-in 1100ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation: hero-cube-in 950ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   animation-delay: var(--cube-delay, 0ms);
 }
 .hero-cube.is-floating {
   opacity: 1;
-  animation: var(--cube-float, hero-cube-float-a) var(--cube-float-duration, 7s) ease-in-out infinite;
+  animation: var(--cube-float, hero-cube-float-a) var(--cube-float-duration, 5s) ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-slide { transition: none !important; }
   .hero-cube { opacity: 1 !important; animation: none !important; transform: none !important; }
+  .hero-cube-wrap { transform: none !important; transition: none !important; }
 }
 
 
