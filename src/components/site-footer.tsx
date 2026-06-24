@@ -1,5 +1,7 @@
 import { Phone, Mail, MapPin } from "lucide-react";
 import logoAsset from "@/assets/logo.svg.asset.json";
+import cubeRed from "@/assets/cube-red.png.asset.json";
+import cubeYellow from "@/assets/cube-yellow.png.asset.json";
 
 const menuLinks = [
   { label: "O nás", href: "#o-nas" },
@@ -49,10 +51,26 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
 
 export function SiteFooter() {
   return (
-    <footer className="bg-background py-10 md:py-14">
-      <div className="container mx-auto px-6">
-        <div className="rounded-2xl bg-ink text-white">
-          <div className="px-6 py-14 md:px-12 md:py-16">
+    <footer className="relative bg-transparent pt-24 md:pt-32 pb-10 md:pb-14">
+      <img
+        src={cubeRed.url}
+        alt=""
+        aria-hidden
+        className="pointer-events-none absolute left-[4%] top-0 z-0 w-[6.3rem] -translate-y-1/2 select-none sm:w-[7.35rem] lg:w-[10.5rem]"
+        loading="lazy"
+        decoding="async"
+      />
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="relative overflow-hidden rounded-2xl bg-ink text-white">
+          <img
+            src={cubeYellow.url}
+            alt=""
+            aria-hidden
+            className="pointer-events-none absolute bottom-[-1rem] right-[-1.5rem] z-0 w-[5rem] select-none sm:w-[6rem] lg:w-[7.5rem]"
+            loading="lazy"
+            decoding="async"
+          />
+          <div className="relative z-10 px-6 py-14 md:px-12 md:py-16">
             <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-12">
           {/* Brand */}
           <div className="lg:col-span-4">
