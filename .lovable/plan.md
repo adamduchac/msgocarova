@@ -1,11 +1,24 @@
-Cílem je tři drobná doladění komponenty `SiteAnnouncementBar`:
+## Cíl
+Doladit dva detaily na aktuální oznamovací liště pod hero:
+1. Hlavní sdělení bude vizuálně přesně ve středu celého boxu (nikoli jen ve středu prostředního sloupce gridu).
+2. Animované rozbalení tlačítka "Podrobnosti →" bude plynulejší.
 
-1. **Velikost fontu sdělení** — Změnit na `text-lg` (18px), stejně jako odstavec v `SiteHero` (`<p className="text-lg ...">`).
-2. **Menší pravý CTA prvek** — Zmenšit kroužek se šipkou a celý pravý sloupec o ~40–45 %:
-   - výška kontejneru z `72/80 px` na `44/48 px` (`h-11 sm:h-12`),
-   - kroužek šipky z `72×72 / 80×80 px` na `44×44 / 48×48 px` (`h-11 w-11 sm:h-12 sm:w-12`),
-   - sama šipka na `h-4 w-4`.
-3. **Stabilní prostřední sloupec** — Pravý sloupec přepnout na pevnou šířku odpovídající plně rozbalenému stavu (např. ~12rem). Střední sloupec zůstane `1fr`, takže jeho šířka se při rozbalení CTA vůbec nezmění a text se nepřesune ani nezalomí jinak. Label „Podrobnosti“ se bude nadále rozbalovat doleva uvnitř tohoto rezervovaného prostoru.
+## Změny
 
-Soubor: `src/components/site-announcement-bar.tsx`.
-Žádné nové závislosti, žádné nové design tokeny.
+### 1. Přesné vycentrování textu
+Aktuálně je vnitřek boxu 3-sloupcový grid (`auto | 1fr | 12rem`). Střed prostředního sloupce není shodný se středem celé lišty, protože levá ikona a pravý CTA mají různou šířku.
+
+**Řešení:** Přepnu vnitřní rozvržení z gridu na `relative flex items-center justify-center`. Ikona a CTA se umístí absolutně vlevo/vpravo, hlavní `<p>` zabere celou šířku s `text-center` a bezpečnými horizontálními paddingy, aby nedocházelo k překrývání.
+
+| breakpoint | levý padding | pravý padding |
+|------------|--------------|---------------|
+| mobile     | ~92 px       | ~160 px       |
+| desktop    | ~104 px      | ~200 px       |
+
+Hodnoty doladím přesně po nasazení, aby text seděl na střed bez ohledu na stav rozbalení CTA.
+
+### 2. Plynulejší vyjetí "Podrobnosti"
+Délku přechodu zvednu z `300 ms` na `500 ms` (případně `550 ms`). Easing zůstane `cubic-bezier(0.22, 1, 0.36, 1)` — jen delší čas dá pohybu luxusnější, méně uspěchaný dojem.
+
+## Soubor
+- `src/components/site-announcement-bar.tsx` — jediný upravovaný soubor. Žádné nové závislosti, žádné nové tokeny, žádné keyframes.
