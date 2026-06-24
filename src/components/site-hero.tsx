@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import heroKids from "@/assets/hero-kids.jpg.asset.json";
 import heroKids2 from "@/assets/hero-kids-2.webp.asset.json";
+import heroKids3 from "@/assets/hero-kids-3.webp.asset.json";
+import heroKids4 from "@/assets/hero-kids-4.webp.asset.json";
 import heroShape from "@/assets/hero-shape.svg.asset.json";
 import cubeA from "@/assets/cube-hero-a.png.asset.json";
 import cubeB from "@/assets/cube-hero-b.png.asset.json";
@@ -9,6 +11,8 @@ import { ArrowRight } from "lucide-react";
 const SLIDES = [
   { url: heroKids.url, alt: "Děti si hrají s dřevěnými kostkami na školní zahradě" },
   { url: heroKids2.url, alt: "Paní učitelka čte dětem pohádku v útulné herně" },
+  { url: heroKids3.url, alt: "Děti si hrají na pískovišti a staví hrad z písku" },
+  { url: heroKids4.url, alt: "Děti malují prsty barvami u stolu ve třídě" },
 ];
 
 export function SiteHero() {
