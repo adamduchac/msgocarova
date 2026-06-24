@@ -75,8 +75,8 @@ export function SiteHero() {
       raf = 0;
       const a = cubeAWrapRef.current;
       const b = cubeBWrapRef.current;
-      if (a) a.style.transform = `translate3d(${(-targetX * 9).toFixed(2)}px, ${(-targetY * 9).toFixed(2)}px, 0)`;
-      if (b) b.style.transform = `translate3d(${(-targetX * 6).toFixed(2)}px, ${(-targetY * 6).toFixed(2)}px, 0)`;
+      if (a) a.style.transform = `translate3d(${(-targetX * 7).toFixed(2)}px, ${(-targetY * 7).toFixed(2)}px, 0)`;
+      if (b) b.style.transform = `translate3d(${(-targetX * 7).toFixed(2)}px, ${(-targetY * 7).toFixed(2)}px, 0)`;
     };
 
     const handleLeave = () => {
