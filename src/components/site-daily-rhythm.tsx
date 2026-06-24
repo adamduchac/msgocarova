@@ -65,6 +65,8 @@ const moments: Moment[] = [
 ];
 
 const delays = ["0ms", "440ms", "880ms", "1320ms", "1760ms"];
+const dotColors = ["#276CEC", "#2B7EEF", "#2F90F2", "#32A2F4", "#36B4F7"];
+
 
 export function SiteDailyRhythm() {
   return (
