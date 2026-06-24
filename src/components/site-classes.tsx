@@ -75,47 +75,20 @@ export function SiteClasses() {
                   key={c.name}
                   href="#"
                   aria-label={`Vstupte do třídy — ${c.name}`}
-                  className="card-hover reveal-up group relative block overflow-hidden rounded-3xl border border-white/60 bg-background p-5 pb-16 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:p-6 sm:pb-16"
+                  className="reveal-up relative block overflow-hidden rounded-3xl border border-white/60 bg-background p-5 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:p-6"
                   style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}
                 >
-                  <div className="flex items-center gap-2">
-                    <span
-                      className={`inline-block h-2.5 w-2.5 rounded-full ${c.dot}`}
-                      aria-hidden
-                    />
-                    <p
-                      className={`text-xs font-semibold uppercase tracking-[0.14em] ${c.textColor}`}
-                    >
-                      {c.name}
-                    </p>
-                  </div>
+                  <p
+                    className={`text-lg font-bold uppercase tracking-[0.14em] ${c.textColor}`}
+                  >
+                    {c.name}
+                  </p>
                   <h3 className="mt-2 font-display text-lg font-bold text-ink">
                     {c.age}
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-body">
                     {c.teachers}
                   </p>
-
-                  {/* Rozbalovací CTA pill */}
-                  <span
-                    className={`absolute bottom-4 right-4 inline-flex h-11 items-center overflow-hidden rounded-full text-white ${c.pillBg}`}
-                    aria-hidden
-                  >
-                    <span
-                      className="max-w-0 overflow-hidden whitespace-nowrap px-0 text-sm font-medium opacity-0 group-hover:max-w-[180px] group-hover:pl-4 group-hover:pr-1 group-hover:opacity-100 group-focus-visible:max-w-[180px] group-focus-visible:pl-4 group-focus-visible:pr-1 group-focus-visible:opacity-100"
-                      style={{
-                        transitionProperty: "max-width, opacity, padding",
-                        transitionDuration: "560ms",
-                        transitionTimingFunction:
-                          "cubic-bezier(0.22, 1, 0.36, 1)",
-                      }}
-                    >
-                      Vstupte do třídy
-                    </span>
-                    <span className="grid h-11 w-11 shrink-0 place-items-center">
-                      <ArrowRight className="h-4 w-4" />
-                    </span>
-                  </span>
                 </a>
               ))}
             </div>
