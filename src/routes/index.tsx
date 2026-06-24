@@ -44,11 +44,7 @@ function Index() {
         <SiteDailyRhythm />
         <SiteClasses />
         <SiteQuickLinks />
-        <SiteAbout />
         <SiteActivities />
-        <SiteNews />
-
-        <SiteCtaBanner />
       </main>
       <SiteFooter />
     </div>
