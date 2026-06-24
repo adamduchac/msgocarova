@@ -46,36 +46,43 @@ const benefits: Benefit[] = [
 
 export function SiteBenefits() {
   return (
-    <section id="vyhody" className="section-y bg-offwhite">
+    <section
+      id="vyhody"
+      className="section-y"
+      style={{
+        background:
+          "linear-gradient(to bottom, #ffffff 0%, #ffffff 12%, var(--offwhite) 66%, var(--offwhite) 100%)",
+      }}
+    >
       <div className="container mx-auto px-6">
         <div className="reveal-up section-header-gap mx-auto max-w-2xl text-center">
           <p className="text-sm font-medium uppercase tracking-[0.18em] text-brand-blue">
             Proč k nám
           </p>
           <h2 className="mt-3 font-display text-3xl font-semibold text-ink md:text-[40px]">
-            Proč si nás rodiče <span className="text-brand-green">vybírají?</span>
+            Proč si nás rodiče vybírají?
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-7">
+        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
           {benefits.map((b, i) => (
             <article
               key={b.title}
-              className="card-hover reveal-up group flex flex-col rounded-2xl border border-border/60 bg-card p-7"
+              className={`card-hover reveal-up group flex flex-col rounded-3xl border border-white/60 p-5 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] sm:p-6 ${b.tint}`}
               style={{ ["--reveal-delay" as string]: `${i * 110}ms` }}
             >
-              <div className={`mb-6 flex h-40 items-center justify-center rounded-xl ${b.tint}`}>
+              <div className="relative mb-6 aspect-square w-full overflow-hidden rounded-2xl bg-white ring-1 ring-black/[0.04]">
                 <img
                   src={b.image}
                   alt={b.alt}
-                  width={420}
-                  height={420}
-                  className={`h-32 w-32 object-contain ${b.flip ? "-scale-x-100" : ""}`}
+                  width={640}
+                  height={640}
+                  className={`absolute inset-0 m-auto h-[72%] w-[72%] object-contain ${b.flip ? "-scale-x-100" : ""}`}
                   loading="lazy"
                   decoding="async"
                 />
               </div>
-              <h3 className="font-display text-xl font-semibold leading-snug text-ink">
+              <h3 className="font-display text-xl font-semibold leading-snug text-ink sm:text-[22px]">
                 {b.title}
               </h3>
               <p className="mt-3 text-[15px] leading-relaxed text-body">{b.text}</p>

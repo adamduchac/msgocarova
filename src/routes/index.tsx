@@ -38,9 +38,9 @@ function Index() {
       <SiteNavbar />
       <main>
         <SiteHero />
+        <SiteBenefits />
         <SiteQuickLinks />
         <SiteAbout />
-        <SiteBenefits />
         <SiteClasses />
         <SiteActivities />
         <SiteNews />
