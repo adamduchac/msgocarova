@@ -1,3 +1,5 @@
+import { useRef } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import denRano from "@/assets/den-rano.webp.asset.json";
 import denTvoreni from "@/assets/den-tvoreni.webp.asset.json";
 import denPohyb from "@/assets/den-pohyb.webp.asset.json";
@@ -60,6 +62,16 @@ const delays = ["0ms", "440ms", "880ms", "1320ms", "1760ms"];
 
 
 export function SiteDailyRhythm() {
+  const scrollerRef = useRef<HTMLOListElement | null>(null);
+
+  const scrollByCard = (dir: 1 | -1) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const first = el.firstElementChild as HTMLElement | null;
+    const cardW = first ? first.clientWidth : el.clientWidth * 0.8;
+    el.scrollBy({ left: dir * (cardW + 20), behavior: "smooth" });
+  };
+
   return (
     <section
       id="bezny-den"
@@ -74,13 +86,16 @@ export function SiteDailyRhythm() {
           <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
             Zažijte to s námi
           </p>
-          <h2 className="mt-3 font-display text-3xl text-ink md:text-[40px]">
+          <h2 className="mt-3 font-display text-[34px] text-ink md:text-[40px]">
             Jeden den v MŠ Gočárova
           </h2>
         </header>
 
         {/* Polaroids — md+: grid 5 cols / mobile: horizontal scroll-snap */}
-        <ol className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 pt-10 md:mx-0 md:grid md:grid-cols-5 md:gap-6 md:overflow-visible md:px-0 md:pt-14">
+        <ol
+          ref={scrollerRef}
+          className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 pt-10 md:mx-0 md:grid md:grid-cols-5 md:gap-6 md:overflow-visible md:px-0 md:pt-14"
+        >
           {moments.map((m, i) => (
             <li
               key={m.title}
@@ -109,6 +124,26 @@ export function SiteDailyRhythm() {
             </li>
           ))}
         </ol>
+
+        {/* Šipky pro mobilní slider */}
+        <div className="mt-6 flex items-center justify-center gap-3 md:hidden">
+          <button
+            type="button"
+            onClick={() => scrollByCard(-1)}
+            aria-label="Předchozí moment dne"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border/70 bg-background text-ink shadow-sm transition-colors duration-200 hover:bg-offwhite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
+          >
+            <ChevronLeft className="h-5 w-5" aria-hidden />
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollByCard(1)}
+            aria-label="Další moment dne"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border/70 bg-background text-ink shadow-sm transition-colors duration-200 hover:bg-offwhite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
+          >
+            <ChevronRight className="h-5 w-5" aria-hidden />
+          </button>
+        </div>
       </div>
     </section>
   );

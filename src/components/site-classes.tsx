@@ -56,7 +56,7 @@ export function SiteClasses() {
             <p className="reveal-up font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
               Barevné kostičky
             </p>
-            <h2 className="reveal-up mt-3 font-display text-3xl text-ink md:text-[40px]">
+            <h2 className="reveal-up mt-3 font-display text-[34px] text-ink md:text-[40px]">
               Čtyři třídy, jeden{" "}
               <span
                 className="bg-clip-text text-transparent"
@@ -72,45 +72,9 @@ export function SiteClasses() {
 
           {/* Ilustrace + přepínač */}
           <div
-            className="reveal-fade relative mx-auto mt-8 w-full max-w-4xl pr-0 md:pr-32 lg:mt-10 lg:max-w-[1024px] lg:pr-44"
+            className="reveal-fade relative mx-auto mt-8 w-full max-w-4xl md:pr-32 lg:mt-10 lg:max-w-[1024px] lg:pr-44"
             style={{ ["--reveal-delay" as string]: "120ms" }}
           >
-            {/* Glass switch — vertical, right of image */}
-            <div className="pointer-events-none absolute right-2 top-1/2 z-10 -translate-y-1/2 md:right-0 lg:right-2">
-              <button
-                type="button"
-                role="switch"
-                aria-checked={outside}
-                onClick={() => setOutside((v) => !v)}
-                className="pointer-events-auto group inline-flex cursor-pointer flex-col items-center gap-3 rounded-3xl border border-border/70 bg-background/80 px-4 py-4 shadow-[0_10px_28px_-14px_rgba(15,23,42,0.28)] backdrop-blur-md transition-colors duration-200 hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              >
-                <span
-                  aria-hidden
-                  className={`relative inline-flex h-9 w-16 shrink-0 items-center rounded-full transition-colors duration-300 ${
-                    outside ? "bg-brand-green/85" : "bg-brand-blue/85"
-                  }`}
-                >
-                  <span
-                    className={`absolute top-1/2 grid h-7 w-7 -translate-y-1/2 place-items-center rounded-full bg-white shadow-[0_2px_6px_rgba(0,0,0,0.22)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                      outside ? "translate-x-[34px]" : "translate-x-[4px]"
-                    }`}
-                  >
-                    {outside ? (
-                      <Trees className="h-4 w-4 text-brand-green" strokeWidth={2.5} />
-                    ) : (
-                      <Home className="h-4 w-4 text-brand-blue" strokeWidth={2.5} />
-                    )}
-                  </span>
-                </span>
-                <span
-                  key={outside ? "out" : "in"}
-                  className="min-w-[9rem] text-center font-display text-[14px] font-semibold leading-tight text-ink animate-fade-in"
-                >
-                  {outside ? "Vem kostičky dovnitř" : "Vem kostičky ven"}
-                </span>
-              </button>
-            </div>
-
             {/* Crossfade obrázků */}
             <div className="relative aspect-[4/3] w-full">
               <img
@@ -132,7 +96,44 @@ export function SiteClasses() {
                 draggable={false}
               />
             </div>
+
+            {/* Glass switch — mobile: centered below image; md+: absolute right of image */}
+            <div className="mt-4 flex justify-center md:mt-0 md:absolute md:right-0 md:top-1/2 md:block md:-translate-y-1/2 lg:right-2">
+              <button
+                type="button"
+                role="switch"
+                aria-checked={outside}
+                onClick={() => setOutside((v) => !v)}
+                className="group inline-flex cursor-pointer flex-col items-center gap-2 rounded-2xl border border-border/70 bg-background/80 px-3 py-2.5 shadow-[0_10px_28px_-14px_rgba(15,23,42,0.28)] backdrop-blur-md transition-colors duration-200 hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background md:gap-3 md:rounded-3xl md:px-4 md:py-4"
+              >
+                <span
+                  aria-hidden
+                  className={`relative inline-flex h-7 w-12 shrink-0 items-center rounded-full transition-colors duration-300 md:h-9 md:w-16 ${
+                    outside ? "bg-brand-green/85" : "bg-brand-blue/85"
+                  }`}
+                >
+                  <span
+                    className={`absolute top-1/2 grid h-5 w-5 -translate-y-1/2 place-items-center rounded-full bg-white shadow-[0_2px_6px_rgba(0,0,0,0.22)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:h-7 md:w-7 ${
+                      outside ? "translate-x-[26px] md:translate-x-[34px]" : "translate-x-[4px]"
+                    }`}
+                  >
+                    {outside ? (
+                      <Trees className="h-3 w-3 text-brand-green md:h-4 md:w-4" strokeWidth={2.5} />
+                    ) : (
+                      <Home className="h-3 w-3 text-brand-blue md:h-4 md:w-4" strokeWidth={2.5} />
+                    )}
+                  </span>
+                </span>
+                <span
+                  key={outside ? "out" : "in"}
+                  className="min-w-[9rem] text-center font-display text-[13px] font-semibold leading-tight text-ink animate-fade-in md:text-[14px]"
+                >
+                  {outside ? "Vem kostičky dovnitř" : "Vem kostičky ven"}
+                </span>
+              </button>
+            </div>
           </div>
+
 
 
           {/* 4×1 grid tříd */}

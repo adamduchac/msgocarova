@@ -18,25 +18,29 @@ const classes: ClassRow[] = [
 
 export function SiteFooter() {
   return (
-    <footer className="relative bg-transparent pt-24 md:pt-32 pb-10 md:pb-14">
-      <img
-        src={cubeRed.url}
-        alt=""
-        aria-hidden
-        className="pointer-events-none absolute left-[4%] top-[-10px] z-0 w-[6.3rem] select-none sm:w-[7.35rem] lg:w-[10.5rem]"
-        loading="lazy"
-        decoding="async"
-      />
+    <footer className="relative bg-transparent pt-24 md:pt-32 pb-16 md:pb-20">
       <div className="container mx-auto px-6 relative z-10">
-        <div className="relative rounded-2xl bg-ink text-white">
+        <div className="relative">
+          {/* Červená kostička — sedí na horní hraně tmavé karty, ~10 px schovaných pod */}
           <img
-            src={cubeYellow.url}
+            src={cubeRed.url}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute bottom-[-1.5rem] right-[-1.5rem] z-20 w-[8rem] select-none sm:w-[9.6rem] lg:w-[12rem] scale-x-[-1]"
+            className="pointer-events-none absolute left-[6%] bottom-[calc(100%-10px)] z-0 w-[6.3rem] select-none sm:left-[4%] sm:w-[7.35rem] lg:w-[10.5rem]"
             loading="lazy"
             decoding="async"
           />
+
+          <div className="relative rounded-2xl bg-ink text-white">
+            <img
+              src={cubeYellow.url}
+              alt=""
+              aria-hidden
+              className="pointer-events-none absolute bottom-[-10px] right-[-10px] z-20 w-[8rem] select-none sm:w-[9.6rem] lg:w-[12rem] scale-x-[-1]"
+              loading="lazy"
+              decoding="async"
+            />
+
 
           <div className="relative z-10 px-6 py-14 md:px-12 md:py-16">
             <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8 lg:gap-12">
