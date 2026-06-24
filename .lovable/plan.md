@@ -1,5 +1,5 @@
 ## Cíl
-Timeline „Běžný den": jemnější linka, menší body sladěné s gradientem, časy nad nimi ve stejné barvě.
+Timeline „Jeden den": jemnější linka, menší body sladěné s gradientem, časy nad nimi ve stejné barvě.
 
 ## Změny v `src/components/site-daily-rhythm.tsx`
 
