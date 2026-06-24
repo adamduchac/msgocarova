@@ -43,16 +43,21 @@ export function SiteHero() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden">
+    <section
+      className="relative overflow-hidden"
+      style={{ background: "linear-gradient(to bottom, #FEF8E7 0%, #FFFFFF 100%)" }}
+    >
       <div className="hero-y container mx-auto grid items-center gap-12 px-6 lg:grid-cols-12 lg:gap-10">
         {/* Text */}
         <div className="reveal-up lg:col-span-5">
           <h1 className="font-display text-[44px] font-extrabold leading-[1.04] tracking-tight text-ink sm:text-5xl lg:text-[58px]">
             Místo, kde si děti{" "}
-            <span className="text-brand-blue">hrají</span>,{" "}
-            <span className="text-brand-green">objevují</span>
-            <br className="hidden sm:block" />
-            {" "}a <span className="text-brand-yellow">rostou</span>
+            <span
+              className="bg-clip-text text-transparent"
+              style={{ backgroundImage: "linear-gradient(105deg, #2E7DF4 0%, #2FA39B 48%, #3DA35D 100%)" }}
+            >
+              hrají, objevují a rostou
+            </span>
           </h1>
 
           <p
@@ -142,7 +147,7 @@ export function SiteHero() {
               ["--cube-delay" as string]: `${cubeAStart + cubeBDelay}ms`,
               ["--cube-float" as string]: "hero-cube-float-b",
               ["--cube-float-duration" as string]: "8.5s",
-              animationDelay: cubesFloating ? "-2s" : undefined,
+              
             }}
           />
 
