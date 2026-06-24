@@ -107,13 +107,9 @@ export function SiteNavbar() {
                         aria-expanded={isOpen}
                         onFocus={() => openNow(item.label)}
                         onClick={() => setOpenMenu(isOpen ? null : item.label)}
-                        className="nav-link inline-flex items-center gap-1 text-[15px] font-medium text-ink/85 transition-colors duration-200 hover:text-ink focus-visible:text-ink"
+                        className="nav-link inline-flex items-center text-[15px] font-medium text-ink/85 transition-colors duration-200 hover:text-ink focus-visible:text-ink"
                       >
                         {item.label}
-                        <ChevronDown
-                          className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-                          aria-hidden
-                        />
                       </button>
 
                       <div
