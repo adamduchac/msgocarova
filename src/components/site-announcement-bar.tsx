@@ -38,13 +38,11 @@ export function SiteAnnouncementBar() {
               aria-hidden="true"
             >
               <span
-                className="overflow-hidden whitespace-nowrap text-sm sm:text-base font-medium max-w-0 opacity-0 group-hover:max-w-[180px] group-hover:opacity-100 group-focus-visible:max-w-[180px] group-focus-visible:opacity-100"
+                className="overflow-hidden whitespace-nowrap text-sm sm:text-base font-medium max-w-0 opacity-0 px-0 group-hover:max-w-[180px] group-hover:opacity-100 group-hover:pl-4 group-hover:pr-1 group-focus-visible:max-w-[180px] group-focus-visible:opacity-100 group-focus-visible:pl-4 group-focus-visible:pr-1"
                 style={{
                   transitionProperty: "max-width, opacity, padding",
                   transitionDuration: "560ms",
                   transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
-                  paddingLeft: "1rem",
-                  paddingRight: "0.25rem",
                 }}
               >
                 Podrobnosti
