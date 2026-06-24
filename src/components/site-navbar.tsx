@@ -117,13 +117,13 @@ export function SiteNavbar() {
                         role="menu"
                         aria-label={item.label}
                         data-open={isOpen}
-                        className="nav-submenu absolute left-0 top-full z-50 mt-3 min-w-56 rounded-2xl border border-border/60 bg-background p-1.5 shadow-[0_18px_40px_-20px_rgba(15,23,42,0.25)]"
+                        className="nav-submenu absolute -left-3 top-full z-50 mt-3 min-w-60 rounded-2xl border border-border/60 bg-background p-3 shadow-[0_18px_40px_-20px_rgba(15,23,42,0.25)]"
                       >
                         <div
                           aria-hidden
                           className="absolute -top-3 left-0 right-0 h-3"
                         />
-                        <ul className="flex flex-col">
+                        <ul className="flex flex-col gap-0.5">
                           {item.children.map((child, ci) => (
                             <li
                               key={child.href}
@@ -135,13 +135,14 @@ export function SiteNavbar() {
                                 role="menuitem"
                                 tabIndex={isOpen ? 0 : -1}
                                 onClick={() => setOpenMenu(null)}
-                                className="block rounded-lg px-3 py-2 text-[15px] font-medium text-ink/85 transition-colors duration-200 hover:bg-offwhite hover:text-brand-blue focus-visible:bg-offwhite focus-visible:text-brand-blue"
+                                className="block rounded-lg px-3 py-2.5 text-[15px] font-medium text-ink/85 transition-colors duration-200 hover:bg-offwhite hover:text-brand-blue focus-visible:bg-offwhite focus-visible:text-brand-blue"
                               >
                                 {child.label}
                               </a>
                             </li>
                           ))}
                         </ul>
+
                       </div>
                     </div>
                   );
