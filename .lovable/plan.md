@@ -1,28 +1,30 @@
-## Plovoucí menu nad hero
+## Barevné kostičky — border, nový obrázek + přepínač ven/dovnitř
 
-### Cíl
-Menu bude plovoucí nad stránkou. Hero sekce sahe až k samotnému vršku viewportu. Menu zůstane v současném boxu s mírně průhledným pozadím a blurem – nemění se jeho vzhled, jen jeho pozice na stránce.
+### Změny v `src/components/site-classes.tsx`
 
-### Změny
+1. **Border boxu**: změnit `border-white/60` na `border-border/70` (stejný jako 4 rychlá tlačítka v site-quick-links). Případně mírně sjednotit shadow.
 
-1. **site-navbar.tsx**
-   - `<header>`: změnit `sticky top-0` → `fixed top-0 left-0 right-0 z-50`.
-   - Odstranit `bg-offwhite` z `<header>` (pozadí menu je už ve vnitřním boxu).
-   - Ponechat `px-6` pro odsazení od okrajů.
-   - Přidat `mt-3 sm:mt-4` na vnitřní `.container` box, aby box s menu „plaval“ a nelepil se k hornímu okraji.
-   - Ponechat všechny ostatní styly vnitřního boxu beze změny (`bg-background/95`, `backdrop-blur-lg`, `shadow-[…]`, `border-white/60`, `rounded-2xl`).
+2. **Nahrazení obrázku**: 
+   - Smazat starý asset `src/assets/kosticky-doma.webp.asset.json` (delete_asset).
+   - Nahrát `kosticky_tridyA.webp` a `kosticky_tridyB.webp` jako Lovable assets přes CLI z `/mnt/user-uploads/`.
+   - Importovat oba pointery do `site-classes.tsx`.
 
-2. **index.tsx**
-   - Na `<div className="min-h-screen bg-background">` nebo na samotný `<SiteHero />` přidat horní padding, který vykompenzuje výšku plovoucího menu (`h-20` + horní mezera `mt-3/4`).
-   - Přidat např. `pt-28` (≈ 112 px), aby obsah hero začínal pod menu a nebyl překrytý.
-   - Gradient wrapper `#FEF8E7 → #FFFFFF` zůstává; díky fixed headeru začíná gradient už na samém vršku viewportu a menu plave nad ním.
+3. **Přepínač "Vem kostičky ven / dovnitř"**:
+   - Stav `const [outside, setOutside] = useState(false)`.
+   - Umístění: nad obrázkem, zarovnaný doprava (`flex justify-end`), mírně překrývá pravý horní roh obrázku.
+   - Vizuál: pill button v glass stylu (`rounded-full border border-border/70 bg-background/80 backdrop-blur shadow-…`), uvnitř text + animovaný switch (track 44×24, knob 18×18). Track barva přepíná mezi `bg-mint` (dovnitř) a `bg-sky` (ven). Knob s drobnou ikonkou (🏠 ↔ 🌳) – použijeme lucide `Home` / `TreePine`.
+   - `aria-pressed`, `role="switch"`, fokus ring.
 
-3. **site-hero.tsx**
-   - Upravit/přizpůsobit horní padding (`hero-y` utility) tak, aby celkový prostor nad textem hero odpovídal: výška menu + mezera nad menu + mezera pod menu + stávající hero padding.
-   - Alternativně řídit celé odsazení přes `index.tsx` (bod 2) a v hero ponechat současný padding.
+4. **Crossfade + lehký scale obrázků**:
+   - Wrapper s `position: relative`, oba obrázky absolutně přes sebe, řízené `data-active`.
+   - Přechod `opacity 600ms` + `transform: scale(0.98) → 1` `cubic-bezier(0.22,1,0.36,1)`.
+   - Druhý obrázek `loading="lazy"` ale předem v DOM, aby nebylo flicker.
+   - Respekt `prefers-reduced-motion` (jen swap bez animace).
+   - Alt texty: A = „Plastelínové kostičky doma — červená, modrá, zelená a žlutá"; B = „Plastelínové kostičky venku na zahradě se skluzavkou a stromem".
 
-### Výsledek
-- Hero gradient začíná přímo na vršku stránky (žádný krémový pruh nad ním).
-- Menu je plovoucí box s glass efektem, který viditelně plave nad hero obsahem.
-- Při scrollu se chová stejně – zůstává přilepené nahoře jako plovoucí panel.
-- Žádné řešení pozadí podle scrollu; menu má své vlastní pozadí pořád.
+5. **Drobnosti**:
+   - Wrapper obrázku zachovat `w-[70%] max-w-3xl mx-auto`, výška dle aspect-ratio (~4:3) přes `aspect-[4/3]`.
+   - Přepínač má `whitespace-nowrap` a min šířku, aby se text neměnil skokově při přepnutí — buď fixed width na nejdelší variantu, nebo plynulá šířka přes `transition: width`.
+
+### Bez zásahu do dat / textů tříd
+Karty 4 tříd zůstávají beze změny.
