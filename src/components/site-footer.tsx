@@ -40,22 +40,6 @@ export function SiteFooter() {
 
           <div className="relative z-10 px-6 py-14 md:px-12 md:py-16">
             <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8 lg:gap-12">
-              {/* Kontakt */}
-              <div>
-                <h3 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-white/60">
-                  Kontakt
-                </h3>
-
-                <div className="mt-6 flex items-start gap-3 text-[15px] leading-relaxed text-white/75">
-                  <MapPin className="mt-1 h-4 w-4 shrink-0 text-white/50" aria-hidden />
-                  <address className="not-italic">
-                    <span className="block font-medium text-white">Mateřská škola Josefa Gočára</span>
-                    <span className="block">Škroupova 693</span>
-                    <span className="block">500 02 Hradec Králové 2</span>
-                  </address>
-                </div>
-              </div>
-
               {/* Vedení školky */}
               <div>
                 <h3 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-white/60">
@@ -75,6 +59,22 @@ export function SiteFooter() {
                   >
                     495 444 421
                   </a>
+                </div>
+              </div>
+
+              {/* Kontakt */}
+              <div>
+                <h3 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-white/60">
+                  Kontakt
+                </h3>
+
+                <div className="mt-6 flex items-start gap-3 text-[15px] leading-relaxed text-white/75">
+                  <MapPin className="mt-1 h-4 w-4 shrink-0 text-white/50" aria-hidden />
+                  <address className="not-italic">
+                    <span className="block font-medium text-white">Mateřská škola Josefa Gočára</span>
+                    <span className="block">Škroupova 693</span>
+                    <span className="block">500 02 Hradec Králové 2</span>
+                  </address>
                 </div>
               </div>
 
@@ -107,24 +107,27 @@ export function SiteFooter() {
                 </ul>
               </div>
             </div>
+
           </div>
 
           {/* Bottom bar */}
           <div className="relative z-10 border-t border-white/10">
-            <div className="px-6 py-5 md:px-12 flex flex-col items-center gap-2 text-center md:flex-row md:justify-between md:text-left">
-              <p className="text-sm text-white/55">
-                © 2026 MŠ Josefa Gočára. Všechna práva vyhrazena. | Používáme pouze technické cookies
-              </p>
+            <div className="px-6 py-5 md:px-12 text-center text-sm text-white/55">
+              <span>© 2026 MŠ Josefa Gočára. Všechna práva vyhrazena.</span>
+              <span className="mx-2 text-white/30" aria-hidden>|</span>
+              <span>Používáme pouze technické cookies</span>
+              <span className="mx-2 text-white/30" aria-hidden>|</span>
               <a
                 href="https://www.addu.cz"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-white/55 transition-colors duration-200 hover:text-brand-yellow"
+                className="transition-colors duration-200 hover:text-brand-yellow"
               >
                 Design a realizace ADDU.cz
               </a>
             </div>
           </div>
+
         </div>
       </div>
     </footer>
