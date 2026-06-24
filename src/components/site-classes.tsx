@@ -45,7 +45,7 @@ export function SiteClasses() {
   return (
     <section id="tridy" className="section-y bg-background">
       <div className="container mx-auto px-6">
-        <div className="rounded-3xl border border-white/60 bg-background px-6 py-12 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] md:px-12 md:py-16 lg:px-16 lg:py-20">
+        <div className="rounded-3xl border border-border/70 bg-background px-6 py-12 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] md:px-12 md:py-16 lg:px-16 lg:py-20">
 
           {/* Eyebrow + nadpis */}
           <div className="mx-auto max-w-3xl text-center">
