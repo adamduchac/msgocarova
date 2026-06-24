@@ -51,7 +51,7 @@ export function SiteHero() {
             Místo, kde si děti{" "}
             <span
               className="bg-clip-text text-transparent"
-              style={{ backgroundImage: "linear-gradient(105deg, #2E7DF4 0%, #2FA39B 48%, #3DA35D 100%)" }}
+              style={{ backgroundImage: "linear-gradient(105deg, #2563EB 0%, #38BDF8 100%)" }}
             >
               hrají, objevují
               <br className="hidden sm:block" />
