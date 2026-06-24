@@ -105,7 +105,7 @@ export function SiteDailyRhythm() {
 
           {/* Wavy line with small dots */}
           <div className="relative mt-2 h-10">
-            <div className="absolute left-[10%] right-[10%] top-1/2 -translate-y-1/2">
+            <div className="reveal-up absolute left-[10%] right-[10%] top-1/2 -translate-y-1/2">
               <svg
                 viewBox="0 0 1200 40"
                 preserveAspectRatio="none"
