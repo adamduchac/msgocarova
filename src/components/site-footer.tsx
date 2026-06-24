@@ -150,15 +150,17 @@ export function SiteFooter() {
               </nav>
             </FooterColumn>
           </div>
-        </div>
-      </div>
+            </div>
+          </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-white/10">
-        <div className="container mx-auto px-6 py-5">
-          <p className="text-center text-sm text-white/55">
-            © 2026 MŠ Josefa Gočára. Všechna práva vyhrazena.
-          </p>
+          {/* Bottom bar */}
+          <div className="border-t border-white/10">
+            <div className="px-6 py-5 md:px-12">
+              <p className="text-center text-sm text-white/55">
+                © 2026 MŠ Josefa Gočára. Všechna práva vyhrazena.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
