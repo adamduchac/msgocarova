@@ -66,7 +66,7 @@ export function SiteFooter() {
             src={cubeYellow.url}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute bottom-[-1.5rem] right-[-1.5rem] z-20 w-[5rem] select-none sm:w-[6rem] lg:w-[7.5rem]"
+            className="pointer-events-none absolute bottom-[-1.5rem] right-[-1.5rem] z-20 w-[8rem] select-none sm:w-[9.6rem] lg:w-[12rem] scale-x-[-1]"
             loading="lazy"
             decoding="async"
           />
