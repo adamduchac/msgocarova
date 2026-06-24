@@ -90,7 +90,7 @@ export function SiteNavbar() {
           </a>
 
           <div className="flex items-center gap-8">
-            <nav ref={navRef} className="hidden items-center gap-7 lg:flex" aria-label="Hlavní navigace">
+            <nav ref={navRef} className="hidden items-center gap-9 lg:flex" aria-label="Hlavní navigace">
               {navItems.map((item) => {
                 if ("children" in item) {
                   const isOpen = openMenu === item.label;
