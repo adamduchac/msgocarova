@@ -1,4 +1,5 @@
 import heroKids from "@/assets/hero-kids.jpg.asset.json";
+import heroShape from "@/assets/hero-shape.svg.asset.json";
 import cubeBlue from "@/assets/cube-blue.png.asset.json";
 import cubeRed from "@/assets/cube-red.png.asset.json";
 import cubeGreen from "@/assets/cube-green.png.asset.json";
@@ -70,18 +71,30 @@ export function SiteHero() {
             <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2.5" />
           </svg>
 
-          <div className="relative overflow-hidden rounded-[36px] shadow-[0_20px_60px_-20px_rgba(16,15,16,0.25)]">
+          <div
+            className="relative aspect-[1000/979] w-full"
+            style={{
+              filter: "drop-shadow(0 24px 40px rgba(16,15,16,0.22))",
+              WebkitMaskImage: `url(${heroShape.url})`,
+              maskImage: `url(${heroShape.url})`,
+              WebkitMaskSize: "100% 100%",
+              maskSize: "100% 100%",
+              WebkitMaskRepeat: "no-repeat",
+              maskRepeat: "no-repeat",
+            }}
+          >
             <img
               src={heroKids.url}
-              alt="Dvě usměvavé děti si hrají s dřevěnými kostkami u stolečku ve světlé třídě"
-              width={1280}
+              alt="Děti si hrají s dřevěnými kostkami na školní zahradě"
+              width={1024}
               height={1024}
-              className="h-auto w-full select-none object-cover"
+              className="h-full w-full select-none object-cover"
               loading="eager"
               decoding="async"
               draggable={false}
             />
           </div>
+
 
           {/* Cubes breaking out of bottom */}
           <div className="pointer-events-none absolute inset-x-0 -bottom-6 flex items-end justify-center gap-4 sm:gap-7 lg:-bottom-8 lg:gap-9">
