@@ -86,7 +86,7 @@ export function SiteNavbar() {
       <div className="container mx-auto overflow-visible rounded-2xl border border-white/60 bg-background/70 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.25)] backdrop-blur-lg">
         <div className="flex h-20 items-center justify-between px-6 lg:px-8">
           <a href="/" className="flex items-center" aria-label="MŠ Josefa Gočára — domů">
-            <img src={logoAsset.url} alt="MŠ Josefa Gočára" className="h-10 w-auto" />
+            <img src={logoAsset.url} alt="MŠ Josefa Gočára" className="h-[1.875rem] w-auto md:h-10" />
           </a>
 
           <div className="flex items-center gap-8 xl:gap-10">
