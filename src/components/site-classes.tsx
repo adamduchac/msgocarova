@@ -128,7 +128,7 @@ export function SiteClasses() {
                   key={outside ? "out" : "in"}
                   className="min-w-[9rem] text-center font-display text-[13px] font-semibold leading-tight text-ink animate-fade-in md:text-[14px]"
                 >
-                  {outside ? "Vem kostičky dovnitř" : "Vem kostičky ven"}
+                  {outside ? "Vezmi kostičky dovnitř" : "Vezmi kostičky ven"}
                 </span>
               </button>
             </div>

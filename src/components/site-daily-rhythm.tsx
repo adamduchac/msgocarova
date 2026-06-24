@@ -94,7 +94,7 @@ export function SiteDailyRhythm() {
         {/* Polaroids — md+: grid 5 cols / mobile: horizontal scroll-snap */}
         <ol
           ref={scrollerRef}
-          className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 pt-10 md:mx-0 md:grid md:grid-cols-5 md:gap-6 md:overflow-visible md:px-0 md:pt-14"
+          className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 pt-10 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:grid-cols-5 md:gap-6 md:overflow-visible md:px-0 md:pt-14"
         >
           {moments.map((m, i) => (
             <li
@@ -109,7 +109,7 @@ export function SiteDailyRhythm() {
                     alt={m.alt}
                     width={800}
                     height={1000}
-                    loading="lazy"
+                    loading="eager"
                     decoding="async"
                     className="aspect-[4/5] h-auto w-full object-cover"
                   />

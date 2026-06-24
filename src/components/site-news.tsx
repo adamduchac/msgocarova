@@ -44,7 +44,7 @@ export function SiteNews() {
     <section id="aktuality" className="section-y">
       <div className="container mx-auto px-6">
         <div className="reveal-up section-header-gap mx-auto max-w-2xl text-center">
-          <p className="text-sm font-medium uppercase tracking-[0.18em] text-brand-blue">
+          <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
             Aktuálně
           </p>
           <h2 className="mt-3 font-display text-[34px] font-extrabold text-ink md:text-[40px]">
