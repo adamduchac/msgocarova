@@ -250,11 +250,10 @@ export function SiteNavbar() {
                     : {})}
                   onClick={() => setOpen(false)}
                   tabIndex={open ? 0 : -1}
-                  className="mobile-nav-item inline-flex items-center justify-between rounded-lg px-3 py-3 text-base font-medium text-ink/90 transition-colors duration-200 hover:bg-offwhite hover:text-brand-blue"
+                  className="mobile-nav-item rounded-lg px-3 py-3 text-base font-medium text-ink/90 transition-colors duration-200 hover:bg-offwhite hover:text-brand-blue"
                   style={{ ["--mobile-nav-delay" as string]: `${i * 40}ms` }}
                 >
-                  <span>{item.label}</span>
-                  {item.external && <ExternalLink className="h-4 w-4" aria-hidden />}
+                  {item.label}
                 </a>
               );
             })}
