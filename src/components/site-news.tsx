@@ -79,7 +79,7 @@ export function SiteNews() {
                 <p className="mt-2 text-sm leading-relaxed text-body">{n.text}</p>
                 <a
                   href="#"
-                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue transition-[gap] duration-200 hover:gap-2.5"
+                  className="group mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
                 >
                   Číst více
                   <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
