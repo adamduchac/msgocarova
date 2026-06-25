@@ -34,8 +34,8 @@ export function useRevealOnScroll() {
         }
       },
       {
-        rootMargin: isCoarse ? "0px" : "0px 0px -8% 0px",
-        threshold: 0,
+        rootMargin: "0px 0px -8% 0px",
+        threshold: isCoarse ? 0.08 : 0,
       },
     );
 
@@ -52,6 +52,28 @@ export function useRevealOnScroll() {
     const onRescan = () => observeAll();
     window.addEventListener("reveal:rescan", onRescan);
 
+    // Lightweight MutationObserver — only childList on body, no subtree
+    // attribute watching (that was the original jank source). Re-scans are
+    // throttled via requestIdleCallback so they happen during browser idle.
+    type IdleScheduler = (cb: () => void, opts?: { timeout?: number }) => number;
+    const ric: IdleScheduler =
+      (window as unknown as { requestIdleCallback?: IdleScheduler }).requestIdleCallback ??
+      ((cb) => window.setTimeout(cb, 200));
+    let scheduled = false;
+    const scheduleRescan = () => {
+      if (scheduled) return;
+      scheduled = true;
+      ric(
+        () => {
+          scheduled = false;
+          observeAll();
+        },
+        { timeout: 500 },
+      );
+    };
+    const mo = new MutationObserver(scheduleRescan);
+    mo.observe(document.body, { childList: true, subtree: true });
+
     // Safety net: if anything stays unrevealed after 1.5s (slow hydrate, route
     // transition, IO miss), force-show it so nothing is permanently invisible.
     const safety = window.setTimeout(() => {
@@ -62,6 +84,7 @@ export function useRevealOnScroll() {
       cancelAnimationFrame(raf);
       window.clearTimeout(safety);
       observer.disconnect();
+      mo.disconnect();
       window.removeEventListener("reveal:rescan", onRescan);
     };
   }, []);
