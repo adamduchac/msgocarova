@@ -26,7 +26,7 @@ export function SiteFooter() {
             src={cubeRed.url}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute left-[6%] bottom-[calc(100%-20px)] z-0 w-[6.3rem] select-none sm:bottom-[calc(100%-10px)] sm:left-[4%] sm:w-[7.35rem] lg:w-[10.5rem]"
+            className="pointer-events-none absolute left-[6%] bottom-[calc(100%-35px)] z-0 w-[6.3rem] select-none sm:bottom-[calc(100%-25px)] sm:left-[4%] sm:w-[7.35rem] lg:w-[10.5rem]"
             loading="lazy"
             decoding="async"
           />
@@ -36,7 +36,7 @@ export function SiteFooter() {
               src={cubeYellow.url}
               alt=""
               aria-hidden
-              className="pointer-events-none absolute bottom-3 right-3 z-20 hidden w-[8rem] select-none sm:bottom-[-10px] sm:right-[-10px] sm:block sm:w-[9.6rem] lg:w-[12rem] scale-x-[-1]"
+              className="pointer-events-none absolute bottom-3 right-3 z-20 hidden w-[8rem] select-none sm:bottom-[-30px] sm:right-[-30px] sm:block sm:w-[9.6rem] lg:w-[12rem] scale-x-[-1]"
               loading="lazy"
               decoding="async"
             />
