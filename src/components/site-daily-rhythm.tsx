@@ -109,7 +109,7 @@ export function SiteDailyRhythm() {
                     alt={m.alt}
                     width={800}
                     height={1000}
-                    loading="eager"
+                    loading={i < 2 ? "eager" : "lazy"}
                     decoding="async"
                     className="aspect-[4/5] h-auto w-full object-cover"
                   />

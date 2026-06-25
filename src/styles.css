@@ -207,7 +207,6 @@
 
 :where(.reveal-up, .reveal-right, .reveal-fade, .reveal-scale) {
   opacity: 0;
-  will-change: opacity, transform;
   transition-property: opacity, transform;
   transition-duration: 600ms;
   transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
@@ -221,17 +220,19 @@
 :where(.reveal-up, .reveal-right, .reveal-fade, .reveal-scale).is-visible {
   opacity: 1;
   transform: none;
-  will-change: auto;
 }
 
-/* Slightly faster + shorter travel on mobile for smoother feel. */
-@media (max-width: 767px) {
+/* Mobile / touch — shorter, lighter reveal to keep 60fps on coarse-pointer GPUs. */
+@media (max-width: 767px), (pointer: coarse) {
   :where(.reveal-up, .reveal-right, .reveal-fade, .reveal-scale) {
-    transition-duration: 560ms;
+    transition-duration: 380ms;
+    transition-delay: calc(var(--reveal-delay, 0ms) * 0.5);
   }
-  .reveal-up    { transform: translate3d(0, 14px, 0); }
-  .reveal-right { transform: translate3d(12px, 0, 0); }
+  .reveal-up    { transform: translate3d(0, 10px, 0); }
+  .reveal-right { transform: translate3d(8px, 0, 0); }
+  .reveal-scale { transform: none; }
 }
+
 
 /* ---------- Interactive card hover ----------
    Separate from .reveal-* so the reveal transition (opacity/transform, 720ms)
@@ -246,8 +247,9 @@
               border-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
               background-color 220ms cubic-bezier(0.22, 1, 0.36, 1);
   translate: 0 0;
-  will-change: transform;
+  contain: layout paint;
 }
+
 
 .card-hover::after,
 .card-hover-soft::after {
@@ -398,22 +400,11 @@ html { scroll-behavior: smooth; }
   width: 100%;
   height: 100%;
   opacity: 0;
-  transform: translateY(-8%);
-  transition:
-    opacity 1400ms cubic-bezier(0.4, 0, 0.2, 1),
-    transform 1400ms cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: opacity, transform;
+  transition: opacity 1200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.hero-slide[data-active="true"] {
-  opacity: 1;
-  transform: translateY(0);
-  z-index: 2;
-}
-.hero-slide[data-active="false"] {
-  opacity: 0;
-  transform: translateY(8%);
-  z-index: 1;
-}
+.hero-slide[data-active="true"]  { opacity: 1; z-index: 2; }
+.hero-slide[data-active="false"] { opacity: 0; z-index: 1; }
+
 
 /* Hero cubes — enter + float ----------------------------------------- */
 @keyframes hero-cube-in {
@@ -451,11 +442,18 @@ html { scroll-behavior: smooth; }
   animation: var(--cube-float, hero-cube-float-a) var(--cube-float-duration, 5s) ease-in-out infinite;
 }
 
+/* Disable the infinite cube float on touch devices — composite cost stacks
+   with the hero crossfade and drags the whole page's framerate down. */
+@media (pointer: coarse) {
+  .hero-cube.is-floating { animation: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-slide { transition: none !important; }
   .hero-cube { opacity: 1 !important; animation: none !important; transform: none !important; }
   .hero-cube-wrap { transform: none !important; transition: none !important; }
 }
+
 
 /* Classes illustration crossfade ------------------------------------- */
 .classes-illu {
