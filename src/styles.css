@@ -247,8 +247,9 @@
               border-color 220ms cubic-bezier(0.22, 1, 0.36, 1),
               background-color 220ms cubic-bezier(0.22, 1, 0.36, 1);
   translate: 0 0;
-  will-change: transform;
+  contain: layout paint;
 }
+
 
 .card-hover::after,
 .card-hover-soft::after {
