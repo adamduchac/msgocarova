@@ -167,6 +167,7 @@ export function SiteHero() {
                 className="hero-slide select-none object-cover"
                 data-active={i === index}
                 loading={i === 0 ? "eager" : "lazy"}
+                fetchPriority={i === 0 ? "high" : "auto"}
                 decoding="async"
                 draggable={false}
               />

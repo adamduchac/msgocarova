@@ -441,11 +441,18 @@ html { scroll-behavior: smooth; }
   animation: var(--cube-float, hero-cube-float-a) var(--cube-float-duration, 5s) ease-in-out infinite;
 }
 
+/* Disable the infinite cube float on touch devices — composite cost stacks
+   with the hero crossfade and drags the whole page's framerate down. */
+@media (pointer: coarse) {
+  .hero-cube.is-floating { animation: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-slide { transition: none !important; }
   .hero-cube { opacity: 1 !important; animation: none !important; transform: none !important; }
   .hero-cube-wrap { transform: none !important; transition: none !important; }
 }
+
 
 /* Classes illustration crossfade ------------------------------------- */
 .classes-illu {
