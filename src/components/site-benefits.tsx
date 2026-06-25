@@ -73,7 +73,7 @@ export function SiteBenefits() {
             <article
               key={b.titleMain}
               className="card-hover reveal-up group flex flex-col gap-5 rounded-3xl border border-white/60 bg-background p-5 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] sm:flex-row sm:items-center sm:gap-6 sm:p-6"
-              style={{ ["--reveal-delay" as string]: `${i * 110}ms` }}
+              style={{ ["--reveal-delay" as string]: `${i * 80}ms` }}
             >
               <div
                 className={`relative aspect-square w-full shrink-0 overflow-hidden rounded-2xl ring-1 ring-black/[0.04] sm:w-[40%] ${b.tint}`}

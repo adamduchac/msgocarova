@@ -233,6 +233,17 @@
   .reveal-scale { transform: none; }
 }
 
+/* Daily-rhythm horizontal slider on mobile: skip per-card reveal — cards are
+   horizontally off-screen when IntersectionObserver fires vertically, so the
+   animation would happen unseen. Header reveal stays intact. */
+@media (max-width: 767px) {
+  #bezny-den ol .reveal-up {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 
 /* ---------- Interactive card hover ----------
    Separate from .reveal-* so the reveal transition (opacity/transform, 720ms)

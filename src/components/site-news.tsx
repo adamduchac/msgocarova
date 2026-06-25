@@ -58,7 +58,7 @@ export function SiteNews() {
             <article
               key={n.title}
               className="card-hover reveal-up group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card"
-              style={{ ["--reveal-delay" as string]: `${i * 110}ms` }}
+              style={{ ["--reveal-delay" as string]: `${i * 80}ms` }}
             >
               <div className="relative aspect-[5/3] w-full overflow-hidden">
                 <img
