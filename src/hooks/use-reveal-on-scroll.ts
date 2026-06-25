@@ -34,8 +34,8 @@ export function useRevealOnScroll() {
         }
       },
       {
-        rootMargin: isCoarse ? "0px" : "0px 0px -18% 0px",
-        threshold: isCoarse ? 0 : 0.12,
+        rootMargin: isCoarse ? "0px" : "0px 0px -8% 0px",
+        threshold: 0,
       },
     );
 
@@ -52,8 +52,15 @@ export function useRevealOnScroll() {
     const onRescan = () => observeAll();
     window.addEventListener("reveal:rescan", onRescan);
 
+    // Safety net: if anything stays unrevealed after 1.5s (slow hydrate, route
+    // transition, IO miss), force-show it so nothing is permanently invisible.
+    const safety = window.setTimeout(() => {
+      document.querySelectorAll(SELECTOR).forEach((el) => el.classList.add("is-visible"));
+    }, 1500);
+
     return () => {
       cancelAnimationFrame(raf);
+      window.clearTimeout(safety);
       observer.disconnect();
       window.removeEventListener("reveal:rescan", onRescan);
     };

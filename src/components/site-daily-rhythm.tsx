@@ -58,7 +58,7 @@ const moments: Moment[] = [
   },
 ];
 
-const delays = ["0ms", "440ms", "880ms", "1320ms", "1760ms"];
+const delays = ["0ms", "80ms", "160ms", "240ms", "320ms"];
 
 
 export function SiteDailyRhythm() {
