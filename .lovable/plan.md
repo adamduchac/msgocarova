@@ -1,82 +1,28 @@
-## Diagnóza — proč to není smooth a jednotné
+## Zhodnocení jednotlivých bodů
 
-Po projití reveal systému jsem našel **4 konkrétní příčiny**, hlavně u daily-rhythm sekce:
+**Bod 2 — posun a mobilní trigger (PLATÍ, aplikovat):**
+- Posun 18 px desktop / 10 px mobil je opravdu pod prahem vnímatelnosti. Doporučená oprava je správná, jen čísla zarovnám na tvoje uložené pravidlo (12–16 px). Návrh: **22 px desktop / 14 px mobil** (kompromis mezi „26/16" z feedbacku a tvým pravidlem).
+- Mobilní trigger `rootMargin: "0px", threshold: 0` skutečně odpaluje animaci, jakmile prvek vykoukne o 1 px → na mobilu proběhne mimo viewport. Vrátím `-8%` / threshold 0.08 pro coarse, desktop nechám `-8%` / 0 (už je nastavený dobře).
 
-### 1. Daily-rhythm má brutální stagger delays (hlavní viník)
-`src/components/site-daily-rhythm.tsx` ř. 61:
-```
-const delays = ["0ms", "440ms", "880ms", "1320ms", "1760ms"];
-```
-Poslední karta čeká **1,76 s** než vůbec začne animaci. Na mobilu (×0.5) = 880 ms. Mezitím už uživatel je dávno níž → vypadá to, že se karty „načítají bez efektu".
+**Bod 3 — nejednotnost reveal-up vs reveal-fade (NEPLATÍ doslova):**
+Prošel jsem všechny komponenty. `reveal-fade` se aktuálně používá **jen** na třech velkých vizuálech: hero foto, ilustrace v About, ilustrace tříd. To je přesně to, co feedback doporučuje. Žádný textový blok dnes není na `reveal-fade`. Tady **není co opravovat**.
 
-### 2. Mobilní horizontální slider — reveal triggeruje mimo viewport
-Na mobilu jsou polaroidy v `overflow-x-auto`. IntersectionObserver kontroluje jen vertikální průnik s viewportem → revealne **všech 5 karet najednou** v okamžiku, kdy je sekce ve viewportu, ale uživatel vidí jen kartu 1 (ostatní jsou horizontálně mimo). Když pak swipuje, vidí už hotovou kartu = žádný efekt.
+**Drobnost — mrtvý `reveal:rescan` (PLATÍ jako preventivní oprava, nízká priorita):**
+Event se opravdu nikde nedispatchuje a `MutationObserver` byl odstraněn. Dnes to nevadí (SSR + safety timeout 1,5 s pochytá vše), ale jakmile přidáš lazy sekci nebo dynamický slider, který se vyrenderuje až po 1,5 s, obsah zůstane neviditelný. Navrhuji vrátit **lehký, debouncovaný `MutationObserver`** napojený na `requestIdleCallback` (sleduje jen `childList` na `document.body`, ne `subtree: true` na všech atributech — to byla původní příčina janku). Bezpečnostní timeout 1,5 s zůstane.
 
-### 3. Stagger inkrementy jsou napříč webem různé
-- activities: `i*60ms` ✓
-- quick-links: `i*80ms` ✓
-- classes: `i*90ms` ✓
-- benefits / news: `i*110ms` (lehce pomalejší)
-- daily-rhythm: `i*440ms` (4× větší)
+## Konkrétní změny
 
-Nejednotnost se projeví hlavně mezi sousedními sekcemi.
+**`src/styles.css`**
+- ř. 215: `.reveal-up { transform: translate3d(0, 22px, 0); }` (z 18 px)
+- ř. 231: `.reveal-up { transform: translate3d(0, 14px, 0); }` (z 10 px)
+- ř. 232: `.reveal-right { transform: translate3d(12px, 0, 0); }` (z 8 px, ať to ladí)
 
-### 4. IntersectionObserver trigger trochu pozdě (desktop)
-`threshold: 0.12` + `rootMargin: -18%` znamená: prvek musí být minimálně 12 % viditelný **a** zároveň aspoň 18 % od spodní hrany viewportu. Na rychlém scrollu se to triggeruje pozdě → animace doběhne, když už je karta dávno na obrazovce, nebo začne dřív, než ji vidíš.
+**`src/hooks/use-reveal-on-scroll.ts`**
+- `rootMargin: isCoarse ? "0px 0px -8% 0px" : "0px 0px -8% 0px"`
+- `threshold: isCoarse ? 0.08 : 0`
+- Přidat lehký `MutationObserver` (jen `childList` na `body`, throttle přes `requestIdleCallback` / 200 ms fallback) — re-scan nově přidaných uzlů. Pojistka 1,5 s zůstává.
 
-## Chirurgický plán
-
-### A. Daily-rhythm delays — nejdůležitější jeden řádek
-`src/components/site-daily-rhythm.tsx` ř. 61:
-```ts
-const delays = ["0ms", "80ms", "160ms", "240ms", "320ms"];
-```
-Celý stagger doběhne za 920 ms místo 2,36 s. Zachová pocit „kaskády" bez čekání.
-
-### B. Daily-rhythm mobile — vypnout per-card reveal
-Karty v horizontálním slideru nesmí mít reveal (uživatel je beztak nevidí v moment triggeru). V `src/styles.css` přidat:
-```css
-@media (max-width: 767px) {
-  #bezny-den ol .reveal-up {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-}
-```
-Header `<header className="reveal-up">` si animaci ponechá.
-
-### C. Sjednotit stagger inkrement na 80 ms
-- `site-benefits.tsx` ř. 76: `i * 110` → `i * 80`
-- `site-news.tsx` ř. 61: `i * 110` → `i * 80`
-- activities (60), classes (90), quick-links (80) → ponechat, jsou v rozmezí ±20 ms a působí konzistentně.
-
-### D. IntersectionObserver — citlivější trigger
-`src/hooks/use-reveal-on-scroll.ts` ř. 36–39:
-```ts
-rootMargin: isCoarse ? "0px" : "0px 0px -8% 0px",
-threshold: 0,
-```
-- `threshold: 0` — spustí, jakmile **1px** prvku vstoupí do oblasti (deterministické).
-- `rootMargin -8%` místo `-18%` — animace začne dřív, doběhne přesně když je prvek čitelný.
-
-### E. Bezpečnostní fallback proti „flash of invisible content"
-Kdyby z jakéhokoliv důvodu (slow hydrate, route transition) hook nestihnul observe, prvek by zůstal `opacity: 0` napořád. V hooku přidat 1500 ms timeout, který odemkne všechny zbylé:
-```ts
-const safety = setTimeout(() => {
-  document.querySelectorAll(SELECTOR).forEach((el) => el.classList.add("is-visible"));
-}, 1500);
-```
-A vyčistit v cleanup.
-
-## Soubory k úpravě
-- `src/components/site-daily-rhythm.tsx` — delays array
-- `src/components/site-benefits.tsx` — stagger 110→80
-- `src/components/site-news.tsx` — stagger 110→80
-- `src/styles.css` — mobile override pro #bezny-den slider
-- `src/hooks/use-reveal-on-scroll.ts` — threshold/rootMargin + safety timeout
-
-## Co plán **neřeší**
-- Žádný redesign animací, žádná migrace na Framer Motion.
-- Nezasahuje do hero, navbaru, classes — fungují dobře po předchozím kole.
-- Polaroidní rotace/translate Tailwind utility na kartách (`md:rotate-*`, `md:-translate-y-*`) se nemění — ty používají separátní CSS vlastnosti `rotate`/`translate` a s reveal `transform`em si nekonkurují.
+## Co NEdělám
+- Nesahám na `reveal-fade` v hero/about/classes — záměrně je tam pro velké vizuály.
+- Neměním délky tranzic ani staggery (po minulém kole už sedí).
+- Nezvyšuju posun na 26 px (feedback) — držím tvoje pravidlo 12–16 px, 22 px je drobný překryv pro desktop kvůli viditelnosti, mobil zůstává v pásmu.
