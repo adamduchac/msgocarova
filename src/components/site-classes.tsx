@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ArrowRight, Home, Trees } from "lucide-react";
+import { fixPrepositions } from "@/lib/typography";
 import kostickyA from "@/assets/kosticky-tridy-a.webp.asset.json";
 import kostickyB from "@/assets/kosticky-tridy-b.webp.asset.json";
 
@@ -13,31 +14,32 @@ type ClassItem = {
 
 const classes: ClassItem[] = [
   {
-    name: "Červená kostička",
-    age: "pro děti od 5 do 7 let",
-    teachers:
-      "paní učitelka Mgr. Nikola Šorfová, Mgr. Jitka Kouklíková a Hana Hloušková",
+    name: fixPrepositions("Červená kostička"),
+    age: fixPrepositions("pro děti od 5 do 7 let"),
+    teachers: fixPrepositions(
+      "paní učitelka Mgr. Nikola Šorfová, Mgr. Jitka Kouklíková a Hana Hloušková"
+    ),
     textColor: "text-brand-red",
     pillBg: "bg-brand-red",
   },
   {
-    name: "Zelená kostička",
-    age: "pro děti od 5 do 7 let",
-    teachers: "paní učitelka Jana Tuharská a Kristýna Vaňátková, DiS.",
+    name: fixPrepositions("Zelená kostička"),
+    age: fixPrepositions("pro děti od 5 do 7 let"),
+    teachers: fixPrepositions("paní učitelka Jana Tuharská a Kristýna Vaňátková, DiS."),
     textColor: "text-brand-green",
     pillBg: "bg-brand-green",
   },
   {
-    name: "Modrá kostička",
-    age: "pro děti od 3 do 5 let",
-    teachers: "paní učitelka Bc. Veronika Kremláčková a Elena Špicarová",
+    name: fixPrepositions("Modrá kostička"),
+    age: fixPrepositions("pro děti od 3 do 5 let"),
+    teachers: fixPrepositions("paní učitelka Bc. Veronika Kremláčková a Elena Špicarová"),
     textColor: "text-brand-blue",
     pillBg: "bg-brand-blue",
   },
   {
-    name: "Žlutá kostička",
-    age: "pro děti od 3 do 5 let",
-    teachers: "paní učitelka Magdaléna Sováková a Milena Svobodová, DiS.",
+    name: fixPrepositions("Žlutá kostička"),
+    age: fixPrepositions("pro děti od 3 do 5 let"),
+    teachers: fixPrepositions("paní učitelka Magdaléna Sováková a Milena Svobodová, DiS."),
     textColor: "text-brand-yellow",
     pillBg: "bg-brand-yellow",
   },
@@ -54,10 +56,10 @@ export function SiteClasses() {
           {/* Eyebrow + nadpis */}
           <div className="mx-auto max-w-3xl text-center">
             <p className="reveal-up font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
-              Barevné kostičky
+              {fixPrepositions("Barevné kostičky")}
             </p>
             <h2 className="reveal-up mt-3 font-display text-[34px] text-ink md:text-[40px]">
-              Čtyři třídy, jeden{" "}
+              {fixPrepositions("Čtyři třídy, jeden")}{" "}
               <span
                 className="bg-clip-text text-transparent"
                 style={{
@@ -65,7 +67,7 @@ export function SiteClasses() {
                     "linear-gradient(105deg, #2563EB 0%, #38BDF8 100%)",
                 }}
               >
-                skvělý tým
+                {fixPrepositions("skvělý tým")}
               </span>
             </h2>
           </div>
@@ -128,7 +130,7 @@ export function SiteClasses() {
                   key={outside ? "out" : "in"}
                   className="min-w-[9rem] text-center font-display text-[13px] font-semibold leading-tight text-ink animate-fade-in md:text-[14px]"
                 >
-                  {outside ? "Vezmi kostičky dovnitř" : "Vezmi kostičky ven"}
+                  {outside ? fixPrepositions("Vezmi kostičky dovnitř") : fixPrepositions("Vezmi kostičky ven")}
                 </span>
               </button>
             </div>
@@ -142,7 +144,7 @@ export function SiteClasses() {
               <a
                 key={c.name}
                 href="#"
-                aria-label={`Vstupte do třídy — ${c.name}`}
+                aria-label={fixPrepositions(`Vstupte do třídy — ${c.name}`)}
                 className="reveal-up group relative block overflow-hidden rounded-3xl border border-border/70 bg-background p-5 pb-16 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}
               >
@@ -172,7 +174,7 @@ export function SiteClasses() {
                         "cubic-bezier(0.22, 1, 0.36, 1)",
                     }}
                   >
-                    Vstupte do třídy
+                    {fixPrepositions("Vstupte do třídy")}
                   </span>
                   <span className="grid h-11 w-11 shrink-0 place-items-center">
                     <ArrowRight className="h-4 w-4" />

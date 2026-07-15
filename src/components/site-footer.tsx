@@ -1,4 +1,5 @@
 import { ArrowUpRight, MapPin } from "lucide-react";
+import { fixPrepositions } from "@/lib/typography";
 import cubeRed from "@/assets/cube-red.png.asset.json";
 import cubeYellow from "@/assets/cube-yellow.png.asset.json";
 import cubeBlue from "@/assets/cube-blue.png.asset.json";
@@ -78,7 +79,7 @@ export function SiteFooter({
               {/* Vedení školky */}
               <div>
                 <h3 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-white/60">
-                  Vedení školky
+                  {fixPrepositions("Vedení školky")}
                 </h3>
 
                 <div className="mt-6 flex flex-col gap-2">
@@ -100,13 +101,13 @@ export function SiteFooter({
               {/* Kontakt */}
               <div>
                 <h3 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-white/60">
-                  Kontakt
+                  {fixPrepositions("Kontakt")}
                 </h3>
 
                 <div className="mt-6 flex items-start gap-3 text-[15px] leading-relaxed text-white/75">
                   <MapPin className="mt-1 h-4 w-4 shrink-0 text-white/50" aria-hidden />
                   <address className="not-italic">
-                    <span className="block font-medium text-white">Mateřská škola Josefa Gočára</span>
+                    <span className="block font-medium text-white">{fixPrepositions("Mateřská škola Josefa Gočára")}</span>
                     <span className="block">Škroupova 693</span>
                     <span className="block">500 02 Hradec Králové 2</span>
                   </address>
@@ -116,7 +117,7 @@ export function SiteFooter({
               {/* Jednotlivé třídy */}
               <div>
                 <h3 className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-white/60">
-                  Jednotlivé třídy
+                  {fixPrepositions("Jednotlivé třídy")}
                 </h3>
 
                 <ul className="mt-6 flex flex-col gap-3">
@@ -125,7 +126,7 @@ export function SiteFooter({
                       <a
                         href={c.href}
                         className="group flex items-center gap-3 transition-colors duration-200 hover:text-brand-yellow focus-visible:outline-none"
-                        aria-label={`${c.name} — telefon ${c.phone}, vstup do třídy`}
+                        aria-label={fixPrepositions(`${c.name} — telefon ${c.phone}, vstup do třídy`)}
                       >
                         <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${c.dotClass}`} aria-hidden />
                         <span className="flex-1 font-display text-[15px] font-medium text-white group-hover:text-brand-yellow transition-colors duration-200">
@@ -148,9 +149,9 @@ export function SiteFooter({
           {/* Bottom bar */}
           <div className="relative z-10 border-t border-white/10">
             <div className="px-6 py-5 md:px-12 text-left text-sm text-white/55">
-              <span>© 2026 Mateřská škola Josefa Gočára. Všechna práva vyhrazena.</span>
+              <span>{fixPrepositions("© 2026 Mateřská škola Josefa Gočára. Všechna práva vyhrazena.")}</span>
               <span className="mx-2 text-white/30" aria-hidden>|</span>
-              <span>Používáme pouze technické cookies</span>
+              <span>{fixPrepositions("Používáme pouze technické cookies")}</span>
               <span className="mx-2 text-white/30" aria-hidden>|</span>
               <a
                 href="https://www.addu.cz"
@@ -158,7 +159,7 @@ export function SiteFooter({
                 rel="noopener noreferrer"
                 className="transition-colors duration-200 hover:text-brand-yellow"
               >
-                Design a realizace ADDU.cz
+                {fixPrepositions("Design a realizace ADDU.cz")}
               </a>
             </div>
           </div>

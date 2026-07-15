@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { fixPrepositions } from "@/lib/typography";
 import heroKids from "@/assets/hero-kids.jpg.asset.json";
 import heroKids2 from "@/assets/hero-kids-2.webp.asset.json";
 import heroKids3 from "@/assets/hero-kids-3.webp.asset.json";
@@ -7,8 +8,6 @@ import heroShape from "@/assets/hero-shape.svg.asset.json";
 import cubeA from "@/assets/cube-hero-a.png.asset.json";
 import cubeB from "@/assets/cube-hero-b.png.asset.json";
 import { ArrowRight } from "lucide-react";
-
-const NBSP = "\u00A0";
 
 const SLIDES = [
   { url: heroKids.url, alt: "Děti si hrají s dřevěnými kostkami na školní zahradě" },
@@ -102,15 +101,15 @@ export function SiteHero() {
         {/* Text */}
         <div className="reveal-up lg:col-span-5">
           <p className="mb-3 font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
-            Mateřská škola Josefa Gočára
+            {fixPrepositions("Mateřská škola Josefa Gočára")}
           </p>
           <h1 className="font-display text-[53px] font-extrabold leading-[1.04] tracking-tight text-ink sm:text-[58px] lg:text-[70px]">
-            Místo, kde si děti{" "}
+            {fixPrepositions("Místo, kde si děti")}{" "}
             <span
               className="bg-clip-text text-transparent"
               style={{ backgroundImage: "linear-gradient(105deg, #2563EB 0%, #38BDF8 100%)" }}
             >
-              hrají, objevují a{NBSP}rostou
+              {fixPrepositions("hrají, objevují a rostou")}
             </span>
           </h1>
 
@@ -118,8 +117,9 @@ export function SiteHero() {
             className="reveal-up mt-5 max-w-prose text-lg leading-relaxed text-body"
             style={{ ["--reveal-delay" as string]: "120ms" }}
           >
-            Pomáháme dětem přirozeně objevovat svět. Klidné a bezpečné zázemí
-            v centru Hradce Králové s velkou zahradou a respektujícím přístupem.
+            {fixPrepositions(
+              "Pomáháme dětem přirozeně objevovat svět. Klidné a bezpečné zázemí v centru Hradce Králové s velkou zahradou a respektujícím přístupem."
+            )}
           </p>
 
           <div
@@ -130,14 +130,14 @@ export function SiteHero() {
               href="#o-skolce"
               className="group inline-flex h-12 items-center gap-2 rounded-md bg-brand-blue px-6 text-[15px] font-semibold text-white transition-colors duration-200 hover:bg-brand-blue/90"
             >
-              Vítejte u nás
+              {fixPrepositions("Vítejte u nás")}
               <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
             </a>
             <a
               href="#tridy"
               className="inline-flex h-12 items-center rounded-md border border-ink/15 bg-background px-6 text-[15px] font-semibold text-ink transition-colors duration-200 hover:bg-offwhite"
             >
-              Prohlédnout třídy
+              {fixPrepositions("Prohlédnout třídy")}
             </a>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
 
@@ -25,11 +26,11 @@ export const Route = createFileRoute("/o-skolce")({
 });
 
 const sections = [
-  { id: "vize", title: "Představení a vize" },
-  { id: "vzdelavani", title: "Vzdělávání" },
-  { id: "tym", title: "Náš tým" },
-  { id: "hriste", title: "Veřejné hřiště" },
-  { id: "jidelna", title: "Školní jídelna" },
+  { id: "vize", title: fixPrepositions("Představení a vize") },
+  { id: "vzdelavani", title: fixPrepositions("Vzdělávání") },
+  { id: "tym", title: fixPrepositions("Náš tým") },
+  { id: "hriste", title: fixPrepositions("Veřejné hřiště") },
+  { id: "jidelna", title: fixPrepositions("Školní jídelna") },
 ];
 
 function OSkolcePage() {
@@ -44,10 +45,12 @@ function OSkolcePage() {
         <section className="section-y">
           <div className="container mx-auto px-6">
             <h1 className="font-display text-[42px] font-extrabold leading-[1.05] text-ink md:text-[56px]">
-              O školce
+              {fixPrepositions("O školce")}
             </h1>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-body">
-              Pár slov o nás, o tom, jak vzděláváme, kdo se u nás stará o děti a co dalšího nabízíme.
+              {fixPrepositions(
+                "Pár slov o nás, o tom, jak vzděláváme, kdo se u nás stará o děti a co dalšího nabízíme."
+              )}
             </p>
           </div>
         </section>
@@ -65,7 +68,7 @@ function OSkolcePage() {
                 {s.title}
               </h2>
               <p className="mt-4 max-w-2xl text-body">
-                Obsah této sekce brzy doplníme.
+                {fixPrepositions("Obsah této sekce brzy doplníme.")}
               </p>
             </div>
           </section>

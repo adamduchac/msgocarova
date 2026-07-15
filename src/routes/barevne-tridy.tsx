@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
 
@@ -24,10 +25,10 @@ export const Route = createFileRoute("/barevne-tridy")({
 });
 
 const sections = [
-  { id: "cervena", title: "Červená kostička" },
-  { id: "zelena", title: "Zelená kostička" },
-  { id: "modra", title: "Modrá kostička" },
-  { id: "zluta", title: "Žlutá kostička" },
+  { id: "cervena", title: fixPrepositions("Červená kostička") },
+  { id: "zelena", title: fixPrepositions("Zelená kostička") },
+  { id: "modra", title: fixPrepositions("Modrá kostička") },
+  { id: "zluta", title: fixPrepositions("Žlutá kostička") },
 ];
 
 function BarevneTridyPage() {
@@ -42,10 +43,12 @@ function BarevneTridyPage() {
         <section className="section-y">
           <div className="container mx-auto px-6">
             <h1 className="font-display text-[42px] font-extrabold leading-[1.05] text-ink md:text-[56px]">
-              Barevné třídy
+              {fixPrepositions("Barevné třídy")}
             </h1>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-body">
-              U nás si každé dítě najde svoji kostičku. Prohlédněte si jednotlivé třídy.
+              {fixPrepositions(
+                "U nás si každé dítě najde svoji kostičku. Prohlédněte si jednotlivé třídy."
+              )}
             </p>
           </div>
         </section>
@@ -59,7 +62,7 @@ function BarevneTridyPage() {
                 {s.title}
               </h2>
               <p className="mt-4 max-w-2xl text-body">
-                Obsah této sekce brzy doplníme.
+                {fixPrepositions("Obsah této sekce brzy doplníme.")}
               </p>
             </div>
           </section>

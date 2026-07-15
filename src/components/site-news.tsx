@@ -2,6 +2,7 @@ import trip from "@/assets/news-trip.jpg.asset.json";
 import art from "@/assets/news-art.jpg.asset.json";
 import openday from "@/assets/news-openday.jpg.asset.json";
 import { ArrowRight } from "lucide-react";
+import { fixPrepositions } from "@/lib/typography";
 
 type News = {
   badge: string;
@@ -14,26 +15,32 @@ type News = {
 
 const news: News[] = [
   {
-    badge: "Akce",
+    badge: fixPrepositions("Akce"),
     badgeBg: "bg-brand-blue",
-    title: "Výlet do přírody",
-    text: "Společně jsme objevili krásy lesa, hráli hry a užili si den plný zážitků.",
+    title: fixPrepositions("Výlet do přírody"),
+    text: fixPrepositions(
+      "Společně jsme objevili krásy lesa, hráli hry a užili si den plný zážitků."
+    ),
     image: trip.url,
     alt: "Skupina veselých dětí běží po zelené louce v lese",
   },
   {
-    badge: "Novinky",
+    badge: fixPrepositions("Novinky"),
     badgeBg: "bg-brand-green",
-    title: "Nový kroužek – Malý umělec",
-    text: "Od září otevíráme výtvarný kroužek pro všechny kreativní děti.",
+    title: fixPrepositions("Nový kroužek – Malý umělec"),
+    text: fixPrepositions(
+      "Od září otevíráme výtvarný kroužek pro všechny kreativní děti."
+    ),
     image: art.url,
     alt: "Dětské ručky malující vodovkami pestrobarevné květiny",
   },
   {
-    badge: "Oznámení",
+    badge: fixPrepositions("Oznámení"),
     badgeBg: "bg-brand-red",
-    title: "Den otevřených dveří",
-    text: "Přijďte se podívat do naší školky ve středu 15. 5. od 9:00 do 17:00.",
+    title: fixPrepositions("Den otevřených dveří"),
+    text: fixPrepositions(
+      "Přijďte se podívat do naší školky ve středu 15. 5. od 9:00 do 17:00."
+    ),
     image: openday.url,
     alt: "Učitelka čte s malou holčičkou knížku ve světlé třídě",
   },
@@ -45,7 +52,7 @@ export function SiteNews() {
       <div className="container mx-auto px-6">
         <div className="reveal-up section-header-gap mx-auto max-w-2xl text-center">
           <h2 className="font-display text-[34px] font-extrabold text-ink md:text-[40px]">
-            Zážitky, které si děti odnáší
+            {fixPrepositions("Zážitky, které si děti odnáší")}
           </h2>
         </div>
 
@@ -77,7 +84,7 @@ export function SiteNews() {
                   href="#"
                   className="group mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
                 >
-                  Číst více
+                  {fixPrepositions("Číst více")}
                   <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
                 </a>
               </div>
@@ -90,7 +97,7 @@ export function SiteNews() {
             href="#"
             className="group inline-flex h-12 items-center gap-2 rounded-md border border-ink/15 bg-background px-6 text-[15px] font-semibold text-ink transition-colors duration-200 hover:bg-offwhite"
           >
-            Všechny aktuality
+            {fixPrepositions("Všechny aktuality")}
             <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
           </a>
         </div>

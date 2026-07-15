@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { fixPrepositions } from "@/lib/typography";
 import iconNews from "@/assets/icon-news-claymation.webp.asset.json";
 
 export function SiteAnnouncementBar() {
@@ -22,13 +23,13 @@ export function SiteAnnouncementBar() {
               />
             </span>
             <p className="text-center text-base leading-relaxed text-ink font-medium">
-              <span className="font-semibold">Poslední den školky 26. 6. 2026.</span>
+              <span className="font-semibold">{fixPrepositions("Poslední den školky 26. 6. 2026.")}</span>
             </p>
             <span
               className="inline-flex h-11 items-center rounded-full bg-ink px-5 text-sm font-medium text-white"
               aria-hidden="true"
             >
-              Podrobnosti
+              {fixPrepositions("Podrobnosti")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </span>
           </div>
@@ -47,9 +48,9 @@ export function SiteAnnouncementBar() {
 
             <p className="min-h-20 flex items-center justify-center text-center text-lg leading-relaxed text-ink font-medium px-[112px]">
               <span>
-                <span className="font-semibold">Poslední den školky 26. 6. 2026.</span>{" "}
+                <span className="font-semibold">{fixPrepositions("Poslední den školky 26. 6. 2026.")}</span>{" "}
                 <span className="text-body font-normal">
-                  Těšíme se na viděnou v novém školním roce. Užijte si prázdniny!
+                  {fixPrepositions("Těšíme se na viděnou v novém školním roce. Užijte si prázdniny!")}
                 </span>
               </span>
             </p>
@@ -67,7 +68,7 @@ export function SiteAnnouncementBar() {
                     transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
                   }}
                 >
-                  Podrobnosti
+                  {fixPrepositions("Podrobnosti")}
                 </span>
                 <span className="grid place-items-center h-12 w-12 shrink-0">
                   <ArrowRight className="h-4 w-4" />

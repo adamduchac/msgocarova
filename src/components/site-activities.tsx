@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { fixPrepositions } from "@/lib/typography";
 import preschool from "@/assets/activity-preschool.jpg.asset.json";
 import sport from "@/assets/activity-sport.jpg.asset.json";
 import parents from "@/assets/activity-parents.jpg.asset.json";
@@ -13,22 +14,28 @@ type Activity = {
 
 const activities: Activity[] = [
   {
-    title: "Klub Předškoláček",
-    text: "Cílená a hravá příprava na zápis do 1. třídy. Trénujeme grafomotoriku, soustředění a logiku tak, aby se děti do školy těšily.",
+    title: fixPrepositions("Klub Předškoláček"),
+    text: fixPrepositions(
+      "Cílená a hravá příprava na zápis do 1. třídy. Trénujeme grafomotoriku, soustředění a logiku tak, aby se děti do školy těšily."
+    ),
     image: preschool.url,
     alt: "Soustředěný předškolák kreslí tužkou u stolu",
     href: "#predskolacek",
   },
   {
-    title: "Sport a příroda",
-    text: "S dětmi nezůstáváme jen za plotem. Pravidelně jezdíme na předplavecký výcvik, pořádáme lyžařské kurzy a jarní školy v přírodě.",
+    title: fixPrepositions("Sport a příroda"),
+    text: fixPrepositions(
+      "S dětmi nezůstáváme jen za plotem. Pravidelně jezdíme na předplavecký výcvik, pořádáme lyžařské kurzy a jarní školy v přírodě."
+    ),
     image: sport.url,
     alt: "Děti s plovacími deskami v bazénu během plaveckého kurzu",
     href: "#sport",
   },
   {
-    title: "Akce s rodiči",
-    text: "Školka pro nás nekončí odpoledním vyzvednutím. Pořádáme společné tvořivé dílničky, „Večer se strašidly“ nebo jarní zahradní brigády.",
+    title: fixPrepositions("Akce s rodiči"),
+    text: fixPrepositions(
+      "Školka pro nás nekončí odpoledním vyzvednutím. Pořádáme společné tvořivé dílničky, „Večer se strašidly“ nebo jarní zahradní brigády."
+    ),
     image: parents.url,
     alt: "Tatínek s malým synem společně dlabou dýni",
     href: "#akce-rodice",
@@ -41,7 +48,7 @@ export function SiteActivities() {
       <div className="container mx-auto px-6">
         <div className="reveal-up section-header-gap mx-auto max-w-2xl text-center">
           <h2 className="font-display text-[34px] font-extrabold text-ink md:text-[40px]">
-            Zážitky, které si děti odnáší
+            {fixPrepositions("Zážitky, které si děti odnáší")}
           </h2>
         </div>
 
@@ -73,9 +80,9 @@ export function SiteActivities() {
               <a
                 href={a.href}
                 className="activity-cta group/cta absolute inset-x-0 bottom-0 flex items-center justify-center gap-2 px-7 pb-7 pt-3 text-[15px] font-medium text-brand-red opacity-0 translate-y-2 pointer-events-none transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2 motion-reduce:transition-none"
-                aria-label={`Číst dále: ${a.title}`}
+                aria-label={fixPrepositions(`Číst dále: ${a.title}`)}
               >
-                Číst dále
+                {fixPrepositions("Číst dále")}
                 <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-out group-hover/cta:translate-x-1" aria-hidden />
               </a>
             </article>
