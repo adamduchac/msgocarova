@@ -151,16 +151,17 @@ export function SiteNavbar() {
                       onMouseEnter={() => openNow(item.label)}
                       onMouseLeave={scheduleClose}
                     >
-                      <button
-                        type="button"
+                      <Link
+                        to={item.href!}
                         aria-haspopup="true"
                         aria-expanded={isOpen}
                         onFocus={() => openNow(item.label)}
-                        onClick={() => setOpenMenu(isOpen ? null : item.label)}
+                        onClick={() => setOpenMenu(null)}
                         className="nav-link inline-flex items-center text-[15px] font-medium text-ink/85 transition-colors duration-200 hover:text-ink focus-visible:text-ink"
                       >
                         {item.label}
-                      </button>
+                      </Link>
+
 
                       <div
                         role="menu"
