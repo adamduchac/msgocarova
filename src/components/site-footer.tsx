@@ -2,7 +2,7 @@ import { ArrowUpRight, MapPin } from "lucide-react";
 import cubeRed from "@/assets/cube-red.png.asset.json";
 import cubeYellow from "@/assets/cube-yellow.png.asset.json";
 import cubeBlue from "@/assets/cube-blue.png.asset.json";
-import cubeGreen from "@/assets/cube-green.png.asset.json";
+
 
 type ClassRow = {
   name: string;
@@ -22,7 +22,7 @@ type SiteFooterProps = { cubeVariant?: "default" | "kontakty" };
 
 export function SiteFooter({ cubeVariant = "default" }: SiteFooterProps) {
   const topCube = cubeVariant === "kontakty" ? cubeBlue : cubeRed;
-  const bottomCube = cubeVariant === "kontakty" ? cubeGreen : cubeYellow;
+  const bottomCube = cubeVariant === "kontakty" ? null : cubeYellow;
   return (
     <footer className="relative bg-transparent pt-24 md:pt-32 pb-16 md:pb-20">
       <div className="container mx-auto px-6 relative z-10">
@@ -38,14 +38,16 @@ export function SiteFooter({ cubeVariant = "default" }: SiteFooterProps) {
           />
 
           <div className="relative rounded-2xl bg-ink text-white">
-            <img
-              src={bottomCube.url}
-              alt=""
-              aria-hidden
-              className="pointer-events-none absolute bottom-3 right-3 z-20 hidden w-[8rem] select-none sm:bottom-[-30px] sm:right-[-30px] sm:block sm:w-[9.6rem] lg:w-[12rem] scale-x-[-1]"
-              loading="lazy"
-              decoding="async"
-            />
+            {bottomCube && (
+              <img
+                src={bottomCube.url}
+                alt=""
+                aria-hidden
+                className="pointer-events-none absolute bottom-3 right-3 z-20 hidden w-[8rem] select-none sm:bottom-[-30px] sm:right-[-30px] sm:block sm:w-[9.6rem] lg:w-[12rem] scale-x-[-1]"
+                loading="lazy"
+                decoding="async"
+              />
+            )}
 
 
           <div className="relative z-10 px-6 py-14 md:px-12 md:py-16">
