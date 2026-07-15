@@ -1,48 +1,40 @@
-Doladění stránky `/kontakty` podle zpětné vazby — všechny změny jsou v `src/routes/kontakty.tsx`.
+Sjednocené zmenšení vertikálních mezer na celém webu podle zpětné vazby.
 
-## Co se mění
+## 1. Homepage hero — zmenšení mezer mezi bloky o ~1/3
 
-### 1. Hero sekce (levý sloupec)
+V `src/components/site-hero.tsx` upravím vnitřní mezery mezi textovými bloky a spodním odsazením:
 
-- **Odeberu eyebrow** „Zavolejte nám“ a „Napište nám“.
-- Zůstane tam pouze H1 „Kontakty“, krátký perex a pod ním přímo:
-  - Telefon `495 444 421` jako `tel:` odkaz
-  - Email `kosticky@msjghk.cz` jako `mailto:` odkaz
-- **Velikost písma telefonu/emailu zmenším o ~1/3**:
-  - z `text-[40px] md:text-[52px]` → na `text-[28px] md:text-[36px]` (nebo ekvivalentně blízké menšímu písnu).
-- **Barva telefonu/emailu změním z brand-blue na černou** (`text-ink`).
-- **Zmenším mezeru** mezi telefonem a emailem z `mt-10` na `mt-4` nebo `mt-5`.
-- **Adresa** zůstane pod emailem s menší mezerou, bez ikon.
-- V pravém sloupci zůstane 1:1 placeholder fotky.
+- Eyebrow „Mateřská škola Josefa Gočára“: `mb-4` → `mb-3`
+- Perex pod H1: `mt-7` → `mt-5`
+- Tlačítka pod perexem: `mt-8` → `mt-6`
+- Spodní mezera pod obsahem: `h-6 lg:h-10` → `h-4 lg:h-7`
 
-### 2. Prohození sekcí pod herem
+Celkově to hero zatáhne a bude působit kompaktněji, aniž by se ztratila čitelnost.
 
-Aktuální pořadí:
-1. Sekce „Kontakty na tým a třídy“
-2. Sekce „Kudy k nám“ (mapa)
+## 2. Podstránky — zmenšení mezer mezi sekcemi o ~1/2
 
-Nové pořadí:
-1. Sekce **„Kudy k nám“** (mapa) — hned pod hero
-2. Sekce **„Rejstřík“** (přejmenováno z „Kontakty na tým a třídy“) — až pod mapou
+V `src/styles.css` vytvořím novou utilitku `section-y-sm` (kompaktní varianta `section-y`) a použiju ji na `/kontakty` i všech budoucích podstránkách.
 
-### 3. Přejmenování rejstříku
+```text
+@utility section-y-sm {
+  padding-block: clamp(28px, 4vw, 56px);
+}
+```
 
-- Nadpis sekce z `h2` „Kontakty na tým a třídy“ → **„Rejstřík“**.
-- Nadpis zachová stejný typografický styl (`text-[28px] md:text-[32px] font-extrabold text-ink`).
+Porovnání s aktuální `section-y`:
+- Aktuální: `clamp(56px, 8vw, 112px)`
+- Nová kompaktní: `clamp(28px, 4vw, 56px)` — přesně o polovinu menší
 
-### 4. Struktura rejstříku zůstává
+## 3. Aplikace na /kontakty
 
-- Jednotné boxy `rounded-2xl border border-border/60 bg-card p-5 md:p-6`.
-- Grid `grid-cols-1 md:grid-cols-2 gap-3`.
-- Sekční labely jako `col-span-full` bez rámečku.
-- Vedení školky, školní jídelna, barevné třídy s učitelkami.
+V `src/routes/kontakty.tsx` nahradím `section-y` za `section-y-sm` u všech sekcí pod hlavním hero (mapa, rejstřík). Hero sekce samotná zůstane beze změny, protože má vlastní layout a padding.
 
-### 5. Souvislosti
+## 4. Budoucí podstránky
 
-- Mapa a rejstřík si vymění pořadí v JSX, ale zachovají své třídy `section-y`.
-- Sekce s mapou už nebude mít `pt-0`, pokud bude první pod hero; místo toho použije standardní `section-y`.
-- Footer zůstává `cubeVariant="kontakty"` (horní modrá kostička, bez spodní).
+Když přibudou další routy pod `src/routes/`, budou používat `section-y-sm` pro informativní obsah, zatímco homepage zůstane na `section-y` (nebo případně upraveném `hero-y`).
 
 ## Soubory
 
-- `src/routes/kontakty.tsx` — aplikování všech výše uvedených změn.
+- `src/components/site-hero.tsx` — zmenšení vnitřních mezer v hero
+- `src/styles.css` — nová utilitka `section-y-sm`
+- `src/routes/kontakty.tsx` — použití `section-y-sm` na podstránkových sekcích
