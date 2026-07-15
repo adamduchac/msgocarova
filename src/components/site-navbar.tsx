@@ -257,6 +257,21 @@ export function SiteNavbar() {
                 );
               }
 
+              if (item.internal) {
+                return (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    onClick={() => setOpen(false)}
+                    tabIndex={open ? 0 : -1}
+                    className="mobile-nav-item rounded-lg px-3 py-3 text-base font-medium text-ink/90 transition-colors duration-200 hover:bg-offwhite hover:text-brand-blue"
+                    style={{ ["--mobile-nav-delay" as string]: `${i * 40}ms` }}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              }
+
               return (
                 <a
                   key={item.label}
@@ -274,13 +289,13 @@ export function SiteNavbar() {
               );
             })}
             <a
-              href="#zapis"
+              href="#nase-ms"
               onClick={() => setOpen(false)}
               tabIndex={open ? 0 : -1}
               className="mobile-nav-item mt-2 inline-flex h-12 items-center justify-center rounded-md bg-brand-blue px-5 text-base font-semibold text-white transition-colors duration-200 hover:bg-brand-blue/90"
               style={{ ["--mobile-nav-delay" as string]: `${navItems.length * 40}ms` }}
             >
-              Naše školka
+              Aplikace Naše MŠ
             </a>
           </nav>
         </div>
