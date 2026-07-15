@@ -49,7 +49,7 @@ export function SiteActivities() {
           {activities.map((a, i) => (
             <article
               key={a.title}
-              className="card-hover reveal-up group relative overflow-hidden rounded-2xl bg-card"
+              className="card-hover reveal-up group relative overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)]"
               style={{ ["--reveal-delay" as string]: `${i * 60}ms`, minHeight: "440px" }}
             >
               <div className="activity-shift flex h-full flex-col transition-transform duration-300 ease-out motion-reduce:transform-none group-hover:-translate-y-14 group-focus-within:-translate-y-14">
