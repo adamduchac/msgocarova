@@ -29,7 +29,7 @@ export function SiteFooter({ cubeVariant = "default" }: SiteFooterProps) {
         <div className="relative">
           {/* Červená kostička — sedí na horní hraně tmavé karty, ~10 px schovaných pod */}
           <img
-            src={cubeRed.url}
+            src={topCube.url}
             alt=""
             aria-hidden
             className="pointer-events-none absolute left-[6%] bottom-[calc(100%-35px)] z-0 w-[6.3rem] select-none sm:bottom-[calc(100%-25px)] sm:left-[4%] sm:w-[7.35rem] lg:w-[10.5rem]"
@@ -39,7 +39,7 @@ export function SiteFooter({ cubeVariant = "default" }: SiteFooterProps) {
 
           <div className="relative rounded-2xl bg-ink text-white">
             <img
-              src={cubeYellow.url}
+              src={bottomCube.url}
               alt=""
               aria-hidden
               className="pointer-events-none absolute bottom-3 right-3 z-20 hidden w-[8rem] select-none sm:bottom-[-30px] sm:right-[-30px] sm:block sm:w-[9.6rem] lg:w-[12rem] scale-x-[-1]"
