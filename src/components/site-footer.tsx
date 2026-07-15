@@ -38,14 +38,16 @@ export function SiteFooter({ cubeVariant = "default" }: SiteFooterProps) {
           />
 
           <div className="relative rounded-2xl bg-ink text-white">
-            <img
-              src={bottomCube.url}
-              alt=""
-              aria-hidden
-              className="pointer-events-none absolute bottom-3 right-3 z-20 hidden w-[8rem] select-none sm:bottom-[-30px] sm:right-[-30px] sm:block sm:w-[9.6rem] lg:w-[12rem] scale-x-[-1]"
-              loading="lazy"
-              decoding="async"
-            />
+            {bottomCube && (
+              <img
+                src={bottomCube.url}
+                alt=""
+                aria-hidden
+                className="pointer-events-none absolute bottom-3 right-3 z-20 hidden w-[8rem] select-none sm:bottom-[-30px] sm:right-[-30px] sm:block sm:w-[9.6rem] lg:w-[12rem] scale-x-[-1]"
+                loading="lazy"
+                decoding="async"
+              />
+            )}
 
 
           <div className="relative z-10 px-6 py-14 md:px-12 md:py-16">
