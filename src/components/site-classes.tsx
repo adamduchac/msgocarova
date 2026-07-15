@@ -13,13 +13,6 @@ type ClassItem = {
 
 const classes: ClassItem[] = [
   {
-    name: "Modrá kostička",
-    age: "pro děti od 3 do 5 let",
-    teachers: "paní učitelka Bc. Veronika Kremláčková a Elena Špicarová",
-    textColor: "text-brand-blue",
-    pillBg: "bg-brand-blue",
-  },
-  {
     name: "Červená kostička",
     age: "pro děti od 5 do 7 let",
     teachers:
@@ -28,18 +21,25 @@ const classes: ClassItem[] = [
     pillBg: "bg-brand-red",
   },
   {
-    name: "Žlutá kostička",
-    age: "pro děti od 3 do 5 let",
-    teachers: "paní učitelka Magdaléna Sováková a Milena Svobodová, DiS.",
-    textColor: "text-brand-yellow",
-    pillBg: "bg-brand-yellow",
-  },
-  {
     name: "Zelená kostička",
     age: "pro děti od 5 do 7 let",
     teachers: "paní učitelka Jana Tuharská a Kristýna Vaňátková, DiS.",
     textColor: "text-brand-green",
     pillBg: "bg-brand-green",
+  },
+  {
+    name: "Modrá kostička",
+    age: "pro děti od 3 do 5 let",
+    teachers: "paní učitelka Bc. Veronika Kremláčková a Elena Špicarová",
+    textColor: "text-brand-blue",
+    pillBg: "bg-brand-blue",
+  },
+  {
+    name: "Žlutá kostička",
+    age: "pro děti od 3 do 5 let",
+    teachers: "paní učitelka Magdaléna Sováková a Milena Svobodová, DiS.",
+    textColor: "text-brand-yellow",
+    pillBg: "bg-brand-yellow",
   },
 ];
 

@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import logoAsset from "@/assets/logo.svg.asset.json";
 
 type NavChild = { label: string; href: string };
 type NavItem =
-  | { label: string; href: string; external?: boolean }
+  | { label: string; href: string; external?: boolean; internal?: boolean }
   | { label: string; children: NavChild[] };
 
 const navItems: NavItem[] = [
@@ -20,9 +21,9 @@ const navItems: NavItem[] = [
   {
     label: "Barevné třídy",
     children: [
-      { label: "Modrá kostička", href: "#trida-modra" },
       { label: "Červená kostička", href: "#trida-cervena" },
       { label: "Zelená kostička", href: "#trida-zelena" },
+      { label: "Modrá kostička", href: "#trida-modra" },
       { label: "Žlutá kostička", href: "#trida-zluta" },
     ],
   },
@@ -30,8 +31,8 @@ const navItems: NavItem[] = [
     label: "Pro rodiče",
     children: [
       { label: "Zápis do MŠ", href: "#zapis" },
-      { label: "Organizace a Platby", href: "#organizace" },
-      { label: "Program a aktivity", href: "#program" },
+      { label: "Platby", href: "#platby" },
+      { label: "Program dne", href: "#program" },
       { label: "Dokumenty ke stažení", href: "#dokumenty" },
     ],
   },
@@ -39,6 +40,11 @@ const navItems: NavItem[] = [
     label: "ZŠ Josefa Gočára",
     href: "https://zsgocarova.cz/",
     external: true,
+  },
+  {
+    label: "Kontakty",
+    href: "/kontakty",
+    internal: true,
   },
 ];
 
@@ -85,9 +91,9 @@ export function SiteNavbar() {
     <header className="fixed left-0 right-0 top-0 z-50 w-full px-6 pt-3 sm:pt-4">
       <div className="container mx-auto overflow-visible rounded-2xl border border-white/60 bg-background/95 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.25)] lg:bg-background/70 lg:backdrop-blur-md">
         <div className="flex h-20 items-center justify-between px-6 lg:px-8">
-          <a href="/" className="flex items-center" aria-label="MŠ Josefa Gočára — domů">
-            <img src={logoAsset.url} alt="MŠ Josefa Gočára" className="h-[1.875rem] w-auto md:h-10" />
-          </a>
+          <Link to="/" className="flex items-center" aria-label="Mateřská škola Josefa Gočára — domů">
+            <img src={logoAsset.url} alt="Mateřská škola Josefa Gočára" className="h-[1.875rem] w-auto md:h-11" />
+          </Link>
 
           <div className="flex items-center gap-8 xl:gap-10">
             <nav ref={navRef} className="hidden items-center gap-9 lg:flex xl:gap-12" aria-label="Hlavní navigace">
@@ -148,6 +154,18 @@ export function SiteNavbar() {
                   );
                 }
 
+                if (item.internal) {
+                  return (
+                    <Link
+                      key={item.label}
+                      to={item.href}
+                      className="nav-link inline-flex items-center text-[15px] font-medium text-ink/85 transition-colors duration-200 hover:text-ink focus-visible:text-ink"
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                }
+
                 return (
                   <a
                     key={item.label}
@@ -164,10 +182,10 @@ export function SiteNavbar() {
             </nav>
 
             <a
-              href="#zapis"
+              href="#nase-ms"
               className="hidden h-11 items-center rounded-md bg-brand-blue px-5 text-[15px] font-semibold text-white transition-colors duration-200 hover:bg-brand-blue/90 lg:inline-flex"
             >
-              Naše školka
+              Aplikace Naše MŠ
             </a>
 
             <button
@@ -239,6 +257,21 @@ export function SiteNavbar() {
                 );
               }
 
+              if (item.internal) {
+                return (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    onClick={() => setOpen(false)}
+                    tabIndex={open ? 0 : -1}
+                    className="mobile-nav-item rounded-lg px-3 py-3 text-base font-medium text-ink/90 transition-colors duration-200 hover:bg-offwhite hover:text-brand-blue"
+                    style={{ ["--mobile-nav-delay" as string]: `${i * 40}ms` }}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              }
+
               return (
                 <a
                   key={item.label}
@@ -256,13 +289,13 @@ export function SiteNavbar() {
               );
             })}
             <a
-              href="#zapis"
+              href="#nase-ms"
               onClick={() => setOpen(false)}
               tabIndex={open ? 0 : -1}
               className="mobile-nav-item mt-2 inline-flex h-12 items-center justify-center rounded-md bg-brand-blue px-5 text-base font-semibold text-white transition-colors duration-200 hover:bg-brand-blue/90"
               style={{ ["--mobile-nav-delay" as string]: `${navItems.length * 40}ms` }}
             >
-              Naše školka
+              Aplikace Naše MŠ
             </a>
           </nav>
         </div>

@@ -1,6 +1,8 @@
 import { ArrowUpRight, MapPin } from "lucide-react";
 import cubeRed from "@/assets/cube-red.png.asset.json";
 import cubeYellow from "@/assets/cube-yellow.png.asset.json";
+import cubeBlue from "@/assets/cube-blue.png.asset.json";
+import cubeGreen from "@/assets/cube-green.png.asset.json";
 
 type ClassRow = {
   name: string;
@@ -10,20 +12,24 @@ type ClassRow = {
 };
 
 const classes: ClassRow[] = [
-  { name: "Modrá kostička", phone: "495 444 423", href: "#tridy-modra", dotClass: "bg-brand-blue" },
-  { name: "Žlutá kostička", phone: "495 444 424", href: "#tridy-zluta", dotClass: "bg-brand-yellow" },
   { name: "Červená kostička", phone: "495 444 425", href: "#tridy-cervena", dotClass: "bg-brand-red" },
   { name: "Zelená kostička", phone: "495 444 426", href: "#tridy-zelena", dotClass: "bg-brand-green" },
+  { name: "Modrá kostička", phone: "495 444 423", href: "#tridy-modra", dotClass: "bg-brand-blue" },
+  { name: "Žlutá kostička", phone: "495 444 424", href: "#tridy-zluta", dotClass: "bg-brand-yellow" },
 ];
 
-export function SiteFooter() {
+type SiteFooterProps = { cubeVariant?: "default" | "kontakty" };
+
+export function SiteFooter({ cubeVariant = "default" }: SiteFooterProps) {
+  const topCube = cubeVariant === "kontakty" ? cubeBlue : cubeRed;
+  const bottomCube = cubeVariant === "kontakty" ? cubeGreen : cubeYellow;
   return (
     <footer className="relative bg-transparent pt-24 md:pt-32 pb-16 md:pb-20">
       <div className="container mx-auto px-6 relative z-10">
         <div className="relative">
           {/* Červená kostička — sedí na horní hraně tmavé karty, ~10 px schovaných pod */}
           <img
-            src={cubeRed.url}
+            src={topCube.url}
             alt=""
             aria-hidden
             className="pointer-events-none absolute left-[6%] bottom-[calc(100%-35px)] z-0 w-[6.3rem] select-none sm:bottom-[calc(100%-25px)] sm:left-[4%] sm:w-[7.35rem] lg:w-[10.5rem]"
@@ -33,7 +39,7 @@ export function SiteFooter() {
 
           <div className="relative rounded-2xl bg-ink text-white">
             <img
-              src={cubeYellow.url}
+              src={bottomCube.url}
               alt=""
               aria-hidden
               className="pointer-events-none absolute bottom-3 right-3 z-20 hidden w-[8rem] select-none sm:bottom-[-30px] sm:right-[-30px] sm:block sm:w-[9.6rem] lg:w-[12rem] scale-x-[-1]"
@@ -117,7 +123,7 @@ export function SiteFooter() {
           {/* Bottom bar */}
           <div className="relative z-10 border-t border-white/10">
             <div className="px-6 py-5 md:px-12 text-left text-sm text-white/55">
-              <span>© 2026 MŠ Josefa Gočára. Všechna práva vyhrazena.</span>
+              <span>© 2026 Mateřská škola Josefa Gočára. Všechna práva vyhrazena.</span>
               <span className="mx-2 text-white/30" aria-hidden>|</span>
               <span>Používáme pouze technické cookies</span>
               <span className="mx-2 text-white/30" aria-hidden>|</span>

@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteHero } from "@/components/site-hero";
-import { SiteQuickLinks } from "@/components/site-quick-links";
 import { SiteBenefits } from "@/components/site-benefits";
 import { SiteDailyRhythm } from "@/components/site-daily-rhythm";
 import { SiteAnnouncementBar } from "@/components/site-announcement-bar";
@@ -12,13 +11,13 @@ import { SiteFooter } from "@/components/site-footer";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "MŠ Josefa Gočára — Mateřská škola v centru Hradce Králové" },
+      { title: "Mateřská škola Josefa Gočára — Hradec Králové" },
       {
         name: "description",
         content:
           "Mateřská škola Josefa Gočára v centru Hradce Králové. Místo, kde si děti hrají, objevují a rostou — bezpečné zázemí, velká zahrada a respektující přístup.",
       },
-      { property: "og:title", content: "MŠ Josefa Gočára — Mateřská škola v centru Hradce Králové" },
+      { property: "og:title", content: "Mateřská škola Josefa Gočára — Hradec Králové" },
       {
         property: "og:description",
         content:
@@ -43,7 +42,6 @@ function Index() {
         <SiteBenefits />
         <SiteDailyRhythm />
         <SiteClasses />
-        <SiteQuickLinks />
         <div style={{ background: "linear-gradient(to bottom, #FFFFFF 0%, #FEF8E7 40%, #FEF8E7 100%)" }}>
           <SiteActivities />
           <SiteFooter />

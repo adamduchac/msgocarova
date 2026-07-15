@@ -44,13 +44,9 @@ export function SiteNews() {
     <section id="aktuality" className="section-y">
       <div className="container mx-auto px-6">
         <div className="reveal-up section-header-gap mx-auto max-w-2xl text-center">
-          <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
-            Aktuálně
-          </p>
-          <h2 className="mt-3 font-display text-[34px] font-extrabold text-ink md:text-[40px]">
-            Aktuali<span className="text-brand-yellow">ty</span>
+          <h2 className="font-display text-[34px] font-extrabold text-ink md:text-[40px]">
+            Zážitky, které si děti odnáší
           </h2>
-
         </div>
 
         <div className="grid grid-cols-1 gap-7 md:grid-cols-3">
