@@ -300,6 +300,9 @@
 @utility section-y {
   padding-block: clamp(56px, 8vw, 112px);
 }
+@utility section-y-sm {
+  padding-block: clamp(28px, 4vw, 56px);
+}
 @utility hero-y {
   padding-block: clamp(20px, 3vw, 48px);
 }
