@@ -1,89 +1,64 @@
-# Úpravy webu MŠ Josefa Gočára
 
-## 1. Odstranit sekci Rychlý rozcestník
-- `src/routes/index.tsx`: odstranit `<SiteQuickLinks />` a import.
-- Smazat `src/components/site-quick-links.tsx`.
+## 1. Aktuality — zobrazit na home
 
-## 2. Aktuality (`site-news.tsx`)
-- Odebrat eyebrow „Aktuálně".
-- Nadpis: **„Zážitky, které si děti odnáší"** — jednobarevně (bez žlutého akcentu).
+`SiteNews` existuje a má správný nadpis, ale není zaregistrovaná v `src/routes/index.tsx`. Přidat import a vložit `<SiteNews />` do `main`, mezi `SiteClasses` a `SiteActivities` (uvnitř gradient wrapperu, ať navazuje na krémový přechod).
 
-## 3. Sjednocení názvu školky
-- Grep celého projektu; kdekoli je „MŠ Gočárova", „MŠ Gočára" apod. → **„Mateřská škola Josefa Gočára"**.
-- Zkratku „MŠ Josefa Gočára" ponechat jen v `alt` loga a copyrightu ve footeru (prostorové důvody).
+## 2. `/kontakty` — kompletní redesign do minimalismu
 
-## 4. Třídy — přeuspořádat
-Pořadí: **červená, zelená, modrá, žlutá**.
-- `src/components/site-classes.tsx` — pole tříd.
-- `src/components/site-navbar.tsx` — submenu „Barevné třídy".
-- `src/components/site-footer.tsx` — seznam tříd v pravém sloupci ve stejném pořadí.
+Odstranit veškeré eyebrow labely (`Napište nám`, `Vedení školy`, `Telefony`, `Hlavní kontakt`) napříč stránkou. Sjednotit hierarchii přes velikost/váhu písma a barvu, ne přes malé UPPERCASE popisky.
 
-## 5. Menu (`site-navbar.tsx`)
-- Submenu „Pro rodiče":
-  - „Organizace a Platby" → **„Platby"**
-  - „Program a aktivity" → **„Program dne"**
-- Přidat top-level položku **„Kontakty"** (interní, za „ZŠ Josefa Gočára"). Použít `<Link to="/kontakty">` z `@tanstack/react-router` v desktop i mobil nav.
-- Logo desktop: `md:h-10` → `md:h-11` (+10 %). Mobil beze změny.
-- CTA button „Naše školka" → **„Aplikace Naše MŠ"** (desktop i mobil), href `#nase-ms`.
+### Hero (page header)
+- Bez eyebrow. Jen `<h1>Kontakty</h1>` centrovaný, stejný font a velikost jako doposud (`text-[42px] md:text-[56px]`). Krátký lead text pod (jedna věta, kterou už máme) — ponechat, ale utlumit na `text-body`.
 
-## 6. Nová stránka `/kontakty`
-Soubor `src/routes/kontakty.tsx` — `createFileRoute("/kontakty")` + vlastní `head()` (title, description, og:title, og:description).
+### Hlavní kontakt (levý sloupec) + mapa (pravý sloupec)
+Přesná typografická hierarchie podle přiloženého referenčního screenu:
 
-### Layout stránky
-Struktura ve stylu webu (navbar → hero-lite hlavička → obsah → footer).
+```text
+495 444 421          ← brand-blue, font-display, extrabold, text-[44px] md:text-[56px], ikona Phone stroke brand-blue
+kosticky@msjghk.cz   ← ink (černá), font-display, bold, text-[28px] md:text-[32px], ikona Mail ink/60
+Mateřská škola Josefa Gočára   ← ink, medium, text-[15px]
+Škroupova 693                   ← body (šedá), text-[15px]
+500 02 Hradec Králové 2         ← body (šedá), text-[15px]
+```
 
-**Hlavička** (podobná ostatním section headerům):
-- eyebrow: `Napište nám`
-- h1: `Kontakty` (font-display, extrabold)
-- krátký lead pod nadpisem (1 věta, klidně: „Rádi vás uvítáme osobně, nebo se ozvěte telefonem či e-mailem.")
+Žádné zelené eyebrow „Hlavní kontakt“. Odstupy: telefon → email `mt-4`, email → adresa `mt-8`.
 
-**Hlavní blok — kontaktní karta + mapa (2-sloupcový grid na desktopu)**
+Mapa vpravo beze změny (rounded, border, iframe mapy.com), jen bez okolního eyebrow.
 
-Levý sloupec (velký kontakt):
-- **Telefon** (velký, klikací `tel:+420495444421`) — font-display, ~34–40px, brand-blue
-- **E-mail** (velký, klikací `mailto:kosticky@msjghk.cz`) — font-display, ~28–34px
-- Pod tím adresa v `<address>`:
-  Mateřská škola Josefa Gočára / Škroupova 693 / 500 02 Hradec Králové 2
+### Vedení školky (jedna sjednocená sekce)
+Titulek sekce jako obyčejný `h2` (`text-[28px] md:text-[32px]`, extrabold, ink, zarovnaný vlevo — konzistentní s dalšími sekcemi níže). Bez eyebrow, bez centrování.
 
-Pravý sloupec:
-- Mapa v iframe s kulatými rohy (`rounded-2xl`, `overflow-hidden`, jemný stín):
-  ```html
-  <iframe src="https://mapy.com/s/kovocenope" title="Mapa — Mateřská škola Josefa Gočára" class="w-full h-[360px] md:h-[420px] block" loading="lazy" style="border:0" />
-  ```
+Dvě karty (grid 2 sloupce, `rounded-2xl border bg-card p-6 md:p-8`), každá:
+- Role šedě `text-body text-sm`
+- Jméno `font-display text-xl font-bold text-ink`
+- Telefon `tel:` link `text-brand-blue font-semibold text-[17px]` s ikonou Phone
+- E-mail `mailto:` link `text-ink hover:text-brand-blue text-[15px]` s ikonou Mail
 
-**Vedení školy** (samostatná menší sekce, dvě karty vedle sebe):
-- Karta 1: „Ředitel ZŠ a MŠ Josefa Gočára" — **Mgr. Petr Sadílek**
-- Karta 2: „Zástupce ředitele pro MŠ" — **Mgr. Jitka Kouklíková**
-- Styl: `rounded-2xl border bg-card` karty s eyebrow labelem a jménem.
+Obsah:
+- **Ředitel ZŠ a MŠ Josefa Gočára** — Mgr. Petr Sadílek — (bez telefonu / e-mailu, ty jsou na ZŠ; ponechat jen jméno a roli, protože obsah, který uživatel dodal, u ředitele nemá kontakt).
+- **Zástupkyně ředitele pro MŠ** — Mgr. Jitka Kouklíková — telefon 495 444 421, e-mail kosticky@msjghk.cz.
 
-**Telefonní seznam** (grid karet, `rounded-2xl border`, každá s ikonou/tečkou barvy třídy kde relevantní):
-- Mateřská škola (zástupce ředitele) — 495 444 421
-- Školní jídelna ZŠ — odhlašování obědů — 495 019 050 *(malý popisek: „nejdéle do 10:00 na příští den")*
-- Výdejna obědů MŠ — 495 444 422
-- Modrá kostička — 495 444 423 (modrá tečka)
-- Žlutá kostička — 495 444 424 (žlutá tečka)
-- Červená kostička — 495 444 425 (červená tečka)
-- Zelená kostička — 495 444 426 (zelená tečka)
+### Školní jídelna (nová sekce)
+Stejný styl `h2` jako Vedení. Jedna karta se dvěma řádky:
+- **Školní jídelna ZŠ** — 495 019 050 — poznámka „odhlašování obědů nejdéle do 10:00 na příští den“ (`text-sm text-body`)
+- **Výdejna obědů MŠ** — 495 444 422
 
-Grid: 1 sloupec mobile → 2 sloupce md → případně 2 sloupce lg (pro čitelnost radši 2, ne 3).
-Čísla klikací (`tel:`), s tabular-nums.
+### Barevné třídy (nová sekce, přejmenovaný telefonní seznam)
+Nadpis `h2` „Barevné třídy“. Grid 2 sloupce, 4 karty (červená, zelená, modrá, žlutá — v tomto pořadí, konzistentně s webem), každá karta:
+- barevná tečka
+- název třídy `font-display font-semibold text-ink`
+- telefon vpravo `tabular-nums`, hover brand-blue
 
-**Placeholder pro fotku školky**:
-- Nad nebo mezi bloky široký `rounded-[36px]` blok s `aspect-[16/7]`, `bg-offwhite` (nebo jemný gradient), uprostřed textem „Fotka školky (placeholder)". Až user dodá foto, jen swap.
+Odstranit z předchozího seznamu položky Mateřská škola / Školní jídelna / Výdejna (přesunuty do sekcí výše).
 
-### Footer na /kontakty — prohozené kostičky
-- Rozšířit `SiteFooter` o prop `cubeVariant?: "default" | "kontakty"`.
-- Import `cubeBlue` a `cubeGreen` navíc; podle variantu:
-  - default: současné (červená nahoře, žlutá dole vpravo).
-  - kontakty: **zelená dole vpravo** (na místě žluté) a **modrá nahoře vlevo** (na místě červené).
-- Ostatní layout zachovat.
+### Vertikální rytmus
+Všechny sekce používají `section-y pt-0` (kromě první), max-width kontejneru zůstává; nadpisy sekcí zarovnané vlevo (ne centrované) — tím vzniká minimalistický, přehledný rytmus.
 
-### Reveal a styl
-- Použít stejné `reveal-up` třídy jako ostatní sekce, stejný vertikální rytmus (`section-y`).
-- Karty `rounded-2xl border border-border/60 bg-card`, hover jen jemná změna barvy (dle Core memory — žádný scale).
+## 3. Footer na `/kontakty` — bez spodní kostičky
 
-## Technické poznámky
-- `Link` z `@tanstack/react-router` pro položku „Kontakty" v navbaru — kvůli SPA navigaci a prefetchi.
-- `routeTree.gen.ts` se přegeneruje automaticky, needitovat.
-- Head metadata `/kontakty`: title „Kontakty — Mateřská škola Josefa Gočára", description shrnutí adresy a hlavních kontaktů.
-- Ověření: build musí projít, ručně projít `/` i `/kontakty`, ověřit že submenu má nové položky a že footer na /kontakty má modrou nahoře + zelenou dole.
+V `SiteFooter` když `cubeVariant="kontakty"`, nerenderovat spodní (pravou) kostičku. Horní modrá zůstává. Realizace: podmíněný render obrázku `bottomCube`, nebo předat `bottomCube = null` a přeskočit `<img>`.
+
+## Soubory
+- `src/routes/index.tsx` — import + render `<SiteNews />`
+- `src/routes/kontakty.tsx` — přepsat obsah dle výše
+- `src/components/site-footer.tsx` — podmínit spodní kostičku dle variantu
