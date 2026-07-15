@@ -1,6 +1,8 @@
 import { ArrowUpRight, MapPin } from "lucide-react";
 import cubeRed from "@/assets/cube-red.png.asset.json";
 import cubeYellow from "@/assets/cube-yellow.png.asset.json";
+import cubeBlue from "@/assets/cube-blue.png.asset.json";
+import cubeGreen from "@/assets/cube-green.png.asset.json";
 
 type ClassRow = {
   name: string;
@@ -10,13 +12,17 @@ type ClassRow = {
 };
 
 const classes: ClassRow[] = [
-  { name: "Modrá kostička", phone: "495 444 423", href: "#tridy-modra", dotClass: "bg-brand-blue" },
-  { name: "Žlutá kostička", phone: "495 444 424", href: "#tridy-zluta", dotClass: "bg-brand-yellow" },
   { name: "Červená kostička", phone: "495 444 425", href: "#tridy-cervena", dotClass: "bg-brand-red" },
   { name: "Zelená kostička", phone: "495 444 426", href: "#tridy-zelena", dotClass: "bg-brand-green" },
+  { name: "Modrá kostička", phone: "495 444 423", href: "#tridy-modra", dotClass: "bg-brand-blue" },
+  { name: "Žlutá kostička", phone: "495 444 424", href: "#tridy-zluta", dotClass: "bg-brand-yellow" },
 ];
 
-export function SiteFooter() {
+type SiteFooterProps = { cubeVariant?: "default" | "kontakty" };
+
+export function SiteFooter({ cubeVariant = "default" }: SiteFooterProps) {
+  const topCube = cubeVariant === "kontakty" ? cubeBlue : cubeRed;
+  const bottomCube = cubeVariant === "kontakty" ? cubeGreen : cubeYellow;
   return (
     <footer className="relative bg-transparent pt-24 md:pt-32 pb-16 md:pb-20">
       <div className="container mx-auto px-6 relative z-10">
