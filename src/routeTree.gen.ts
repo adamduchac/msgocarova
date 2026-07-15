@@ -9,12 +9,36 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ZapisDoSkolkyRouteImport } from './routes/zapis-do-skolky'
+import { Route as ProRodiceRouteImport } from './routes/pro-rodice'
+import { Route as OSkolceRouteImport } from './routes/o-skolce'
 import { Route as KontaktyRouteImport } from './routes/kontakty'
+import { Route as BarevneTridyRouteImport } from './routes/barevne-tridy'
 import { Route as IndexRouteImport } from './routes/index'
 
+const ZapisDoSkolkyRoute = ZapisDoSkolkyRouteImport.update({
+  id: '/zapis-do-skolky',
+  path: '/zapis-do-skolky',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProRodiceRoute = ProRodiceRouteImport.update({
+  id: '/pro-rodice',
+  path: '/pro-rodice',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OSkolceRoute = OSkolceRouteImport.update({
+  id: '/o-skolce',
+  path: '/o-skolce',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const KontaktyRoute = KontaktyRouteImport.update({
   id: '/kontakty',
   path: '/kontakty',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BarevneTridyRoute = BarevneTridyRouteImport.update({
+  id: '/barevne-tridy',
+  path: '/barevne-tridy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,37 +49,100 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/barevne-tridy': typeof BarevneTridyRoute
   '/kontakty': typeof KontaktyRoute
+  '/o-skolce': typeof OSkolceRoute
+  '/pro-rodice': typeof ProRodiceRoute
+  '/zapis-do-skolky': typeof ZapisDoSkolkyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/barevne-tridy': typeof BarevneTridyRoute
   '/kontakty': typeof KontaktyRoute
+  '/o-skolce': typeof OSkolceRoute
+  '/pro-rodice': typeof ProRodiceRoute
+  '/zapis-do-skolky': typeof ZapisDoSkolkyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/barevne-tridy': typeof BarevneTridyRoute
   '/kontakty': typeof KontaktyRoute
+  '/o-skolce': typeof OSkolceRoute
+  '/pro-rodice': typeof ProRodiceRoute
+  '/zapis-do-skolky': typeof ZapisDoSkolkyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/kontakty'
+  fullPaths:
+    | '/'
+    | '/barevne-tridy'
+    | '/kontakty'
+    | '/o-skolce'
+    | '/pro-rodice'
+    | '/zapis-do-skolky'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/kontakty'
-  id: '__root__' | '/' | '/kontakty'
+  to:
+    | '/'
+    | '/barevne-tridy'
+    | '/kontakty'
+    | '/o-skolce'
+    | '/pro-rodice'
+    | '/zapis-do-skolky'
+  id:
+    | '__root__'
+    | '/'
+    | '/barevne-tridy'
+    | '/kontakty'
+    | '/o-skolce'
+    | '/pro-rodice'
+    | '/zapis-do-skolky'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BarevneTridyRoute: typeof BarevneTridyRoute
   KontaktyRoute: typeof KontaktyRoute
+  OSkolceRoute: typeof OSkolceRoute
+  ProRodiceRoute: typeof ProRodiceRoute
+  ZapisDoSkolkyRoute: typeof ZapisDoSkolkyRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/zapis-do-skolky': {
+      id: '/zapis-do-skolky'
+      path: '/zapis-do-skolky'
+      fullPath: '/zapis-do-skolky'
+      preLoaderRoute: typeof ZapisDoSkolkyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pro-rodice': {
+      id: '/pro-rodice'
+      path: '/pro-rodice'
+      fullPath: '/pro-rodice'
+      preLoaderRoute: typeof ProRodiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/o-skolce': {
+      id: '/o-skolce'
+      path: '/o-skolce'
+      fullPath: '/o-skolce'
+      preLoaderRoute: typeof OSkolceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/kontakty': {
       id: '/kontakty'
       path: '/kontakty'
       fullPath: '/kontakty'
       preLoaderRoute: typeof KontaktyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/barevne-tridy': {
+      id: '/barevne-tridy'
+      path: '/barevne-tridy'
+      fullPath: '/barevne-tridy'
+      preLoaderRoute: typeof BarevneTridyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,18 +157,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BarevneTridyRoute: BarevneTridyRoute,
   KontaktyRoute: KontaktyRoute,
+  OSkolceRoute: OSkolceRoute,
+  ProRodiceRoute: ProRodiceRoute,
+  ZapisDoSkolkyRoute: ZapisDoSkolkyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

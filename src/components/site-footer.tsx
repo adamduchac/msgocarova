@@ -18,24 +18,47 @@ const classes: ClassRow[] = [
   { name: "Žlutá kostička", phone: "495 444 424", href: "#tridy-zluta", dotClass: "bg-brand-yellow" },
 ];
 
-type SiteFooterProps = { cubeVariant?: "default" | "kontakty" };
+type SiteFooterProps = {
+  cubeVariant?: "default" | "kontakty";
+  topCubeColor?: "red" | "blue";
+  topCubePosition?: "left" | "right";
+  showBottomCube?: boolean;
+};
 
-export function SiteFooter({ cubeVariant = "default" }: SiteFooterProps) {
-  const topCube = cubeVariant === "kontakty" ? cubeBlue : cubeRed;
-  const bottomCube = cubeVariant === "kontakty" ? null : cubeYellow;
+export function SiteFooter({
+  cubeVariant = "default",
+  topCubeColor,
+  topCubePosition,
+  showBottomCube,
+}: SiteFooterProps) {
+  // Backwards-compat mapping from cubeVariant
+  const resolvedColor: "red" | "blue" =
+    topCubeColor ?? (cubeVariant === "kontakty" ? "blue" : "red");
+  const resolvedPosition: "left" | "right" =
+    topCubePosition ?? (cubeVariant === "kontakty" ? "right" : "left");
+  const resolvedShowBottom =
+    showBottomCube ?? (cubeVariant !== "kontakty");
+
+  const topCube = resolvedColor === "blue" ? cubeBlue : cubeRed;
+  const bottomCube = resolvedShowBottom ? cubeYellow : null;
+  const topPositionClass =
+    resolvedPosition === "right"
+      ? "right-[6%] sm:right-[4%]"
+      : "left-[6%] sm:left-[4%]";
   return (
     <footer className="relative bg-transparent pt-24 md:pt-32 pb-16 md:pb-20">
       <div className="container mx-auto px-6 relative z-10">
         <div className="relative">
-          {/* Červená kostička — sedí na horní hraně tmavé karty, ~10 px schovaných pod */}
+          {/* Horní kostička — sedí na horní hraně tmavé karty */}
           <img
             src={topCube.url}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute left-[6%] bottom-[calc(100%-35px)] z-0 w-[6.3rem] select-none sm:bottom-[calc(100%-25px)] sm:left-[4%] sm:w-[7.35rem] lg:w-[10.5rem]"
+            className={`pointer-events-none absolute ${topPositionClass} bottom-[calc(100%-35px)] z-0 w-[6.3rem] select-none sm:bottom-[calc(100%-25px)] sm:w-[7.35rem] lg:w-[10.5rem]`}
             loading="lazy"
             decoding="async"
           />
+
 
           <div className="relative rounded-2xl bg-ink text-white">
             {bottomCube && (

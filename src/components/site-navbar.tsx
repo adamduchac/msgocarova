@@ -3,37 +3,50 @@ import { Menu, X } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import logoAsset from "@/assets/logo.svg.asset.json";
 
-type NavChild = { label: string; href: string };
+type NavChild = {
+  label: string;
+  href: string;
+  internal?: boolean;
+  hash?: string;
+};
 type NavItem =
-  | { label: string; href: string; external?: boolean; internal?: boolean }
-  | { label: string; children: NavChild[] };
+  | { label: string; href: string; external?: boolean; internal?: boolean; children?: undefined }
+  | { label: string; href?: string; internal?: boolean; children: NavChild[] };
 
 const navItems: NavItem[] = [
   {
     label: "O školce",
+    href: "/o-skolce",
+    internal: true,
     children: [
-      { label: "Představení a vize", href: "#predstaveni" },
-      { label: "Náš tým", href: "#tym" },
-      { label: "Veřejné hřiště", href: "#hriste" },
-      { label: "Školní jídelna", href: "#jidelna" },
+      { label: "Představení a vize", href: "/o-skolce", hash: "vize", internal: true },
+      { label: "Vzdělávání", href: "/o-skolce", hash: "vzdelavani", internal: true },
+      { label: "Náš tým", href: "/o-skolce", hash: "tym", internal: true },
+      { label: "Veřejné hřiště", href: "/o-skolce", hash: "hriste", internal: true },
+      { label: "Školní jídelna", href: "/o-skolce", hash: "jidelna", internal: true },
     ],
   },
   {
     label: "Barevné třídy",
+    href: "/barevne-tridy",
+    internal: true,
     children: [
-      { label: "Červená kostička", href: "#trida-cervena" },
-      { label: "Zelená kostička", href: "#trida-zelena" },
-      { label: "Modrá kostička", href: "#trida-modra" },
-      { label: "Žlutá kostička", href: "#trida-zluta" },
+      { label: "Červená kostička", href: "/barevne-tridy", hash: "cervena", internal: true },
+      { label: "Zelená kostička", href: "/barevne-tridy", hash: "zelena", internal: true },
+      { label: "Modrá kostička", href: "/barevne-tridy", hash: "modra", internal: true },
+      { label: "Žlutá kostička", href: "/barevne-tridy", hash: "zluta", internal: true },
     ],
   },
   {
     label: "Pro rodiče",
+    href: "/pro-rodice",
+    internal: true,
     children: [
-      { label: "Zápis do MŠ", href: "#zapis" },
-      { label: "Platby", href: "#platby" },
-      { label: "Program dne", href: "#program" },
-      { label: "Dokumenty ke stažení", href: "#dokumenty" },
+      { label: "Zápis do MŠ", href: "/zapis-do-skolky", internal: true },
+      { label: "Platby", href: "/pro-rodice", hash: "platby", internal: true },
+      { label: "Program dne", href: "/pro-rodice", hash: "program-dne", internal: true },
+      { label: "Výbava do školky", href: "/pro-rodice", hash: "vybava", internal: true },
+      { label: "Dokumenty ke stažení", href: "/pro-rodice", hash: "dokumenty", internal: true },
     ],
   },
   {
@@ -87,19 +100,49 @@ export function SiteNavbar() {
     };
   }, []);
 
+  const renderChild = (child: NavChild, isOpen: boolean, onNavigate: () => void) => {
+    const cls =
+      "block rounded-lg px-3 py-2.5 text-[15px] font-medium text-ink/85 transition-colors duration-200 hover:bg-offwhite hover:text-brand-blue focus-visible:bg-offwhite focus-visible:text-brand-blue";
+    if (child.internal) {
+      return (
+        <Link
+          to={child.href}
+          hash={child.hash}
+          role="menuitem"
+          tabIndex={isOpen ? 0 : -1}
+          onClick={onNavigate}
+          className={cls}
+        >
+          {child.label}
+        </Link>
+      );
+    }
+    return (
+      <a
+        href={child.href}
+        role="menuitem"
+        tabIndex={isOpen ? 0 : -1}
+        onClick={onNavigate}
+        className={cls}
+      >
+        {child.label}
+      </a>
+    );
+  };
+
   return (
     <header className="fixed left-0 right-0 top-0 z-50 w-full px-6 pt-3 sm:pt-4">
-      <div className="container mx-auto overflow-visible rounded-2xl border border-white/60 bg-background/95 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.25)] lg:bg-background/70 lg:backdrop-blur-md">
+      <div className="container mx-auto overflow-visible rounded-2xl border border-white/60 bg-background shadow-[0_10px_30px_-18px_rgba(15,23,42,0.25)] lg:bg-background/70 lg:backdrop-blur-md">
         <div className="flex h-20 items-center justify-between px-6 lg:px-8">
           <Link to="/" className="flex items-center" aria-label="Mateřská škola Josefa Gočára — domů">
-            <img src={logoAsset.url} alt="Mateřská škola Josefa Gočára" className="h-[1.875rem] w-auto md:h-11" />
+            <img src={logoAsset.url} alt="Mateřská škola Josefa Gočára" className="h-[1.875rem] w-auto md:h-10" />
           </Link>
 
           <div className="flex items-center gap-8 xl:gap-10">
             <nav ref={navRef} className="hidden items-center gap-9 lg:flex xl:gap-12" aria-label="Hlavní navigace">
 
               {navItems.map((item) => {
-                if ("children" in item) {
+                if (item.children) {
                   const isOpen = openMenu === item.label;
                   return (
                     <div
@@ -132,19 +175,11 @@ export function SiteNavbar() {
                         <ul className="flex flex-col gap-0.5">
                           {item.children.map((child, ci) => (
                             <li
-                              key={child.href}
+                              key={`${child.href}${child.hash ?? ""}`}
                               className="nav-submenu-item"
                               style={{ ["--i" as string]: ci }}
                             >
-                              <a
-                                href={child.href}
-                                role="menuitem"
-                                tabIndex={isOpen ? 0 : -1}
-                                onClick={() => setOpenMenu(null)}
-                                className="block rounded-lg px-3 py-2.5 text-[15px] font-medium text-ink/85 transition-colors duration-200 hover:bg-offwhite hover:text-brand-blue focus-visible:bg-offwhite focus-visible:text-brand-blue"
-                              >
-                                {child.label}
-                              </a>
+                              {renderChild(child, isOpen, () => setOpenMenu(null))}
                             </li>
                           ))}
                         </ul>
@@ -185,7 +220,7 @@ export function SiteNavbar() {
               href="#nase-ms"
               className="hidden h-11 items-center rounded-md bg-brand-blue px-5 text-[15px] font-semibold text-white transition-colors duration-200 hover:bg-brand-blue/90 lg:inline-flex"
             >
-              Aplikace Naše MŠ
+              Naše MŠ
             </a>
 
             <button
@@ -213,7 +248,7 @@ export function SiteNavbar() {
         >
           <nav className="flex flex-col gap-1 px-6 py-4" aria-label="Mobilní navigace">
             {navItems.map((item, i) => {
-              if ("children" in item) {
+              if (item.children) {
                 const isOpen = mobileSubmenu === item.label;
                 return (
                   <div
@@ -239,17 +274,35 @@ export function SiteNavbar() {
                     >
                       <div className="min-h-0">
                         <div className="flex flex-col gap-0.5 pl-6 pr-3 py-1">
-                          {item.children.map((child) => (
-                            <a
-                              key={child.href}
-                              href={child.href}
-                              onClick={() => setOpen(false)}
-                              tabIndex={open && isOpen ? 0 : -1}
-                              className="rounded-lg px-3 py-2 text-[15px] font-medium text-ink/80 transition-colors duration-200 hover:bg-offwhite hover:text-brand-blue"
-                            >
-                              {child.label}
-                            </a>
-                          ))}
+                          {item.children.map((child) => {
+                            const cls =
+                              "rounded-lg px-3 py-2 text-[15px] font-medium text-ink/80 transition-colors duration-200 hover:bg-offwhite hover:text-brand-blue";
+                            if (child.internal) {
+                              return (
+                                <Link
+                                  key={`${child.href}${child.hash ?? ""}`}
+                                  to={child.href}
+                                  hash={child.hash}
+                                  onClick={() => setOpen(false)}
+                                  tabIndex={open && isOpen ? 0 : -1}
+                                  className={cls}
+                                >
+                                  {child.label}
+                                </Link>
+                              );
+                            }
+                            return (
+                              <a
+                                key={child.href}
+                                href={child.href}
+                                onClick={() => setOpen(false)}
+                                tabIndex={open && isOpen ? 0 : -1}
+                                className={cls}
+                              >
+                                {child.label}
+                              </a>
+                            );
+                          })}
                         </div>
                       </div>
                     </div>
@@ -295,7 +348,7 @@ export function SiteNavbar() {
               className="mobile-nav-item mt-2 inline-flex h-12 items-center justify-center rounded-md bg-brand-blue px-5 text-base font-semibold text-white transition-colors duration-200 hover:bg-brand-blue/90"
               style={{ ["--mobile-nav-delay" as string]: `${navItems.length * 40}ms` }}
             >
-              Aplikace Naše MŠ
+              Naše MŠ
             </a>
           </nav>
         </div>
