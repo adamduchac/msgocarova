@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import logoAsset from "@/assets/logo.svg.asset.json";
 
 type NavChild = { label: string; href: string };
 type NavItem =
-  | { label: string; href: string; external?: boolean }
+  | { label: string; href: string; external?: boolean; internal?: boolean }
   | { label: string; children: NavChild[] };
 
 const navItems: NavItem[] = [
@@ -20,9 +21,9 @@ const navItems: NavItem[] = [
   {
     label: "Barevné třídy",
     children: [
-      { label: "Modrá kostička", href: "#trida-modra" },
       { label: "Červená kostička", href: "#trida-cervena" },
       { label: "Zelená kostička", href: "#trida-zelena" },
+      { label: "Modrá kostička", href: "#trida-modra" },
       { label: "Žlutá kostička", href: "#trida-zluta" },
     ],
   },
@@ -30,8 +31,8 @@ const navItems: NavItem[] = [
     label: "Pro rodiče",
     children: [
       { label: "Zápis do MŠ", href: "#zapis" },
-      { label: "Organizace a Platby", href: "#organizace" },
-      { label: "Program a aktivity", href: "#program" },
+      { label: "Platby", href: "#platby" },
+      { label: "Program dne", href: "#program" },
       { label: "Dokumenty ke stažení", href: "#dokumenty" },
     ],
   },
@@ -39,6 +40,11 @@ const navItems: NavItem[] = [
     label: "ZŠ Josefa Gočára",
     href: "https://zsgocarova.cz/",
     external: true,
+  },
+  {
+    label: "Kontakty",
+    href: "/kontakty",
+    internal: true,
   },
 ];
 
