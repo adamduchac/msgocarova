@@ -3,6 +3,7 @@ import { ImageIcon } from "lucide-react";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
 
+
 export const Route = createFileRoute("/kontakty")({
   head: () => ({
     meta: [
