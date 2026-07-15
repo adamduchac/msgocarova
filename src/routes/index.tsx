@@ -43,8 +43,8 @@ function Index() {
         <SiteBenefits />
         <SiteDailyRhythm />
         <SiteClasses />
+        <SiteActivities />
         <div style={{ background: "linear-gradient(to bottom, #FFFFFF 0%, #FEF8E7 40%, #FEF8E7 100%)" }}>
-          <SiteActivities />
           <SiteTeachers />
           <SiteFooter />
         </div>
