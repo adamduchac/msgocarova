@@ -22,7 +22,7 @@ type SiteFooterProps = { cubeVariant?: "default" | "kontakty" };
 
 export function SiteFooter({ cubeVariant = "default" }: SiteFooterProps) {
   const topCube = cubeVariant === "kontakty" ? cubeBlue : cubeRed;
-  const bottomCube = cubeVariant === "kontakty" ? cubeGreen : cubeYellow;
+  const bottomCube = cubeVariant === "kontakty" ? null : cubeYellow;
   return (
     <footer className="relative bg-transparent pt-24 md:pt-32 pb-16 md:pb-20">
       <div className="container mx-auto px-6 relative z-10">
