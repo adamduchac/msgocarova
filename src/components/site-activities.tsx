@@ -40,13 +40,9 @@ export function SiteActivities() {
     <section id="aktuality" className="section-y">
       <div className="container mx-auto px-6">
         <div className="reveal-up section-header-gap mx-auto max-w-2xl text-center">
-          <p className="text-sm font-medium uppercase tracking-[0.18em] text-brand-blue">
-            Aktuality
-          </p>
-          <h2 className="mt-3 font-display text-[34px] font-extrabold text-ink md:text-[40px]">
-            Zážitky, které si děti odnesou do školy
+          <h2 className="font-display text-[34px] font-extrabold text-ink md:text-[40px]">
+            Zážitky, které si děti odnáší
           </h2>
-
         </div>
 
         <div className="grid grid-cols-1 gap-7 md:grid-cols-3">
