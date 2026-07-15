@@ -257,15 +257,30 @@ export function SiteNavbar() {
                     className="mobile-nav-item"
                     style={{ ["--mobile-nav-delay" as string]: `${i * 40}ms` }}
                   >
-                    <button
-                      type="button"
-                      onClick={() => setMobileSubmenu(isOpen ? null : item.label)}
-                      aria-expanded={isOpen}
-                      tabIndex={open ? 0 : -1}
-                      className="flex w-full items-center justify-between rounded-lg px-3 py-3 text-base font-medium text-ink/90 transition-colors duration-200 hover:bg-offwhite hover:text-brand-blue"
-                    >
-                      <span>{item.label}</span>
-                    </button>
+                    <div className="flex items-center gap-1">
+                      <Link
+                        to={item.href!}
+                        onClick={() => setOpen(false)}
+                        tabIndex={open ? 0 : -1}
+                        className="flex-1 rounded-lg px-3 py-3 text-base font-medium text-ink/90 transition-colors duration-200 hover:bg-offwhite hover:text-brand-blue"
+                      >
+                        {item.label}
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={() => setMobileSubmenu(isOpen ? null : item.label)}
+                        aria-expanded={isOpen}
+                        aria-label={`${isOpen ? "Zavřít" : "Otevřít"} podmenu ${item.label}`}
+                        tabIndex={open ? 0 : -1}
+                        className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-ink/70 transition-colors duration-200 hover:bg-offwhite hover:text-brand-blue"
+                      >
+                        <ChevronDown
+                          className={`h-5 w-5 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                          aria-hidden
+                        />
+                      </button>
+                    </div>
+
                     <div
                       className="grid overflow-hidden transition-[grid-template-rows,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
                       style={{
