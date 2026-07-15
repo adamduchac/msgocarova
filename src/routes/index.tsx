@@ -11,13 +11,13 @@ import { SiteFooter } from "@/components/site-footer";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "MŠ Josefa Gočára — Mateřská škola v centru Hradce Králové" },
+      { title: "Mateřská škola Josefa Gočára — Hradec Králové" },
       {
         name: "description",
         content:
           "Mateřská škola Josefa Gočára v centru Hradce Králové. Místo, kde si děti hrají, objevují a rostou — bezpečné zázemí, velká zahrada a respektující přístup.",
       },
-      { property: "og:title", content: "MŠ Josefa Gočára — Mateřská škola v centru Hradce Králové" },
+      { property: "og:title", content: "Mateřská škola Josefa Gočára — Hradec Králové" },
       {
         property: "og:description",
         content:
@@ -42,7 +42,6 @@ function Index() {
         <SiteBenefits />
         <SiteDailyRhythm />
         <SiteClasses />
-        <SiteQuickLinks />
         <div style={{ background: "linear-gradient(to bottom, #FFFFFF 0%, #FEF8E7 40%, #FEF8E7 100%)" }}>
           <SiteActivities />
           <SiteFooter />

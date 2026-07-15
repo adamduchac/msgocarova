@@ -102,7 +102,7 @@ export function SiteHero() {
         {/* Text */}
         <div className="reveal-up lg:col-span-5">
           <p className="mb-4 font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
-            MŠ Gočárova
+            Mateřská škola Josefa Gočára
           </p>
           <h1 className="font-display text-[53px] font-extrabold leading-[1.04] tracking-tight text-ink sm:text-[58px] lg:text-[70px]">
             Místo, kde si děti{" "}

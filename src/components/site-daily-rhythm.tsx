@@ -87,7 +87,7 @@ export function SiteDailyRhythm() {
             Zažijte to s námi
           </p>
           <h2 className="mt-3 font-display text-[34px] text-ink md:text-[40px]">
-            Jeden den v MŠ Gočárova
+            Jeden den v Mateřské škole Josefa Gočára
           </h2>
         </header>
 
