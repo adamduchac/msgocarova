@@ -137,7 +137,7 @@ function KontaktyPage() {
 
       <main>
         {/* Kudy k nám */}
-        <section className="section-y">
+        <section className="section-y-sm">
           <div className="container mx-auto px-6">
             <h2 className={`reveal-up mb-6 ${h2Class}`}>Kudy k nám</h2>
             <div
@@ -156,7 +156,7 @@ function KontaktyPage() {
         </section>
 
         {/* Rejstřík */}
-        <section className="section-y">
+        <section className="section-y-sm">
           <div className="container mx-auto px-6">
             <h2 className={`reveal-up mb-6 ${h2Class}`}>Rejstřík</h2>
 

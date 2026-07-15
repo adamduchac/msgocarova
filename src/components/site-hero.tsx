@@ -101,7 +101,7 @@ export function SiteHero() {
       <div className="hero-y container mx-auto grid items-center gap-16 px-6 lg:grid-cols-12 lg:gap-10">
         {/* Text */}
         <div className="reveal-up lg:col-span-5">
-          <p className="mb-4 font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
+          <p className="mb-3 font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
             Mateřská škola Josefa Gočára
           </p>
           <h1 className="font-display text-[53px] font-extrabold leading-[1.04] tracking-tight text-ink sm:text-[58px] lg:text-[70px]">
@@ -115,7 +115,7 @@ export function SiteHero() {
           </h1>
 
           <p
-            className="reveal-up mt-7 max-w-prose text-lg leading-relaxed text-body"
+            className="reveal-up mt-5 max-w-prose text-lg leading-relaxed text-body"
             style={{ ["--reveal-delay" as string]: "120ms" }}
           >
             Pomáháme dětem přirozeně objevovat svět. Klidné a bezpečné zázemí
@@ -123,7 +123,7 @@ export function SiteHero() {
           </p>
 
           <div
-            className="reveal-up mt-8 flex flex-wrap gap-3"
+            className="reveal-up mt-6 flex flex-wrap gap-3"
             style={{ ["--reveal-delay" as string]: "220ms" }}
           >
             <a
@@ -214,7 +214,7 @@ export function SiteHero() {
         </div>
       </div>
 
-      <div className="h-6 lg:h-10" aria-hidden />
+      <div className="h-4 lg:h-7" aria-hidden />
     </section>
   );
 }
