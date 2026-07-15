@@ -1,40 +1,60 @@
-Sjednocené zmenšení vertikálních mezer na celém webu podle zpětné vazby.
 
-## 1. Homepage hero — zmenšení mezer mezi bloky o ~1/3
+## 1) Mezera mezi poslední sekcí a footerem na podstránkách
 
-V `src/components/site-hero.tsx` upravím vnitřní mezery mezi textovými bloky a spodním odsazením:
+Na HP je poslední sekce (`SiteActivities`) v `section-y` = `clamp(56px, 8vw, 112px)`, na `/kontakty` je poslední `section-y-sm` = `clamp(28px, 4vw, 56px)` → před footerem je viditelně menší mezera a kostička na footeru „sedí" blíž.
 
-- Eyebrow „Mateřská škola Josefa Gočára“: `mb-4` → `mb-3`
-- Perex pod H1: `mt-7` → `mt-5`
-- Tlačítka pod perexem: `mt-8` → `mt-6`
-- Spodní mezera pod obsahem: `h-6 lg:h-10` → `h-4 lg:h-7`
-
-Celkově to hero zatáhne a bude působit kompaktněji, aniž by se ztratila čitelnost.
-
-## 2. Podstránky — zmenšení mezer mezi sekcemi o ~1/2
-
-V `src/styles.css` vytvořím novou utilitku `section-y-sm` (kompaktní varianta `section-y`) a použiju ji na `/kontakty` i všech budoucích podstránkách.
+**Řešení:** nová utilita v `src/styles.css`:
 
 ```text
-@utility section-y-sm {
-  padding-block: clamp(28px, 4vw, 56px);
+@utility pb-section {
+  padding-bottom: clamp(56px, 8vw, 112px);
 }
 ```
 
-Porovnání s aktuální `section-y`:
-- Aktuální: `clamp(56px, 8vw, 112px)`
-- Nová kompaktní: `clamp(28px, 4vw, 56px)` — přesně o polovinu menší
+Aplikace v `src/routes/kontakty.tsx` na poslední sekci (Rejstřík) — přidat `pb-section` k `section-y-sm`. Stejný pattern použiju u všech budoucích podstránek (poslední sekce před footerem dostane `pb-section`).
 
-## 3. Aplikace na /kontakty
+## 2) Nahradit "Zážitky, které si děti odnáší" (`SiteNews`) medailonky učitelů
 
-V `src/routes/kontakty.tsx` nahradím `section-y` za `section-y-sm` u všech sekcí pod hlavním hero (mapa, rejstřík). Hero sekce samotná zůstane beze změny, protože má vlastní layout a padding.
+Nová komponenta `src/components/site-teachers.tsx`:
 
-## 4. Budoucí podstránky
+- **Box** ve stylu `SiteClasses`: `rounded-3xl border bg-background shadow-…`, uvnitř container s paddingem.
+- **Eyebrow** „Náš tým" + **H2** „Lidé, kteří se o vaše děti starají" (finální wording potvrdíme, ale ne infantilní).
+- **Slider** — 1 medailonek naráz, horizontální přechod (slide + crossfade, respektuje `prefers-reduced-motion`).
+  - Layout medailonku: 2 sloupce — vlevo **foto** (rounded-2xl, aspect-[4/5] nebo 1:1), vpravo **text** (jméno + role + medailonek).
+  - Na mobilu foto nahoře, text pod ní.
+- **Ovládání:** šipky vlevo/vpravo (kruhové buttony), pod nimi tečkový indikátor. Klávesnice (←/→), swipe na mobilu, autoplay ~7 s s pauzou na hover/focus.
+- **Data** (seed — 1 učitelka podle podkladů, ostatní jako placeholder pro pozdější doplnění):
 
-Když přibudou další routy pod `src/routes/`, budou používat `section-y-sm` pro informativní obsah, zatímco homepage zůstane na `section-y` (nebo případně upraveném `hero-y`).
+```ts
+{
+  name: "Jana Tuharská",
+  role: "Učitelka v Zelené kostičce",
+  roleColor: "text-brand-green",
+  photo: "@/assets/teacher-jana-tuharska.webp.asset.json",
+  bio: "Jmenuji se Jana Tuharská a v této mateřské škole pracuji už 30 let. Zaměřuji se na rozvoj grafomotoriky a dovedností, které dětem usnadňují vstup do základní školy. Děti vedu ke kamarádství. Ráda s dětmi dělám legraci. Hraji na kytaru a baví mě s nimi zpívat i tancovat. Zaměřuji se také na pracovní činnosti a tvoření z různých materiálů, které podporují jejich zručnost a kreativitu. Ve volném čase ráda cestuji a mám vztah k přírodě a ke zvířatům."
+}
+```
+
+- **Foto:** uploaded `Jana_Tuharská.webp` → `lovable-assets create` do `src/assets/teacher-jana-tuharska.webp.asset.json`.
+- Design: šampionem je 1 medailonek, prostor vzdušný, jméno velké `font-display`, role menší barevný label třídy, text jako body.
+
+## 3) Prohození pořadí na HP
+
+V `src/routes/index.tsx` současné pořadí:
+```
+SiteNews → SiteActivities
+```
+Nové:
+```
+SiteActivities (Klub Předškoláček…) → SiteTeachers
+```
+
+`SiteNews` z HP odstraníme (import + použití). Soubor komponenty ponechám v repu pro případ pozdějšího návratu (nebo smazat — dej vědět).
 
 ## Soubory
 
-- `src/components/site-hero.tsx` — zmenšení vnitřních mezer v hero
-- `src/styles.css` — nová utilitka `section-y-sm`
-- `src/routes/kontakty.tsx` — použití `section-y-sm` na podstránkových sekcích
+- `src/styles.css` — nová utilita `pb-section`
+- `src/routes/kontakty.tsx` — přidat `pb-section` k sekci Rejstřík
+- `src/assets/teacher-jana-tuharska.webp.asset.json` — nový asset (upload z user-uploads)
+- `src/components/site-teachers.tsx` — nová komponenta se sliderem
+- `src/routes/index.tsx` — vyměnit `SiteNews` za `SiteTeachers`, prohodit pořadí
