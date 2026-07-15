@@ -16,7 +16,7 @@ const benefits: Benefit[] = [
   {
     titleMain: "Velká zahrada",
     titleSub: "s dopravním hřištěm",
-    text: "Naše vlastní zelená oáza v centru města. Děti tu jezdí na koloběžkách, skáčou na zemní trampolíně a v létě se chladí v bazénku. Ven chodíme za každého počasí.",
+    text: "Naše zelená oáza v centru města u Labe žije celý rok — podzimní hrátky, zimní bobování, letní osvěžení v bazénu a prvky přírodní zahrady. Součástí je dopravní hřiště i trampolína. Ven chodíme za každého počasí.",
     image: zahrada.url,
     alt: "Plastelínový strom a malé hřiště se skluzavkou",
     tint: "bg-mint",
@@ -24,7 +24,7 @@ const benefits: Benefit[] = [
   {
     titleMain: "Angličtina",
     titleSub: "a moderní technologie",
-    text: "Jdeme s dobou. Tradiční hru doplňujeme o interaktivní tabule, základy programování s robotickými myšmi a předškoláky hravou formou seznamujeme s angličtinou.",
+    text: "Angličtinu máme přirozeně ve všech třídách. Jdeme s dobou. Tradiční hru doplňujeme o interaktivní tabule, robotické myši, mikroskopy i světelný panel.",
     image: robot.url,
     alt: "Plastelínový robot s britskou vlajkou",
     tint: "bg-sky",
@@ -32,7 +32,7 @@ const benefits: Benefit[] = [
   {
     titleMain: "Respektující",
     titleSub: "a individuální přístup",
-    text: "Inspirujeme se Montessori a programem Začít spolu. Respektujeme tempo každého dítěte, komunikujeme partnersky a vedeme děti k přirozené samostatnosti.",
+    text: "Stavíme na důvěře, bezpečí a partnerské komunikaci mezi dětmi, učiteli i rodiči. Dáváme dětem prostor hledat vlastní řešení, spolupracovat a rozvíjet se vlastním tempem.",
     image: komunikace.url,
     alt: "Plastelínová bublina s usměvavým smajlíkem",
     tint: "bg-cream",
@@ -40,7 +40,7 @@ const benefits: Benefit[] = [
   {
     titleMain: "Otevřená",
     titleSub: "a snadná komunikace",
-    text: "Žádné papírové vzkazy na šatních skříňkách. Omluvenky i fotky z akcí máte v mobilní aplikaci. O víkendech navíc naši zahradu otevíráme veřejnosti.",
+    text: "Jsme otevřená školka, pro kterou je spolupráce s rodinou klíčová. Pro omlouvání a přehled o dění využíváme aplikaci Naše MŠ, o víkendech otevíráme zahradu veřejnosti.",
     image: srdce.url,
     alt: "Plastelínové červené srdce",
     tint: "bg-blush",
