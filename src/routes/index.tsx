@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteHero } from "@/components/site-hero";
-import { SiteQuickLinks } from "@/components/site-quick-links";
 import { SiteBenefits } from "@/components/site-benefits";
 import { SiteDailyRhythm } from "@/components/site-daily-rhythm";
 import { SiteAnnouncementBar } from "@/components/site-announcement-bar";
