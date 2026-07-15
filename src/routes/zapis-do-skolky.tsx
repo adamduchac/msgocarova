@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
 
@@ -35,10 +36,12 @@ function ZapisPage() {
         <section className="section-y">
           <div className="container mx-auto px-6">
             <h1 className="font-display text-[42px] font-extrabold leading-[1.05] text-ink md:text-[56px]">
-              Zápis do školky
+              {fixPrepositions("Zápis do školky")}
             </h1>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-body">
-              Termíny, potřebné dokumenty a průběh zápisu do Mateřské školy Josefa Gočára.
+              {fixPrepositions(
+                "Termíny, potřebné dokumenty a průběh zápisu do Mateřské školy Josefa Gočára."
+              )}
             </p>
           </div>
         </section>
@@ -48,10 +51,10 @@ function ZapisPage() {
         <section className="section-y-sm scroll-mt-28">
           <div className="container mx-auto px-6">
             <h2 className="font-display text-[28px] font-extrabold text-ink md:text-[32px]">
-              Informace k zápisu
+              {fixPrepositions("Informace k zápisu")}
             </h2>
             <p className="mt-4 max-w-2xl text-body">
-              Obsah této stránky brzy doplníme.
+              {fixPrepositions("Obsah této stránky brzy doplníme.")}
             </p>
           </div>
         </section>

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ImageIcon } from "lucide-react";
+import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
 
@@ -34,33 +35,34 @@ type ClassRow = {
 
 const classes: ClassRow[] = [
   {
-    name: "Červená kostička",
+    name: fixPrepositions("Červená kostička"),
     phone: "495 444 425",
     tel: "+420495444425",
     dot: "bg-brand-red",
-    teachers:
-      "paní učitelka Mgr. Nikola Šorfová, Mgr. Jitka Kouklíková a Hana Hloušková",
+    teachers: fixPrepositions(
+      "paní učitelka Mgr. Nikola Šorfová, Mgr. Jitka Kouklíková a Hana Hloušková"
+    ),
   },
   {
-    name: "Zelená kostička",
+    name: fixPrepositions("Zelená kostička"),
     phone: "495 444 426",
     tel: "+420495444426",
     dot: "bg-brand-green",
-    teachers: "paní učitelka Jana Tuharská a Kristýna Vaňátková, DiS.",
+    teachers: fixPrepositions("paní učitelka Jana Tuharská a Kristýna Vaňátková, DiS."),
   },
   {
-    name: "Modrá kostička",
+    name: fixPrepositions("Modrá kostička"),
     phone: "495 444 423",
     tel: "+420495444423",
     dot: "bg-brand-blue",
-    teachers: "paní učitelka Bc. Veronika Kremláčková a Elena Špicarová",
+    teachers: fixPrepositions("paní učitelka Bc. Veronika Kremláčková a Elena Špicarová"),
   },
   {
-    name: "Žlutá kostička",
+    name: fixPrepositions("Žlutá kostička"),
     phone: "495 444 424",
     tel: "+420495444424",
     dot: "bg-brand-yellow",
-    teachers: "paní učitelka Magdaléna Sováková a Milena Svobodová, DiS.",
+    teachers: fixPrepositions("paní učitelka Magdaléna Sováková a Milena Svobodová, DiS."),
   },
 ];
 
@@ -88,10 +90,10 @@ function KontaktyPage() {
             {/* Levý sloupec */}
             <div className="reveal-up">
               <h1 className="font-display text-[42px] font-extrabold leading-[1.05] text-ink md:text-[56px]">
-                Kontakty
+                {fixPrepositions("Kontakty")}
               </h1>
               <p className="mt-4 text-lg leading-relaxed text-body">
-                Rádi vás uvítáme osobně, nebo se ozvěte telefonem či e-mailem.
+                {fixPrepositions("Rádi vás uvítáme osobně, nebo se ozvěte telefonem či e-mailem.")}
               </p>
 
               <div className="mt-6">
@@ -110,10 +112,10 @@ function KontaktyPage() {
               </div>
 
               <div className="mt-6">
-                <p className={eyebrowClass}>Adresa</p>
+                <p className={eyebrowClass}>{fixPrepositions("Adresa")}</p>
                 <address className="mt-3 not-italic leading-relaxed">
                   <span className="block font-medium text-ink">
-                    Mateřská škola Josefa Gočára
+                    {fixPrepositions("Mateřská škola Josefa Gočára")}
                   </span>
                   <span className="block text-body">Škroupova 693</span>
                   <span className="block text-body">500 02 Hradec Králové 2</span>
@@ -128,7 +130,7 @@ function KontaktyPage() {
             >
               <div className="flex aspect-square w-full flex-col items-center justify-center gap-3 overflow-hidden rounded-[28px] border border-border/60 bg-muted">
                 <ImageIcon className="h-12 w-12 text-ink/25" aria-hidden />
-                <span className="text-sm text-ink/40">Fotka školky</span>
+                <span className="text-sm text-ink/40">{fixPrepositions("Fotka školky")}</span>
               </div>
             </div>
           </div>
@@ -139,7 +141,7 @@ function KontaktyPage() {
         {/* Kudy k nám */}
         <section className="section-y-sm">
           <div className="container mx-auto px-6">
-            <h2 className={`reveal-up mb-6 ${h2Class}`}>Kudy k nám</h2>
+            <h2 className={`reveal-up mb-6 ${h2Class}`}>{fixPrepositions("Kudy k nám")}</h2>
             <div
               className="reveal-fade overflow-hidden rounded-[28px] border border-border/60 shadow-[0_20px_60px_-22px_rgba(16,15,16,0.25)]"
               style={{ ["--reveal-delay" as string]: "120ms" }}
@@ -158,14 +160,14 @@ function KontaktyPage() {
         {/* Rejstřík */}
         <section className="section-y-sm pb-section">
           <div className="container mx-auto px-6">
-            <h2 className={`reveal-up mb-6 ${h2Class}`}>Rejstřík</h2>
+            <h2 className={`reveal-up mb-6 ${h2Class}`}>{fixPrepositions("Rejstřík")}</h2>
 
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               {/* Vedení školky */}
-              <p className={sectionLabelClass}>Vedení školky</p>
+              <p className={sectionLabelClass}>{fixPrepositions("Vedení školky")}</p>
 
               <div className={`reveal-up ${boxClass}`}>
-                <p className="text-sm text-body">Ředitel ZŠ a MŠ Josefa Gočára</p>
+                <p className="text-sm text-body">{fixPrepositions("Ředitel ZŠ a MŠ Josefa Gočára")}</p>
                 <p className="mt-1 font-display text-lg font-bold text-ink">
                   Mgr. Petr Sadílek
                 </p>
@@ -175,7 +177,7 @@ function KontaktyPage() {
                 className={`reveal-up ${boxClass}`}
                 style={{ ["--reveal-delay" as string]: "60ms" }}
               >
-                <p className="text-sm text-body">Zástupkyně ředitele pro MŠ</p>
+                <p className="text-sm text-body">{fixPrepositions("Zástupkyně ředitele pro MŠ")}</p>
                 <p className="mt-1 font-display text-lg font-bold text-ink">
                   Mgr. Jitka Kouklíková
                 </p>
@@ -196,14 +198,14 @@ function KontaktyPage() {
               </div>
 
               {/* Školní jídelna */}
-              <p className={`${sectionLabelClass} mt-6`}>Školní jídelna</p>
+              <p className={`${sectionLabelClass} mt-6`}>{fixPrepositions("Školní jídelna")}</p>
 
               <div className={`reveal-up ${boxClass}`}>
                 <p className="font-display text-lg font-bold text-ink">
-                  Školní jídelna ZŠ
+                  {fixPrepositions("Školní jídelna ZŠ")}
                 </p>
                 <p className="mt-1 text-sm text-body">
-                  Odhlašování obědů nejdéle do 10:00 na příští den.
+                  {fixPrepositions("Odhlašování obědů nejdéle do 10:00 na příští den.")}
                 </p>
                 <a
                   href="tel:+420495019050"
@@ -218,7 +220,7 @@ function KontaktyPage() {
                 style={{ ["--reveal-delay" as string]: "60ms" }}
               >
                 <p className="font-display text-lg font-bold text-ink">
-                  Výdejna obědů MŠ
+                  {fixPrepositions("Výdejna obědů MŠ")}
                 </p>
                 <a
                   href="tel:+420495444422"
@@ -229,7 +231,7 @@ function KontaktyPage() {
               </div>
 
               {/* Barevné třídy */}
-              <p className={`${sectionLabelClass} mt-6`}>Barevné třídy</p>
+              <p className={`${sectionLabelClass} mt-6`}>{fixPrepositions("Barevné třídy")}</p>
 
               {classes.map((c, i) => (
                 <div

@@ -1,3 +1,4 @@
+import { fixPrepositions } from "@/lib/typography";
 import zahrada from "@/assets/vyhoda-zahrada.webp.asset.json";
 import robot from "@/assets/vyhoda-robot.webp.asset.json";
 import komunikace from "@/assets/vyhoda-komunikace.webp.asset.json";
@@ -14,33 +15,41 @@ type Benefit = {
 
 const benefits: Benefit[] = [
   {
-    titleMain: "Velká zahrada",
-    titleSub: "s dopravním hřištěm",
-    text: "Naše zelená oáza v centru města u Labe žije celý rok — podzimní hrátky, zimní bobování, letní osvěžení v bazénu a prvky přírodní zahrady. Součástí je dopravní hřiště i trampolína. Ven chodíme za každého počasí.",
+    titleMain: fixPrepositions("Velká zahrada"),
+    titleSub: fixPrepositions("s dopravním hřištěm"),
+    text: fixPrepositions(
+      "Naše zelená oáza v centru města u Labe žije celý rok — podzimní hrátky, zimní bobování, letní osvěžení v bazénu a prvky přírodní zahrady. Součástí je dopravní hřiště i trampolína. Ven chodíme za každého počasí."
+    ),
     image: zahrada.url,
     alt: "Plastelínový strom a malé hřiště se skluzavkou",
     tint: "bg-mint",
   },
   {
-    titleMain: "Angličtina",
-    titleSub: "a moderní technologie",
-    text: "Angličtinu máme přirozeně ve všech třídách. Jdeme s dobou. Tradiční hru doplňujeme o interaktivní tabule, robotické myši, mikroskopy i světelný panel.",
+    titleMain: fixPrepositions("Angličtina"),
+    titleSub: fixPrepositions("a moderní technologie"),
+    text: fixPrepositions(
+      "Angličtinu máme přirozeně ve všech třídách. Jdeme s dobou. Tradiční hru doplňujeme o interaktivní tabule, robotické myši, mikroskopy i světelný panel."
+    ),
     image: robot.url,
     alt: "Plastelínový robot s britskou vlajkou",
     tint: "bg-sky",
   },
   {
-    titleMain: "Respektující",
-    titleSub: "a individuální přístup",
-    text: "Stavíme na důvěře, bezpečí a partnerské komunikaci mezi dětmi, učiteli i rodiči. Dáváme dětem prostor hledat vlastní řešení, spolupracovat a rozvíjet se vlastním tempem.",
+    titleMain: fixPrepositions("Respektující"),
+    titleSub: fixPrepositions("a individuální přístup"),
+    text: fixPrepositions(
+      "Stavíme na důvěře, bezpečí a partnerské komunikaci mezi dětmi, učiteli i rodiči. Dáváme dětem prostor hledat vlastní řešení, spolupracovat a rozvíjet se vlastním tempem."
+    ),
     image: komunikace.url,
     alt: "Plastelínová bublina s usměvavým smajlíkem",
     tint: "bg-cream",
   },
   {
-    titleMain: "Otevřená",
-    titleSub: "a snadná komunikace",
-    text: "Jsme otevřená školka, pro kterou je spolupráce s rodinou klíčová. Pro omlouvání a přehled o dění využíváme aplikaci Naše MŠ, o víkendech otevíráme zahradu veřejnosti.",
+    titleMain: fixPrepositions("Otevřená"),
+    titleSub: fixPrepositions("a snadná komunikace"),
+    text: fixPrepositions(
+      "Jsme otevřená školka, pro kterou je spolupráce s rodinou klíčová. Pro omlouvání a přehled o dění využíváme aplikaci Naše MŠ, o víkendech otevíráme zahradu veřejnosti."
+    ),
     image: srdce.url,
     alt: "Plastelínové červené srdce",
     tint: "bg-blush",
@@ -60,10 +69,10 @@ export function SiteBenefits() {
       <div className="container mx-auto px-6">
         <div className="reveal-up section-header-gap mx-auto max-w-2xl text-center">
           <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
-            Přijďte se podívat
+            {fixPrepositions("Přijďte se podívat")}
           </p>
           <h2 className="mt-3 font-display text-[34px] text-ink md:text-[40px]">
-            To pravé místo pro vaše děti
+            {fixPrepositions("To pravé místo pro vaše děti")}
           </h2>
 
         </div>

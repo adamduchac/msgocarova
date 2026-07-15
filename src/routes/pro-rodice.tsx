@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
 
@@ -24,10 +25,10 @@ export const Route = createFileRoute("/pro-rodice")({
 });
 
 const sections = [
-  { id: "platby", title: "Platby" },
-  { id: "program-dne", title: "Program dne" },
-  { id: "vybava", title: "Výbava do školky" },
-  { id: "dokumenty", title: "Dokumenty ke stažení" },
+  { id: "platby", title: fixPrepositions("Platby") },
+  { id: "program-dne", title: fixPrepositions("Program dne") },
+  { id: "vybava", title: fixPrepositions("Výbava do školky") },
+  { id: "dokumenty", title: fixPrepositions("Dokumenty ke stažení") },
 ];
 
 function ProRodicePage() {
@@ -42,10 +43,12 @@ function ProRodicePage() {
         <section className="section-y">
           <div className="container mx-auto px-6">
             <h1 className="font-display text-[42px] font-extrabold leading-[1.05] text-ink md:text-[56px]">
-              Pro rodiče
+              {fixPrepositions("Pro rodiče")}
             </h1>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-body">
-              Praktické informace pro každodenní chod i pohodový nástup do školky.
+              {fixPrepositions(
+                "Praktické informace pro každodenní chod i pohodový nástup do školky."
+              )}
             </p>
           </div>
         </section>
@@ -59,7 +62,7 @@ function ProRodicePage() {
                 {s.title}
               </h2>
               <p className="mt-4 max-w-2xl text-body">
-                Obsah této sekce brzy doplníme.
+                {fixPrepositions("Obsah této sekce brzy doplníme.")}
               </p>
             </div>
           </section>

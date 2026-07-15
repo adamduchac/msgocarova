@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { fixPrepositions } from "@/lib/typography";
 import denRano from "@/assets/den-rano.webp.asset.json";
 import denTvoreni from "@/assets/den-tvoreni.webp.asset.json";
 import denPohyb from "@/assets/den-pohyb.webp.asset.json";
@@ -17,40 +18,40 @@ type Moment = {
 
 const moments: Moment[] = [
   {
-    title: "Ranní přivítání",
-    desc: "Přivítáme se a naladíme na to, co nás čeká.",
+    title: fixPrepositions("Ranní přivítání"),
+    desc: fixPrepositions("Přivítáme se a naladíme na to, co nás čeká."),
     img: denRano,
     alt: "Ranní přivítání — paní učitelka předčítá dětem v kruhu",
     rotate: "md:rotate-[-2.2deg]",
     offset: "md:-translate-y-2",
   },
   {
-    title: "Tvoření a hry",
-    desc: "Kreslíme a objevujeme svět vlastním tempem.",
+    title: fixPrepositions("Tvoření a hry"),
+    desc: fixPrepositions("Kreslíme a objevujeme svět vlastním tempem."),
     img: denTvoreni,
     alt: "Tvoření a hry — děti kreslí pastelkami u stolu",
     rotate: "md:rotate-[1.4deg]",
     offset: "md:translate-y-3",
   },
   {
-    title: "Pohyb a dobrodružství",
-    desc: "Šplháme, balancujeme a vybíjíme energii.",
+    title: fixPrepositions("Pohyb a dobrodružství"),
+    desc: fixPrepositions("Šplháme, balancujeme a vybíjíme energii."),
     img: denPohyb,
     alt: "Pohyb a dobrodružství — děti šplhají po dřevěné prolézačce",
     rotate: "md:rotate-[-0.8deg]",
     offset: "md:-translate-y-3",
   },
   {
-    title: "Svačinka",
-    desc: "Ve třídě si dáme něco zdravého a dobrého.",
+    title: fixPrepositions("Svačinka"),
+    desc: fixPrepositions("Ve třídě si dáme něco zdravého a dobrého."),
     img: denSvacina,
     alt: "Svačinka — kluk se chutě zakusuje do jablka",
     rotate: "md:rotate-[2.0deg]",
     offset: "md:translate-y-2",
   },
   {
-    title: "Smyslová stezka",
-    desc: "Naboso poznáváme přírodu na naší stezce.",
+    title: fixPrepositions("Smyslová stezka"),
+    desc: fixPrepositions("Naboso poznáváme přírodu na naší stezce."),
     img: denStezka,
     alt: "Smyslová stezka — děti chodí naboso po kamíncích a šiškách",
     rotate: "md:rotate-[-1.6deg]",
@@ -84,10 +85,10 @@ export function SiteDailyRhythm() {
       <div className="container mx-auto px-6">
         <header className="reveal-up section-header-gap mx-auto max-w-2xl text-center">
           <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
-            Zažijte to s námi
+            {fixPrepositions("Zažijte to s námi")}
           </p>
           <h2 className="mt-3 font-display text-[34px] text-ink md:text-[40px]">
-            Jeden den v Mateřské škole Josefa Gočára
+            {fixPrepositions("Jeden den v Mateřské škole Josefa Gočára")}
           </h2>
         </header>
 
@@ -130,7 +131,7 @@ export function SiteDailyRhythm() {
           <button
             type="button"
             onClick={() => scrollByCard(-1)}
-            aria-label="Předchozí moment dne"
+            aria-label={fixPrepositions("Předchozí moment dne")}
             className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border/70 bg-background text-ink shadow-sm transition-colors duration-200 hover:bg-offwhite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
           >
             <ChevronLeft className="h-5 w-5" aria-hidden />
@@ -138,7 +139,7 @@ export function SiteDailyRhythm() {
           <button
             type="button"
             onClick={() => scrollByCard(1)}
-            aria-label="Další moment dne"
+            aria-label={fixPrepositions("Další moment dne")}
             className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border/70 bg-background text-ink shadow-sm transition-colors duration-200 hover:bg-offwhite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
           >
             <ChevronRight className="h-5 w-5" aria-hidden />

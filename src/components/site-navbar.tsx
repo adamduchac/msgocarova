@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import { fixPrepositions } from "@/lib/typography";
 import logoAsset from "@/assets/logo.svg.asset.json";
 
 type NavChild = {
@@ -15,47 +16,47 @@ type NavItem =
 
 const navItems: NavItem[] = [
   {
-    label: "O školce",
+    label: fixPrepositions("O školce"),
     href: "/o-skolce",
     internal: true,
     children: [
-      { label: "Představení a vize", href: "/o-skolce", hash: "vize", internal: true },
-      { label: "Vzdělávání", href: "/o-skolce", hash: "vzdelavani", internal: true },
-      { label: "Náš tým", href: "/o-skolce", hash: "tym", internal: true },
-      { label: "Veřejné hřiště", href: "/o-skolce", hash: "hriste", internal: true },
-      { label: "Školní jídelna", href: "/o-skolce", hash: "jidelna", internal: true },
+      { label: fixPrepositions("Představení a vize"), href: "/o-skolce", hash: "vize", internal: true },
+      { label: fixPrepositions("Vzdělávání"), href: "/o-skolce", hash: "vzdelavani", internal: true },
+      { label: fixPrepositions("Náš tým"), href: "/o-skolce", hash: "tym", internal: true },
+      { label: fixPrepositions("Veřejné hřiště"), href: "/o-skolce", hash: "hriste", internal: true },
+      { label: fixPrepositions("Školní jídelna"), href: "/o-skolce", hash: "jidelna", internal: true },
     ],
   },
   {
-    label: "Barevné třídy",
+    label: fixPrepositions("Barevné třídy"),
     href: "/barevne-tridy",
     internal: true,
     children: [
-      { label: "Červená kostička", href: "/barevne-tridy", hash: "cervena", internal: true },
-      { label: "Zelená kostička", href: "/barevne-tridy", hash: "zelena", internal: true },
-      { label: "Modrá kostička", href: "/barevne-tridy", hash: "modra", internal: true },
-      { label: "Žlutá kostička", href: "/barevne-tridy", hash: "zluta", internal: true },
+      { label: fixPrepositions("Červená kostička"), href: "/barevne-tridy", hash: "cervena", internal: true },
+      { label: fixPrepositions("Zelená kostička"), href: "/barevne-tridy", hash: "zelena", internal: true },
+      { label: fixPrepositions("Modrá kostička"), href: "/barevne-tridy", hash: "modra", internal: true },
+      { label: fixPrepositions("Žlutá kostička"), href: "/barevne-tridy", hash: "zluta", internal: true },
     ],
   },
   {
-    label: "Pro rodiče",
+    label: fixPrepositions("Pro rodiče"),
     href: "/pro-rodice",
     internal: true,
     children: [
-      { label: "Zápis do MŠ", href: "/zapis-do-skolky", internal: true },
-      { label: "Platby", href: "/pro-rodice", hash: "platby", internal: true },
-      { label: "Program dne", href: "/pro-rodice", hash: "program-dne", internal: true },
-      { label: "Výbava do školky", href: "/pro-rodice", hash: "vybava", internal: true },
-      { label: "Dokumenty ke stažení", href: "/pro-rodice", hash: "dokumenty", internal: true },
+      { label: fixPrepositions("Zápis do MŠ"), href: "/zapis-do-skolky", internal: true },
+      { label: fixPrepositions("Platby"), href: "/pro-rodice", hash: "platby", internal: true },
+      { label: fixPrepositions("Program dne"), href: "/pro-rodice", hash: "program-dne", internal: true },
+      { label: fixPrepositions("Výbava do školky"), href: "/pro-rodice", hash: "vybava", internal: true },
+      { label: fixPrepositions("Dokumenty ke stažení"), href: "/pro-rodice", hash: "dokumenty", internal: true },
     ],
   },
   {
-    label: "ZŠ Josefa Gočára",
+    label: fixPrepositions("ZŠ Josefa Gočára"),
     href: "https://zsgocarova.cz/",
     external: true,
   },
   {
-    label: "Kontakty",
+    label: fixPrepositions("Kontakty"),
     href: "/kontakty",
     internal: true,
   },
@@ -221,7 +222,7 @@ export function SiteNavbar() {
               href="#nase-ms"
               className="hidden h-11 items-center rounded-md bg-brand-blue px-5 text-[15px] font-semibold text-white transition-colors duration-200 hover:bg-brand-blue/90 lg:inline-flex"
             >
-              Naše MŠ
+              {fixPrepositions("Naše MŠ")}
             </a>
 
             <button
@@ -364,7 +365,7 @@ export function SiteNavbar() {
               className="mobile-nav-item mt-2 inline-flex h-12 items-center justify-center rounded-md bg-brand-blue px-5 text-base font-semibold text-white transition-colors duration-200 hover:bg-brand-blue/90"
               style={{ ["--mobile-nav-delay" as string]: `${navItems.length * 40}ms` }}
             >
-              Naše MŠ
+              {fixPrepositions("Naše MŠ")}
             </a>
           </nav>
         </div>
