@@ -137,7 +137,7 @@ function KontaktyPage() {
       </div>
 
       <main>
-        {/* Rejstřík kontaktů */}
+        {/* Mapa */}
         <section className="section-y">
           <div className="container mx-auto px-6">
             <h2 className={`reveal-up mb-6 ${h2Class}`}>Kontakty na tým a třídy</h2>
