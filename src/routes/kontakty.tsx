@@ -156,7 +156,7 @@ function KontaktyPage() {
         </section>
 
         {/* Rejstřík */}
-        <section className="section-y-sm">
+        <section className="section-y-sm pb-section">
           <div className="container mx-auto px-6">
             <h2 className={`reveal-up mb-6 ${h2Class}`}>Rejstřík</h2>
 

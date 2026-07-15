@@ -7,7 +7,7 @@ import { SiteAnnouncementBar } from "@/components/site-announcement-bar";
 import { SiteClasses } from "@/components/site-classes";
 import { SiteActivities } from "@/components/site-activities";
 import { SiteFooter } from "@/components/site-footer";
-import { SiteNews } from "@/components/site-news";
+import { SiteTeachers } from "@/components/site-teachers";
 
 export const Route = createFileRoute("/")({
   head: () => ({
