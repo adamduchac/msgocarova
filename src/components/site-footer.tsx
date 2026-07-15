@@ -2,7 +2,7 @@ import { ArrowUpRight, MapPin } from "lucide-react";
 import cubeRed from "@/assets/cube-red.png.asset.json";
 import cubeYellow from "@/assets/cube-yellow.png.asset.json";
 import cubeBlue from "@/assets/cube-blue.png.asset.json";
-import cubeGreen from "@/assets/cube-green.png.asset.json";
+
 
 type ClassRow = {
   name: string;
