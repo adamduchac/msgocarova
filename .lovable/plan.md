@@ -1,60 +1,46 @@
+## 1) Prohodit pozadí sekcí `SiteActivities` a `SiteTeachers`
 
-## 1) Mezera mezi poslední sekcí a footerem na podstránkách
+Aktuálně jsou obě sekce uvnitř béžového gradient wrapperu na HP, ale `SiteTeachers` má vlastní `bg-background` (bílé), takže Aktivity vidí béžovou a Tým bílou — přechod k footeru pak nesedí.
 
-Na HP je poslední sekce (`SiteActivities`) v `section-y` = `clamp(56px, 8vw, 112px)`, na `/kontakty` je poslední `section-y-sm` = `clamp(28px, 4vw, 56px)` → před footerem je viditelně menší mezera a kostička na footeru „sedí" blíž.
+**Řešení v `src/routes/index.tsx`:** vytáhnout `SiteActivities` ven z béžového wrapperu (do bílé části nad ním) a nechat `SiteTeachers` uvnitř wrapperu. Zároveň v `src/components/site-teachers.tsx` odstranit `bg-background` na `<section>` (nechat průhledné, ať prosvítá béžová z wrapperu). Vnitřní box medailonku ale zůstane bílý (`bg-background`) — kontrast proti béžovému okolí, stejně jako `SiteClasses` na HP.
 
-**Řešení:** nová utilita v `src/styles.css`:
-
+Výsledná posloupnost pozadí na HP:
 ```text
-@utility pb-section {
-  padding-bottom: clamp(56px, 8vw, 112px);
-}
+Hero (béžová) → Benefits → DailyRhythm → Classes → Activities (bílá) → Teachers (béžová) → Footer (béžová)
 ```
 
-Aplikace v `src/routes/kontakty.tsx` na poslední sekci (Rejstřík) — přidat `pb-section` k `section-y-sm`. Stejný pattern použiju u všech budoucích podstránek (poslední sekce před footerem dostane `pb-section`).
+## 2) Doplnit medailonky učitelů do `src/components/site-teachers.tsx`
 
-## 2) Nahradit "Zážitky, které si děti odnáší" (`SiteNews`) medailonky učitelů
+Do pole `teachers` přidat 6 nových položek (celkem 7). Pořadí navrhuji podle role a barvy třídy:
 
-Nová komponenta `src/components/site-teachers.tsx`:
+1. **Mgr. Jitka Kouklíková** — Zástupkyně ředitele pro MŠ (role bez barvy, tj. `text-ink/70`) — foto ✓
+2. **Mgr. Nikola Šorfová** — Učitelka v Červené kostičce (`text-brand-red`) — foto ✓
+3. **Jana Tuharská** — Učitelka v Zelené kostičce (`text-brand-green`) — foto ✓ (stávající)
+4. **Kristýna Vaňátková** — Učitelka v Zelené kostičce (`text-brand-green`) — bez foto
+5. **Bc. Veronika Kremláčková** — Učitelka v Modré kostičce (`text-brand-blue`) — bez foto
+6. **Milena Svobodová, DiS.** — Učitelka ve Žluté kostičce (`text-brand-yellow`) — bez foto
+7. **Martina Bartošová** — Učitelka mateřské školy (`text-ink/70`) — foto ✓
 
-- **Box** ve stylu `SiteClasses`: `rounded-3xl border bg-background shadow-…`, uvnitř container s paddingem.
-- **Eyebrow** „Náš tým" + **H2** „Lidé, kteří se o vaše děti starají" (finální wording potvrdíme, ale ne infantilní).
-- **Slider** — 1 medailonek naráz, horizontální přechod (slide + crossfade, respektuje `prefers-reduced-motion`).
-  - Layout medailonku: 2 sloupce — vlevo **foto** (rounded-2xl, aspect-[4/5] nebo 1:1), vpravo **text** (jméno + role + medailonek).
-  - Na mobilu foto nahoře, text pod ní.
-- **Ovládání:** šipky vlevo/vpravo (kruhové buttony), pod nimi tečkový indikátor. Klávesnice (←/→), swipe na mobilu, autoplay ~7 s s pauzou na hover/focus.
-- **Data** (seed — 1 učitelka podle podkladů, ostatní jako placeholder pro pozdější doplnění):
+Texty medailonků převzít 1:1 z uživatelské zprávy.
 
-```ts
-{
-  name: "Jana Tuharská",
-  role: "Učitelka v Zelené kostičce",
-  roleColor: "text-brand-green",
-  photo: "@/assets/teacher-jana-tuharska.webp.asset.json",
-  bio: "Jmenuji se Jana Tuharská a v této mateřské škole pracuji už 30 let. Zaměřuji se na rozvoj grafomotoriky a dovedností, které dětem usnadňují vstup do základní školy. Děti vedu ke kamarádství. Ráda s dětmi dělám legraci. Hraji na kytaru a baví mě s nimi zpívat i tancovat. Zaměřuji se také na pracovní činnosti a tvoření z různých materiálů, které podporují jejich zručnost a kreativitu. Ve volném čase ráda cestuji a mám vztah k přírodě a ke zvířatům."
-}
-```
+## 3) Fotky — nové assety
 
-- **Foto:** uploaded `Jana_Tuharská.webp` → `lovable-assets create` do `src/assets/teacher-jana-tuharska.webp.asset.json`.
-- Design: šampionem je 1 medailonek, prostor vzdušný, jméno velké `font-display`, role menší barevný label třídy, text jako body.
+Nahrát 3 fotky přes `lovable-assets create`:
 
-## 3) Prohození pořadí na HP
+- `user-uploads://Jitka_Kouklíková.webp` → `src/assets/teacher-jitka-kouklikova.webp.asset.json`
+- `user-uploads://Mgr._Nikola_Šorfová.webp` → `src/assets/teacher-nikola-sorfova.webp.asset.json`
+- `user-uploads://Martina_Bartošová.webp` → `src/assets/teacher-martina-bartosova.webp.asset.json`
 
-V `src/routes/index.tsx` současné pořadí:
-```
-SiteNews → SiteActivities
-```
-Nové:
-```
-SiteActivities (Klub Předškoláček…) → SiteTeachers
-```
+## 4) Placeholder pro chybějící fotky
 
-`SiteNews` z HP odstraníme (import + použití). Soubor komponenty ponechám v repu pro případ pozdějšího návratu (nebo smazat — dej vědět).
+V šabloně slidu podmínit vykreslení `<img>`: když `photo` chybí, místo obrázku ukázat `aspect-[4/5]` box s béžovým pozadím `#FEF8E7` (stejné jako gradient sekce), `rounded-2xl`, `border-border/60`, uvnitř jen jemná ikona/monogram iniciál v `text-ink/25` (font-display, velké). Žádný text „Fotka chybí" — jen elegantní placeholder navazující na paletu.
+
+Typ `Teacher.photo` změním na `string | null`, `alt` zůstane povinný pro čtečky obrazovky.
 
 ## Soubory
 
-- `src/styles.css` — nová utilita `pb-section`
-- `src/routes/kontakty.tsx` — přidat `pb-section` k sekci Rejstřík
-- `src/assets/teacher-jana-tuharska.webp.asset.json` — nový asset (upload z user-uploads)
-- `src/components/site-teachers.tsx` — nová komponenta se sliderem
-- `src/routes/index.tsx` — vyměnit `SiteNews` za `SiteTeachers`, prohodit pořadí
+- `src/routes/index.tsx` — přesun `SiteActivities` z béžového wrapperu do bílé části
+- `src/components/site-teachers.tsx` — odstranit `bg-background` na `<section>`, rozšířit `teachers[]`, přidat větev placeholder pro chybějící foto
+- `src/assets/teacher-jitka-kouklikova.webp.asset.json` — nový
+- `src/assets/teacher-nikola-sorfova.webp.asset.json` — nový
+- `src/assets/teacher-martina-bartosova.webp.asset.json` — nový
