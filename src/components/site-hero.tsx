@@ -75,7 +75,9 @@ export function SiteHero() {
       raf = 0;
       const a = cubeAWrapRef.current;
       const b = cubeBWrapRef.current;
-      if (a) a.style.transform = `translate3d(${(-targetX * 7).toFixed(2)}px, ${(-targetY * 7).toFixed(2)}px, 0)`;
+      // Cube A (top-left): opposite direction and ~2/3 the travel of cube B for depth
+      if (a) a.style.transform = `translate3d(${(targetX * 5).toFixed(2)}px, ${(targetY * 5).toFixed(2)}px, 0)`;
+      // Cube B (lower-right): follows the cursor direction at a slightly faster rate
       if (b) b.style.transform = `translate3d(${(-targetX * 7).toFixed(2)}px, ${(-targetY * 7).toFixed(2)}px, 0)`;
     };
 
