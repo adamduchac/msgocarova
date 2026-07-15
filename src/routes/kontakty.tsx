@@ -94,27 +94,22 @@ function KontaktyPage() {
                 Rádi vás uvítáme osobně, nebo se ozvěte telefonem či e-mailem.
               </p>
 
-              <div className="mt-10">
-                <p className={eyebrowClass}>Zavolejte nám</p>
+              <div className="mt-6">
                 <a
                   href="tel:+420495444421"
-                  className="mt-3 block font-display text-[40px] font-extrabold leading-[1.05] tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80 md:text-[52px]"
+                  className="block font-display text-[28px] font-extrabold leading-[1.1] tabular-nums text-ink transition-colors duration-200 hover:text-ink/70 md:text-[36px]"
                 >
                   495 444 421
                 </a>
-              </div>
-
-              <div className="mt-10">
-                <p className={eyebrowClass}>Napište nám</p>
                 <a
                   href="mailto:kosticky@msjghk.cz"
-                  className="mt-3 block break-all font-display text-[40px] font-extrabold leading-[1.05] text-brand-blue transition-colors duration-200 hover:text-brand-blue/80 md:text-[52px]"
+                  className="mt-1 block break-all font-display text-[28px] font-extrabold leading-[1.1] text-ink transition-colors duration-200 hover:text-ink/70 md:text-[36px]"
                 >
                   kosticky@msjghk.cz
                 </a>
               </div>
 
-              <div className="mt-10">
+              <div className="mt-6">
                 <p className={eyebrowClass}>Adresa</p>
                 <address className="mt-3 not-italic leading-relaxed">
                   <span className="block font-medium text-ink">
@@ -141,10 +136,29 @@ function KontaktyPage() {
       </div>
 
       <main>
-        {/* Rejstřík kontaktů */}
+        {/* Kudy k nám */}
         <section className="section-y">
           <div className="container mx-auto px-6">
-            <h2 className={`reveal-up mb-6 ${h2Class}`}>Kontakty na tým a třídy</h2>
+            <h2 className={`reveal-up mb-6 ${h2Class}`}>Kudy k nám</h2>
+            <div
+              className="reveal-fade overflow-hidden rounded-[28px] border border-border/60 shadow-[0_20px_60px_-22px_rgba(16,15,16,0.25)]"
+              style={{ ["--reveal-delay" as string]: "120ms" }}
+            >
+              <iframe
+                title="Mapa — Mateřská škola Josefa Gočára"
+                src="https://mapy.com/s/kovocenope"
+                className="block h-[420px] w-full md:h-[480px]"
+                style={{ border: 0 }}
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Rejstřík */}
+        <section className="section-y">
+          <div className="container mx-auto px-6">
+            <h2 className={`reveal-up mb-6 ${h2Class}`}>Rejstřík</h2>
 
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               {/* Vedení školky */}
@@ -243,25 +257,6 @@ function KontaktyPage() {
                   </p>
                 </div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Mapa */}
-        <section className="section-y pt-0">
-          <div className="container mx-auto px-6">
-            <h2 className={`reveal-up mb-6 ${h2Class}`}>Kudy k nám</h2>
-            <div
-              className="reveal-fade overflow-hidden rounded-[28px] border border-border/60 shadow-[0_20px_60px_-22px_rgba(16,15,16,0.25)]"
-              style={{ ["--reveal-delay" as string]: "120ms" }}
-            >
-              <iframe
-                title="Mapa — Mateřská škola Josefa Gočára"
-                src="https://mapy.com/s/kovocenope"
-                className="block h-[420px] w-full md:h-[480px]"
-                style={{ border: 0 }}
-                loading="lazy"
-              />
             </div>
           </div>
         </section>
