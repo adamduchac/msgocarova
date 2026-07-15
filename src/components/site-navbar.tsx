@@ -154,6 +154,18 @@ export function SiteNavbar() {
                   );
                 }
 
+                if (item.internal) {
+                  return (
+                    <Link
+                      key={item.label}
+                      to={item.href}
+                      className="nav-link inline-flex items-center text-[15px] font-medium text-ink/85 transition-colors duration-200 hover:text-ink focus-visible:text-ink"
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                }
+
                 return (
                   <a
                     key={item.label}
@@ -170,10 +182,10 @@ export function SiteNavbar() {
             </nav>
 
             <a
-              href="#zapis"
+              href="#nase-ms"
               className="hidden h-11 items-center rounded-md bg-brand-blue px-5 text-[15px] font-semibold text-white transition-colors duration-200 hover:bg-brand-blue/90 lg:inline-flex"
             >
-              Naše školka
+              Aplikace Naše MŠ
             </a>
 
             <button
