@@ -95,27 +95,22 @@ function KontaktyPage() {
                 Rádi vás uvítáme osobně, nebo se ozvěte telefonem či e-mailem.
               </p>
 
-              <div className="mt-10">
-                <p className={eyebrowClass}>Zavolejte nám</p>
+              <div className="mt-6">
                 <a
                   href="tel:+420495444421"
-                  className="mt-3 block font-display text-[40px] font-extrabold leading-[1.05] tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80 md:text-[52px]"
+                  className="block font-display text-[28px] font-extrabold leading-[1.1] tabular-nums text-ink transition-colors duration-200 hover:text-ink/70 md:text-[36px]"
                 >
                   495 444 421
                 </a>
-              </div>
-
-              <div className="mt-10">
-                <p className={eyebrowClass}>Napište nám</p>
                 <a
                   href="mailto:kosticky@msjghk.cz"
-                  className="mt-3 block break-all font-display text-[40px] font-extrabold leading-[1.05] text-brand-blue transition-colors duration-200 hover:text-brand-blue/80 md:text-[52px]"
+                  className="mt-1 block break-all font-display text-[28px] font-extrabold leading-[1.1] text-ink transition-colors duration-200 hover:text-ink/70 md:text-[36px]"
                 >
                   kosticky@msjghk.cz
                 </a>
               </div>
 
-              <div className="mt-10">
+              <div className="mt-6">
                 <p className={eyebrowClass}>Adresa</p>
                 <address className="mt-3 not-italic leading-relaxed">
                   <span className="block font-medium text-ink">
