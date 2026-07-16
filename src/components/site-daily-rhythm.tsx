@@ -82,18 +82,18 @@ const moments: Moment[] = [
   },
 ];
 
-// Desktop: pseudo-náhodný náklon ±5–8°, střídání znamének, jemný Y offset.
+// Desktop: pseudo-náhodný náklon ±2.5–4°, střídání znamének, jemný Y offset.
 const desktopTransforms = [
-  "rotate(-6.4deg) translateY(-4px)",
-  "rotate(5.8deg) translateY(3px)",
-  "rotate(-7.2deg) translateY(-2px)",
-  "rotate(6.1deg) translateY(4px)",
-  "rotate(-5.3deg) translateY(-3px)",
-  "rotate(7.6deg) translateY(3px)",
-  "rotate(-5.9deg) translateY(-4px)",
-  "rotate(6.8deg) translateY(2px)",
-  "rotate(-7.1deg) translateY(-3px)",
-  "rotate(5.4deg) translateY(4px)",
+  "rotate(-3.2deg) translateY(-2px)",
+  "rotate(2.9deg) translateY(2px)",
+  "rotate(-3.6deg) translateY(-1px)",
+  "rotate(3.1deg) translateY(2px)",
+  "rotate(-2.7deg) translateY(-1px)",
+  "rotate(3.8deg) translateY(2px)",
+  "rotate(-3.0deg) translateY(-2px)",
+  "rotate(3.4deg) translateY(1px)",
+  "rotate(-3.6deg) translateY(-1px)",
+  "rotate(2.7deg) translateY(2px)",
 ];
 
 
