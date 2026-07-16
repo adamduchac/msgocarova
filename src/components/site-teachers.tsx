@@ -89,7 +89,7 @@ const teachers: Teacher[] = [
   },
 ];
 
-const AUTOPLAY_MS = 7000;
+
 
 function getInitials(name: string): string {
   return name
