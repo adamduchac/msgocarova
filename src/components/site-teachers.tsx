@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { fixPrepositions } from "@/lib/typography";
 import janaPhoto from "@/assets/teacher-jana-tuharska.webp.asset.json";
