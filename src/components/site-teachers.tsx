@@ -125,10 +125,6 @@ export function SiteTeachers() {
       <div className="container mx-auto px-6">
         <div
           className="rounded-3xl border border-border/70 bg-background px-6 py-12 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] md:px-12 md:py-16 lg:px-16 lg:py-20"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          onFocus={() => setPaused(true)}
-          onBlur={() => setPaused(false)}
           onTouchStart={(e) => (touchStartX.current = e.touches[0].clientX)}
           onTouchEnd={(e) => {
             const start = touchStartX.current;
@@ -138,6 +134,7 @@ export function SiteTeachers() {
             touchStartX.current = null;
           }}
         >
+
           {/* Header */}
           <div className="mx-auto max-w-3xl text-center">
             <p className="reveal-up font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
