@@ -103,21 +103,11 @@ function getInitials(name: string): string {
 
 export function SiteTeachers() {
   const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
   const total = teachers.length;
   const touchStartX = useRef<number | null>(null);
 
   const go = (dir: 1 | -1) => setIndex((i) => (i + dir + total) % total);
   const goTo = (i: number) => setIndex(((i % total) + total) % total);
-
-  useEffect(() => {
-    if (paused || total <= 1) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
-    const id = window.setInterval(() => go(1), AUTOPLAY_MS);
-    return () => window.clearInterval(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [paused, total]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -128,6 +118,7 @@ export function SiteTeachers() {
     return () => window.removeEventListener("keydown", onKey);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [total]);
+
 
   return (
     <section id="tym" className="section-y">
