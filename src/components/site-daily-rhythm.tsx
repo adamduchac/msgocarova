@@ -82,19 +82,20 @@ const moments: Moment[] = [
   },
 ];
 
-// Desktop náklony: 1. řada jemnější, 2. řada opačně a výrazněji.
+// Desktop: pseudo-náhodný náklon ±5–8°, střídání znamének, jemný Y offset.
 const desktopTransforms = [
-  "rotate(-2deg) translateY(-6px)",
-  "rotate(1deg) translateY(6px)",
-  "rotate(-1deg) translateY(-4px)",
-  "rotate(2deg) translateY(8px)",
-  "rotate(-1.5deg) translateY(-2px)",
-  "rotate(2.5deg) translateY(8px)",
-  "rotate(-3deg) translateY(-6px)",
-  "rotate(1.5deg) translateY(4px)",
-  "rotate(-2.5deg) translateY(-8px)",
-  "rotate(3deg) translateY(2px)",
+  "rotate(-6.4deg) translateY(-4px)",
+  "rotate(5.8deg) translateY(3px)",
+  "rotate(-7.2deg) translateY(-2px)",
+  "rotate(6.1deg) translateY(4px)",
+  "rotate(-5.3deg) translateY(-3px)",
+  "rotate(7.6deg) translateY(3px)",
+  "rotate(-5.9deg) translateY(-4px)",
+  "rotate(6.8deg) translateY(2px)",
+  "rotate(-7.1deg) translateY(-3px)",
+  "rotate(5.4deg) translateY(4px)",
 ];
+
 
 export function SiteDailyRhythm() {
   const scrollerRef = useRef<HTMLOListElement | null>(null);
