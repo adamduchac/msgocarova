@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { fixPrepositions } from "@/lib/typography";
 import janaPhoto from "@/assets/teacher-jana-tuharska.webp.asset.json";
@@ -88,7 +89,7 @@ const teachers: Teacher[] = [
   },
 ];
 
-const AUTOPLAY_MS = 7000;
+
 
 function getInitials(name: string): string {
   return name
@@ -102,21 +103,11 @@ function getInitials(name: string): string {
 
 export function SiteTeachers() {
   const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
   const total = teachers.length;
   const touchStartX = useRef<number | null>(null);
 
   const go = (dir: 1 | -1) => setIndex((i) => (i + dir + total) % total);
   const goTo = (i: number) => setIndex(((i % total) + total) % total);
-
-  useEffect(() => {
-    if (paused || total <= 1) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
-    const id = window.setInterval(() => go(1), AUTOPLAY_MS);
-    return () => window.clearInterval(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [paused, total]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -128,15 +119,12 @@ export function SiteTeachers() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [total]);
 
+
   return (
     <section id="tym" className="section-y">
       <div className="container mx-auto px-6">
         <div
           className="rounded-3xl border border-border/70 bg-background px-6 py-12 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] md:px-12 md:py-16 lg:px-16 lg:py-20"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          onFocus={() => setPaused(true)}
-          onBlur={() => setPaused(false)}
           onTouchStart={(e) => (touchStartX.current = e.touches[0].clientX)}
           onTouchEnd={(e) => {
             const start = touchStartX.current;
@@ -146,6 +134,7 @@ export function SiteTeachers() {
             touchStartX.current = null;
           }}
         >
+
           {/* Header */}
           <div className="mx-auto max-w-3xl text-center">
             <p className="reveal-up font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
@@ -172,11 +161,19 @@ export function SiteTeachers() {
             aria-roledescription="carousel"
             aria-label="Medailonky učitelů"
           >
-            <div className="relative">
-              <div key={index} className="animate-fade-in">
-                {(() => {
-                  const t = teachers[index];
-                  return (
+            <div className="overflow-hidden">
+
+              <div
+                className="flex transition-transform duration-500 ease-out motion-reduce:transition-none"
+                style={{ transform: `translateX(-${index * 100}%)` }}
+                aria-live="polite"
+              >
+                {teachers.map((t, i) => (
+                  <div
+                    key={t.name}
+                    className="w-full shrink-0"
+                    aria-hidden={i !== index}
+                  >
                     <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-[minmax(0,360px)_1fr] md:gap-12 lg:gap-16">
                       <div
                         className="mx-auto w-full max-w-[360px] overflow-hidden rounded-2xl border border-border/60"
@@ -217,10 +214,11 @@ export function SiteTeachers() {
                         </p>
                       </div>
                     </div>
-                  );
-                })()}
+                  </div>
+                ))}
               </div>
             </div>
+
 
 
             {/* Controls */}
