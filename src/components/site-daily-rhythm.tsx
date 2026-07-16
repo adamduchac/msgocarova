@@ -122,8 +122,8 @@ export function SiteDailyRhythm() {
           <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
             {fixPrepositions("Zažijte to s námi")}
           </p>
-          <h2 className="mt-3 font-display text-[34px] text-ink md:text-[40px]">
-            {fixPrepositions("Jeden den v Mateřské škole Josefa Gočára")}
+          <h2 className="mt-3 whitespace-pre-line font-display text-[34px] text-ink md:text-[40px]">
+            {fixPrepositions("Jeden den v\u00A0Mateřské škole\u00A0\nJosefa Gočára")}
           </h2>
         </header>
 
