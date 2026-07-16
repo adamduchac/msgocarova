@@ -130,20 +130,24 @@ export function SiteDailyRhythm() {
         {/* Polaroidy — mobile: horizontal snap slider (10) / md: grid 3x3 (9) / lg: grid 5x2 (10) */}
         <ol
           ref={scrollerRef}
-          className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 pt-10 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pt-14 lg:grid-cols-5"
+          className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-10 pt-10 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-4 md:pt-14 lg:grid-cols-5"
         >
           {moments.map((m, i) => {
             const hideOnTablet = i === 9 ? "max-lg:md:hidden" : "";
             return (
               <li
                 key={m.title}
-                className={`reveal-up flex shrink-0 basis-[78%] snap-start justify-center md:basis-auto md:[transform:var(--tilt)] ${hideOnTablet}`}
+                className={`reveal-up flex shrink-0 basis-[78%] snap-start justify-center md:basis-auto ${hideOnTablet}`}
                 style={{
                   ["--reveal-delay" as string]: `${i * 70}ms`,
-                  ["--tilt" as string]: desktopTransforms[i],
                 }}
               >
-                <article className="card-hover-soft w-full rounded-md bg-card px-3 pb-6 pt-3 shadow-[0_18px_40px_-22px_rgba(16,15,16,0.28)]">
+                <article
+                  className="card-hover-soft w-full rounded-md bg-card px-3 pb-6 pt-3 shadow-[0_18px_40px_-22px_rgba(16,15,16,0.28)] lg:[transform:var(--tilt)]"
+                  style={{
+                    ["--tilt" as string]: desktopTransforms[i],
+                  }}
+                >
                   <figure className="overflow-hidden rounded-sm bg-muted">
                     <img
                       src={m.img.url}
@@ -166,6 +170,7 @@ export function SiteDailyRhythm() {
             );
           })}
         </ol>
+
 
         {/* Šipky pro mobilní slider */}
         <div className="mt-6 flex items-center justify-center gap-3 md:hidden">
