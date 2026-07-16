@@ -1,50 +1,39 @@
-## Cíl
-Upravit sekci `SiteDailyRhythm` na homepage: 10 momentů dne s novými fotkami a texty, responzivní mřížka, alternující náklon polaroidů, svižnější scroll-reveal stagger.
+## Tři úpravy
 
-## Nahrání obrázků
-Nahrát 10 uživatelských fotek jako Lovable Assets (přes `lovable-assets create --file /mnt/user-uploads/N.webp`) do `src/assets/den-01.webp.asset.json` … `den-10.webp.asset.json`. Mapování podle popisků:
+### 1) Desktop: 10 karet, náhodné natočení ±5–8°
+V `src/components/site-daily-rhythm.tsx`:
+- **Proč se náklon teď neaplikuje:** `md:[transform:var(--tilt)]` je na stejném `<li>` jako `.reveal-up`, a reveal animace přepisuje `transform` (`translateY`). Řešení: přesunout náklon z `<li>` na vnitřní `<article>`, které reveal neanimuje.
+- Nahradit stávající pole `desktopTransforms` deterministickým „pseudo-náhodným" polem s úhly z intervalu ±5–8° (10 hodnot, žádný nulový, střídat znaménko tak, aby to nevypadalo pravidelně), např.:
+  `[-6.4, 5.8, -7.2, 6.1, -5.3, 7.6, -5.9, 6.8, -7.1, 5.4]` (jen ilustrace — vyberu hodnoty tak, aby dvě sousední karty neměly stejné znaménko a rozsah zůstal 5–8°).
+- Malý `translateY` offset (~±4 px) ponechám kvůli přirozenému rozmístění polaroidů.
+- Aplikovat přes `style={{ ['--tilt']: 'rotate(Xdeg) translateY(Ypx)' }}` na `<article>` a třídu `md:[transform:var(--tilt)]`. Přidat `transform-origin: center` implicitně (default vyhovuje).
+- Na mobilu (`< md`) žádný náklon, na tabletu (`md` až `< lg`) náklon zůstává vypnutý — nebo ponechat jemnější? **Ponechám zapnutý jen od `lg`** (`lg:[transform:var(--tilt)]`), tablet 3×3 tak zůstane rovný a přehledný.
 
-1. `1.webp` → Vítáme se hrou
-2. `2.webp` → Hra na kuchaře
-3. `3.webp` → Ranní kruh
-4. `4.webp` → Spolupracujeme
-5. `5.webp` → Pečujeme o zahradu
-6. `6.webp` → Objevujeme přírodu
-7. `7.webp` → Obědváme
-8. `8.webp` → Klidové chvíle
-9. `9.webp` → Odpolední hry
-10. `10.webp` → Společně tvoříme
+### 2) Mobil: slider „Jeden den" — ořezané spodní stíny
+Stín karty je `shadow-[0_18px_40px_-22px_...]` (spread 40 px dolů), ale scroller má `pb-4` (16 px) a `overflow-x-auto` — spodní část stínu se ořízne skryvající se osou Y.
+- Zvětšit spodní padding scrolleru na mobilu: `pb-10` (mobile) / ponechat `md:pb-4`.
+- Zajistit, že se scrollbar neobjeví: scroller už má `[scrollbar-width:none]` a skrytý `::-webkit-scrollbar`, takže `pb-10` nezpůsobí posun.
+- Alternativně přidat `overflow-y-visible` — nelze kombinovat s `overflow-x-auto`, oba směry musí být stejné. Proto řešení = větší padding + případně `-mb-6` na sekci, aby nevznikla dvojitá mezera pod slidem.
 
-Staré `den-rano/tvoreni/pohyb/svacina/stezka` pointery nechat být (mohou být použité jinde nebo v historii).
+### 3) Mobil: slider „Náš tým" — velká mezera pod textem
+Problém: všechny slidy jsou v `<div class="flex">` s `w-full shrink-0`, takže výška kontejneru = výška nejdelšího medailonku (Milena Svobodová má rozsáhlý bio). Aktuální medailonek pak má prázdné místo dole.
 
-## Úprava `src/components/site-daily-rhythm.tsx`
+Řešení: **renderovat jen aktivního učitele** + cross-fade animace, místo horizontálního `translateX` na flex-tracku.
+- Odstranit `flex` track a `translateX(-index*100%)`.
+- Nahradit jedním kontejnerem, který zobrazuje `teachers[index]`. Přechod: `key={index}` na vnitřním `<div>` s třídou `animate-fade-in` (existuje v projektu, 0.3 s ease-out).
+- Layout mřížky (foto vlevo, text vpravo od `md`) zůstává stejný, jen bez wrapperu `flex` na všech položkách.
+- Přístupnost: zachovat `role="region"` + `aria-roledescription="carousel"` + `aria-label`. Nechat swipe (touchStart/touchEnd), autoplay, klávesové šipky, tečky.
+- Vedlejší přínos: DOM je lehčí (1 slide místo 7), obrázky se dále lazy-loadují jen tehdy, když se stanou aktivními (přidám `loading="eager"` na aktivní, `lazy` je zbytečné — v každém okamžiku jde jen o jeden obrázek).
 
-**Data:** pole `moments` rozšířit na 10 položek s tituly a popisky přesně podle zadání (bez čísel), přes `fixPrepositions`. `alt` texty odvodit z fotek. `rotate`/`offset` odstranit z dat — místo per-položkových tříd použít výpočet z indexu (řada 1 vs. řada 2 na desktopu).
+Aby crossfade vypadal plynule, obal medailonku dostane `min-height` **nesetované** (nechá se řídit obsahem) a `key={index}` na obalu zajistí re-mount → `animate-fade-in`. Bez min-height se skok výšky projeví, ale to je záměr uživatele („real výška").
 
-**Náklon polaroidů (desktop, 2 řady po 5):**
-- Řada 1 (index 0–4): jemné úhly `-2°, +1°, -1°, +2°, -1.5°`, offset `translateY(-6px, +6px, -4px, +8px, -2px)`
-- Řada 2 (index 5–9): výrazněji naopak `+2.5°, -3°, +1.5°, -2.5°, +3°`, offset `translateY(+8px, -6px, +4px, -8px, +2px)`
+Pokud by skok byl rušivý, můžu ještě přidat `transition` na `min-height` — ale to bez měření DOMu neuděláme čistě, proto necháváme prostý fade a real-height (přesně jak si přál).
 
-Implementace přes inline `style={{ transform: 'rotate(...) translateY(...)' }}` na `<li>` uvnitř `md:` breakpointu (mobil/tablet slider bez rotace, resp. rotace jen na `md:` třídou nebo `md:[transform:...]`). Nejjednodušší: vypočítat pole `desktopTransforms[10]` a aplikovat přes CSS proměnnou + utilitu, např. `md:[transform:var(--tilt)]` a `style={{ ['--tilt' as any]: transforms[i] }}`.
+### Soubory
+- `src/components/site-daily-rhythm.tsx` — nové úhly, přesun `--tilt` na `<article>`, `pb-10 md:pb-4` na scrolleru, aktivace tiltu až od `lg:`.
+- `src/components/site-teachers.tsx` — přepis slideru na single-render + `animate-fade-in`.
 
-**Responzivní grid:**
-- Mobil (`< md`): stávající horizontální snap-slider, zobrazí všech 10.
-- Tablet (`md` až `< lg`): grid 3 sloupce, 3 řady, zobrazí **prvních 9** (10. skrytá přes `max-lg:[&:nth-child(10)]:hidden` nebo `hidden lg:block` na 10. položce).
-- Desktop (`lg+`): grid 5 sloupců, 2 řady, všech 10.
-
-Třídy: `md:grid md:grid-cols-3 md:gap-6 lg:grid-cols-5`, na 10. `<li>` přidat `max-lg:md:hidden` (skryje jen na md, na mobilu ve slideru zůstane — mobil není grid).
-
-**Stagger:**
-Nahradit pevné pole `delays` výpočtem `i * 70` ms (70 ms krok). Celková délka posledního: 630 ms + 400–500 ms animace ≈ hotovo do ~1,1 s.
-
-**Šipky slideru:** beze změny, jen aria-labely zůstávají.
-
-## Verifikace
-- Vizuální kontrola na desktopu (2×5, střídavý náklon), tabletu (3×3, karta 10 skrytá), mobilu (slider 10 karet).
-- Reveal doběhne svižně (poslední karta ≤ ~1 s).
-- `prefers-reduced-motion` respektováno (řeší stávající `.reveal-up`).
+### Verifikace
+- Playwright screenshoty: desktop (10 nakloněných karet, různé úhly ±5–8°), mobile (slide „Jeden den" bez ořezu stínů), mobile (slide „Náš tým" bez mezery pod textem, přepínání mezi krátkým a dlouhým bio).
+- Prefer-reduced-motion — fade se degraduje na okamžité přepnutí (Tailwind `motion-reduce:` vypne animaci).
 - Build projde.
-
-## Soubory
-- `src/assets/den-01.webp.asset.json` … `den-10.webp.asset.json` (nové, přes CLI)
-- `src/components/site-daily-rhythm.tsx` (přepis dat, transformy, grid, delay)

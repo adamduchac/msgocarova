@@ -172,17 +172,11 @@ export function SiteTeachers() {
             aria-roledescription="carousel"
             aria-label="Medailonky učitelů"
           >
-            <div className="relative overflow-hidden">
-              <div
-                className="flex transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
-                style={{ transform: `translateX(-${index * 100}%)` }}
-              >
-                {teachers.map((t, i) => (
-                  <div
-                    key={t.name}
-                    className="w-full shrink-0 px-1"
-                    aria-hidden={i !== index}
-                  >
+            <div className="relative">
+              <div key={index} className="animate-fade-in">
+                {(() => {
+                  const t = teachers[index];
+                  return (
                     <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-[minmax(0,360px)_1fr] md:gap-12 lg:gap-16">
                       <div
                         className="mx-auto w-full max-w-[360px] overflow-hidden rounded-2xl border border-border/60"
@@ -193,7 +187,7 @@ export function SiteTeachers() {
                             src={t.photo}
                             alt={t.alt}
                             className="aspect-[4/5] h-full w-full object-cover"
-                            loading="lazy"
+                            loading="eager"
                             decoding="async"
                             draggable={false}
                           />
@@ -223,10 +217,11 @@ export function SiteTeachers() {
                         </p>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })()}
               </div>
             </div>
+
 
             {/* Controls */}
             {total > 1 && (
