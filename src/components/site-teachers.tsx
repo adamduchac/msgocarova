@@ -155,17 +155,18 @@ export function SiteTeachers() {
           </div>
 
           {/* Slider */}
-          <div
-            className="reveal-fade relative mt-10 lg:mt-12"
-            role="region"
-            aria-roledescription="carousel"
-            aria-label="Medailonky učitelů"
-          >
-            <div className="relative">
-              <div key={index} className="animate-fade-in">
-                {(() => {
-                  const t = teachers[index];
-                  return (
+            <div className="overflow-hidden">
+              <div
+                className="flex transition-transform duration-500 ease-out motion-reduce:transition-none"
+                style={{ transform: `translateX(-${index * 100}%)` }}
+                aria-live="polite"
+              >
+                {teachers.map((t, i) => (
+                  <div
+                    key={t.name}
+                    className="w-full shrink-0"
+                    aria-hidden={i !== index}
+                  >
                     <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-[minmax(0,360px)_1fr] md:gap-12 lg:gap-16">
                       <div
                         className="mx-auto w-full max-w-[360px] overflow-hidden rounded-2xl border border-border/60"
@@ -206,10 +207,11 @@ export function SiteTeachers() {
                         </p>
                       </div>
                     </div>
-                  );
-                })()}
+                  </div>
+                ))}
               </div>
             </div>
+
 
 
             {/* Controls */}
