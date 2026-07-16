@@ -139,7 +139,7 @@ export function SiteDailyRhythm() {
                 key={m.title}
                 className={`reveal-up flex shrink-0 basis-[78%] snap-start justify-center md:basis-auto ${hideOnTablet}`}
                 style={{
-                  ["--reveal-delay" as string]: `${i * 70}ms`,
+                  ["--reveal-delay" as string]: `${i * 110}ms`,
                 }}
               >
                 <article
