@@ -155,7 +155,14 @@ export function SiteTeachers() {
           </div>
 
           {/* Slider */}
+          <div
+            className="reveal-fade relative mt-10 lg:mt-12"
+            role="region"
+            aria-roledescription="carousel"
+            aria-label="Medailonky učitelů"
+          >
             <div className="overflow-hidden">
+
               <div
                 className="flex transition-transform duration-500 ease-out motion-reduce:transition-none"
                 style={{ transform: `translateX(-${index * 100}%)` }}
