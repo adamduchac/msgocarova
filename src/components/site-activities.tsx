@@ -10,7 +10,7 @@ type Activity = {
   text: string;
   image: string;
   alt: string;
-  href: "/pro-rodice" | "/vzdelavani-a-rozvoj" | "/akce-s-rodici";
+  href: "/pro-rodice" | "/vzdelavani-a-rozvoj" | "/akce-s-rodici" | "/predskolacek";
   hash?: string;
 };
 
@@ -22,8 +22,7 @@ const activities: Activity[] = [
     ),
     image: preschool.url,
     alt: "Soustředěný předškolák kreslí tužkou u stolu",
-    href: "/pro-rodice",
-    hash: "krouzky",
+    href: "/predskolacek",
   },
   {
     title: fixPrepositions("Vzdělávání a aktivity"),
