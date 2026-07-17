@@ -368,40 +368,45 @@ function OSkolcePage() {
             </div>
 
             <div
-              className="reveal-fade mt-10 grid gap-0 overflow-hidden rounded-2xl border border-border/70 bg-background md:grid-cols-2"
+              className="reveal-fade mt-10 overflow-hidden rounded-2xl border border-border/70 bg-background"
               style={{ ["--reveal-delay" as string]: "120ms" }}
             >
-              <div className="border-b border-border/70 p-8 md:border-b-0 md:border-r">
-                <p className="font-display text-xs font-semibold uppercase tracking-[0.18em] text-brand-green">
-                  {t("15. dubna – září")}
+              <div className="px-6 pt-6 md:px-8 md:pt-8">
+                <p className="font-display text-xs font-semibold uppercase tracking-[0.18em] text-brand-yellow">
+                  {t("Sobota, neděle")}
                 </p>
-                <dl className="mt-4 space-y-2 text-ink">
-                  <div className="flex items-baseline justify-between gap-6">
-                    <dt className="text-body">{t("Dopoledne")}</dt>
-                    <dd className="font-display text-xl font-bold">10:00 – 12:00</dd>
-                  </div>
-                  <div className="flex items-baseline justify-between gap-6">
-                    <dt className="text-body">{t("Odpoledne")}</dt>
-                    <dd className="font-display text-xl font-bold">13:00 – 17:00</dd>
-                  </div>
-                </dl>
               </div>
-              <div className="p-8">
-                <p className="font-display text-xs font-semibold uppercase tracking-[0.18em] text-brand-red">
-                  {t("Do 15. října")}
-                </p>
-                <dl className="mt-4 space-y-2 text-ink">
-                  <div className="flex items-baseline justify-between gap-6">
-                    <dt className="text-body">{t("Dopoledne")}</dt>
-                    <dd className="font-display text-xl font-bold">10:00 – 12:00</dd>
-                  </div>
-                  <div className="flex items-baseline justify-between gap-6">
-                    <dt className="text-body">{t("Odpoledne")}</dt>
-                    <dd className="font-display text-xl font-bold">13:00 – 16:00</dd>
-                  </div>
-                </dl>
+              <div className="mt-4 grid grid-cols-[1fr_auto_auto] gap-x-6 gap-y-3 px-6 pb-6 text-[15px] md:gap-x-10 md:px-8 md:pb-8 md:text-base">
+                <span aria-hidden />
+                <span className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-ink/55">
+                  {t("Dopolední")}
+                </span>
+                <span className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-ink/55">
+                  {t("Odpolední")}
+                </span>
+
+                <span className="border-t border-border/60 pt-3 text-body">
+                  {t("od 15. dubna, květen, červen, září")}
+                </span>
+                <span className="border-t border-border/60 pt-3 font-display font-bold text-ink tabular-nums">
+                  10:00 – 12:00
+                </span>
+                <span className="border-t border-border/60 pt-3 font-display font-bold text-ink tabular-nums">
+                  13:00 – 17:00
+                </span>
+
+                <span className="border-t border-border/60 pt-3 text-body">
+                  {t("do 15. října")}
+                </span>
+                <span className="border-t border-border/60 pt-3 font-display font-bold text-ink tabular-nums">
+                  10:00 – 12:00
+                </span>
+                <span className="border-t border-border/60 pt-3 font-display font-bold text-ink tabular-nums">
+                  13:00 – 16:00
+                </span>
               </div>
             </div>
+
 
             <p className="reveal-up mt-5 text-sm text-body/80">
               {t("Ve státní svátky je hřiště uzavřeno.")}
