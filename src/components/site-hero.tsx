@@ -170,9 +170,9 @@ export function SiteHero() {
               maskRepeat: "no-repeat",
             }}
           >
-            {SLIDES.map((slide, i) => (
+            {slides.map((slide, i) => (
               <img
-                key={i}
+                key={slide.url}
                 src={slide.url}
                 alt={i === index ? slide.alt : ""}
                 width={1024}
