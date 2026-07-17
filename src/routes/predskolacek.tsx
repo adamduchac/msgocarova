@@ -151,13 +151,8 @@ function PredskolacekPage() {
                 </ul>
               </article>
             </div>
-          </div>
-        </section>
 
-        {/* Přihlášení — samostatně, plná šířka */}
-        <section className="section-y-md">
-          <div className="container mx-auto px-6">
-            <div className="reveal-up rounded-2xl border border-black/[0.06] bg-[#FEF8E7]/60 p-8 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)] md:p-10">
+            <div className="mt-8 reveal-up rounded-2xl border border-black/[0.06] bg-[#FEF8E7]/60 p-8 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)] md:p-10">
               <h3 className="font-display text-xl font-extrabold text-ink">
                 {t("Přihlášení")}
               </h3>
