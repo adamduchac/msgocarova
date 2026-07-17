@@ -1,7 +1,7 @@
-import { AlertCircle, CalendarCheck } from "lucide-react";
+import { AlertCircle, CalendarCheck, Clock } from "lucide-react";
 import { fixPrepositions } from "@/lib/typography";
 
-type Variant = "closed" | "open";
+type Variant = "closed" | "open" | "upcoming";
 
 type StatusBlockProps = {
   variant?: Variant;
