@@ -71,7 +71,6 @@ const classes: ClassData[] = [
     heroPhoto: cervenaPhoto.url,
     alt: "Červená plastelínová kostička na hřišti se skluzavkou",
     textColor: "text-brand-red",
-    bgTint: "#FEECEC",
     teachers: [
       {
         name: "Mgr. Nikola Šorfová",
@@ -108,7 +107,6 @@ const classes: ClassData[] = [
     heroPhoto: zelenaPhoto.url,
     alt: "Zelená plastelínová kostička v parku",
     textColor: "text-brand-green",
-    bgTint: "#E9F5EC",
     teachers: [
       {
         name: "Jana Tuharská",
@@ -135,7 +133,6 @@ const classes: ClassData[] = [
     heroPhoto: modraPhoto.url,
     alt: "Modrá plastelínová kostička u bazénku",
     textColor: "text-brand-blue",
-    bgTint: "#E7F1FC",
     teachers: [
       {
         name: "Bc. Veronika Kremláčková",
@@ -162,7 +159,6 @@ const classes: ClassData[] = [
     heroPhoto: zlutaPhoto.url,
     alt: "Žlutá plastelínová kostička na pískovišti",
     textColor: "text-brand-yellow",
-    bgTint: "#FEF5D9",
     teachers: [
       {
         name: "Magdaléna Sováková",
