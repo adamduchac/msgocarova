@@ -56,6 +56,8 @@ type Area = {
   iconColor: string;
   iconBg: string;
   activities: Activity[];
+  image?: string;
+  imageAlt?: string;
 };
 
 const vzdelavaniAreas: Area[] = [
