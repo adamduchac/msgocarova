@@ -59,28 +59,21 @@ function ZapisPage() {
       </div>
 
       <main>
-        {/* Stavový blok */}
-        <section className="section-y-sm">
-          <div className="container mx-auto px-6">
-            <div className="max-w-4xl">
-              <StatusBlock
-                variant="closed"
-                title="Zápis pro školní rok 2026/2027 je uzavřen"
-              >
-                <p>
-                  {t(
-                    "Termín zápisu pro školní rok 2027/2028 zatím nebyl vyhlášen. Jakmile bude známý, zveřejníme ho zde, na nástěnkách školky a v aplikaci Naše MŠ."
-                  )}
-                </p>
-              </StatusBlock>
-            </div>
-          </div>
-        </section>
-
-        {/* Dva boxy 1/2 + 1/2 */}
+        {/* Status + hlavní 3sloupcový grid (jedna sekce) */}
         <section className="section-y-md">
           <div className="container mx-auto px-6">
-            <div className="mx-0 grid max-w-4xl gap-6 md:grid-cols-2">
+            <StatusBlock
+              variant="closed"
+              title="Zápis pro školní rok 2026/2027 je uzavřen"
+            >
+              <p>
+                {t(
+                  "Termín zápisu pro školní rok 2027/2028 zatím nebyl vyhlášen. Jakmile bude známý, zveřejníme ho zde, na nástěnkách školky a v aplikaci Naše MŠ."
+                )}
+              </p>
+            </StatusBlock>
+
+            <div className="mt-8 grid gap-6 md:grid-cols-3">
               <article className="reveal-up rounded-2xl border border-black/[0.06] bg-white p-7 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
                 <div className="flex items-center gap-3">
                   <span
@@ -152,44 +145,49 @@ function ZapisPage() {
                   </li>
                 </ul>
               </article>
+
+              <article className="reveal-up rounded-2xl border border-black/[0.06] bg-white p-7 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
+                <div className="flex items-center gap-3">
+                  <span
+                    aria-hidden
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-yellow/20 text-ink"
+                  >
+                    <Sun className="h-5 w-5" />
+                  </span>
+                  <h3 className="font-display text-lg font-bold text-ink">
+                    {t("Prázdninový provoz (červenec–srpen)")}
+                  </h3>
+                </div>
+                <p className="mt-4 text-[15px] leading-relaxed text-body">
+                  {t(
+                    "V létě můžeme přijmout i děti z jiných školek, a to na dobu, kdy má jejich kmenová školka omezený nebo přerušený provoz. Přednost mají děti ze spádového obvodu a s trvalým bydlištěm v Hradci Králové; při převisu rozhoduje los. Podrobná pravidla najdete v dokumentech."
+                  )}{" "}
+                  <Link
+                    to="/pro-rodice"
+                    hash="dokumenty"
+                    className="inline-flex items-center gap-1 font-medium text-brand-blue underline-offset-4 hover:underline"
+                  >
+                    {t("Pravidla přijímání")}
+                    <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+                  </Link>
+                </p>
+              </article>
             </div>
           </div>
         </section>
 
-        {/* Infobox 1/1 */}
+        {/* Po přijetí — samostatně, plná šířka */}
         <section className="section-y-md">
           <div className="container mx-auto px-6">
-            <div className="reveal-up max-w-4xl rounded-2xl border border-black/[0.06] bg-[#FEF8E7]/60 p-8 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)] md:p-10">
-              <div className="grid gap-8 md:grid-cols-2">
-                <div>
-                  <h3 className="font-display text-xl font-extrabold text-ink">
-                    {t("Po přijetí")}
-                  </h3>
-                  <p className="mt-3 text-[15px] leading-relaxed text-body">
-                    {t(
-                      "Rodiče nově přijatých dětí zveme na společnou schůzku před začátkem docházky, kde se dozvíte vše k nástupu a předáte zbývající dokumenty (evidenční list, přihlášku ke stravování, pověření k vyzvedávání)."
-                    )}
-                  </p>
-                </div>
-                <div>
-                  <h3 className="font-display text-xl font-extrabold text-ink">
-                    {t("Prázdninový provoz (červenec–srpen)")}
-                  </h3>
-                  <p className="mt-3 text-[15px] leading-relaxed text-body">
-                    {t(
-                      "V létě můžeme přijmout i děti z jiných školek, a to na dobu, kdy má jejich kmenová školka omezený nebo přerušený provoz. Přednost mají děti ze spádového obvodu a s trvalým bydlištěm v Hradci Králové; při převisu rozhoduje los. Podrobná pravidla najdete v dokumentech."
-                    )}{" "}
-                    <Link
-                      to="/pro-rodice"
-                      hash="dokumenty"
-                      className="inline-flex items-center gap-1 font-medium text-brand-blue underline-offset-4 hover:underline"
-                    >
-                      {t("Pravidla přijímání")}
-                      <ArrowRight className="h-3.5 w-3.5" aria-hidden />
-                    </Link>
-                  </p>
-                </div>
-              </div>
+            <div className="reveal-up rounded-2xl border border-black/[0.06] bg-[#FEF8E7]/60 p-8 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)] md:p-10">
+              <h3 className="font-display text-xl font-extrabold text-ink">
+                {t("Po přijetí")}
+              </h3>
+              <p className="mt-3 text-[15px] leading-relaxed text-body">
+                {t(
+                  "Rodiče nově přijatých dětí zveme na společnou schůzku před začátkem docházky, kde se dozvíte vše k nástupu a předáte zbývající dokumenty (evidenční list, přihlášku ke stravování, pověření k vyzvedávání)."
+                )}
+              </p>
             </div>
           </div>
         </section>
