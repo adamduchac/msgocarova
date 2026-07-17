@@ -138,19 +138,10 @@ export function SiteTeachers() {
           {/* Header */}
           <div className="mx-auto max-w-3xl text-center">
             <p className="reveal-up font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
-              {fixPrepositions("Náš tým")}
+              {fixPrepositions("POZNEJTE NÁS")}
             </p>
             <h2 className="reveal-up mt-3 font-display text-[34px] text-ink md:text-[40px]">
-              {fixPrepositions("Lidé, kteří se o vaše děti")}{" "}
-              <span
-                className="bg-clip-text text-transparent"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(105deg, #2563EB 0%, #38BDF8 100%)",
-                }}
-              >
-                {fixPrepositions("starají")}
-              </span>
+              {fixPrepositions("Přestavujeme naše učitelky")}
             </h2>
           </div>
 
