@@ -244,7 +244,7 @@ function OSkolcePage() {
               </h2>
               <p className="reveal-up mt-5 text-lg leading-relaxed text-body">
                 {t(
-                  "Pro nás je důležitá spolupráce s rodinou. Úzce spolupracujeme se ZŠ Josefa Gočára, což budoucím školákům usnadňuje přechod do 1. třídy."
+                  "Nejdůležitější je pro nás spolupráce s rodinou. Úzce také spolupracujeme se ZŠ Josefa Gočára, což budoucím školákům usnadňuje přechod do 1. třídy."
                 )}
               </p>
             </div>
