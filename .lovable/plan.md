@@ -1,28 +1,34 @@
-## Cíl
-Na `/barevne-tridy` obalit každou třídu do jednoho velkého bílého boxu (rounded-2xl, jemný border a měkký stín). Vzniknou 4 boxy — Červená, Zelená, Modrá, Žlutá. Vnější obal se roztahuje do plné šířky sekce (stejná šířka jako boxy tříd na homepage), ne jen do úzkého `max-w-5xl`.
+# Dokumenty ke stažení — sekce na /pro-rodice
 
-## Změny v `src/routes/barevne-tridy.tsx` (`ClassSection`)
+## Rozsah
+Přidat 4. sekci `#dokumenty` na konec stránky `/pro-rodice`, ve stylu ostatních sekcí (max-w-4xl, zarovnáno vlevo, `section-y-md`). Poslední sekce dostane gradient bílá → krémová k patičce (jako jinde na webu). Submenu odkaz `/pro-rodice#dokumenty` zůstává beze změny.
 
-1. **Vnější obal třídy** — box obklopuje celý obsah třídy a jde do plné šířky kontejneru (stejný rytmus jako boxy tříd na HP):
-   - `rounded-2xl border border-border/60 bg-background`
-   - jemný stín `shadow-[0_10px_30px_-20px_rgba(15,23,42,0.18)]`
-   - vnitřní padding `p-6 md:p-10`
-   - box umístit přímo do `container mx-auto px-6` (odstranit stávající `mx-auto max-w-5xl` wrapper), aby šířka odpovídala HP kartám
+## Obsah — dvě podskupiny, 7 položek
 
-2. **Hero ilustrace bez rámečku** — z hero fota odstranit `border`, `rounded-2xl` i `overflow-hidden`; obrázek leží přímo na bílém pozadí boxu (`aspect-[16/10] w-full object-cover`, bez zaobleného rámu).
+**Formuláře a žádosti**
+- Žádost o přijetí k předškolnímu vzdělávání
+- Žádost o přijetí — prázdninový provoz
+- Žádost o uvolnění dítěte z povinného předškolního vzdělávání
+- Pravidla přijímání dětí — prázdninový provoz 2026
 
-3. **Věková značka „X–X let" — inverzní** — místo bílého pillu s barevným textem: plné barevné pozadí v barvě třídy, text bílý, bez borderu. Doplnit do `ClassData`:
-   - `bgColor`: `bg-brand-red / bg-brand-green / bg-brand-blue / bg-brand-yellow`
-   - `pillText`: `text-white` (u žluté `text-ink` kvůli kontrastu)
+**Základní dokumenty**
+- Školní řád mateřské školy
+- Vnitřní řád školní výdejny
+- Školní vzdělávací program — Skládáme svět z kostiček
 
-4. **Vertikální rytmus** — sekce si ponechají `section-y-sm`; poslední sekce si ponechá gradient do žluté na pozadí, box zůstane bílý navrchu.
+## Vizuální řešení
+Řádkový seznam v boxu (bílá karta, `rounded-2xl`, jemný border/stín jako ostatní karty na webu). Každá položka:
+- ikona PDF (Lucide `FileText`) v barevném kroužku
+- název dokumentu (tučný)
+- pod ním malým písmem „PDF" + velikost souboru
+- šipka `Download` vpravo, hover = jemný posun (v souladu s pravidly, žádný scale)
 
-5. **Karty učitelek** uvnitř zůstávají beze změny; po náhledu případně jemně snížit stín, aby se nebily s vnějším boxem.
+Celý řádek je `<a href="…" target="_blank" rel="noopener noreferrer">` s viditelným focus stavem. Dva boxy pod sebou (Formuláře / Základní dokumenty), každý s vlastním malým nadpisem `h3`.
 
-## Co se nemění
-- Data, telefony, medailonky, chování rozbalování učitelek.
-- Header, footer, hash navigace `#cervena / #zelena / #modra / #zluta`.
+## Technika
+1. Nahrát 7 PDF přes `lovable-assets create` z `/mnt/user-uploads/…` → `src/assets/dokumenty/{slug}.pdf.asset.json` pointery. Původní binárky nekopírovat do repa.
+2. V `src/routes/pro-rodice.tsx` naimportovat pointery, přidat sekci s `id="dokumenty"` za `#vybava`.
+3. Přesunout gradient na poslední (novou) sekci; ze současné poslední sekce gradient odebrat, aby přechod na footer navazoval jen jednou.
+4. Ověřit build.
 
-## Ověření
-- `bun run build`
-- Playwright screenshot `/barevne-tridy` (desktop 1280 a mobile 390) — 4 boxy plné šířky sekce, hero foto bez rámečku, barevné pilulky.
+Poznámka: pokud PDF s prázdninovým provozem 2026 v budoucnu zestárne, půjde nahradit novou verzí přes `lovable-assets` beze změny kódu.

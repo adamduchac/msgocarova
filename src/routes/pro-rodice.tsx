@@ -1,7 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { FileText, Download } from "lucide-react";
 import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
+
+import zadostPrijeti from "@/assets/dokumenty/zadost-o-prijeti.pdf.asset.json";
+import zadostPrazdniny from "@/assets/dokumenty/zadost-prazdninovy-provoz.pdf.asset.json";
+import zadostUvolneni from "@/assets/dokumenty/zadost-o-uvolneni.pdf.asset.json";
+import pravidlaPrazdniny from "@/assets/dokumenty/pravidla-prazdninovy-provoz-2026.pdf.asset.json";
+import skolniRad from "@/assets/dokumenty/skolni-rad.pdf.asset.json";
+import radVydejny from "@/assets/dokumenty/vnitrni-rad-vydejny.pdf.asset.json";
+import svp from "@/assets/dokumenty/svp-skladame-svet-z-kosticek.pdf.asset.json";
 
 export const Route = createFileRoute("/pro-rodice")({
   head: () => ({
@@ -24,12 +33,67 @@ export const Route = createFileRoute("/pro-rodice")({
   component: ProRodicePage,
 });
 
-const sections = [
+const placeholderSections = [
   { id: "platby", title: fixPrepositions("Platby") },
   { id: "program-dne", title: fixPrepositions("Program dne") },
   { id: "vybava", title: fixPrepositions("Výbava do školky") },
-  { id: "dokumenty", title: fixPrepositions("Dokumenty ke stažení") },
 ];
+
+type DocAsset = { url: string; size: number; original_filename: string };
+
+const formulare: { title: string; asset: DocAsset }[] = [
+  { title: "Žádost o přijetí k předškolnímu vzdělávání", asset: zadostPrijeti },
+  { title: "Žádost o přijetí — prázdninový provoz", asset: zadostPrazdniny },
+  { title: "Žádost o uvolnění dítěte z povinného předškolního vzdělávání", asset: zadostUvolneni },
+  { title: "Pravidla přijímání dětí — prázdninový provoz 2026", asset: pravidlaPrazdniny },
+];
+
+const zakladni: { title: string; asset: DocAsset }[] = [
+  { title: "Školní řád mateřské školy", asset: skolniRad },
+  { title: "Vnitřní řád školní výdejny", asset: radVydejny },
+  { title: "Školní vzdělávací program — Skládáme svět z kostiček", asset: svp },
+];
+
+function formatSize(bytes: number) {
+  if (bytes >= 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  return `${Math.max(1, Math.round(bytes / 1024))} kB`;
+}
+
+function DocList({ items }: { items: { title: string; asset: DocAsset }[] }) {
+  return (
+    <ul className="divide-y divide-black/5">
+      {items.map((doc) => (
+        <li key={doc.asset.url}>
+          <a
+            href={doc.asset.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-4 px-5 py-4 transition-colors hover:bg-black/[0.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 sm:px-6"
+          >
+            <span
+              aria-hidden
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue"
+            >
+              <FileText className="h-5 w-5" />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block font-semibold text-ink">
+                {fixPrepositions(doc.title)}
+              </span>
+              <span className="mt-0.5 block text-xs uppercase tracking-wide text-body/70">
+                PDF · {formatSize(doc.asset.size)}
+              </span>
+            </span>
+            <Download
+              aria-hidden
+              className="h-5 w-5 shrink-0 text-body transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-brand-blue"
+            />
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 function ProRodicePage() {
   return (
@@ -55,7 +119,7 @@ function ProRodicePage() {
       </div>
 
       <main>
-        {sections.map((s) => (
+        {placeholderSections.map((s) => (
           <section key={s.id} id={s.id} className="section-y-sm scroll-mt-28">
             <div className="container mx-auto px-6">
               <h2 className="font-display text-[28px] font-extrabold text-ink md:text-[32px]">
@@ -74,6 +138,41 @@ function ProRodicePage() {
               "linear-gradient(to bottom, #FFFFFF 0%, #FEF8E7 40%, #FEF8E7 100%)",
           }}
         >
+          <section id="dokumenty" className="section-y-md scroll-mt-28">
+            <div className="container mx-auto px-6">
+              <div className="max-w-4xl">
+                <h2 className="font-display text-[28px] font-extrabold text-ink md:text-[32px]">
+                  {fixPrepositions("Dokumenty ke stažení")}
+                </h2>
+                <p className="mt-4 max-w-2xl text-body">
+                  {fixPrepositions(
+                    "Formuláře, žádosti a základní dokumenty naší mateřské školy ke stažení ve formátu PDF."
+                  )}
+                </p>
+
+                <div className="mt-10 space-y-8">
+                  <div>
+                    <h3 className="mb-3 font-display text-lg font-bold text-ink">
+                      {fixPrepositions("Formuláře a žádosti")}
+                    </h3>
+                    <div className="overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
+                      <DocList items={formulare} />
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="mb-3 font-display text-lg font-bold text-ink">
+                      {fixPrepositions("Základní dokumenty")}
+                    </h3>
+                    <div className="overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
+                      <DocList items={zakladni} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <SiteFooter topCubeColor="blue" topCubePosition="left" />
         </div>
       </main>
