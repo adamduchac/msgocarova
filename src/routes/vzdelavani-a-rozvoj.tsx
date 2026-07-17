@@ -172,6 +172,25 @@ const allAreas: Area[] = [
       },
     ],
   },
+  {
+    id: "tradicni-akce",
+    eyebrow: "Aktivity",
+    title: "Tradiční akce",
+    photoLabel: "Karneval a další akce",
+    photoBg: "#FCEDED",
+    iconColor: "text-brand-red",
+    iconBg: "bg-brand-red/10",
+    image: karnevalImg.url,
+    imageAlt: "Děti v barevných karnevalových kostýmech ve školce",
+    activities: [
+      {
+        icon: PartyPopper,
+        title: "Oblíbené akce během roku",
+        text:
+          "Během školního roku se děti účastní řady oblíbených aktivit. Patří sem podzimní a jarní výlety do přírody, Čertí rej, karneval, návštěvy Divadla Drak, poznávací exkurze a další společné akce.",
+      },
+    ],
+  },
 ];
 
 function AreaPhoto({ area, aspect = "aspect-[4/5]" }: { area: Area; aspect?: string }) {
