@@ -1,19 +1,29 @@
-Cíl: Sekce Přihlášení na /predskolacek a Po přijetí na /zapis-do-skolky se mají stát součástí stejného obsahového bloku jako StatusBlock a třísloupcový grid — se stejnou mezerou jako mezi StatusBlockem a gridem (mt-8), nikoli jako samostatné sekce s větším spacingem.
+# Fáze 1 — Základ CMS
 
-Změny:
+## Rozsah
 
-1. /predskolacek
-   - Přesunout box "Přihlášení" dovnitř sekce s StatusBlock a 3 sloupci.
-   - Box zůstane plná šířka, zachová žlutý podtón a stín jako nyní.
-   - Mezera nad boxem bude mt-8 (stejná jako mezi StatusBlock a grid).
-   - Odstranit samostatnou `<section className="section-y-md">` kolem Přihlášení.
-   - Ponechat CTA sekci s polovičním spacingem (section-y-sm) a footer žlutý.
+1. **Zapnout Lovable Cloud** (databáze, auth, storage).
+2. **Auth setup**
+   - Registrace vypnutá (přes nastavení auth).
+   - Migrace: `app_role` enum (`admin`), tabulka `user_roles`, security-definer funkce `has_role()`, RLS policies.
+   - První admin `adam.duchac@gmail.com` / `Severni723` — vytvořen jednorázově přes admin API v migraci (nebo dedikovaným krokem po zapnutí Cloudu), + řádek v `user_roles` s rolí `admin`.
+3. **Storage buckety** (prázdné, připravené pro fázi 2): `staff-photos` (public), `documents` (public).
+4. **Admin shell**
+   - `/admin/login` — přihlašovací formulář (email + heslo), redirect na `/admin` po úspěchu.
+   - `/admin` (a všechny podstránky) pod route gate `_authenticated` + kontrola role `admin` v `beforeLoad`; bez role → redirect na `/admin/login`.
+   - Layout se sidebarem vlevo (položky: Top zprávy, Zaměstnanci, Dokumenty, Předškoláček, Zápis) + header s emailem přihlášeného a odhlášením.
+   - Každá podstránka zatím jen placeholder „Sekce bude aktivní ve fázi 2".
+   - Vizuál: čistý admin styl (světlé pozadí, sidebar bílý s brand accentem), oddělený od veřejného webu — bez hero/navbaru veřejné části.
 
-2. /zapis-do-skolky
-   - Přesunout box "Po přijetí" dovnitř sekce s StatusBlock a 3 sloupci.
-   - Box zůstane plná šířka, zachová žlutý podtón a stín jako nyní.
-   - Mezera nad boxem bude mt-8 (stejná jako mezi StatusBlock a grid).
-   - Odstranit samostatnou `<section className="section-y-md">` kolem Po přijetí.
-   - Ponechat CTA sekci s polovičním spacingem (section-y-sm) a footer žlutý.
+## Co Fáze 1 neobsahuje
 
-Očekávaný výsledek: Obě stránky budou mít H1 + úvod, a pod ním jeden kompaktní plný blok (status → 3 karty → plná šířka accent box) se sjednocenými mezerami, až pak následuje CTA a footer.
+- Žádné CRUD tabulky obsahu (Top zprávy, Zaměstnanci, Dokumenty, Infoboxy) — přijdou ve Fázi 2.
+- Žádné napojení veřejných stránek na DB — public web zůstává beze změny.
+
+## Výstup
+
+Po Fázi 1 se budeš moci přihlásit na `/admin/login`, uvidíš sidebar a prázdné sekce. Pak pokračujeme Fází 2 (sekce po sekci — začneme Top zprávami).
+
+---
+
+Pokračovat implementací Fáze 1?
