@@ -189,92 +189,55 @@ function OSkolcePage() {
         style={{ background: "linear-gradient(to bottom, #FEF8E7 0%, #FFFFFF 100%)" }}
         className="pt-28 sm:pt-32"
       >
-        <section className="section-y">
+        <section className="section-y-sm">
           <div className="container mx-auto px-6">
-            <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
-              <div className="reveal-up max-w-3xl">
-                <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-brand-green">
-                  {t("O školce")}
-                </p>
-                <h1 className="mt-3 font-display text-[42px] font-extrabold leading-[1.05] text-ink md:text-[56px]">
-                  {t("Mateřská škola Josefa Gočára")}
-                </h1>
-                <p className="mt-5 text-lg leading-relaxed text-body md:text-xl">
-                  {t(
-                    "Nacházíme se v centru Hradce Králové, v klidné části města u břehu Labe. Pracujeme podle školního vzdělávacího programu „Skládáme svět z kostiček“, který vychází ze současných trendů předškolního vzdělávání."
-                  )}
-                </p>
-              </div>
+            <div className="reveal-up max-w-3xl">
+              <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-brand-green">
+                {t("O školce")}
+              </p>
+              <h1 className="mt-3 font-display text-[42px] font-extrabold leading-[1.05] text-ink md:text-[56px]">
+                {t("Mateřská škola Josefa Gočára")}
+              </h1>
+              <p className="mt-5 text-lg leading-relaxed text-body md:text-xl">
+                {t(
+                  "Nacházíme se v centru Hradce Králové, v klidné části města u břehu Labe. Pracujeme podle školního vzdělávacího programu „Skládáme svět z kostiček“, který vychází ze současných trendů předškolního vzdělávání."
+                )}
+              </p>
 
-              {/* Sticky TOC on desktop */}
-              <nav
-                aria-label="Obsah stránky"
-                className="reveal-fade hidden rounded-2xl border border-border/70 bg-background/70 p-5 backdrop-blur lg:block"
-                style={{ ["--reveal-delay" as string]: "160ms" }}
-              >
-                <p className="font-display text-xs font-semibold uppercase tracking-[0.18em] text-ink/55">
-                  {t("Obsah")}
-                </p>
-                <ul className="mt-3 space-y-2">
-                  {tocSections.map((s) => (
-                    <li key={s.id}>
-                      <a
-                        href={`#${s.id}`}
-                        className="group inline-flex items-center gap-2 text-sm text-ink/80 transition-colors hover:text-brand-blue"
-                      >
-                        <span className="h-px w-4 bg-ink/25 transition-all group-hover:w-6 group-hover:bg-brand-blue" />
-                        {t(s.title)}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
+              <h2 className="mt-10 font-display text-[32px] font-extrabold leading-[1.15] text-ink md:text-[40px]">
+                {t("Školka, kde má hra a přirozený rozvoj hlavní slovo")}
+              </h2>
+              <p className="mt-6 text-lg leading-relaxed text-body">
+                {t(
+                  "Naše třídy nesou názvy barevných kostiček — symbolu dětské hry, té nejpřirozenější a nejdůležitější činnosti předškoláka. Cílem je podnětné prostředí plné hraček a zajímavých aktivit, kam se děti každý den těší."
+                )}
+              </p>
+              <p className="mt-4 text-lg leading-relaxed text-body">
+                {t(
+                  "Preferujeme osobní přístup ke každému dítěti a rozvíjíme jeho potenciál. Didaktické pomůcky umísťujeme tak, aby si je děti mohly samostatně brát a přirozeně rozvíjet fantazii i celou svou osobnost. Na estetickém prostředí školy se děti podílejí svými výtvory. Všechny učitelky mají odpovídající kvalifikaci a dále se vzdělávají."
+                )}
+              </p>
             </div>
           </div>
         </section>
       </div>
 
       <main>
-        {/* Galerie mezi heru a Skládáme svět */}
-        <section id="o-skolce" className="pt-4 pb-12 scroll-mt-28 md:pt-6 md:pb-16">
+        {/* Galerie na plnou šířku */}
+        <section id="o-skolce" className="section-y-sm scroll-mt-28">
           <div className="container mx-auto px-6">
-            <div className="mx-auto max-w-4xl md:mx-0">
-              <AboutGallery startTint={0} />
-            </div>
+            <AboutGallery startTint={0} />
           </div>
         </section>
 
-        {/* 1. Skládáme svět z kostiček */}
-        <section className="section-y">
-          <div className="container mx-auto px-6">
-            <div className="max-w-4xl">
-              <div className="reveal-up">
-                <h2 className="font-display text-[32px] font-extrabold leading-[1.15] text-ink md:text-[40px]">
-                  {t("Školka, kde má hra a přirozený rozvoj hlavní slovo")}
-                </h2>
-                <p className="mt-6 text-lg leading-relaxed text-body">
-                  {t(
-                    "Naše třídy nesou názvy barevných kostiček — symbolu dětské hry, té nejpřirozenější a nejdůležitější činnosti předškoláka. Cílem je podnětné prostředí plné hraček a zajímavých aktivit, kam se děti každý den těší."
-                  )}
-                </p>
-                <p className="mt-4 text-lg leading-relaxed text-body">
-                  {t(
-                    "Preferujeme osobní přístup ke každému dítěti a rozvíjíme jeho potenciál. Didaktické pomůcky umísťujeme tak, aby si je děti mohly samostatně brát a přirozeně rozvíjet fantazii i celou svou osobnost. Na estetickém prostředí školy se děti podílejí svými výtvory. Všechny učitelky mají odpovídající kvalifikaci a dále se vzdělávají."
-                  )}
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 2. Představení a vize */}
+        {/* Představení a vize */}
         <section
           id="vize"
-          className="section-y scroll-mt-28"
+          className="section-y-sm scroll-mt-28"
           style={{ backgroundColor: "#FDFAF6" }}
         >
           <div className="container mx-auto px-6">
-            <div className="mx-auto max-w-3xl text-center">
+            <div className="max-w-4xl">
               <p className="reveal-up font-display text-sm font-semibold uppercase tracking-[0.18em] text-brand-blue">
                 {t("Představení a vize")}
               </p>
@@ -319,8 +282,8 @@ function OSkolcePage() {
           </div>
         </section>
 
-        {/* 3. Vzdělávání a rozvoj */}
-        <section id="vzdelavani" className="section-y scroll-mt-28">
+        {/* Vzdělávání a rozvoj */}
+        <section id="vzdelavani" className="section-y-sm scroll-mt-28">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl">
               <div className="reveal-up">
@@ -358,18 +321,18 @@ function OSkolcePage() {
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
               </div>
+            </div>
 
-              <div className="mt-14">
-                <AboutGallery startTint={3} />
-              </div>
+            <div className="mt-14">
+              <AboutGallery startTint={3} />
             </div>
           </div>
         </section>
 
-        {/* 4. Náš tým */}
+        {/* Náš tým */}
         <section
           id="tym"
-          className="section-y scroll-mt-28"
+          className="section-y-sm scroll-mt-28"
           style={{ backgroundColor: "#F8FAFC" }}
         >
           <div className="container mx-auto px-6">
@@ -387,172 +350,176 @@ function OSkolcePage() {
           </div>
         </section>
 
-        {/* 5. Veřejné hřiště */}
-        <section id="hriste" className="section-y scroll-mt-28">
+        {/* Veřejné hřiště */}
+        <section id="hriste" className="section-y-sm scroll-mt-28">
           <div className="container mx-auto px-6">
-            <div className="max-w-4xl">
-              <div className="reveal-up">
-                <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-brand-yellow">
-                  {t("Veřejné hřiště")}
-                </p>
-                <h2 className="mt-3 font-display text-[32px] font-extrabold leading-[1.15] text-ink md:text-[40px]">
-                  {t("Zahrada slouží o víkendech veřejnosti")}
-                </h2>
-                <p className="mt-4 text-lg leading-relaxed text-body">
-                  {t(
-                    "Školní zahrada je o sobotách a nedělích otevřená pro širokou veřejnost. Přijďte si s dětmi zaběhat, prolézt prolézačky a užít si klidný park uprostřed města."
-                  )}
-                </p>
-              </div>
-
-              <div
-                className="reveal-fade mt-10 grid gap-0 overflow-hidden rounded-2xl border border-border/70 bg-background md:grid-cols-2"
-                style={{ ["--reveal-delay" as string]: "120ms" }}
-              >
-                <div className="border-b border-border/70 p-8 md:border-b-0 md:border-r">
-                  <p className="font-display text-xs font-semibold uppercase tracking-[0.18em] text-brand-green">
-                    {t("15. dubna – září")}
-                  </p>
-                  <dl className="mt-4 space-y-2 text-ink">
-                    <div className="flex items-baseline justify-between gap-6">
-                      <dt className="text-body">{t("Dopoledne")}</dt>
-                      <dd className="font-display text-xl font-bold">10:00 – 12:00</dd>
-                    </div>
-                    <div className="flex items-baseline justify-between gap-6">
-                      <dt className="text-body">{t("Odpoledne")}</dt>
-                      <dd className="font-display text-xl font-bold">13:00 – 17:00</dd>
-                    </div>
-                  </dl>
-                </div>
-                <div className="p-8">
-                  <p className="font-display text-xs font-semibold uppercase tracking-[0.18em] text-brand-red">
-                    {t("Do 15. října")}
-                  </p>
-                  <dl className="mt-4 space-y-2 text-ink">
-                    <div className="flex items-baseline justify-between gap-6">
-                      <dt className="text-body">{t("Dopoledne")}</dt>
-                      <dd className="font-display text-xl font-bold">10:00 – 12:00</dd>
-                    </div>
-                    <div className="flex items-baseline justify-between gap-6">
-                      <dt className="text-body">{t("Odpoledne")}</dt>
-                      <dd className="font-display text-xl font-bold">13:00 – 16:00</dd>
-                    </div>
-                  </dl>
-                </div>
-              </div>
-
-              <p className="reveal-up mt-5 text-sm text-body/80">
-                {t("Ve státní svátky je hřiště uzavřeno.")}
+            <div className="max-w-4xl reveal-up">
+              <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-brand-yellow">
+                {t("Veřejné hřiště")}
+              </p>
+              <h2 className="mt-3 font-display text-[32px] font-extrabold leading-[1.15] text-ink md:text-[40px]">
+                {t("Zahrada slouží o víkendech veřejnosti")}
+              </h2>
+              <p className="mt-4 text-lg leading-relaxed text-body">
+                {t(
+                  "Školní zahrada je o sobotách a nedělích otevřená pro širokou veřejnost. Přijďte si s dětmi zaběhat, prolézt prolézačky a užít si klidný park uprostřed města."
+                )}
               </p>
             </div>
+
+            <div
+              className="reveal-fade mt-10 grid gap-0 overflow-hidden rounded-2xl border border-border/70 bg-background md:grid-cols-2"
+              style={{ ["--reveal-delay" as string]: "120ms" }}
+            >
+              <div className="border-b border-border/70 p-8 md:border-b-0 md:border-r">
+                <p className="font-display text-xs font-semibold uppercase tracking-[0.18em] text-brand-green">
+                  {t("15. dubna – září")}
+                </p>
+                <dl className="mt-4 space-y-2 text-ink">
+                  <div className="flex items-baseline justify-between gap-6">
+                    <dt className="text-body">{t("Dopoledne")}</dt>
+                    <dd className="font-display text-xl font-bold">10:00 – 12:00</dd>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-6">
+                    <dt className="text-body">{t("Odpoledne")}</dt>
+                    <dd className="font-display text-xl font-bold">13:00 – 17:00</dd>
+                  </div>
+                </dl>
+              </div>
+              <div className="p-8">
+                <p className="font-display text-xs font-semibold uppercase tracking-[0.18em] text-brand-red">
+                  {t("Do 15. října")}
+                </p>
+                <dl className="mt-4 space-y-2 text-ink">
+                  <div className="flex items-baseline justify-between gap-6">
+                    <dt className="text-body">{t("Dopoledne")}</dt>
+                    <dd className="font-display text-xl font-bold">10:00 – 12:00</dd>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-6">
+                    <dt className="text-body">{t("Odpoledne")}</dt>
+                    <dd className="font-display text-xl font-bold">13:00 – 16:00</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+
+            <p className="reveal-up mt-5 text-sm text-body/80">
+              {t("Ve státní svátky je hřiště uzavřeno.")}
+            </p>
           </div>
         </section>
 
-        {/* 6. Školní jídelna */}
+        {/* Školní jídelna */}
         <section
           id="jidelna"
-          className="section-y scroll-mt-28"
+          className="section-y-sm scroll-mt-28"
           style={{ background: "linear-gradient(to bottom, #FFFFFF 0%, #FDFAF6 100%)" }}
         >
           <div className="container mx-auto px-6">
-            <div className="max-w-4xl">
-              <div className="reveal-up">
-                <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-brand-blue">
-                  {t("Školní jídelna")}
+            <div className="max-w-4xl reveal-up">
+              <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-brand-blue">
+                {t("Školní jídelna")}
+              </p>
+              <h2 className="mt-3 font-display text-[32px] font-extrabold leading-[1.15] text-ink md:text-[40px]">
+                {t("Praktické informace ke stravování")}
+              </h2>
+            </div>
+
+            <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-6">
+              {/* Odhlašování */}
+              <div className="reveal-up flex flex-col rounded-2xl border border-border/70 bg-background p-7 md:p-8">
+                <h3 className="font-display text-xl font-bold text-ink">
+                  {t("Odhlašování a přihlašování stravy")}
+                </h3>
+                <p className="mt-4 text-[15px] leading-relaxed text-body">
+                  {t(
+                    "Teplé pokrmy jsou určeny k přímé spotřebě v den výdeje, nejdéle do 12:30. Stravu na následující den je nutné odhlásit nebo přihlásit den předem do 10:00."
+                  )}
                 </p>
-                <h2 className="mt-3 font-display text-[32px] font-extrabold leading-[1.15] text-ink md:text-[40px]">
-                  {t("Praktické informace ke stravování")}
-                </h2>
-              </div>
+                <ul className="mt-5 space-y-3 text-[15px] text-ink">
+                  <li className="flex gap-3">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-blue" />
+                    <span>{t("Osobně v kanceláři školní jídelny")}</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-blue" />
+                    <span>
+                      {t("Telefonicky ")}
+                      <a
+                        href="tel:+420495019050"
+                        className="font-semibold text-ink underline-offset-4 hover:text-brand-blue hover:underline"
+                      >
+                        495 019 050
+                      </a>
+                    </span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-blue" />
+                    <span>
+                      {t("Online na ")}
+                      <a
+                        href="https://www.strava.cz"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-ink underline-offset-4 hover:text-brand-blue hover:underline"
+                      >
+                        www.strava.cz
+                      </a>
+                    </span>
+                  </li>
+                </ul>
 
-              <div className="mt-12 space-y-6 md:space-y-8">
-                {/* Pravidla */}
-                <div className="reveal-up rounded-2xl border border-border/70 bg-background p-7 md:p-8">
-                  <h3 className="font-display text-xl font-bold text-ink">
-                    {t("Odhlašování a přihlašování stravy")}
-                  </h3>
-                  <p className="mt-4 text-[15px] leading-relaxed text-body">
-                    {t(
-                      "Teplé pokrmy jsou určeny k přímé spotřebě v den výdeje, nejdéle do 12:30. Stravu na následující den je nutné odhlásit nebo přihlásit den předem do 10:00."
-                    )}
-                  </p>
-                  <ul className="mt-5 space-y-3 text-[15px] text-ink">
-                    <li className="flex gap-3">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-blue" />
-                      <span>{t("Osobně v kanceláři školní jídelny")}</span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-blue" />
-                      <span>
-                        {t("Telefonicky ")}
-                        <a
-                          href="tel:+420495019050"
-                          className="font-semibold text-ink underline-offset-4 hover:text-brand-blue hover:underline"
-                        >
-                          495 019 050
-                        </a>
-                      </span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-blue" />
-                      <span>
-                        {t("Online na ")}
-                        <a
-                          href="https://www.strava.cz"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-semibold text-ink underline-offset-4 hover:text-brand-blue hover:underline"
-                        >
-                          www.strava.cz
-                        </a>
-                      </span>
-                    </li>
-                  </ul>
-
-                  <div className="mt-7 rounded-xl border border-brand-red/25 bg-blush/60 p-4 text-sm text-ink">
+                <div className="mt-auto pt-6">
+                  <div className="rounded-xl border border-brand-red/25 bg-blush/60 p-4 text-sm text-ink">
                     {t("Zákaz výdeje obědů do skleněných nádob.")}
                   </div>
                 </div>
+              </div>
 
-                {/* Platby + časy */}
-                <div
-                  className="reveal-up rounded-2xl border border-border/70 bg-background p-7 md:p-8"
-                  style={{ ["--reveal-delay" as string]: "120ms" }}
-                >
-                  <h3 className="font-display text-xl font-bold text-ink">
-                    {t("Platba stravného")}
-                  </h3>
-                  <dl className="mt-4 space-y-2.5 text-[15px]">
-                    <div className="flex flex-wrap items-baseline justify-between gap-3">
-                      <dt className="text-body">{t("Číslo účtu")}</dt>
-                      <dd className="font-display font-semibold text-ink">27-320530297/0100</dd>
-                    </div>
-                    <div className="flex flex-wrap items-baseline justify-between gap-3">
-                      <dt className="text-body">{t("Variabilní symbol")}</dt>
-                      <dd className="text-ink">{t("evidenční číslo dítěte")}</dd>
-                    </div>
-                    <div className="flex flex-wrap items-baseline justify-between gap-3">
-                      <dt className="text-body">{t("Konstantní symbol (složenka)")}</dt>
-                      <dd className="font-display font-semibold text-ink">0379</dd>
-                    </div>
-                    <div className="flex flex-wrap items-baseline justify-between gap-3">
-                      <dt className="text-body">{t("Konstantní symbol (převod)")}</dt>
-                      <dd className="font-display font-semibold text-ink">0558</dd>
-                    </div>
-                  </dl>
+              {/* Platba */}
+              <div
+                className="reveal-up flex flex-col rounded-2xl border border-border/70 bg-background p-7 md:p-8"
+                style={{ ["--reveal-delay" as string]: "100ms" }}
+              >
+                <h3 className="font-display text-xl font-bold text-ink">
+                  {t("Platba stravného")}
+                </h3>
+                <dl className="mt-4 space-y-2.5 text-[15px]">
+                  <div className="flex flex-wrap items-baseline justify-between gap-3">
+                    <dt className="text-body">{t("Číslo účtu")}</dt>
+                    <dd className="font-display font-semibold text-ink">27-320530297/0100</dd>
+                  </div>
+                  <div className="flex flex-wrap items-baseline justify-between gap-3">
+                    <dt className="text-body">{t("Variabilní symbol")}</dt>
+                    <dd className="text-ink">{t("evidenční číslo dítěte")}</dd>
+                  </div>
+                  <div className="flex flex-wrap items-baseline justify-between gap-3">
+                    <dt className="text-body">{t("Konstantní symbol (složenka)")}</dt>
+                    <dd className="font-display font-semibold text-ink">0379</dd>
+                  </div>
+                  <div className="flex flex-wrap items-baseline justify-between gap-3">
+                    <dt className="text-body">{t("Konstantní symbol (převod)")}</dt>
+                    <dd className="font-display font-semibold text-ink">0558</dd>
+                  </div>
+                </dl>
+              </div>
 
-                  <h4 className="mt-8 font-display text-lg font-bold text-ink">
-                    {t("Výdej stravy")}
-                  </h4>
-                  <ul className="mt-4 divide-y divide-border/60">
-                    {canteenSchedule.map((row) => (
-                      <li key={row.label} className="flex items-baseline justify-between gap-4 py-2.5 text-[15px]">
-                        <span className="text-body">{t(row.label)}</span>
-                        <span className="font-display font-semibold text-ink">{row.time}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              {/* Výdej */}
+              <div
+                className="reveal-up flex flex-col rounded-2xl border border-border/70 bg-background p-7 md:p-8"
+                style={{ ["--reveal-delay" as string]: "200ms" }}
+              >
+                <h3 className="font-display text-xl font-bold text-ink">
+                  {t("Výdej stravy")}
+                </h3>
+                <ul className="mt-4 divide-y divide-border/60">
+                  {canteenSchedule.map((row) => (
+                    <li key={row.label} className="flex items-baseline justify-between gap-4 py-2.5 text-[15px]">
+                      <span className="text-body">{t(row.label)}</span>
+                      <span className="font-display font-semibold text-ink">{row.time}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
@@ -564,12 +531,13 @@ function OSkolcePage() {
               "linear-gradient(to bottom, #FDFAF6 0%, #FEF8E7 40%, #FEF8E7 100%)",
           }}
         >
-          <SiteFooter topCubeColor="blue" topCubePosition="right" />
+          <SiteFooter topCubeColor="blue" topCubePosition="right" showBottomCube={false} />
         </div>
       </main>
     </div>
   );
 }
+
 
 function TeamGroup({ title, members }: { title: string; members: typeof teamMembers }) {
   return (
