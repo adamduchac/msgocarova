@@ -6,6 +6,7 @@ import kostickyA from "@/assets/kosticky-tridy-a.webp.asset.json";
 import kostickyB from "@/assets/kosticky-tridy-b.webp.asset.json";
 
 type ClassItem = {
+  id: string;
   name: string;
   age: string;
   teachers: string;
@@ -15,6 +16,7 @@ type ClassItem = {
 
 const classes: ClassItem[] = [
   {
+    id: "cervena",
     name: fixPrepositions("Červená kostička"),
     age: fixPrepositions("pro děti od 5 do 7 let"),
     teachers: fixPrepositions(
@@ -24,6 +26,7 @@ const classes: ClassItem[] = [
     pillBg: "bg-brand-red",
   },
   {
+    id: "zelena",
     name: fixPrepositions("Zelená kostička"),
     age: fixPrepositions("pro děti od 5 do 7 let"),
     teachers: fixPrepositions("paní učitelka Jana Tuharská a Kristýna Vaňátková, DiS."),
@@ -31,6 +34,7 @@ const classes: ClassItem[] = [
     pillBg: "bg-brand-green",
   },
   {
+    id: "modra",
     name: fixPrepositions("Modrá kostička"),
     age: fixPrepositions("pro děti od 3 do 5 let"),
     teachers: fixPrepositions("paní učitelka Bc. Veronika Kremláčková a Elena Špicarová"),
@@ -38,6 +42,7 @@ const classes: ClassItem[] = [
     pillBg: "bg-brand-blue",
   },
   {
+    id: "zluta",
     name: fixPrepositions("Žlutá kostička"),
     age: fixPrepositions("pro děti od 3 do 5 let"),
     teachers: fixPrepositions("paní učitelka Magdaléna Sováková a Milena Svobodová, DiS."),
