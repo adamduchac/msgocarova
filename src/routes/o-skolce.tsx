@@ -314,10 +314,10 @@ function OSkolcePage() {
 
               <div className="reveal-fade mt-10">
                 <Link
-                  to="/"
+                  to="/vzdelavani-a-rozvoj"
                   className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 font-display text-sm font-semibold text-background transition-colors duration-200 hover:bg-ink/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
                 >
-                  {t("Více o vzdělávání")}
+                  {t("Více o vzdělávání a aktivitách")}
                   <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
               </div>
