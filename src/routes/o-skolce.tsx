@@ -369,7 +369,7 @@ function OSkolcePage() {
             </div>
 
             <div
-              className="reveal-fade mt-10 overflow-hidden rounded-2xl border border-border/70 bg-background"
+              className="reveal-fade mt-10 overflow-hidden rounded-2xl border border-border/70 bg-background shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)]"
               style={{ ["--reveal-delay" as string]: "120ms" }}
             >
               <div className="px-6 pt-6 md:px-8 md:pt-8">
