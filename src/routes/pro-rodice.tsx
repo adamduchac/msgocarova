@@ -94,7 +94,7 @@ const formulare: { title: string; asset: DocAsset }[] = [
 const zakladni: { title: string; asset: DocAsset }[] = [
   { title: "Školní řád mateřské školy", asset: skolniRad },
   { title: "Vnitřní řád školní výdejny", asset: radVydejny },
-  { title: "Školní vzdělávací program — Skládáme svět z kostiček", asset: svp },
+  { title: "Školní vzdělávací program", asset: svp },
 ];
 
 function formatSize(bytes: number) {
