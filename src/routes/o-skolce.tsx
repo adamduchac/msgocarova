@@ -40,12 +40,12 @@ const tocSections = [
 ];
 
 const galleryTints = [
-  { bg: "#FCEDED", label: "text-brand-red/40" },
-  { bg: "#E3EEFB", label: "text-brand-blue/40" },
-  { bg: "#EAF5EC", label: "text-brand-green/50" },
-  { bg: "#FEF6E6", label: "text-brand-yellow/50" },
-  { bg: "#FDFAF6", label: "text-ink/25" },
-  { bg: "#ECF7F0", label: "text-brand-green/40" },
+  { bg: "#FFFFFF", label: "text-brand-red/40" },
+  { bg: "#FFFFFF", label: "text-brand-blue/40" },
+  { bg: "#FFFFFF", label: "text-brand-green/50" },
+  { bg: "#FFFFFF", label: "text-brand-yellow/50" },
+  { bg: "#FFFFFF", label: "text-ink/25" },
+  { bg: "#FFFFFF", label: "text-brand-green/40" },
 ];
 
 function AboutGallery({ startTint = 0 }: { startTint?: number }) {
@@ -564,7 +564,7 @@ function TeamGroup({ title, members }: { title: string; members: typeof teamMemb
           >
             <div
               className="overflow-hidden rounded-2xl border border-border/60"
-              style={m.photo ? undefined : { backgroundColor: "#FEF8E7" }}
+              style={m.photo ? undefined : { backgroundColor: "#FFFFFF" }}
             >
               {m.photo ? (
                 <img
