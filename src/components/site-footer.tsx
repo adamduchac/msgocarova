@@ -21,7 +21,7 @@ const classes: ClassRow[] = [
 
 type SiteFooterProps = {
   cubeVariant?: "default" | "kontakty";
-  topCubeColor?: "red" | "blue";
+  topCubeColor?: "red" | "blue" | "yellow";
   topCubePosition?: "left" | "right";
   showBottomCube?: boolean;
 };
@@ -33,14 +33,19 @@ export function SiteFooter({
   showBottomCube,
 }: SiteFooterProps) {
   // Backwards-compat mapping from cubeVariant
-  const resolvedColor: "red" | "blue" =
+  const resolvedColor: "red" | "blue" | "yellow" =
     topCubeColor ?? (cubeVariant === "kontakty" ? "blue" : "red");
   const resolvedPosition: "left" | "right" =
     topCubePosition ?? (cubeVariant === "kontakty" ? "right" : "left");
   const resolvedShowBottom =
     showBottomCube ?? (cubeVariant !== "kontakty");
 
-  const topCube = resolvedColor === "blue" ? cubeBlue : cubeRed;
+  const topCube =
+    resolvedColor === "blue"
+      ? cubeBlue
+      : resolvedColor === "yellow"
+        ? cubeYellow
+        : cubeRed;
   const bottomCube = resolvedShowBottom ? cubeYellow : null;
   const topPositionClass =
     resolvedPosition === "right"
