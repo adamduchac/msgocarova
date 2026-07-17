@@ -56,7 +56,6 @@ type Area = {
 const areas: Area[] = [
   {
     id: "jazyk",
-    eyebrow: "Oblast 01",
     title: "Jazyk a komunikace",
     photoLabel: "Angličtina a řeč",
     photoBg: "#E3EEFB",
@@ -79,7 +78,6 @@ const areas: Area[] = [
   },
   {
     id: "mysleni",
-    eyebrow: "Oblast 02",
     title: "Myšlení a příprava na školu",
     photoLabel: "Předškoláci",
     photoBg: "#FCEDED",
@@ -96,7 +94,6 @@ const areas: Area[] = [
   },
   {
     id: "technologie",
-    eyebrow: "Oblast 03",
     title: "Moderní technologie",
     photoLabel: "Digitální pomůcky",
     photoBg: "#EAF5EC",
@@ -113,7 +110,6 @@ const areas: Area[] = [
   },
   {
     id: "pohyb",
-    eyebrow: "Oblast 04",
     title: "Pohyb a pobyt v přírodě",
     photoLabel: "Plavání, hory, sníh",
     photoBg: "#FEF6E6",
