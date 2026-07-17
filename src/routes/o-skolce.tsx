@@ -234,7 +234,7 @@ function OSkolcePage() {
         <section
           id="vize"
           className="section-y-md scroll-mt-28"
-          style={{ backgroundColor: "#FDFAF6" }}
+          style={{ background: "linear-gradient(to bottom, #ffffff 0%, #ffffff 10%, var(--blue-soft) 55%, var(--blue-soft) 100%)" }}
         >
           <div className="container mx-auto px-6">
             <div className="max-w-4xl">
