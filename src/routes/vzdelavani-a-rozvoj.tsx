@@ -154,7 +154,7 @@ function AreaBlock({ area, index }: { area: Area; index: number }) {
             className={`reveal-fade ${photoRight ? "md:order-2" : "md:order-1"}`}
           >
             <div
-              className="flex aspect-[4/3] w-full items-end justify-start overflow-hidden rounded-2xl border border-border/60 p-6"
+              className="flex aspect-[4/5] w-full items-end justify-start overflow-hidden rounded-2xl border border-border/60 p-6"
               style={{ backgroundColor: area.photoBg }}
             >
               <span className="font-display text-xs font-semibold uppercase tracking-[0.16em] text-ink/40">
@@ -167,10 +167,7 @@ function AreaBlock({ area, index }: { area: Area; index: number }) {
           <div
             className={`reveal-up ${photoRight ? "md:order-1" : "md:order-2"}`}
           >
-            <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
-              {t(area.eyebrow)}
-            </p>
-            <h2 className="mt-3 font-display text-[32px] font-extrabold leading-[1.1] text-ink md:text-[42px]">
+            <h2 className="font-display text-[32px] font-extrabold leading-[1.1] text-ink md:text-[42px]">
               {t(area.title)}
             </h2>
 
