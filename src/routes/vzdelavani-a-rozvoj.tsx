@@ -119,6 +119,8 @@ const aktivityAreas: Area[] = [
     photoBg: "#E3EEFB",
     iconColor: "text-brand-blue",
     iconBg: "bg-brand-blue/10",
+    image: plavaniImg.url,
+    imageAlt: "Děti s plaveckými deskami v bazénu během plaveckého kurzu",
     activities: [
       {
         icon: Waves,
