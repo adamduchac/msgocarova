@@ -36,14 +36,15 @@ const news: News[] = [
     alt: "Dětské ručky malující vodovkami pestrobarevné květiny",
   },
   {
-    badge: fixPrepositions("Oznámení"),
+    badge: fixPrepositions("Rodiče"),
     badgeBg: "bg-brand-red",
-    title: fixPrepositions("Den otevřených dveří"),
+    title: fixPrepositions("Akce s rodiči"),
     text: fixPrepositions(
-      "Přijďte se podívat do naší školky ve středu 15. 5. od 9:00 do 17:00."
+      "Od podzimního dlabání dýní přes vánoční posezení až po květnové Slavnosti školy — společně si užíváme celý rok."
     ),
     image: openday.url,
-    alt: "Učitelka čte s malou holčičkou knížku ve světlé třídě",
+    alt: "Rodiče a děti pohromadě na společné akci školky",
+    href: "/akce-s-rodici",
   },
 ];
 
