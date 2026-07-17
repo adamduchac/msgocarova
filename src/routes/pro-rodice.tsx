@@ -291,55 +291,7 @@ function ProRodicePage() {
           </div>
         </section>
 
-        {/* Program dne */}
-        <section id="program-dne" className="section-y-md scroll-mt-28">
-          <div className="container mx-auto px-6">
-            <div className="max-w-3xl">
-              <h2 className="font-display text-[32px] font-extrabold leading-[1.15] text-ink md:text-[40px]">
-                {t("Program dne")}
-              </h2>
-              <p className="mt-4 text-lg leading-relaxed text-body">
-                {t("Den v naší školce má jasný rytmus, ale ponechává dětem prostor pro spontánní hru i klid.")}
-              </p>
-            </div>
 
-            <div className="mt-10 grid gap-6 md:grid-cols-2">
-              <ScheduleCard rows={programDne.slice(0, 4)} />
-              <ScheduleCard rows={programDne.slice(4)} />
-            </div>
-
-            <div className="mt-14 max-w-3xl">
-              <h3 className="font-display text-[24px] font-extrabold leading-[1.15] text-ink md:text-[28px]">
-                {t("Kroužky a aktivity")}
-              </h3>
-              <p className="mt-3 text-body">
-                {t("Nabízíme dětem pravidelné aktivity, které rozvíjejí myšlení, soustředění i radost ze hry.")}
-              </p>
-            </div>
-
-            <div className="mt-8 grid gap-4 md:grid-cols-3">
-              {krouzky.map(({ image, alt, title, text }) => (
-                <div
-                  key={title}
-                  className="flex items-start gap-4 rounded-2xl border border-black/[0.06] bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]"
-                >
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-white">
-                    <img
-                      src={image}
-                      alt={alt}
-                      loading="lazy"
-                      className="h-full w-full object-contain"
-                    />
-                  </div>
-                  <div className="min-w-0">
-                    <h4 className="font-display font-bold text-ink">{t(title)}</h4>
-                    <p className="mt-1 text-sm leading-relaxed text-body">{t(text)}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
 
         {/* Výbava */}
