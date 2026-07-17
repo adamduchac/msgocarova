@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { FileText, Download } from "lucide-react";
+import { FileText, Download, Wallet, CreditCard, Check, Puzzle, Brain, Dices } from "lucide-react";
 import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
