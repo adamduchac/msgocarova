@@ -11,6 +11,7 @@ type News = {
   text: string;
   image: string;
   alt: string;
+  href?: string;
 };
 
 const news: News[] = [
