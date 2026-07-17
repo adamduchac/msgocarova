@@ -224,7 +224,7 @@ function OSkolcePage() {
 
       <main>
         {/* Galerie na plnou šířku */}
-        <section id="o-skolce" className="section-y-sm scroll-mt-28">
+        <section id="o-skolce" className="section-y-md scroll-mt-28">
           <div className="container mx-auto px-6">
             <AboutGallery startTint={0} />
           </div>
@@ -233,7 +233,7 @@ function OSkolcePage() {
         {/* Představení a vize */}
         <section
           id="vize"
-          className="section-y-sm scroll-mt-28"
+          className="section-y-md scroll-mt-28"
           style={{ backgroundColor: "#FDFAF6" }}
         >
           <div className="container mx-auto px-6">
@@ -283,7 +283,7 @@ function OSkolcePage() {
         </section>
 
         {/* Vzdělávání a rozvoj */}
-        <section id="vzdelavani" className="section-y-sm scroll-mt-28">
+        <section id="vzdelavani" className="section-y-md scroll-mt-28">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl">
               <div className="reveal-up">
@@ -332,7 +332,7 @@ function OSkolcePage() {
         {/* Náš tým */}
         <section
           id="tym"
-          className="section-y-sm scroll-mt-28"
+          className="section-y-md scroll-mt-28"
           style={{ backgroundColor: "#F8FAFC" }}
         >
           <div className="container mx-auto px-6">
@@ -351,7 +351,7 @@ function OSkolcePage() {
         </section>
 
         {/* Veřejné hřiště */}
-        <section id="hriste" className="section-y-sm scroll-mt-28">
+        <section id="hriste" className="section-y-md scroll-mt-28">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl reveal-up">
               <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-brand-yellow">
@@ -412,7 +412,7 @@ function OSkolcePage() {
         {/* Školní jídelna */}
         <section
           id="jidelna"
-          className="section-y-sm scroll-mt-28"
+          className="section-y-md scroll-mt-28"
           style={{ background: "linear-gradient(to bottom, #FFFFFF 0%, #FDFAF6 100%)" }}
         >
           <div className="container mx-auto px-6">
