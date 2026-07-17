@@ -45,7 +45,6 @@ type Activity = {
 
 type Area = {
   id: string;
-  eyebrow: string;
   title: string;
   photoLabel: string;
   photoBg: string;
