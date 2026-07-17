@@ -1,24 +1,28 @@
-Převedu 4 barevné boxy na HP z nefunkčních `<a href="#">` na odkazy vedoucí na stránku `/barevne-tridy` s přesným hashem na konkrétní třídu.
+## Cíl
+Na `/barevne-tridy` obalit každou třídu do jednoho velkého bílého boxu (rounded-2xl, jemný border a měkký stín). Vzniknou 4 boxy — Červená, Zelená, Modrá, Žlutá. Vnější obal se roztahuje do plné šířky sekce (stejná šířka jako boxy tříd na homepage), ne jen do úzkého `max-w-5xl`.
 
-## Co se změní
+## Změny v `src/routes/barevne-tridy.tsx` (`ClassSection`)
 
-1. **Úprava `src/components/site-classes.tsx`**
-   - Rozšířit data každé třídy o `id` (`cervena`, `zelena`, `modra`, `zluta`) a `hash` (`#cervena`, `#zelena`, `#modra`, `#zluta`).
-   - Nahradit aktuální `<a href="#">` za TanStack `<Link>` s `to="/barevne-tridy" hash={c.id}`.
-   - Aktualizovat `aria-label` z "Vstupte do třídy — Červená kostička" na smysluplný popis odkazu (např. "Přejít na detail Červené kostičky").
-   - Ponechat vizuální styl (rounded-3xl, hover/focus efekty, CTA pill) a animace; odkaz nesmí změnit estetiku.
+1. **Vnější obal třídy** — box obklopuje celý obsah třídy a jde do plné šířky kontejneru (stejný rytmus jako boxy tříd na HP):
+   - `rounded-2xl border border-border/60 bg-background`
+   - jemný stín `shadow-[0_10px_30px_-20px_rgba(15,23,42,0.18)]`
+   - vnitřní padding `p-6 md:p-10`
+   - box umístit přímo do `container mx-auto px-6` (odstranit stávající `mx-auto max-w-5xl` wrapper), aby šířka odpovídala HP kartám
 
-2. **Stránka `/barevne-tridy` je již připravená**
-   - Sekce jednotlivých tříd mají správná ID (`cervena`, `zelena`, `modra`, `zluta`) a `scroll-mt-28`, takže hash navigace dopadne na správné místo.
+2. **Hero ilustrace bez rámečku** — z hero fota odstranit `border`, `rounded-2xl` i `overflow-hidden`; obrázek leží přímo na bílém pozadí boxu (`aspect-[16/10] w-full object-cover`, bez zaobleného rámu).
 
-3. **Detaily implementace**
-   - Import `<Link>` z `@tanstack/react-router`.
-   - Změna se netýká žádných serverových funkcí, databáze ani env proměnných.
-   - Zachová se zakázaný hover scale dle project memory — karta zůstane jen posunutím/spuštěním CTA pill, bez `hover:scale-*`.
+3. **Věková značka „X–X let" — inverzní** — místo bílého pillu s barevným textem: plné barevné pozadí v barvě třídy, text bílý, bez borderu. Doplnit do `ClassData`:
+   - `bgColor`: `bg-brand-red / bg-brand-green / bg-brand-blue / bg-brand-yellow`
+   - `pillText`: `text-white` (u žluté `text-ink` kvůli kontrastu)
 
-4. **Ověření**
-   - Provedu kontrolu buildu přes `bun run build`.
-   - Zkontroluji, že každý box odkazuje na správný hash a že se stránka správně posune na příslušnou třídu.
+4. **Vertikální rytmus** — sekce si ponechají `section-y-sm`; poslední sekce si ponechá gradient do žluté na pozadí, box zůstane bílý navrchu.
 
-## Výsledek
-Na homepage kliknutí na libovolný barevný box povede na `/barevne-tridy#cervena` (resp. #zelena, #modra, #zluta) a prohlížeč automaticky scrolluje na začátek dané třídy.
+5. **Karty učitelek** uvnitř zůstávají beze změny; po náhledu případně jemně snížit stín, aby se nebily s vnějším boxem.
+
+## Co se nemění
+- Data, telefony, medailonky, chování rozbalování učitelek.
+- Header, footer, hash navigace `#cervena / #zelena / #modra / #zluta`.
+
+## Ověření
+- `bun run build`
+- Playwright screenshot `/barevne-tridy` (desktop 1280 a mobile 390) — 4 boxy plné šířky sekce, hero foto bez rámečku, barevné pilulky.
