@@ -19,6 +19,8 @@ import plavaniImg from "@/assets/vzdelavani/plavani.webp.asset.json";
 import skolaPrirodeImg from "@/assets/vzdelavani/skolavprirode.webp.asset.json";
 import lyzeImg from "@/assets/vzdelavani/lyze.webp.asset.json";
 
+import karnevalImg from "@/assets/vzdelavani/karneval.webp.asset.json";
+
 const t = fixPrepositions;
 
 export const Route = createFileRoute("/vzdelavani-a-rozvoj")({
