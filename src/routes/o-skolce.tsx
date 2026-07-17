@@ -224,7 +224,7 @@ function OSkolcePage() {
         {/* Galerie na plnou šířku */}
         <section id="o-skolce" className="section-y-md scroll-mt-28">
           <div className="container mx-auto px-6">
-            <AboutGallery startTint={0} />
+            <AboutGallery />
           </div>
         </section>
 
