@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ZapisDoSkolkyRouteImport } from './routes/zapis-do-skolky'
 import { Route as VzdelavaniARozvojRouteImport } from './routes/vzdelavani-a-rozvoj'
 import { Route as ProRodiceRouteImport } from './routes/pro-rodice'
+import { Route as PredskolacekRouteImport } from './routes/predskolacek'
 import { Route as OSkolceRouteImport } from './routes/o-skolce'
 import { Route as KontaktyRouteImport } from './routes/kontakty'
 import { Route as BarevneTridyRouteImport } from './routes/barevne-tridy'
@@ -31,6 +32,11 @@ const VzdelavaniARozvojRoute = VzdelavaniARozvojRouteImport.update({
 const ProRodiceRoute = ProRodiceRouteImport.update({
   id: '/pro-rodice',
   path: '/pro-rodice',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PredskolacekRoute = PredskolacekRouteImport.update({
+  id: '/predskolacek',
+  path: '/predskolacek',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OSkolceRoute = OSkolceRouteImport.update({
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/barevne-tridy': typeof BarevneTridyRoute
   '/kontakty': typeof KontaktyRoute
   '/o-skolce': typeof OSkolceRoute
+  '/predskolacek': typeof PredskolacekRoute
   '/pro-rodice': typeof ProRodiceRoute
   '/vzdelavani-a-rozvoj': typeof VzdelavaniARozvojRoute
   '/zapis-do-skolky': typeof ZapisDoSkolkyRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/barevne-tridy': typeof BarevneTridyRoute
   '/kontakty': typeof KontaktyRoute
   '/o-skolce': typeof OSkolceRoute
+  '/predskolacek': typeof PredskolacekRoute
   '/pro-rodice': typeof ProRodiceRoute
   '/vzdelavani-a-rozvoj': typeof VzdelavaniARozvojRoute
   '/zapis-do-skolky': typeof ZapisDoSkolkyRoute
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/barevne-tridy': typeof BarevneTridyRoute
   '/kontakty': typeof KontaktyRoute
   '/o-skolce': typeof OSkolceRoute
+  '/predskolacek': typeof PredskolacekRoute
   '/pro-rodice': typeof ProRodiceRoute
   '/vzdelavani-a-rozvoj': typeof VzdelavaniARozvojRoute
   '/zapis-do-skolky': typeof ZapisDoSkolkyRoute
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/barevne-tridy'
     | '/kontakty'
     | '/o-skolce'
+    | '/predskolacek'
     | '/pro-rodice'
     | '/vzdelavani-a-rozvoj'
     | '/zapis-do-skolky'
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/barevne-tridy'
     | '/kontakty'
     | '/o-skolce'
+    | '/predskolacek'
     | '/pro-rodice'
     | '/vzdelavani-a-rozvoj'
     | '/zapis-do-skolky'
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/barevne-tridy'
     | '/kontakty'
     | '/o-skolce'
+    | '/predskolacek'
     | '/pro-rodice'
     | '/vzdelavani-a-rozvoj'
     | '/zapis-do-skolky'
@@ -129,6 +141,7 @@ export interface RootRouteChildren {
   BarevneTridyRoute: typeof BarevneTridyRoute
   KontaktyRoute: typeof KontaktyRoute
   OSkolceRoute: typeof OSkolceRoute
+  PredskolacekRoute: typeof PredskolacekRoute
   ProRodiceRoute: typeof ProRodiceRoute
   VzdelavaniARozvojRoute: typeof VzdelavaniARozvojRoute
   ZapisDoSkolkyRoute: typeof ZapisDoSkolkyRoute
@@ -155,6 +168,13 @@ declare module '@tanstack/react-router' {
       path: '/pro-rodice'
       fullPath: '/pro-rodice'
       preLoaderRoute: typeof ProRodiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/predskolacek': {
+      id: '/predskolacek'
+      path: '/predskolacek'
+      fullPath: '/predskolacek'
+      preLoaderRoute: typeof PredskolacekRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/o-skolce': {
@@ -201,6 +221,7 @@ const rootRouteChildren: RootRouteChildren = {
   BarevneTridyRoute: BarevneTridyRoute,
   KontaktyRoute: KontaktyRoute,
   OSkolceRoute: OSkolceRoute,
+  PredskolacekRoute: PredskolacekRoute,
   ProRodiceRoute: ProRodiceRoute,
   VzdelavaniARozvojRoute: VzdelavaniARozvojRoute,
   ZapisDoSkolkyRoute: ZapisDoSkolkyRoute,

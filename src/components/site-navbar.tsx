@@ -44,6 +44,7 @@ const navItems: NavItem[] = [
     internal: true,
     children: [
       { label: fixPrepositions("Zápis do MŠ"), href: "/zapis-do-skolky", internal: true },
+      { label: fixPrepositions("Předškoláček"), href: "/predskolacek", internal: true },
       { label: fixPrepositions("Platby"), href: "/pro-rodice", hash: "platby", internal: true },
       { label: fixPrepositions("Program dne"), href: "/pro-rodice", hash: "program-dne", internal: true },
       { label: fixPrepositions("Kroužky a aktivity"), href: "/pro-rodice", hash: "krouzky", internal: true },
