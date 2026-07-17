@@ -130,26 +130,19 @@ function DocCard({ doc }: { doc: { title: string; asset: DocAsset } }) {
   );
 }
 
-function TimelineColumn({ rows }: { rows: typeof programDne }) {
+function ScheduleCard({ rows }: { rows: typeof programDne }) {
   return (
-    <div className="relative">
-      <div className="absolute left-[11px] top-3 bottom-3 w-px bg-white/50" />
-      <ul className="relative space-y-6">
-        {rows.map((row) => (
-          <li key={row.time} className="relative pl-8">
-            <span
-              aria-hidden
-              className="absolute left-0 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-white ring-2 ring-brand-blue/30"
-            />
-            <span className="font-display text-lg font-extrabold text-brand-blue tabular-nums">
-              {row.time}
-            </span>
-            <p className="mt-1 text-[15px] leading-relaxed text-body">
-              {t(row.activity)}
-            </p>
-          </li>
-        ))}
-      </ul>
+    <div className="divide-y divide-black/5 rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
+      {rows.map((row) => (
+        <div key={row.time} className="flex items-start gap-4 px-6 py-4">
+          <span className="w-28 shrink-0 font-display font-bold text-ink tabular-nums">
+            {row.time}
+          </span>
+          <span className="text-[15px] leading-relaxed text-body">
+            {t(row.activity)}
+          </span>
+        </div>
+      ))}
     </div>
   );
 }
