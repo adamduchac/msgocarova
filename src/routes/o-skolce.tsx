@@ -285,7 +285,7 @@ function OSkolcePage() {
             <div className="max-w-4xl">
               <div className="reveal-up">
                 <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-brand-green">
-                  {t("Vzdělávání a rozvoj")}
+                  {t("VZDĚLÁVÁNÍ A AKTIVITY")}
                 </p>
                 <h2 className="mt-3 font-display text-[32px] font-extrabold leading-[1.15] text-ink md:text-[40px]">
                   {t("Pestrý program, který rozvíjí celou osobnost dítěte")}
