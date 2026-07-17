@@ -52,7 +52,6 @@ type ClassData = {
   heroPhoto: string;
   alt: string;
   textColor: string;
-  bgTint: string;
   teachers: Teacher[];
 };
 
