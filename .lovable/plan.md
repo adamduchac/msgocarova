@@ -1,28 +1,12 @@
-## Úpravy sekce a stínů na /o-skolce
+Cílem je odstranit sekci/odstavec o barevných kostičkách ze stránky /o-skolce a použít tento text jako první odstavec pod H1 na stránce /barevne-tridy.
 
-### 1. Pozadí sekcí
+Nalezený stav:
+- Na stránce `/o-skolce` (řádky ~205–217) je pod nadpisem „Školka, kde má hra a přirozený rozvoj hlavní slovo“ odstavec:
+  `„Naše třídy nesou názvy barevných kostiček — symbolu dětské hry, té nejpřirozenější a nejdůležitější činnosti předškoláka. Cílem je podnětné prostředí plné hraček a zajímavých aktivit, kam se děti každý den těší.“`
+- Na stránce `/barevne-tridy` (řádky ~393–400) je pod H1 „Barevné třídy“ aktuálně kratší odstavec:
+  `„Naše třídy nesou názvy barevných kostiček — symbolu dětské hry. Poznejte je jednu po druhé.“`
 
-**Vzdělávání a rozvoj** (`#vzdelavani`, řádek 284)
-- Přidat gradient shora dolů: nahoře `var(--blue-soft)` → dole `#FFFFFF`.
-
-**Náš tým** (`#tym`, řádek 327)
-- Odstranit `backgroundColor: "#F8FAFC"` — sekce bude bez pozadí (bílá).
-
-**Žlutý gradient přes hřiště → jídelna**
-- **Veřejné hřiště** (`#hriste`, řádek 348): přidat gradient `#FFFFFF` → `#FDFAF6`.
-- **Školní jídelna** (`#jidelna`, řádek 412): upravit gradient na `#FDFAF6` → `#FEF8E7`, aby plynule navazoval a končil v krémové/žluté před footerem (který už je `#FEF8E7`).
-
-### 2. Stín na kartách (jako na HP)
-
-Přidat základní stín `shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)]` na všechny bílé karty na stránce. Fotografie (galerie, portréty týmu) zůstávají bez stínu.
-
-Konkrétně:
-- 5 karet ve „Vize" (řádek 259).
-- Info karta u hřiště s otevírací dobou (řádek 365).
-- 3 karty v jídelně: Odhlašování (429), Platba (480), Výdej (508).
-
-Karty už mají `.card-hover`, což řeší jen hover přírůstek — přidáním základního stínu získáme stejný klidový vzhled jako na HP.
-
-### Technické detaily
-
-Všechny změny jsou v jediném souboru `src/routes/o-skolce.tsx` — úpravy inline `style` gradientů u čtyř `<section>` prvků a přidání jedné shadow utility třídy do `className` každé z osmi karet. Ostatní obsah, layout ani komponenty se nemění.
+Plán úpravy:
+1. V souboru `src/routes/o-skolce.tsx` odstranit odstavec o barevných kostičkách (řádky 208–212) a případně upravit vertikální mezery, aby zbylý obsah plynule navazoval.
+2. V souboru `src/routes/barevne-tridy.tsx` nahradit aktuální text pod H1 plnějším textem z `/o-skolce`, zabaleným do `fixPrepositions` pro správné předložky.
+3. Ověřit v náhledu, že stránka `/o-skolce` nemá chybějící obsah ani rušivou mezeru a stránka `/barevne-tridy` má nový úvodní odstavec hned pod hlavním nadpisem.
