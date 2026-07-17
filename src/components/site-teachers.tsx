@@ -219,7 +219,7 @@ export function SiteTeachers() {
                   type="button"
                   onClick={() => go(-1)}
                   aria-label="Předchozí učitel"
-                  className="grid h-11 w-11 place-items-center rounded-full border border-border/70 bg-background text-ink transition-colors duration-200 hover:bg-offwhite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="grid h-11 w-11 cursor-pointer place-items-center rounded-full border border-border/70 bg-background text-ink transition-colors duration-200 hover:bg-offwhite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <ChevronLeft className="h-5 w-5" />
                 </button>
