@@ -34,7 +34,7 @@ export function useRevealOnScroll() {
         }
       },
       {
-        rootMargin: "0px 0px -8% 0px",
+        rootMargin: "0px 0px 10% 0px",
         threshold: isCoarse ? 0.08 : 0,
       },
     );
