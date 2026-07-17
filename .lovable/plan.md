@@ -1,29 +1,21 @@
-Cíl: upravit podstránku `/pro-rodice` podle zadaných požadavků a sladit footer.
+## Cíl
+Na podstránce `/o-skolce` použít v horní galerii dvě dodané fotky a spodní galerii úplně odstranit.
 
-## 1. Program dne — odstranit čísla a boxy
-- Současný 4×2 grid bílých karet s čísly nahradit čistou časovou osou.
-- **Návrh:** vertikální časová osa s jemnou spojnicí a tečkami/body. Každý bod obsahuje:
-  - časový rozsah (bold, tabular-nums, brand-blue),
-  - popis činnosti pod ním.
-- Na desktopu 2 sloupce vedle sebe (každý se 4 body a vlastní spojnicí), na mobilu 1 sloupec.
-- Sekce zůstane na modrém gradientním pozadí jako doposud; žádné bílé boxy, žádná čísla.
+## Kroky
 
-## 2. Dokumenty ke stažení — dva sloupce
-- Místo dvou samostatných seznamů pod sebou udělat jeden grid `md:grid-cols-2`:
-  - **levý sloupec:** nadpis „Formuláře a žádosti“ + 4 DocCards pod sebou,
-  - **pravý sloupec:** nadpis „Základní dokumenty“ + 3 DocCards pod sebou.
-- Zachovat stávající DocCard komponentu, jen se přeskupí layout.
+1. **Nahrát obě fotky jako Lovable assety**
+   - `user-uploads://oskole_1.webp` → `src/assets/oskolce-1.webp.asset.json` (zahrada s dětmi)
+   - `user-uploads://oskole_2.webp` → `src/assets/oskolce-2.webp.asset.json` (tvoření s dýní ve třídě)
 
-## 3. Footer — žlutá horní kostička, odstranit spodní žlutou kostičku
-- V `src/routes/pro-rodice.tsx` změnit volání `<SiteFooter>` na `topCubeColor="yellow"` + `showBottomCube={false}`.
-- Rozšířit `SiteFooter` komponentu v `src/components/site-footer.tsx`, aby `topCubeColor` akceptovalo i `"yellow"` (aktuálně podporuje jen red/blue).
-- Spodní žlutá kostička se vynechá, aby vizuální dno zůstalo stejné jako dosud s modrou kostičkou.
+2. **`src/routes/o-skolce.tsx` — horní galerie**
+   - Nahradit stávající dva bílé placeholdery skutečnými `<img>` s novými assety.
+   - Zachovat 4:3 poměr, `rounded-2xl`, plnou šířku kontejneru a mobilní slider (1 viditelná).
+   - Alt texty v češtině popisující obsah fotek.
 
-## Dotčené soubory
-- `src/routes/pro-rodice.tsx` — timeline, layout dokumentů, footer props.
-- `src/components/site-footer.tsx` — přidat barvu `yellow` pro horní kostičku.
+3. **`src/routes/o-skolce.tsx` — spodní galerie**
+   - Kompletně odstranit spodní galerijní sekci (pod „Vzdělávání a rozvoj" resp. tam, kde je druhá galerie s placeholdery).
+   - Zachovat vertikální rytmus — mezera mezi sousedními sekcemi zůstane konzistentní (`section-y-md`).
 
-## Vizuální principy
-- Žádné `hover:scale-*`, max jemné `translateY(-1px až -2px)` na kartách.
-- Zachovat `rounded-2xl`, `fixPrepositions`, přístupnost (focus-visible) a responzivitu.
-- Nezmění se obsah, odkazy, PDF assety ani metadata stránky.
+## Co se nemění
+- Text, ostatní sekce, footer, navigace, ostatní podstránky.
+- Styl galerie (rámování, radius, slider chování) zůstává, jen se vymění zdroje.
