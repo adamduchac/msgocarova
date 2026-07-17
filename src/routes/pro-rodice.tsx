@@ -161,8 +161,8 @@ function ProRodicePage() {
             <h1 className="font-display text-[42px] font-extrabold leading-[1.05] text-ink md:text-[56px]">
               {t("Pro rodiče")}
             </h1>
-            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-body">
-              {t("Praktické informace pro každodenní chod i pohodový nástup do školky.")}
+            <p className="mt-4 max-w-3xl text-lg leading-relaxed text-body">
+              {t("Platby, denní program, co s sebou i kroužky – praktické informace, které budete během roku potřebovat nejčastěji. Dokumenty a formuláře najdete dole ke stažení.")}
             </p>
           </div>
         </section>
