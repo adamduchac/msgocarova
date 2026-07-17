@@ -130,6 +130,30 @@ function DocCard({ doc }: { doc: { title: string; asset: DocAsset } }) {
   );
 }
 
+function TimelineColumn({ rows }: { rows: typeof programDne }) {
+  return (
+    <div className="relative">
+      <div className="absolute left-[11px] top-3 bottom-3 w-px bg-white/50" />
+      <ul className="relative space-y-6">
+        {rows.map((row) => (
+          <li key={row.time} className="relative pl-8">
+            <span
+              aria-hidden
+              className="absolute left-0 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-white ring-2 ring-brand-blue/30"
+            />
+            <span className="font-display text-lg font-extrabold text-brand-blue tabular-nums">
+              {row.time}
+            </span>
+            <p className="mt-1 text-[15px] leading-relaxed text-body">
+              {t(row.activity)}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 function ProRodicePage() {
   return (
     <div className="min-h-screen bg-background">
@@ -223,25 +247,10 @@ function ProRodicePage() {
               </p>
             </div>
 
-            <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {programDne.map((row, i) => (
-                <li
-                  key={row.time}
-                  className="rounded-2xl border border-black/[0.06] bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-blue/10 font-display text-xs font-extrabold text-brand-blue tabular-nums">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span className="font-display text-lg font-extrabold text-ink tabular-nums">
-                      {row.time}
-                    </span>
-                  </div>
-                  <div className="my-4 h-px bg-black/5" />
-                  <p className="text-sm leading-relaxed text-body">{t(row.activity)}</p>
-                </li>
-              ))}
-            </ol>
+            <div className="mt-10 grid gap-8 sm:grid-cols-2">
+              <TimelineColumn rows={programDne.slice(0, 4)} />
+              <TimelineColumn rows={programDne.slice(4)} />
+            </div>
 
             <div className="mt-14 max-w-3xl">
               <h3 className="font-display text-[24px] font-extrabold leading-[1.15] text-ink md:text-[28px]">
@@ -324,12 +333,12 @@ function ProRodicePage() {
                 </p>
               </div>
 
-              <div className="mt-10 space-y-10">
+              <div className="mt-10 grid gap-8 md:grid-cols-2">
                 <div>
                   <h3 className="mb-4 font-display text-lg font-bold text-ink">
                     {t("Formuláře a žádosti")}
                   </h3>
-                  <div className="grid gap-4 md:grid-cols-2">
+                  <div className="grid gap-4">
                     {formulare.map((doc) => (
                       <DocCard key={doc.asset.url} doc={doc} />
                     ))}
@@ -340,7 +349,7 @@ function ProRodicePage() {
                   <h3 className="mb-4 font-display text-lg font-bold text-ink">
                     {t("Základní dokumenty")}
                   </h3>
-                  <div className="grid gap-4 md:grid-cols-2">
+                  <div className="grid gap-4">
                     {zakladni.map((doc) => (
                       <DocCard key={doc.asset.url} doc={doc} />
                     ))}
@@ -350,7 +359,7 @@ function ProRodicePage() {
             </div>
           </section>
 
-          <SiteFooter topCubeColor="blue" topCubePosition="left" />
+          <SiteFooter topCubeColor="yellow" topCubePosition="left" showBottomCube={false} />
         </div>
       </main>
     </div>
