@@ -7,6 +7,7 @@ import {
   Waves,
   Mountain,
   Snowflake,
+  PartyPopper,
   type LucideIcon,
 } from "lucide-react";
 import { fixPrepositions } from "@/lib/typography";
