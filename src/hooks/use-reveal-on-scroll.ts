@@ -72,13 +72,18 @@ export function useRevealOnScroll() {
       );
     };
     const mo = new MutationObserver(scheduleRescan);
-    mo.observe(document.body, { childList: true, subtree: true });
+    mo.observe(document.body, { childList: true });
 
-    // Safety net: if anything stays unrevealed after 1.5s (slow hydrate, route
-    // transition, IO miss), force-show it so nothing is permanently invisible.
+    // Safety net: if anything above/near the fold stays unrevealed after 5s
+    // (slow hydrate, IO miss), force-show only those. Elements far below the
+    // fold stay observed so they can still animate when scrolled into view.
     const safety = window.setTimeout(() => {
-      document.querySelectorAll(SELECTOR).forEach((el) => el.classList.add("is-visible"));
-    }, 1500);
+      const vh = window.innerHeight;
+      document.querySelectorAll(SELECTOR).forEach((el) => {
+        const rect = (el as HTMLElement).getBoundingClientRect();
+        if (rect.top < vh * 1.1) el.classList.add("is-visible");
+      });
+    }, 5000);
 
     return () => {
       cancelAnimationFrame(raf);
