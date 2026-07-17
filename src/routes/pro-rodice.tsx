@@ -1,8 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { FileText, Download, Wallet, CreditCard, Check, Info } from "lucide-react";
 import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
+import { fetchDocuments, type DocumentWithUrl } from "@/lib/cms";
 
 import zadostPrijeti from "@/assets/dokumenty/zadost-o-prijeti.pdf.asset.json";
 import zadostPrazdniny from "@/assets/dokumenty/zadost-prazdninovy-provoz.pdf.asset.json";
@@ -150,6 +152,55 @@ function ScheduleCard({ rows }: { rows: typeof programDne }) {
             ))}
           </ul>
         ))}
+      </div>
+    </div>
+  );
+}
+
+function CmsDocCard({ doc }: { doc: DocumentWithUrl }) {
+  if (!doc.url) return null;
+  return (
+    <a
+      href={doc.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group flex items-center gap-4 rounded-2xl border border-black/[0.06] bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)] transition-transform duration-200 hover:-translate-y-[2px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 sm:p-6"
+    >
+      <span aria-hidden className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue">
+        <FileText className="h-5 w-5" />
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="block font-semibold text-ink">{fixPrepositions(doc.title)}</span>
+        <span className="mt-0.5 block text-xs uppercase tracking-wide text-body/70">PDF</span>
+      </span>
+      <Download aria-hidden className="h-5 w-5 shrink-0 text-body transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-brand-blue" />
+    </a>
+  );
+}
+
+function CmsDocumentsGrid() {
+  const { data: cmsDocs } = useQuery({
+    queryKey: ["documents", "active"],
+    queryFn: () => fetchDocuments(true),
+    staleTime: 60_000,
+  });
+  const cmsFormulare = (cmsDocs ?? []).filter((d) => d.category === "formulare");
+  const cmsZakladni = (cmsDocs ?? []).filter((d) => d.category === "dokumenty");
+  return (
+    <div className="mt-10 grid gap-8 md:grid-cols-2">
+      <div>
+        <h3 className="mb-4 font-display text-lg font-bold text-ink">{t("Formuláře a žádosti")}</h3>
+        <div className="grid gap-4">
+          {formulare.map((doc) => (<DocCard key={doc.asset.url} doc={doc} />))}
+          {cmsFormulare.map((doc) => (<CmsDocCard key={doc.id} doc={doc} />))}
+        </div>
+      </div>
+      <div>
+        <h3 className="mb-4 font-display text-lg font-bold text-ink">{t("Základní dokumenty")}</h3>
+        <div className="grid gap-4">
+          {zakladni.map((doc) => (<DocCard key={doc.asset.url} doc={doc} />))}
+          {cmsZakladni.map((doc) => (<CmsDocCard key={doc.id} doc={doc} />))}
+        </div>
       </div>
     </div>
   );
@@ -342,29 +393,7 @@ function ProRodicePage() {
                 </p>
               </div>
 
-              <div className="mt-10 grid gap-8 md:grid-cols-2">
-                <div>
-                  <h3 className="mb-4 font-display text-lg font-bold text-ink">
-                    {t("Formuláře a žádosti")}
-                  </h3>
-                  <div className="grid gap-4">
-                    {formulare.map((doc) => (
-                      <DocCard key={doc.asset.url} doc={doc} />
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="mb-4 font-display text-lg font-bold text-ink">
-                    {t("Základní dokumenty")}
-                  </h3>
-                  <div className="grid gap-4">
-                    {zakladni.map((doc) => (
-                      <DocCard key={doc.asset.url} doc={doc} />
-                    ))}
-                  </div>
-                </div>
-              </div>
+              <CmsDocumentsGrid />
             </div>
           </section>
 

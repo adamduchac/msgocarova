@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PlaceholderSection } from "@/components/admin/placeholder-section";
+import { InfoBoxAdmin } from "@/components/admin/info-box-admin";
 
 export const Route = createFileRoute("/admin/zapis")({
   component: () => (
-    <PlaceholderSection
-      title="Zápis"
-      description="Stavový infobox nahoře na stránce /zapis-do-skolky – termíny, kapacita a aktuální stav."
+    <InfoBoxAdmin
+      page="zapis"
+      heading="Zápis — infobox"
+      description="Řídí stavový box na stránce /zapis-do-skolky. Pokud je vyplněný titulek, přepíše statický obsah."
     />
   ),
 });
