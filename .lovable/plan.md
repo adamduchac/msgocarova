@@ -1,46 +1,28 @@
-Úpravy v `src/routes/o-skolce.tsx` a `src/components/site-footer.tsx`.
+Úpravy v `src/routes/o-skolce.tsx` a `src/styles.css`.
 
-## 1. Hero — odebrat obsah (TOC menu)
-V hero blocku odeberu pravý sloupec `<nav aria-label="Obsah stránky">` (TOC karta) a zjednoduším grid — hero bude jednosloupcový (jen eyebrow + H1 + úvodní odstavec, na plnou šířku kontejneru).
+## 1. Zvětšit mezery o třetinu
+V `src/styles.css` přidám novou utilitu `section-y-md`:
+```
+@utility section-y-md {
+  padding-block: clamp(37px, 5.3vw, 75px);
+}
+```
+(≈ o třetinu víc než `section-y-sm`: 28→37, 4vw→5.3vw, 56→75). Všechny `section-y-sm` v `o-skolce.tsx` přepnu na `section-y-md`. Hero blok necháme na `section-y-sm` (padding ke stránce vč. horního `pt-28` už dost).
 
-## 2. Blok „Školka, kde má hra…" hned pod úvod
-Sekci „Skládáme svět z kostiček" (dnes samostatná sekce pod galerií) přesunu **do hero bloku** — dva odstavce a nadpis se objeví přímo pod úvodním odstavcem (uvnitř stejného `max-w-3xl` textového sloupce). Původní samostatná sekce zmizí.
+## 2. Modrý gradient na „Představení a vize"
+Změním `style={{ backgroundColor: "#FDFAF6" }}` na modrý gradient jako na HP (site-benefits): `linear-gradient(to bottom, #ffffff 0%, #ffffff 10%, var(--blue-soft) 55%, var(--blue-soft) 100%)`.
 
-## 3. Galerie na plnou šířku
-Sekci s první galerií (`AboutGallery startTint={0}`) upravím tak, aby nebyla omezená na `max-w-4xl` — obtékající wrapper `max-w-4xl` odeberu, galerie zabere celou šířku containeru. Grid v `AboutGallery` je už `md:grid-cols-3`, takže 3 karty vedle sebe se roztáhnou. Druhá galerie pod „Vzděláváním" zůstává v `max-w-4xl` sloupci (je součástí toho bloku), pokud si nepřejete i tu na plno — zeptám se dole.
+## 3. Galerie — 2 fotky místo 3
+V komponentě `AboutGallery`:
+- pole tiles: `[0, 1]` místo `[0, 1, 2]`
+- desktop grid: `md:grid-cols-2` místo `md:grid-cols-3`
 
-## 4. Představení a vize — zarovnat vlevo
-Wrapper `mx-auto max-w-3xl text-center` v hlavičce sekce změním na `max-w-4xl` bez `text-center` (levé zarovnání, stejná šířka jako O školce). Eyebrow, H2 i úvodní odstavec budou vlevo. Grid karet zůstává beze změny.
+## 4. Otevírací doba hřiště — tabulka podle screenu
+Nahradím současný dvousloupcový grid tabulkou 3 sloupců (období / dopoledne / odpoledne) se dvěma řádky:
+- **od 15. dubna, květen, červen, září** — 10:00 – 12:00 / 13:00 – 17:00
+- **do 15. října** — 10:00 – 12:00 / 13:00 – 16:00
 
-## 5. Boxy Veřejné hřiště a Školní jídelna — plná šířka
-- Veřejné hřiště: wrapper `max-w-4xl` obepínající úvodní text i tabulku otevíracích dob rozdělím — text hlavičky zůstane v `max-w-4xl`, ale grid tabulky (`grid md:grid-cols-2`) vyjmu ven a nechám na plnou šířku kontejneru.
-- Školní jídelna: stejně — hlavička (eyebrow, H2) v `max-w-4xl` vlevo, ale karty s pravidly / platbou / výdejem budou na plnou šířku.
-
-## 6. Školní jídelna — rozdělit na tři boxy
-Dnes máme dva boxy (jeden kombinuje platbu + výdej). Rozdělím box „Platba stravného + Výdej stravy" na dva samostatné:
-1. **Odhlašování a přihlašování stravy** (beze změny)
-2. **Platba stravného** (jen účet, VS, KS)
-3. **Výdej stravy** (jen tabulka časů)
-
-Layout: na desktopu 3 boxy vedle sebe (`md:grid-cols-3`) nebo 2+1 — použiju `md:grid-cols-3` s vyrovnanou výškou. Na mobilu pod sebou.
-
-## 7. Zápatí — žlutá kostička dole
-V `src/components/site-footer.tsx` v použití na této stránce předám `showBottomCube={false}` (props už existuje). Změním volání `<SiteFooter topCubeColor="blue" topCubePosition="right" />` v `o-skolce.tsx` na `<SiteFooter topCubeColor="blue" topCubePosition="right" showBottomCube={false} />`. Žádná úprava komponenty footer není potřeba.
-
-## 8. Sjednocení mezer mezi sekcemi
-Všechny sekce v `<main>` používají `section-y` (56–112px). Přepnu je na `section-y-sm` (28–56px) — stejné jako kontakty. Poslední sekce (Školní jídelna) si zachová prostor k footeru díky vlastnímu gradientnímu pozadí a paddingu footeru — nechám ji na `section-y-sm` a mezera k footeru zůstane pohodová z paddingu footeru (`pt-24 md:pt-32`).
-
-Konkrétně přepnu:
-- Sekce galerie (pt-4 pb-12 → sjednotím dovnitř section-y-sm nebo ponechám menší; přepnu na `section-y-sm`)
-- Skládáme svět (odstraní se, obsah je v hero)
-- Představení a vize — `section-y-sm`
-- Vzdělávání — `section-y-sm`
-- Náš tým — `section-y-sm`
-- Veřejné hřiště — `section-y-sm`
-- Školní jídelna — `section-y-sm`
+Nad tabulkou drobný nadpis „Sobota, neděle". Layout: karta `rounded-2xl border`, uvnitř sémantická `<table>` (nebo `<dl>`/grid) — použiju grid `grid-cols-[1fr_auto_auto]` s hlavičkou (dopolední/odpolední) a dvěma řádky. Na mobilu ponechám čitelné (case: menší text, případně 2-sloupcové rozložení). Poznámka „Ve státní svátky je hřiště uzavřeno." zůstává pod.
 
 ## Co se nemění
-
-- Texty, assety, komponenta `AboutGallery`, tým a data.
-- Ostatní stránky.
-- Hero pozadí (žlutý gradient).
+Texty ostatních sekcí, footer, assety, ostatní stránky.
