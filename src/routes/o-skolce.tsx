@@ -50,7 +50,7 @@ const galleryTints = [
 
 function AboutGallery({ startTint = 0 }: { startTint?: number }) {
   const scrollerRef = useRef<HTMLOListElement | null>(null);
-  const tints = [0, 1, 2].map((i) => galleryTints[(startTint + i) % galleryTints.length]);
+  const tints = [0, 1].map((i) => galleryTints[(startTint + i) % galleryTints.length]);
 
   const scrollByCard = (dir: 1 | -1) => {
     const el = scrollerRef.current;
