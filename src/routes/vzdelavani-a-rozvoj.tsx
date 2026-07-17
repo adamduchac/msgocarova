@@ -92,6 +92,8 @@ const vzdelavaniAreas: Area[] = [
     photoBg: "#FCEDED",
     iconColor: "text-brand-red",
     iconBg: "bg-brand-red/10",
+    image: robotImg.url,
+    imageAlt: "Děti si hrají s programovatelným robotem Bee-Bot na herní podložce",
     activities: [
       {
         icon: Brain,
