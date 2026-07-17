@@ -3,7 +3,7 @@ import { SiteNavbar } from "@/components/site-navbar";
 import { SiteHero } from "@/components/site-hero";
 import { SiteBenefits } from "@/components/site-benefits";
 import { SiteDailyRhythm } from "@/components/site-daily-rhythm";
-import { SiteAnnouncementBar } from "@/components/site-announcement-bar";
+import { SiteAnnouncements } from "@/components/site-announcements";
 import { SiteClasses } from "@/components/site-classes";
 import { SiteActivities } from "@/components/site-activities";
 import { SiteFooter } from "@/components/site-footer";
