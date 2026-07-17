@@ -1,6 +1,6 @@
 import trip from "@/assets/news-trip.jpg.asset.json";
-import art from "@/assets/news-art.jpg.asset.json";
-import openday from "@/assets/news-openday.jpg.asset.json";
+import box2 from "@/assets/box2-2.webp.asset.json";
+import box3 from "@/assets/box3-2.webp.asset.json";
 import { ArrowRight } from "lucide-react";
 import { fixPrepositions } from "@/lib/typography";
 
@@ -32,8 +32,9 @@ const news: News[] = [
     text: fixPrepositions(
       "Od září otevíráme výtvarný kroužek pro všechny kreativní děti."
     ),
-    image: art.url,
+    image: box2.url,
     alt: "Děti si hrají a cákají ve venkovním bazénu na školní zahradě",
+    href: "/vzdelavani-a-rozvoj",
   },
   {
     badge: fixPrepositions("Rodiče"),
@@ -42,7 +43,7 @@ const news: News[] = [
     text: fixPrepositions(
       "Od podzimního dlabání dýní přes vánoční posezení až po květnové Slavnosti školy — společně si užíváme celý rok."
     ),
-    image: openday.url,
+    image: box3.url,
     alt: "Rodiče s dětmi opékají buřty u ohniště na zahradě školky",
     href: "/akce-s-rodici",
   },
