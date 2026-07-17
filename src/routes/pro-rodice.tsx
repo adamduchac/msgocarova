@@ -130,26 +130,19 @@ function DocCard({ doc }: { doc: { title: string; asset: DocAsset } }) {
   );
 }
 
-function TimelineColumn({ rows }: { rows: typeof programDne }) {
+function ScheduleCard({ rows }: { rows: typeof programDne }) {
   return (
-    <div className="relative">
-      <div className="absolute left-[11px] top-3 bottom-3 w-px bg-white/50" />
-      <ul className="relative space-y-6">
-        {rows.map((row) => (
-          <li key={row.time} className="relative pl-8">
-            <span
-              aria-hidden
-              className="absolute left-0 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-white ring-2 ring-brand-blue/30"
-            />
-            <span className="font-display text-lg font-extrabold text-brand-blue tabular-nums">
-              {row.time}
-            </span>
-            <p className="mt-1 text-[15px] leading-relaxed text-body">
-              {t(row.activity)}
-            </p>
-          </li>
-        ))}
-      </ul>
+    <div className="divide-y divide-black/5 rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
+      {rows.map((row) => (
+        <div key={row.time} className="flex items-start gap-4 px-6 py-4">
+          <span className="w-28 shrink-0 font-display font-bold text-ink tabular-nums">
+            {row.time}
+          </span>
+          <span className="text-[15px] leading-relaxed text-body">
+            {t(row.activity)}
+          </span>
+        </div>
+      ))}
     </div>
   );
 }
@@ -168,8 +161,8 @@ function ProRodicePage() {
             <h1 className="font-display text-[42px] font-extrabold leading-[1.05] text-ink md:text-[56px]">
               {t("Pro rodiče")}
             </h1>
-            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-body">
-              {t("Praktické informace pro každodenní chod i pohodový nástup do školky.")}
+            <p className="mt-4 max-w-3xl text-lg leading-relaxed text-body">
+              {t("Platby, denní program, co s sebou i kroužky – praktické informace, které budete během roku potřebovat nejčastěji. Dokumenty a formuláře najdete dole ke stažení.")}
             </p>
           </div>
         </section>
@@ -232,11 +225,7 @@ function ProRodicePage() {
         </section>
 
         {/* Program dne */}
-        <section
-          id="program-dne"
-          className="section-y-md scroll-mt-28"
-          style={{ background: "linear-gradient(to bottom, #ffffff 0%, #ffffff 8%, var(--blue-soft) 45%, var(--blue-soft) 100%)" }}
-        >
+        <section id="program-dne" className="section-y-md scroll-mt-28">
           <div className="container mx-auto px-6">
             <div className="max-w-3xl">
               <h2 className="font-display text-[32px] font-extrabold leading-[1.15] text-ink md:text-[40px]">
@@ -247,9 +236,9 @@ function ProRodicePage() {
               </p>
             </div>
 
-            <div className="mt-10 grid gap-8 sm:grid-cols-2">
-              <TimelineColumn rows={programDne.slice(0, 4)} />
-              <TimelineColumn rows={programDne.slice(4)} />
+            <div className="mt-10 grid gap-6 md:grid-cols-2">
+              <ScheduleCard rows={programDne.slice(0, 4)} />
+              <ScheduleCard rows={programDne.slice(4)} />
             </div>
 
             <div className="mt-14 max-w-3xl">
@@ -261,13 +250,13 @@ function ProRodicePage() {
               </p>
             </div>
 
-            <div className="mt-8 grid gap-5 md:grid-cols-3">
+            <div className="mt-8 grid gap-4 md:grid-cols-3">
               {krouzky.map(({ image, alt, title, text }) => (
                 <div
                   key={title}
-                  className="flex flex-col overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]"
+                  className="flex items-start gap-4 rounded-2xl border border-black/[0.06] bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]"
                 >
-                  <div className="flex aspect-[4/3] items-center justify-center bg-white p-8">
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-white">
                     <img
                       src={image}
                       alt={alt}
@@ -275,15 +264,16 @@ function ProRodicePage() {
                       className="h-full w-full object-contain"
                     />
                   </div>
-                  <div className="border-t border-black/5 p-6">
-                    <h4 className="font-display text-lg font-bold text-ink">{t(title)}</h4>
-                    <p className="mt-2 text-body">{t(text)}</p>
+                  <div className="min-w-0">
+                    <h4 className="font-display font-bold text-ink">{t(title)}</h4>
+                    <p className="mt-1 text-sm leading-relaxed text-body">{t(text)}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
         </section>
+
 
         {/* Výbava */}
         <section id="vybava" className="section-y-md scroll-mt-28">
