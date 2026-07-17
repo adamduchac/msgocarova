@@ -526,12 +526,7 @@ function OSkolcePage() {
           </div>
         </section>
 
-        <div
-          style={{
-            background:
-              "linear-gradient(to bottom, #FDFAF6 0%, #FEF8E7 40%, #FEF8E7 100%)",
-          }}
-        >
+        <div style={{ backgroundColor: "#FEF8E7" }}>
           <SiteFooter topCubeColor="blue" topCubePosition="right" showBottomCube={false} />
         </div>
       </main>
