@@ -333,12 +333,12 @@ function ProRodicePage() {
                 </p>
               </div>
 
-              <div className="mt-10 space-y-10">
+              <div className="mt-10 grid gap-8 md:grid-cols-2">
                 <div>
                   <h3 className="mb-4 font-display text-lg font-bold text-ink">
                     {t("Formuláře a žádosti")}
                   </h3>
-                  <div className="grid gap-4 md:grid-cols-2">
+                  <div className="grid gap-4">
                     {formulare.map((doc) => (
                       <DocCard key={doc.asset.url} doc={doc} />
                     ))}
@@ -349,7 +349,7 @@ function ProRodicePage() {
                   <h3 className="mb-4 font-display text-lg font-bold text-ink">
                     {t("Základní dokumenty")}
                   </h3>
-                  <div className="grid gap-4 md:grid-cols-2">
+                  <div className="grid gap-4">
                     {zakladni.map((doc) => (
                       <DocCard key={doc.asset.url} doc={doc} />
                     ))}
@@ -359,7 +359,7 @@ function ProRodicePage() {
             </div>
           </section>
 
-          <SiteFooter topCubeColor="blue" topCubePosition="left" />
+          <SiteFooter topCubeColor="yellow" topCubePosition="left" showBottomCube={false} />
         </div>
       </main>
     </div>
