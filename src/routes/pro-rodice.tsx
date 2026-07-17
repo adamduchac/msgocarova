@@ -247,25 +247,10 @@ function ProRodicePage() {
               </p>
             </div>
 
-            <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {programDne.map((row, i) => (
-                <li
-                  key={row.time}
-                  className="rounded-2xl border border-black/[0.06] bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-blue/10 font-display text-xs font-extrabold text-brand-blue tabular-nums">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span className="font-display text-lg font-extrabold text-ink tabular-nums">
-                      {row.time}
-                    </span>
-                  </div>
-                  <div className="my-4 h-px bg-black/5" />
-                  <p className="text-sm leading-relaxed text-body">{t(row.activity)}</p>
-                </li>
-              ))}
-            </ol>
+            <div className="mt-10 grid gap-8 sm:grid-cols-2">
+              <TimelineColumn rows={programDne.slice(0, 4)} />
+              <TimelineColumn rows={programDne.slice(4)} />
+            </div>
 
             <div className="mt-14 max-w-3xl">
               <h3 className="font-display text-[24px] font-extrabold leading-[1.15] text-ink md:text-[28px]">
