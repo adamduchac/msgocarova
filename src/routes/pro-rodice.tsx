@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { FileText, Download, Wallet, CreditCard, Check, Puzzle, Brain, Dices } from "lucide-react";
+import { FileText, Download, Wallet, CreditCard, Check, Info } from "lucide-react";
 import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
@@ -11,6 +11,10 @@ import pravidlaPrazdniny from "@/assets/dokumenty/pravidla-prazdninovy-provoz-20
 import skolniRad from "@/assets/dokumenty/skolni-rad.pdf.asset.json";
 import radVydejny from "@/assets/dokumenty/vnitrni-rad-vydejny.pdf.asset.json";
 import svp from "@/assets/dokumenty/svp-skladame-svet-z-kosticek.pdf.asset.json";
+
+import sachyImg from "@/assets/krouzky/sachy.webp.asset.json";
+import pametImg from "@/assets/krouzky/pamet.webp.asset.json";
+import pexesoImg from "@/assets/krouzky/pexeso.webp.asset.json";
 
 export const Route = createFileRoute("/pro-rodice")({
   head: () => ({
@@ -46,19 +50,22 @@ const programDne: { time: string; activity: string }[] = [
   { time: "14:00 – 16:45", activity: "Hygiena, odpolední svačina, hry, činnosti, za příznivého počasí zahrada, rozcházení" },
 ];
 
-const krouzky: { icon: typeof Puzzle; title: string; text: string }[] = [
+const krouzky: { image: string; alt: string; title: string; text: string }[] = [
   {
-    icon: Puzzle,
+    image: sachyImg.url,
+    alt: "Ilustrace šachové figurky",
     title: "Šachy",
     text: "Šachový klub Lipky HK, každou středu 15:15 (30 min), říjen–červen, hradí rodiče.",
   },
   {
-    icon: Brain,
+    image: pametImg.url,
+    alt: "Ilustrace hry piškvorky",
     title: "Bystrohlavička",
     text: "Rozvoj pozornosti, paměti a logického myšlení; říjen–květen v lichém týdnu, Červená (po) a Zelená (út) od 13:15.",
   },
   {
-    icon: Dices,
+    image: pexesoImg.url,
+    alt: "Ilustrace pexesa",
     title: "Stolní hry",
     text: "Pravidla deskových her (Pexeso, Dáma, Domino…), Červená a Zelená od 13:15 dle zájmu.",
   },
@@ -95,39 +102,31 @@ function formatSize(bytes: number) {
   return `${Math.max(1, Math.round(bytes / 1024))} kB`;
 }
 
-function DocList({ items }: { items: { title: string; asset: DocAsset }[] }) {
+function DocCard({ doc }: { doc: { title: string; asset: DocAsset } }) {
   return (
-    <ul className="divide-y divide-black/5">
-      {items.map((doc) => (
-        <li key={doc.asset.url}>
-          <a
-            href={doc.asset.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-4 px-5 py-4 transition-colors hover:bg-black/[0.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 sm:px-6"
-          >
-            <span
-              aria-hidden
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue"
-            >
-              <FileText className="h-5 w-5" />
-            </span>
-            <span className="min-w-0 flex-1">
-              <span className="block font-semibold text-ink">
-                {fixPrepositions(doc.title)}
-              </span>
-              <span className="mt-0.5 block text-xs uppercase tracking-wide text-body/70">
-                PDF · {formatSize(doc.asset.size)}
-              </span>
-            </span>
-            <Download
-              aria-hidden
-              className="h-5 w-5 shrink-0 text-body transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-brand-blue"
-            />
-          </a>
-        </li>
-      ))}
-    </ul>
+    <a
+      href={doc.asset.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group flex items-center gap-4 rounded-2xl border border-black/[0.06] bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)] transition-transform duration-200 hover:-translate-y-[2px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 sm:p-6"
+    >
+      <span
+        aria-hidden
+        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue"
+      >
+        <FileText className="h-5 w-5" />
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="block font-semibold text-ink">{fixPrepositions(doc.title)}</span>
+        <span className="mt-0.5 block text-xs uppercase tracking-wide text-body/70">
+          PDF · {formatSize(doc.asset.size)}
+        </span>
+      </span>
+      <Download
+        aria-hidden
+        className="h-5 w-5 shrink-0 text-body transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-brand-blue"
+      />
+    </a>
   );
 }
 
@@ -143,12 +142,10 @@ function ProRodicePage() {
         <section className="section-y">
           <div className="container mx-auto px-6">
             <h1 className="font-display text-[42px] font-extrabold leading-[1.05] text-ink md:text-[56px]">
-              {fixPrepositions("Pro rodiče")}
+              {t("Pro rodiče")}
             </h1>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-body">
-              {fixPrepositions(
-                "Praktické informace pro každodenní chod i pohodový nástup do školky."
-              )}
+              {t("Praktické informace pro každodenní chod i pohodový nástup do školky.")}
             </p>
           </div>
         </section>
@@ -158,7 +155,7 @@ function ProRodicePage() {
         {/* Platby */}
         <section id="platby" className="section-y-md scroll-mt-28">
           <div className="container mx-auto px-6">
-            <div className="max-w-4xl">
+            <div className="max-w-3xl">
               <h2 className="font-display text-[32px] font-extrabold leading-[1.15] text-ink md:text-[40px]">
                 {t("Platby")}
               </h2>
@@ -167,38 +164,43 @@ function ProRodicePage() {
                   "Školné pro školní rok 2025/2026 činí 600 Kč/měsíc, v červenci a srpnu 300 Kč. Platí se nejpozději do 15. dne daného měsíce. Děti v posledním roce před nástupem do školy (i s odkladem) školné neplatí."
                 )}
               </p>
+            </div>
 
-              <div className="mt-8 grid gap-5 md:grid-cols-2">
-                <div className="rounded-2xl border border-black/[0.06] bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
-                  <div className="flex items-center gap-3">
-                    <span aria-hidden className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue">
-                      <Wallet className="h-5 w-5" />
-                    </span>
-                    <h3 className="font-display text-base font-bold text-ink">
-                      {t("Školné + kurzovné plavání")}
-                    </h3>
-                  </div>
-                  <p className="mt-4 font-display text-xl font-extrabold text-ink tabular-nums">
-                    35-5744160237/0100
-                  </p>
+            <div className="mt-10 grid gap-5 md:grid-cols-2">
+              <div className="rounded-2xl border border-black/[0.06] bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
+                <div className="flex items-center gap-3">
+                  <span aria-hidden className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue">
+                    <Wallet className="h-5 w-5" />
+                  </span>
+                  <h3 className="font-display text-base font-bold text-ink">
+                    {t("Školné + kurzovné plavání")}
+                  </h3>
                 </div>
-
-                <div className="rounded-2xl border border-black/[0.06] bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
-                  <div className="flex items-center gap-3">
-                    <span aria-hidden className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-green/10 text-brand-green">
-                      <CreditCard className="h-5 w-5" />
-                    </span>
-                    <h3 className="font-display text-base font-bold text-ink">
-                      {t("Stravné")}
-                    </h3>
-                  </div>
-                  <p className="mt-4 font-display text-xl font-extrabold text-ink tabular-nums">
-                    27-320530297/0100
-                  </p>
-                </div>
+                <p className="mt-4 font-display text-xl font-extrabold text-ink tabular-nums md:text-2xl">
+                  35-5744160237/0100
+                </p>
               </div>
 
-              <p className="mt-5 text-sm text-body/80">
+              <div className="rounded-2xl border border-black/[0.06] bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
+                <div className="flex items-center gap-3">
+                  <span aria-hidden className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-green/10 text-brand-green">
+                    <CreditCard className="h-5 w-5" />
+                  </span>
+                  <h3 className="font-display text-base font-bold text-ink">
+                    {t("Stravné")}
+                  </h3>
+                </div>
+                <p className="mt-4 font-display text-xl font-extrabold text-ink tabular-nums md:text-2xl">
+                  27-320530297/0100
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-5 flex items-start gap-3 rounded-2xl border border-brand-yellow/40 bg-brand-yellow/10 p-5">
+              <span aria-hidden className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-ink">
+                <Info className="h-4 w-4" />
+              </span>
+              <p className="text-body">
                 {t("Variabilní symbol dítěte je pro všechny platby stejný.")}
               </p>
             </div>
@@ -209,57 +211,67 @@ function ProRodicePage() {
         <section
           id="program-dne"
           className="section-y-md scroll-mt-28"
-          style={{ background: "linear-gradient(to bottom, #ffffff 0%, #ffffff 10%, var(--blue-soft) 55%, var(--blue-soft) 100%)" }}
+          style={{ background: "linear-gradient(to bottom, #ffffff 0%, #ffffff 8%, var(--blue-soft) 45%, var(--blue-soft) 100%)" }}
         >
           <div className="container mx-auto px-6">
-            <div className="max-w-4xl">
+            <div className="max-w-3xl">
               <h2 className="font-display text-[32px] font-extrabold leading-[1.15] text-ink md:text-[40px]">
                 {t("Program dne")}
               </h2>
+              <p className="mt-4 text-lg leading-relaxed text-body">
+                {t("Den v naší školce má jasný rytmus, ale ponechává dětem prostor pro spontánní hru i klid.")}
+              </p>
+            </div>
 
-              <div className="mt-8 overflow-hidden rounded-2xl border border-border/70 bg-white">
-                <div className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-3 px-6 py-6 md:gap-x-10 md:px-8 md:py-8">
-                  {programDne.map((row, i) => (
-                    <div key={row.time} className="contents">
-                      <span
-                        className={`font-display font-bold text-ink tabular-nums ${i > 0 ? "border-t border-border/60 pt-3" : ""}`}
-                      >
-                        {row.time}
-                      </span>
-                      <span
-                        className={`text-body ${i > 0 ? "border-t border-border/60 pt-3" : ""}`}
-                      >
-                        {t(row.activity)}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {programDne.map((row, i) => (
+                <li
+                  key={row.time}
+                  className="rounded-2xl border border-black/[0.06] bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-blue/10 font-display text-xs font-extrabold text-brand-blue tabular-nums">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="font-display text-lg font-extrabold text-ink tabular-nums">
+                      {row.time}
+                    </span>
+                  </div>
+                  <div className="my-4 h-px bg-black/5" />
+                  <p className="text-sm leading-relaxed text-body">{t(row.activity)}</p>
+                </li>
+              ))}
+            </ol>
 
-              <h3 className="mt-12 font-display text-[24px] font-extrabold leading-[1.15] text-ink md:text-[28px]">
+            <div className="mt-14 max-w-3xl">
+              <h3 className="font-display text-[24px] font-extrabold leading-[1.15] text-ink md:text-[28px]">
                 {t("Kroužky a aktivity")}
               </h3>
+              <p className="mt-3 text-body">
+                {t("Nabízíme dětem pravidelné aktivity, které rozvíjejí myšlení, soustředění i radost ze hry.")}
+              </p>
+            </div>
 
-              <div className="mt-6 space-y-4">
-                {krouzky.map(({ icon: Icon, title, text }) => (
-                  <div
-                    key={title}
-                    className="rounded-2xl border border-black/[0.06] bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]"
-                  >
-                    <div className="flex items-start gap-4">
-                      <span aria-hidden className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-yellow/15 text-ink">
-                        <Icon className="h-5 w-5" />
-                      </span>
-                      <div>
-                        <h4 className="font-display text-lg font-bold text-ink">
-                          {t(title)}
-                        </h4>
-                        <p className="mt-1.5 text-body">{t(text)}</p>
-                      </div>
-                    </div>
+            <div className="mt-8 grid gap-5 md:grid-cols-3">
+              {krouzky.map(({ image, alt, title, text }) => (
+                <div
+                  key={title}
+                  className="flex flex-col overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]"
+                >
+                  <div className="flex aspect-[4/3] items-center justify-center bg-white p-8">
+                    <img
+                      src={image}
+                      alt={alt}
+                      loading="lazy"
+                      className="h-full w-full object-contain"
+                    />
                   </div>
-                ))}
-              </div>
+                  <div className="border-t border-black/5 p-6">
+                    <h4 className="font-display text-lg font-bold text-ink">{t(title)}</h4>
+                    <p className="mt-2 text-body">{t(text)}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -267,30 +279,31 @@ function ProRodicePage() {
         {/* Výbava */}
         <section id="vybava" className="section-y-md scroll-mt-28">
           <div className="container mx-auto px-6">
-            <div className="max-w-4xl">
+            <div className="max-w-3xl">
               <h2 className="font-display text-[32px] font-extrabold leading-[1.15] text-ink md:text-[40px]">
                 {t("Co dítě potřebuje do školky")}
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-body">
                 {t("Pro pohodový den ve školce si s sebou dítě přinese:")}
               </p>
-
-              <div className="mt-8 overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
-                <ul className="divide-y divide-black/5">
-                  {vybava.map((item) => (
-                    <li key={item} className="flex items-start gap-4 px-5 py-4 sm:px-6">
-                      <span
-                        aria-hidden
-                        className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-green/15 text-brand-green"
-                      >
-                        <Check className="h-4 w-4" />
-                      </span>
-                      <span className="text-body">{t(item)}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
             </div>
+
+            <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {vybava.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-3 rounded-2xl border border-black/[0.06] bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]"
+                >
+                  <span
+                    aria-hidden
+                    className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-green/15 text-brand-green"
+                  >
+                    <Check className="h-4 w-4" />
+                  </span>
+                  <span className="text-body">{t(item)}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 
@@ -302,33 +315,35 @@ function ProRodicePage() {
         >
           <section id="dokumenty" className="section-y-md scroll-mt-28">
             <div className="container mx-auto px-6">
-              <div className="max-w-4xl">
-                <h2 className="font-display text-[28px] font-extrabold text-ink md:text-[32px]">
-                  {fixPrepositions("Dokumenty ke stažení")}
+              <div className="max-w-3xl">
+                <h2 className="font-display text-[32px] font-extrabold leading-[1.15] text-ink md:text-[40px]">
+                  {t("Dokumenty ke stažení")}
                 </h2>
-                <p className="mt-4 max-w-2xl text-body">
-                  {fixPrepositions(
-                    "Formuláře, žádosti a základní dokumenty naší mateřské školy ke stažení ve formátu PDF."
-                  )}
+                <p className="mt-4 text-lg leading-relaxed text-body">
+                  {t("Formuláře, žádosti a základní dokumenty naší mateřské školy ve formátu PDF.")}
                 </p>
+              </div>
 
-                <div className="mt-10 space-y-8">
-                  <div>
-                    <h3 className="mb-3 font-display text-lg font-bold text-ink">
-                      {fixPrepositions("Formuláře a žádosti")}
-                    </h3>
-                    <div className="overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
-                      <DocList items={formulare} />
-                    </div>
+              <div className="mt-10 space-y-10">
+                <div>
+                  <h3 className="mb-4 font-display text-lg font-bold text-ink">
+                    {t("Formuláře a žádosti")}
+                  </h3>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    {formulare.map((doc) => (
+                      <DocCard key={doc.asset.url} doc={doc} />
+                    ))}
                   </div>
+                </div>
 
-                  <div>
-                    <h3 className="mb-3 font-display text-lg font-bold text-ink">
-                      {fixPrepositions("Základní dokumenty")}
-                    </h3>
-                    <div className="overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
-                      <DocList items={zakladni} />
-                    </div>
+                <div>
+                  <h3 className="mb-4 font-display text-lg font-bold text-ink">
+                    {t("Základní dokumenty")}
+                  </h3>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    {zakladni.map((doc) => (
+                      <DocCard key={doc.asset.url} doc={doc} />
+                    ))}
                   </div>
                 </div>
               </div>
