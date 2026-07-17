@@ -131,18 +131,26 @@ function DocCard({ doc }: { doc: { title: string; asset: DocAsset } }) {
 }
 
 function ScheduleCard({ rows }: { rows: typeof programDne }) {
+  const half = Math.ceil(rows.length / 2);
+  const columns = [rows.slice(0, half), rows.slice(half)];
   return (
-    <div className="divide-y divide-black/5 rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
-      {rows.map((row) => (
-        <div key={row.time} className="flex items-start gap-4 px-6 py-4">
-          <span className="w-28 shrink-0 font-display font-bold text-ink tabular-nums">
-            {row.time}
-          </span>
-          <span className="text-[15px] leading-relaxed text-body">
-            {t(row.activity)}
-          </span>
-        </div>
-      ))}
+    <div className="overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
+      <div className="grid md:grid-cols-2 md:divide-x md:divide-black/5">
+        {columns.map((col, ci) => (
+          <ul key={ci} className="divide-y divide-black/5">
+            {col.map((row) => (
+              <li key={row.time} className="flex items-start gap-4 px-6 py-4">
+                <span className="w-28 shrink-0 font-display font-bold text-ink tabular-nums">
+                  {row.time}
+                </span>
+                <span className="text-[15px] leading-relaxed text-body">
+                  {t(row.activity)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        ))}
+      </div>
     </div>
   );
 }
