@@ -3,7 +3,7 @@ import { Mail, Phone, ClipboardList, FileCheck, ArrowRight, Sun } from "lucide-r
 import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
-import { StatusBlock } from "@/components/status-block";
+import { CmsStatusBlock } from "@/components/cms-status-block";
 
 export const Route = createFileRoute("/zapis-do-skolky")({
   head: () => ({
@@ -62,16 +62,18 @@ function ZapisPage() {
         {/* Status + hlavní 3sloupcový grid (jedna sekce) */}
         <section className="section-y-md">
           <div className="container mx-auto px-6">
-            <StatusBlock
-              variant="closed"
-              title="Zápis pro školní rok 2026/2027 je uzavřen"
-            >
-              <p>
-                {t(
-                  "Termín zápisu pro školní rok 2027/2028 zatím nebyl vyhlášen. Jakmile bude známý, zveřejníme ho zde, na nástěnkách školky a v aplikaci Naše MŠ."
-                )}
-              </p>
-            </StatusBlock>
+            <CmsStatusBlock
+              page="zapis"
+              fallbackVariant="closed"
+              fallbackTitle="Zápis pro školní rok 2026/2027 je uzavřen"
+              fallbackBody={
+                <p>
+                  {t(
+                    "Termín zápisu pro školní rok 2027/2028 zatím nebyl vyhlášen. Jakmile bude známý, zveřejníme ho zde, na nástěnkách školky a v aplikaci Naše MŠ."
+                  )}
+                </p>
+              }
+            />
 
             <div className="mt-8 grid gap-6 md:grid-cols-3">
               <article className="reveal-up rounded-2xl border border-black/[0.06] bg-white p-7 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">

@@ -3,7 +3,7 @@ import { Mail, Phone, GraduationCap, ListChecks, Backpack } from "lucide-react";
 import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
-import { StatusBlock } from "@/components/status-block";
+import { CmsStatusBlock } from "@/components/cms-status-block";
 
 export const Route = createFileRoute("/predskolacek")({
   head: () => ({
@@ -63,16 +63,18 @@ function PredskolacekPage() {
         {/* Status + hlavní 3sloupcový grid (jedna sekce) */}
         <section className="section-y-md">
           <div className="container mx-auto px-6">
-            <StatusBlock
-              variant="closed"
-              title="Termíny Předškoláčka pro rok 2027 zatím nebyly vyhlášeny"
-            >
-              <p>
-                {t(
-                  "Jakmile budou termíny známé, najdete je zde a v aplikaci Naše MŠ. Přihlásit se pak bude možné přes aplikaci nebo osobně ve své třídě."
-                )}
-              </p>
-            </StatusBlock>
+            <CmsStatusBlock
+              page="predskolacek"
+              fallbackVariant="closed"
+              fallbackTitle="Termíny Předškoláčka pro rok 2027 zatím nebyly vyhlášeny"
+              fallbackBody={
+                <p>
+                  {t(
+                    "Jakmile budou termíny známé, najdete je zde a v aplikaci Naše MŠ. Přihlásit se pak bude možné přes aplikaci nebo osobně ve své třídě."
+                  )}
+                </p>
+              }
+            />
 
             <div className="mt-8 grid gap-6 md:grid-cols-3">
               <article className="reveal-up rounded-2xl border border-black/[0.06] bg-white p-7 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
