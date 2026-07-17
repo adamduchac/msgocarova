@@ -22,8 +22,7 @@ const activities: Activity[] = [
     ),
     image: preschool.url,
     alt: "Soustředěný předškolák kreslí tužkou u stolu",
-    href: "/pro-rodice",
-    hash: "krouzky",
+    href: "/predskolacek",
   },
   {
     title: fixPrepositions("Vzdělávání a aktivity"),
