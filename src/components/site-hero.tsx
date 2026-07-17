@@ -18,12 +18,23 @@ const SLIDES = [
 
 export function SiteHero() {
   const [index, setIndex] = useState(0);
+  const [slides, setSlides] = useState(SLIDES);
   const [cubesFloating, setCubesFloating] = useState(false);
   const sectionRef = useRef<HTMLElement | null>(null);
   const cubeAWrapRef = useRef<HTMLDivElement | null>(null);
   const cubeBWrapRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    // Shuffle after hydration (SSR-safe: initial render matches server)
+    setSlides((prev) => {
+      const a = [...prev];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    });
+
     const reduce =
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
