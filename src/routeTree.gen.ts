@@ -17,7 +17,15 @@ import { Route as OSkolceRouteImport } from './routes/o-skolce'
 import { Route as KontaktyRouteImport } from './routes/kontakty'
 import { Route as BarevneTridyRouteImport } from './routes/barevne-tridy'
 import { Route as AkceSRodiciRouteImport } from './routes/akce-s-rodici'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminLoginRouteImport } from './routes/admin_.login'
+import { Route as AdminZpravyRouteImport } from './routes/admin.zpravy'
+import { Route as AdminZapisRouteImport } from './routes/admin.zapis'
+import { Route as AdminZamestnanciRouteImport } from './routes/admin.zamestnanci'
+import { Route as AdminPredskolacekRouteImport } from './routes/admin.predskolacek'
+import { Route as AdminDokumentyRouteImport } from './routes/admin.dokumenty'
 
 const ZapisDoSkolkyRoute = ZapisDoSkolkyRouteImport.update({
   id: '/zapis-do-skolky',
@@ -59,14 +67,55 @@ const AkceSRodiciRoute = AkceSRodiciRouteImport.update({
   path: '/akce-s-rodici',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin_/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminZpravyRoute = AdminZpravyRouteImport.update({
+  id: '/zpravy',
+  path: '/zpravy',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminZapisRoute = AdminZapisRouteImport.update({
+  id: '/zapis',
+  path: '/zapis',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminZamestnanciRoute = AdminZamestnanciRouteImport.update({
+  id: '/zamestnanci',
+  path: '/zamestnanci',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPredskolacekRoute = AdminPredskolacekRouteImport.update({
+  id: '/predskolacek',
+  path: '/predskolacek',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDokumentyRoute = AdminDokumentyRouteImport.update({
+  id: '/dokumenty',
+  path: '/dokumenty',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/akce-s-rodici': typeof AkceSRodiciRoute
   '/barevne-tridy': typeof BarevneTridyRoute
   '/kontakty': typeof KontaktyRoute
@@ -75,6 +124,13 @@ export interface FileRoutesByFullPath {
   '/pro-rodice': typeof ProRodiceRoute
   '/vzdelavani-a-rozvoj': typeof VzdelavaniARozvojRoute
   '/zapis-do-skolky': typeof ZapisDoSkolkyRoute
+  '/admin/dokumenty': typeof AdminDokumentyRoute
+  '/admin/predskolacek': typeof AdminPredskolacekRoute
+  '/admin/zamestnanci': typeof AdminZamestnanciRoute
+  '/admin/zapis': typeof AdminZapisRoute
+  '/admin/zpravy': typeof AdminZpravyRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -86,10 +142,18 @@ export interface FileRoutesByTo {
   '/pro-rodice': typeof ProRodiceRoute
   '/vzdelavani-a-rozvoj': typeof VzdelavaniARozvojRoute
   '/zapis-do-skolky': typeof ZapisDoSkolkyRoute
+  '/admin/dokumenty': typeof AdminDokumentyRoute
+  '/admin/predskolacek': typeof AdminPredskolacekRoute
+  '/admin/zamestnanci': typeof AdminZamestnanciRoute
+  '/admin/zapis': typeof AdminZapisRoute
+  '/admin/zpravy': typeof AdminZpravyRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/akce-s-rodici': typeof AkceSRodiciRoute
   '/barevne-tridy': typeof BarevneTridyRoute
   '/kontakty': typeof KontaktyRoute
@@ -98,11 +162,19 @@ export interface FileRoutesById {
   '/pro-rodice': typeof ProRodiceRoute
   '/vzdelavani-a-rozvoj': typeof VzdelavaniARozvojRoute
   '/zapis-do-skolky': typeof ZapisDoSkolkyRoute
+  '/admin/dokumenty': typeof AdminDokumentyRoute
+  '/admin/predskolacek': typeof AdminPredskolacekRoute
+  '/admin/zamestnanci': typeof AdminZamestnanciRoute
+  '/admin/zapis': typeof AdminZapisRoute
+  '/admin/zpravy': typeof AdminZpravyRoute
+  '/admin_/login': typeof AdminLoginRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/akce-s-rodici'
     | '/barevne-tridy'
     | '/kontakty'
@@ -111,6 +183,13 @@ export interface FileRouteTypes {
     | '/pro-rodice'
     | '/vzdelavani-a-rozvoj'
     | '/zapis-do-skolky'
+    | '/admin/dokumenty'
+    | '/admin/predskolacek'
+    | '/admin/zamestnanci'
+    | '/admin/zapis'
+    | '/admin/zpravy'
+    | '/admin/login'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,9 +201,17 @@ export interface FileRouteTypes {
     | '/pro-rodice'
     | '/vzdelavani-a-rozvoj'
     | '/zapis-do-skolky'
+    | '/admin/dokumenty'
+    | '/admin/predskolacek'
+    | '/admin/zamestnanci'
+    | '/admin/zapis'
+    | '/admin/zpravy'
+    | '/admin/login'
+    | '/admin'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/akce-s-rodici'
     | '/barevne-tridy'
     | '/kontakty'
@@ -133,10 +220,18 @@ export interface FileRouteTypes {
     | '/pro-rodice'
     | '/vzdelavani-a-rozvoj'
     | '/zapis-do-skolky'
+    | '/admin/dokumenty'
+    | '/admin/predskolacek'
+    | '/admin/zamestnanci'
+    | '/admin/zapis'
+    | '/admin/zpravy'
+    | '/admin_/login'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
   AkceSRodiciRoute: typeof AkceSRodiciRoute
   BarevneTridyRoute: typeof BarevneTridyRoute
   KontaktyRoute: typeof KontaktyRoute
@@ -145,6 +240,7 @@ export interface RootRouteChildren {
   ProRodiceRoute: typeof ProRodiceRoute
   VzdelavaniARozvojRoute: typeof VzdelavaniARozvojRoute
   ZapisDoSkolkyRoute: typeof ZapisDoSkolkyRoute
+  AdminLoginRoute: typeof AdminLoginRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -205,6 +301,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AkceSRodiciRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -212,11 +315,81 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin_/login': {
+      id: '/admin_/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/zpravy': {
+      id: '/admin/zpravy'
+      path: '/zpravy'
+      fullPath: '/admin/zpravy'
+      preLoaderRoute: typeof AdminZpravyRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/zapis': {
+      id: '/admin/zapis'
+      path: '/zapis'
+      fullPath: '/admin/zapis'
+      preLoaderRoute: typeof AdminZapisRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/zamestnanci': {
+      id: '/admin/zamestnanci'
+      path: '/zamestnanci'
+      fullPath: '/admin/zamestnanci'
+      preLoaderRoute: typeof AdminZamestnanciRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/predskolacek': {
+      id: '/admin/predskolacek'
+      path: '/predskolacek'
+      fullPath: '/admin/predskolacek'
+      preLoaderRoute: typeof AdminPredskolacekRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/dokumenty': {
+      id: '/admin/dokumenty'
+      path: '/dokumenty'
+      fullPath: '/admin/dokumenty'
+      preLoaderRoute: typeof AdminDokumentyRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminDokumentyRoute: typeof AdminDokumentyRoute
+  AdminPredskolacekRoute: typeof AdminPredskolacekRoute
+  AdminZamestnanciRoute: typeof AdminZamestnanciRoute
+  AdminZapisRoute: typeof AdminZapisRoute
+  AdminZpravyRoute: typeof AdminZpravyRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminDokumentyRoute: AdminDokumentyRoute,
+  AdminPredskolacekRoute: AdminPredskolacekRoute,
+  AdminZamestnanciRoute: AdminZamestnanciRoute,
+  AdminZapisRoute: AdminZapisRoute,
+  AdminZpravyRoute: AdminZpravyRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
   AkceSRodiciRoute: AkceSRodiciRoute,
   BarevneTridyRoute: BarevneTridyRoute,
   KontaktyRoute: KontaktyRoute,
@@ -225,6 +398,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProRodiceRoute: ProRodiceRoute,
   VzdelavaniARozvojRoute: VzdelavaniARozvojRoute,
   ZapisDoSkolkyRoute: ZapisDoSkolkyRoute,
+  AdminLoginRoute: AdminLoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
