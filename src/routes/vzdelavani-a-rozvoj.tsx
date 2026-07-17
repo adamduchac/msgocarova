@@ -169,6 +169,19 @@ const aktivityAreas: Area[] = [
 ];
 
 function AreaPhoto({ area, aspect = "aspect-[4/5]" }: { area: Area; aspect?: string }) {
+  if (area.image) {
+    return (
+      <div className={`${aspect} w-full overflow-hidden rounded-2xl border border-border/60`}>
+        <img
+          src={area.image}
+          alt={t(area.imageAlt ?? area.title)}
+          className="h-full w-full object-cover"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    );
+  }
   return (
     <div
       className={`flex ${aspect} w-full items-end justify-start overflow-hidden rounded-2xl border border-border/60 p-6`}
