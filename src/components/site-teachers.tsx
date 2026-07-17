@@ -232,7 +232,7 @@ export function SiteTeachers() {
                       aria-selected={i === index}
                       aria-label={`Zobrazit ${t.name}`}
                       onClick={() => goTo(i)}
-                      className={`h-2.5 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+                      className={`h-2.5 cursor-pointer rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
                         i === index ? "w-6 bg-ink" : "w-2.5 bg-ink/25 hover:bg-ink/40"
                       }`}
                     />
@@ -242,7 +242,7 @@ export function SiteTeachers() {
                   type="button"
                   onClick={() => go(1)}
                   aria-label="Další učitel"
-                  className="grid h-11 w-11 place-items-center rounded-full border border-border/70 bg-background text-ink transition-colors duration-200 hover:bg-offwhite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="grid h-11 w-11 cursor-pointer place-items-center rounded-full border border-border/70 bg-background text-ink transition-colors duration-200 hover:bg-offwhite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <ChevronRight className="h-5 w-5" />
                 </button>
