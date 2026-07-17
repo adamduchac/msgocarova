@@ -46,18 +46,8 @@ const tocSections = [
   { id: "jidelna", title: "Školní jídelna" },
 ];
 
-const galleryTints = [
-  { bg: "#FFFFFF", label: "text-brand-red/40" },
-  { bg: "#FFFFFF", label: "text-brand-blue/40" },
-  { bg: "#FFFFFF", label: "text-brand-green/50" },
-  { bg: "#FFFFFF", label: "text-brand-yellow/50" },
-  { bg: "#FFFFFF", label: "text-ink/25" },
-  { bg: "#FFFFFF", label: "text-brand-green/40" },
-];
-
-function AboutGallery({ startTint = 0 }: { startTint?: number }) {
+function AboutGallery() {
   const scrollerRef = useRef<HTMLOListElement | null>(null);
-  const tints = [0, 1].map((i) => galleryTints[(startTint + i) % galleryTints.length]);
 
   const scrollByCard = (dir: 1 | -1) => {
     const el = scrollerRef.current;
@@ -73,18 +63,19 @@ function AboutGallery({ startTint = 0 }: { startTint?: number }) {
         ref={scrollerRef}
         className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0"
       >
-        {tints.map((tint, i) => (
+        {galleryPhotos.map((photo, i) => (
           <li
             key={i}
             className="flex shrink-0 basis-[88%] snap-start md:basis-auto"
           >
-            <div
-              className="flex aspect-[4/3] w-full items-end justify-start overflow-hidden rounded-2xl border border-border/60 p-5"
-              style={{ backgroundColor: tint.bg }}
-            >
-              <span className={`font-display text-xs font-semibold uppercase tracking-[0.16em] ${tint.label}`}>
-                {t("Foto brzy doplníme")}
-              </span>
+            <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl border border-border/60 bg-white">
+              <img
+                src={photo.url}
+                alt={photo.alt}
+                loading="lazy"
+                decoding="async"
+                className="h-full w-full object-cover"
+              />
             </div>
           </li>
         ))}
@@ -94,7 +85,7 @@ function AboutGallery({ startTint = 0 }: { startTint?: number }) {
         <button
           type="button"
           onClick={() => scrollByCard(-1)}
-          aria-label={t("Předchozí fotka")}
+          aria-label={fixPrepositions("Předchozí fotka")}
           className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border/70 bg-background text-ink shadow-sm transition-colors duration-200 hover:bg-offwhite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
         >
           <ChevronLeft className="h-5 w-5" aria-hidden />
@@ -102,7 +93,7 @@ function AboutGallery({ startTint = 0 }: { startTint?: number }) {
         <button
           type="button"
           onClick={() => scrollByCard(1)}
-          aria-label={t("Další fotka")}
+          aria-label={fixPrepositions("Další fotka")}
           className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border/70 bg-background text-ink shadow-sm transition-colors duration-200 hover:bg-offwhite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
         >
           <ChevronRight className="h-5 w-5" aria-hidden />
