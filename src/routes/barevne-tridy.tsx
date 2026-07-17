@@ -395,16 +395,11 @@ function BarevneTridyPage() {
       </div>
 
       <main>
-        {classes.map((c) => (
-          <ClassSection key={c.id} data={c} />
+        {classes.map((c, i) => (
+          <ClassSection key={c.id} data={c} isLast={i === classes.length - 1} />
         ))}
 
-        <div
-          style={{
-            background:
-              "linear-gradient(to bottom, #FFFFFF 0%, #FEF8E7 40%, #FEF8E7 100%)",
-          }}
-        >
+        <div style={{ backgroundColor: "#FEF8E7" }}>
           <SiteFooter topCubeColor="red" topCubePosition="right" />
         </div>
       </main>
