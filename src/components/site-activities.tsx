@@ -2,15 +2,16 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { fixPrepositions } from "@/lib/typography";
 import preschool from "@/assets/activity-preschool.jpg.asset.json";
-import sport from "@/assets/activity-sport.jpg.asset.json";
-import parents from "@/assets/activity-parents.jpg.asset.json";
+import box2 from "@/assets/box2-2.webp.asset.json";
+import box3 from "@/assets/box3-2.webp.asset.json";
 
 type Activity = {
   title: string;
   text: string;
   image: string;
   alt: string;
-  href: string;
+  href: "/pro-rodice" | "/vzdelavani-a-rozvoj" | "/akce-s-rodici";
+  hash?: string;
 };
 
 const activities: Activity[] = [
@@ -21,15 +22,16 @@ const activities: Activity[] = [
     ),
     image: preschool.url,
     alt: "Soustředěný předškolák kreslí tužkou u stolu",
-    href: "#predskolacek",
+    href: "/pro-rodice",
+    hash: "krouzky",
   },
   {
     title: fixPrepositions("Vzdělávání a aktivity"),
     text: fixPrepositions(
       "S dětmi nezůstáváme jen za plotem. Pravidelně jezdíme na předplavecký výcvik, pořádáme lyžařské kurzy a jarní školy v přírodě."
     ),
-    image: sport.url,
-    alt: "Děti s plovacími deskami v bazénu během plaveckého kurzu",
+    image: box2.url,
+    alt: "Děti si hrají a cákají ve venkovním bazénu na školní zahradě",
     href: "/vzdelavani-a-rozvoj",
   },
   {
@@ -37,9 +39,9 @@ const activities: Activity[] = [
     text: fixPrepositions(
       "Školka pro nás nekončí odpoledním vyzvednutím. Pořádáme společné tvořivé dílničky, „Večer se strašidly“ nebo jarní zahradní brigády."
     ),
-    image: parents.url,
-    alt: "Tatínek s malým synem společně dlabou dýni",
-    href: "#akce-rodice",
+    image: box3.url,
+    alt: "Rodiče s dětmi opékají buřty u ohniště na zahradě školky",
+    href: "/akce-s-rodici",
   },
 ];
 
@@ -55,10 +57,13 @@ export function SiteActivities() {
 
         <div className="grid grid-cols-1 gap-7 md:grid-cols-3">
           {activities.map((a, i) => (
-            <article
+            <Link
               key={a.title}
-              className="card-hover reveal-up group relative overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)]"
+              to={a.href}
+              hash={a.hash}
+              className="card-hover reveal-up group relative block cursor-pointer overflow-hidden rounded-2xl border border-border/70 bg-card no-underline shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2"
               style={{ ["--reveal-delay" as string]: `${i * 60}ms`, minHeight: "440px" }}
+              aria-label={fixPrepositions(`Číst dále: ${a.title}`)}
             >
               <div className="activity-shift flex h-full flex-col transition-transform duration-300 ease-out motion-reduce:transform-none group-hover:-translate-y-14 group-focus-within:-translate-y-14">
                 <div className="aspect-[5/3] w-full overflow-hidden">
@@ -78,26 +83,11 @@ export function SiteActivities() {
                 </div>
               </div>
 
-              {a.href.startsWith("/") ? (
-                <Link
-                  to={a.href}
-                  className="activity-cta group/cta absolute inset-x-0 bottom-0 flex items-center justify-center gap-2 px-7 pb-7 pt-3 text-[15px] font-medium text-brand-red opacity-0 translate-y-2 pointer-events-none transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2 motion-reduce:transition-none"
-                  aria-label={fixPrepositions(`Číst dále: ${a.title}`)}
-                >
-                  {fixPrepositions("Číst dále")}
-                  <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-out group-hover/cta:translate-x-1" aria-hidden />
-                </Link>
-              ) : (
-                <a
-                  href={a.href}
-                  className="activity-cta group/cta absolute inset-x-0 bottom-0 flex items-center justify-center gap-2 px-7 pb-7 pt-3 text-[15px] font-medium text-brand-red opacity-0 translate-y-2 pointer-events-none transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2 motion-reduce:transition-none"
-                  aria-label={fixPrepositions(`Číst dále: ${a.title}`)}
-                >
-                  {fixPrepositions("Číst dále")}
-                  <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-out group-hover/cta:translate-x-1" aria-hidden />
-                </a>
-              )}
-            </article>
+              <span className="activity-cta group/cta pointer-events-none absolute inset-x-0 bottom-0 flex translate-y-2 items-center justify-center gap-2 px-7 pb-7 pt-3 text-[15px] font-medium text-brand-red opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none">
+                {fixPrepositions("Číst dále")}
+                <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-out group-hover/cta:translate-x-1" aria-hidden />
+              </span>
+            </Link>
           ))}
         </div>
       </div>

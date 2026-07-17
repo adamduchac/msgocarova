@@ -1,19 +1,24 @@
-## Změny v `src/components/site-news.tsx`
+Ověřil jsem aktuální stav přímo v preview i ve zdroji: sekce „Zážitky, které si děti odnáší“ se nevykresluje z `site-news.tsx`, ale ze `src/components/site-activities.tsx`. Proto se předchozí úpravy v jiné komponentě na HP neprojevily.
 
-1. **Nahradit fotky** (nahrát přes `lovable-assets` z `/mnt/user-uploads/`):
-   - `box2-2.webp` → nová 2. karta (bazén)
-   - `box3-2.webp` → nová 3. karta (opékání)
-   - Vytvořit `.asset.json` pointery v `src/assets/`, staré `art` a `openday` importy odstranit.
+Plán opravy:
 
-2. **Odkazy na celé karty:**
-   - 2. karta: `href="/vzdelavani-a-rozvoj"`
-   - 3. karta: `href="/akce-s-rodici"` (už existuje)
-   - 1. karta zůstává bez odkazu (`<article>`).
+1. Upravit správnou komponentu `src/components/site-activities.tsx`
+   - 2. karta použije novou bazénovou fotku z assetu `box2-2.webp`.
+   - 3. karta použije novou fotku ohniště/rodičů z assetu `box3-2.webp`.
+   - 2. karta povede na `/vzdelavani-a-rozvoj`.
+   - 3. karta povede na `/akce-s-rodici`.
 
-3. **Klikatelnost celé plochy + cursor pointer:**
-   - Karty s `href` renderovat jako `<a>` s `block` layoutem — potvrzeno v kódu (řádky 91–99), třída `commonClass` už obsahuje `cursor-pointer` a `flex flex-col`. Funguje správně; uživatel hlásí, že to nefunguje — pravděpodobně proto, že 2. karta zatím nemá `href`, takže se renderuje jako `<article>` bez odkazu. Přidáním `href` na 2. kartu se problém vyřeší.
-   - Ověřím, že žádný vnitřní element neblokuje klik (aktuálně žádný `<a>` uvnitr není).
+2. Udělat klikací celou kartu, ne jen skryté CTA dole
+   - Karty s interním odkazem obalit přes `Link` z TanStack Routeru.
+   - Zachovat stejný vizuál, hover animaci a texty.
+   - Přidat `cursor-pointer` na celou kartu.
+   - Odstranit stav, kdy hlavní karta je jen `article` a klikatelné je až malé CTA.
 
-## Výsledek
-- Všechny tři karty (kromě 1., která zůstává statická) budou plně klikací s cursor pointer.
-- Aktualizované obrázky a alt texty odpovídající novým fotkám.
+3. Opravit první kartu podle současného záměru
+   - Pokud má zůstat bez cílové stránky, nechám ji vizuálně stejnou bez pointer cursoru.
+   - Pokud chceš, aby i první karta byla celá klikací, nastavím jí bezpečný odkaz na příslušnou sekci `/pro-rodice#krouzky` nebo jiný existující cíl.
+
+4. Ověřit po úpravě v preview
+   - Zkontroluji DOM: tagy karet, `href`, `cursor: pointer`, `pointer-events`.
+   - Ověřím, že 3. karta skutečně vede na `/akce-s-rodici`.
+   - Ověřím, že fotky se načítají z nových assetů.
