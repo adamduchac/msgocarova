@@ -137,6 +137,8 @@ const aktivityAreas: Area[] = [
     photoBg: "#EAF5EC",
     iconColor: "text-brand-green",
     iconBg: "bg-brand-green/10",
+    image: skolaPrirodeImg.url,
+    imageAlt: "Děti si hrají na dřevěné prolézačce s výhledem na hory",
     activities: [
       {
         icon: Mountain,
