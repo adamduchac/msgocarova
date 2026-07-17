@@ -33,10 +33,46 @@ export const Route = createFileRoute("/pro-rodice")({
   component: ProRodicePage,
 });
 
-const placeholderSections = [
-  { id: "platby", title: fixPrepositions("Platby") },
-  { id: "program-dne", title: fixPrepositions("Program dne") },
-  { id: "vybava", title: fixPrepositions("Výbava do školky") },
+const t = fixPrepositions;
+
+const programDne: { time: string; activity: string }[] = [
+  { time: "6:15 – 7:15", activity: "Scházení dětí ve Žluté kostičce" },
+  { time: "7:15 – 9:30", activity: "Spontánní hry, individuální a skupinové aktivity, pohyb, řízená činnost" },
+  { time: "8:30 – 8:55", activity: "Hygiena, svačina" },
+  { time: "9:30 – 9:40", activity: "Příprava na pobyt venku" },
+  { time: "9:40 – 11:40", activity: "Pobyt venku" },
+  { time: "11:40 – 12:30", activity: "Oběd, hygiena" },
+  { time: "12:30 – 14:00", activity: "Spánek a odpočinek respektující odlišné potřeby dětí, klidové aktivity" },
+  { time: "14:00 – 16:45", activity: "Hygiena, odpolední svačina, hry, činnosti, za příznivého počasí zahrada, rozcházení" },
+];
+
+const krouzky: { icon: typeof Puzzle; title: string; text: string }[] = [
+  {
+    icon: Puzzle,
+    title: "Šachy",
+    text: "Šachový klub Lipky HK, každou středu 15:15 (30 min), říjen–červen, hradí rodiče.",
+  },
+  {
+    icon: Brain,
+    title: "Bystrohlavička",
+    text: "Rozvoj pozornosti, paměti a logického myšlení; říjen–květen v lichém týdnu, Červená (po) a Zelená (út) od 13:15.",
+  },
+  {
+    icon: Dices,
+    title: "Stolní hry",
+    text: "Pravidla deskových her (Pexeso, Dáma, Domino…), Červená a Zelená od 13:15 dle zájmu.",
+  },
+];
+
+const vybava: string[] = [
+  "pohodlné oblečení do třídy",
+  "vhodnou obuv do třídy (bačkory, ne pantofle)",
+  "pyžamo (netýká se předškoláků)",
+  "oblečení na ven",
+  "náhradní oblečení do sáčku v šatně (ponožky, spodní prádlo, tričko)",
+  "pláštěnku",
+  "papírové kapesníky",
+  "kartáček na zuby (pouze Červená a Zelená kostička)",
 ];
 
 type DocAsset = { url: string; size: number; original_filename: string };
