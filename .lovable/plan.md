@@ -1,9 +1,11 @@
-## Úpravy `/barevne-tridy`
+Cíl: Na podstránce `/barevne-tridy` skrýt žlutou dekorativní kostičku v patičce (dolní pravý roh), zatímco horní červená kostička zůstane.
 
-1. **Odebrat tónované pozadí u sekcí tříd** — v `src/routes/barevne-tridy.tsx` odstranit `bgTint` z `ClassData` i z `<section style={{ backgroundColor: data.bgTint }}>`. Sekce budou na bílém pozadí.
+Technické řešení:
+- Komponenta `SiteFooter` v `src/components/site-footer.tsx` vykresluje žlutou kostičku jako `bottomCube` na základě prop `showBottomCube` (default `true`).
+- V `src/routes/barevne-tridy.tsx` je patička volána s `topCubeColor="red" topCubePosition="right"`.
+- Stačí přidat prop `showBottomCube={false}`, aby se žlutá kostička na této stránce nezobrazila.
 
-2. **Poslední sekce (Žlutá) přechází do krémové** — po vzoru ostatních podstránek. Obalit poslední sekci + footer wrapper gradientem `linear-gradient(to bottom, #FFFFFF 0%, #FEF8E7 40%, #FEF8E7 100%)` (footer už tento gradient používá — sjednotit tak, aby přechod začínal ještě uvnitř poslední třídy).
+Změněné soubory:
+- `src/routes/barevne-tridy.tsx` — přidání `showBottomCube={false}` do volání `SiteFooter`.
 
-3. **Nezávislé rozbalení vizitek učitelek** — nahradit `openIndex: number | null` sadou `openIds: Set<string>`. Klik na kartu přepíná její stav samostatně; může být rozbaleno libovolně mnoho karet zároveň.
-
-4. **Karty se ve dvousloupcovém gridu neprotahují na výšku souseda** — přidat `items-start` na grid, aby zavřená karta zůstala kompaktní i když sousední rozbalená karta roste.
+Žádné další vizuální ani strukturální změny nejsou potřeba.

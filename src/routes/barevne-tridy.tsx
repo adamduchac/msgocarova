@@ -400,7 +400,7 @@ function BarevneTridyPage() {
         ))}
 
         <div style={{ backgroundColor: "#FEF8E7" }}>
-          <SiteFooter topCubeColor="red" topCubePosition="right" />
+          <SiteFooter topCubeColor="red" topCubePosition="right" showBottomCube={false} />
         </div>
       </main>
     </div>
