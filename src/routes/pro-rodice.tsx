@@ -155,18 +155,144 @@ function ProRodicePage() {
       </div>
 
       <main>
-        {placeholderSections.map((s) => (
-          <section key={s.id} id={s.id} className="section-y-sm scroll-mt-28">
-            <div className="container mx-auto px-6">
-              <h2 className="font-display text-[28px] font-extrabold text-ink md:text-[32px]">
-                {s.title}
+        {/* Platby */}
+        <section id="platby" className="section-y-md scroll-mt-28">
+          <div className="container mx-auto px-6">
+            <div className="max-w-4xl">
+              <h2 className="font-display text-[32px] font-extrabold leading-[1.15] text-ink md:text-[40px]">
+                {t("Platby")}
               </h2>
-              <p className="mt-4 max-w-2xl text-body">
-                {fixPrepositions("Obsah této sekce brzy doplníme.")}
+              <p className="mt-4 text-lg leading-relaxed text-body">
+                {t(
+                  "Školné pro školní rok 2025/2026 činí 600 Kč/měsíc, v červenci a srpnu 300 Kč. Platí se nejpozději do 15. dne daného měsíce. Děti v posledním roce před nástupem do školy (i s odkladem) školné neplatí."
+                )}
+              </p>
+
+              <div className="mt-8 grid gap-5 md:grid-cols-2">
+                <div className="rounded-2xl border border-black/[0.06] bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
+                  <div className="flex items-center gap-3">
+                    <span aria-hidden className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue">
+                      <Wallet className="h-5 w-5" />
+                    </span>
+                    <h3 className="font-display text-base font-bold text-ink">
+                      {t("Školné + kurzovné plavání")}
+                    </h3>
+                  </div>
+                  <p className="mt-4 font-display text-xl font-extrabold text-ink tabular-nums">
+                    35-5744160237/0100
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-black/[0.06] bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
+                  <div className="flex items-center gap-3">
+                    <span aria-hidden className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-green/10 text-brand-green">
+                      <CreditCard className="h-5 w-5" />
+                    </span>
+                    <h3 className="font-display text-base font-bold text-ink">
+                      {t("Stravné")}
+                    </h3>
+                  </div>
+                  <p className="mt-4 font-display text-xl font-extrabold text-ink tabular-nums">
+                    27-320530297/0100
+                  </p>
+                </div>
+              </div>
+
+              <p className="mt-5 text-sm text-body/80">
+                {t("Variabilní symbol dítěte je pro všechny platby stejný.")}
               </p>
             </div>
-          </section>
-        ))}
+          </div>
+        </section>
+
+        {/* Program dne */}
+        <section
+          id="program-dne"
+          className="section-y-md scroll-mt-28"
+          style={{ background: "linear-gradient(to bottom, #ffffff 0%, #ffffff 10%, var(--blue-soft) 55%, var(--blue-soft) 100%)" }}
+        >
+          <div className="container mx-auto px-6">
+            <div className="max-w-4xl">
+              <h2 className="font-display text-[32px] font-extrabold leading-[1.15] text-ink md:text-[40px]">
+                {t("Program dne")}
+              </h2>
+
+              <div className="mt-8 overflow-hidden rounded-2xl border border-border/70 bg-white">
+                <div className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-3 px-6 py-6 md:gap-x-10 md:px-8 md:py-8">
+                  {programDne.map((row, i) => (
+                    <div key={row.time} className="contents">
+                      <span
+                        className={`font-display font-bold text-ink tabular-nums ${i > 0 ? "border-t border-border/60 pt-3" : ""}`}
+                      >
+                        {row.time}
+                      </span>
+                      <span
+                        className={`text-body ${i > 0 ? "border-t border-border/60 pt-3" : ""}`}
+                      >
+                        {t(row.activity)}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <h3 className="mt-12 font-display text-[24px] font-extrabold leading-[1.15] text-ink md:text-[28px]">
+                {t("Kroužky a aktivity")}
+              </h3>
+
+              <div className="mt-6 space-y-4">
+                {krouzky.map(({ icon: Icon, title, text }) => (
+                  <div
+                    key={title}
+                    className="rounded-2xl border border-black/[0.06] bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]"
+                  >
+                    <div className="flex items-start gap-4">
+                      <span aria-hidden className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-yellow/15 text-ink">
+                        <Icon className="h-5 w-5" />
+                      </span>
+                      <div>
+                        <h4 className="font-display text-lg font-bold text-ink">
+                          {t(title)}
+                        </h4>
+                        <p className="mt-1.5 text-body">{t(text)}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Výbava */}
+        <section id="vybava" className="section-y-md scroll-mt-28">
+          <div className="container mx-auto px-6">
+            <div className="max-w-4xl">
+              <h2 className="font-display text-[32px] font-extrabold leading-[1.15] text-ink md:text-[40px]">
+                {t("Co dítě potřebuje do školky")}
+              </h2>
+              <p className="mt-4 text-lg leading-relaxed text-body">
+                {t("Pro pohodový den ve školce si s sebou dítě přinese:")}
+              </p>
+
+              <div className="mt-8 overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
+                <ul className="divide-y divide-black/5">
+                  {vybava.map((item) => (
+                    <li key={item} className="flex items-start gap-4 px-5 py-4 sm:px-6">
+                      <span
+                        aria-hidden
+                        className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-green/15 text-brand-green"
+                      >
+                        <Check className="h-4 w-4" />
+                      </span>
+                      <span className="text-body">{t(item)}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <div
           style={{
