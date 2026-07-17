@@ -1,32 +1,25 @@
+## Úpravy `/pro-rodice` + navbar
 
-Úpravy v `src/routes/pro-rodice.tsx`:
+### 1) Navbar — přidat "Kroužky a aktivity"
+V `src/components/site-navbar.tsx` do children pro "Pro rodiče" přidat novou položku hned za "Program dne":
+- `{ label: "Kroužky a aktivity", href: "/pro-rodice", hash: "krouzky", internal: true }`
 
-## 1) Úvodní odstavec
-Nahradit text pod H1 „Pro rodiče":
-> „Platby, denní program, co s sebou i kroužky – praktické informace, které budete během roku potřebovat nejčastěji. Dokumenty a formuláře najdete dole ke stažení."
+Sekci kroužků v `pro-rodice.tsx` opatřit `id="krouzky"` a `scroll-mt-28`.
 
-Zvětšit `max-w-2xl` → `max-w-3xl`, aby se text pěkně vešel.
+### 2) Kroužky a aktivity — samostatná sekce
+V `src/routes/pro-rodice.tsx` vytáhnout blok "Kroužky a aktivity" ze sekce `#program-dne` a udělat z něj samostatnou `<section id="krouzky" className="section-y-md scroll-mt-28">` na stejné úrovni jako Platby / Program dne / Výbava. Nadpis `h2` v jednotném stylu (`text-[32px] md:text-[40px]`, `font-extrabold`, `text-ink`), pod ním úvodní odstavec, pak grid 3 karet (beze změny).
 
-## 2) Program dne — rozvrh místo timeline
-- Odstranit komponentu `TimelineColumn` (tečky, svislá čára, modré časy).
-- Nahradit dvousloupcovým rozvrhem: bílé řádky v jedné kartě (`rounded-2xl` + stín jako ostatní karty), rozdělené jemnou linkou `divide-y divide-black/5`.
-- Každý řádek: čas vlevo (`font-display font-bold text-ink tabular-nums`, **bez modré barvy**, tj. tmavá inková), aktivita vpravo (`text-body`).
-- Layout: `grid md:grid-cols-2 gap-6`, každý sloupec = jedna karta se 4 řádky. Časy dostanou pevnou šířku (`w-28 shrink-0`), aby popisy začínaly zarovnané.
-- Odstranit čísla / kolečka úplně.
+### 3) Program dne — jedna karta o dvou sloupcích
+Místo dvou vedle sebe `ScheduleCard` (po 4 řádcích) udělat jednu bílou kartu (`rounded-2xl`, stejný border/stín), uvnitř `grid md:grid-cols-2 md:divide-x divide-black/5`. Každý sloupec obsahuje 4 řádky rozvrhu s `divide-y divide-black/5`. Čas `w-28 shrink-0 font-display font-bold text-ink tabular-nums`, aktivita `text-[15px] text-body`. Padding sloupců `px-6 py-2` na řádek, karta bez vnějšího paddingu.
 
-## 3) Kroužky jako checklist + odstranit modré pozadí
-- Ze sekce `#program-dne` odstranit inline `style` s modrým gradientem — sekce zůstane na bílém pozadí (stejně jako Platby a Výbava).
-- Kroužky přestylovat z 3 velkých kartiček s obrázkem 4:3 na kompaktní horizontální checklist podobný sekci Výbava:
-  - `grid gap-4 md:grid-cols-3`
-  - Každá karta: bílá, `rounded-2xl`, jemný border + stín, `p-5`, `flex items-start gap-4`.
-  - Ilustrace vlevo v malém čtverci `h-14 w-14` (`object-contain`, bílé pozadí, bez rámečku) — výrazně menší než dosud.
-  - Vpravo nadpis (`font-display font-bold text-ink`) a pod ním popis (`text-sm text-body`).
-- Zachovat obsah (Šachy / Bystrohlavička / Stolní hry) beze změny textů.
+### 4) Platby — tři sloupce
+Nyní `md:grid-cols-2` (dva účty) + samostatný VS callout dole. Předělat na `md:grid-cols-3` tři bílé karty stejného stylu (border, stín, `rounded-2xl`, `p-6`):
+1. **Školné + kurzovné plavání** — ikona `Wallet` (modrý badge), číslo účtu `35-5744160237/0100`.
+2. **Stravné** — ikona `CreditCard` (zelený badge), číslo účtu `27-320530297/0100`.
+3. **Variabilní symbol** — ikona `Info` (žlutý badge, `bg-brand-yellow/15 text-ink`), text „Variabilní symbol dítěte je pro všechny platby stejný."
 
-## 4) Rytmus sekcí
-Po odstranění modrého pozadí bude celá stránka na bílé až po žlutý gradient v Dokumentech — to je záměr (kompaktnější, klidnější dojem, jak si přeje uživatel). Krémový gradient nad footerem u Dokumentů zůstává.
+Žlutý callout box zcela odstranit.
 
 ## Poznámky
-- Ikony `Wallet`, `CreditCard`, `Check`, `Info`, `FileText`, `Download` zůstávají.
-- Import `programDne` a `krouzky` beze změny.
-- Ostatní sekce (Platby, Výbava, Dokumenty, footer se žlutou kostičkou) beze změny.
+- Ostatní sekce beze změny.
+- Zachovat `t()` pro texty s neděliteľnými mezerami.
