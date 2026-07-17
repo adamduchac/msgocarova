@@ -1,28 +1,46 @@
-Úpravy v `src/routes/o-skolce.tsx` a `src/styles.css`.
+## Změny
 
-## 1. Zvětšit mezery o třetinu
-V `src/styles.css` přidám novou utilitu `section-y-md`:
-```
-@utility section-y-md {
-  padding-block: clamp(37px, 5.3vw, 75px);
-}
-```
-(≈ o třetinu víc než `section-y-sm`: 28→37, 4vw→5.3vw, 56→75). Všechny `section-y-sm` v `o-skolce.tsx` přepnu na `section-y-md`. Hero blok necháme na `section-y-sm` (padding ke stránce vč. horního `pt-28` už dost).
+### 1. Přejmenování stránky na „Vzdělávání a aktivity"
+- `src/routes/vzdelavani-a-rozvoj.tsx`: H1, meta title, og:title, description → „Vzdělávání a aktivity".
+- `src/components/site-navbar.tsx` (řádek 24): label `Vzdělávání a rozvoj` → `Vzdělávání a aktivity` (URL beze změny).
 
-## 2. Modrý gradient na „Představení a vize"
-Změním `style={{ backgroundColor: "#FDFAF6" }}` na modrý gradient jako na HP (site-benefits): `linear-gradient(to bottom, #ffffff 0%, #ffffff 10%, var(--blue-soft) 55%, var(--blue-soft) 100%)`.
+### 2. Nové rozložení — 2 skupiny, karetní grid místo alternace foto vlevo/vpravo
 
-## 3. Galerie — 2 fotky místo 3
-V komponentě `AboutGallery`:
-- pole tiles: `[0, 1]` místo `[0, 1, 2]`
-- desktop grid: `md:grid-cols-2` místo `md:grid-cols-3`
+Místo dosavadního `AreaBlock` s 1/2 fotkou vedle 1/2 textu vytvořit nový kompaktnější `AreaCard` (foto nahoře 4:5, nadpis + aktivity pod ním) a rozložit takto:
 
-## 4. Otevírací doba hřiště — tabulka podle screenu
-Nahradím současný dvousloupcový grid tabulkou 3 sloupců (období / dopoledne / odpoledne) se dvěma řádky:
-- **od 15. dubna, květen, červen, září** — 10:00 – 12:00 / 13:00 – 17:00
-- **do 15. října** — 10:00 – 12:00 / 13:00 – 16:00
+**Sekce „Vzdělávání"** — 2 karty vedle sebe (grid `md:grid-cols-2`)
+- Jazyk a komunikace (Angličtina + Zelená kostička)
+- Příprava na školu a moderní technologie
+  - 1) MIU — předškoláci (Červená kostička)
+  - 2) Digitální gramotnost *(přesunutá z původního bloku „Moderní technologie")*
 
-Nad tabulkou drobný nadpis „Sobota, neděle". Layout: karta `rounded-2xl border`, uvnitř sémantická `<table>` (nebo `<dl>`/grid) — použiju grid `grid-cols-[1fr_auto_auto]` s hlavičkou (dopolední/odpolední) a dvěma řádky. Na mobilu ponechám čitelné (case: menší text, případně 2-sloupcové rozložení). Poznámka „Ve státní svátky je hřiště uzavřeno." zůstává pod.
+**Sekce „Aktivity"** — grid 2 + 2 + 1:
+- Řádek 1 (`md:grid-cols-2`): Plavecká výuka | Škola v přírodě
+- Řádek 2 (`md:grid-cols-2` s prázdným místem? ne — místo toho jeden blok na plnou šířku): Lyžařský kurz jako celo­šířková karta pod nimi (foto vlevo 4:5, text vpravo, nebo širší hero-styl).
 
-## Co se nemění
-Texty ostatních sekcí, footer, assety, ostatní stránky.
+Poznámka: v zadání máme 2 (vzdělávání) + 3 (aktivity). Layout tedy vyjde jako **2 + 2 + 1** — dvě karty vzdělávání, dvě karty aktivit, poslední aktivita (Lyžařský kurz) na celou šířku.
+
+`AreaCard` (kompaktní, pro grid):
+- Foto 4:5 nahoře (placeholder box s `photoBg`, popiskou „Foto brzy doplníme").
+- Pod fotkou nadpis (`font-display`, o něco menší než dosud) a `ul` s ikonou + tučný název + text (stejný styl jako dnes).
+- Rounded-2xl, žádný hover scale, drží se editoriálního stylu `/o-skolce`.
+
+Celo­šířková varianta pro Lyžařský kurz:
+- 2sloupcový grid uvnitř karty: foto 4:5 vlevo, text vpravo, stejné komponentové primitivy.
+
+Sekční nadpisy „Vzdělávání" a „Aktivity" před každou skupinou (`font-display`, konzistentní s ostatními H2 na webu, vzdušný margin).
+
+### 3. CTA na `/o-skolce`
+`src/routes/o-skolce.tsx` řádky 316–322:
+- `to="/"` → `to="/vzdelavani-a-rozvoj"`
+- text „Více o vzdělávání" → „Více o vzdělávání a aktivitách"
+
+### 4. Prostřední karta na HP
+`src/components/site-activities.tsx` (řádek 25–33):
+- `title`: „Sport a příroda" → „Vzdělávání a aktivity"
+- `href`: `#sport` → `/vzdelavani-a-rozvoj`
+- Text a obrázek beze změny.
+- Ověřit v komponentě, že `href` proklikne cross-route (pokud používá jen `<a href>`, přepnout na TanStack `<Link>` pro tuto kartu, případně detekovat interní cestu začínající `/`).
+
+## Ověření
+`bun run build`.
