@@ -7,6 +7,7 @@ import {
   Waves,
   Mountain,
   Snowflake,
+  PartyPopper,
   type LucideIcon,
 } from "lucide-react";
 import { fixPrepositions } from "@/lib/typography";
@@ -17,6 +18,8 @@ import robotImg from "@/assets/vzdelavani/robot-2.webp.asset.json";
 import plavaniImg from "@/assets/vzdelavani/plavani.webp.asset.json";
 import skolaPrirodeImg from "@/assets/vzdelavani/skolavprirode.webp.asset.json";
 import lyzeImg from "@/assets/vzdelavani/lyze.webp.asset.json";
+
+import karnevalImg from "@/assets/vzdelavani/karneval.webp.asset.json";
 
 const t = fixPrepositions;
 
@@ -166,6 +169,25 @@ const allAreas: Area[] = [
         title: "Pětidenní lyžařská škola pro předškoláky",
         text:
           "Předškoláci mohou vyjet na pětidenní lyžařskou školu, kde se hravou formou učí základům lyžování a získávají jistotu na sněhu.",
+      },
+    ],
+  },
+  {
+    id: "tradicni-akce",
+    eyebrow: "Aktivity",
+    title: "Tradiční akce",
+    photoLabel: "Karneval a další akce",
+    photoBg: "#FCEDED",
+    iconColor: "text-brand-red",
+    iconBg: "bg-brand-red/10",
+    image: karnevalImg.url,
+    imageAlt: "Děti v barevných karnevalových kostýmech ve školce",
+    activities: [
+      {
+        icon: PartyPopper,
+        title: "Oblíbené akce během roku",
+        text:
+          "Během školního roku se děti účastní řady oblíbených aktivit. Patří sem podzimní a jarní výlety do přírody, Čertí rej, karneval, návštěvy Divadla Drak, poznávací exkurze a další společné akce.",
       },
     ],
   },

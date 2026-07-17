@@ -11,6 +11,7 @@ type News = {
   text: string;
   image: string;
   alt: string;
+  href?: string;
 };
 
 const news: News[] = [
@@ -35,14 +36,15 @@ const news: News[] = [
     alt: "Dětské ručky malující vodovkami pestrobarevné květiny",
   },
   {
-    badge: fixPrepositions("Oznámení"),
+    badge: fixPrepositions("Rodiče"),
     badgeBg: "bg-brand-red",
-    title: fixPrepositions("Den otevřených dveří"),
+    title: fixPrepositions("Akce s rodiči"),
     text: fixPrepositions(
-      "Přijďte se podívat do naší školky ve středu 15. 5. od 9:00 do 17:00."
+      "Od podzimního dlabání dýní přes vánoční posezení až po květnové Slavnosti školy — společně si užíváme celý rok."
     ),
     image: openday.url,
-    alt: "Učitelka čte s malou holčičkou knížku ve světlé třídě",
+    alt: "Rodiče a děti pohromadě na společné akci školky",
+    href: "/akce-s-rodici",
   },
 ];
 
@@ -57,39 +59,54 @@ export function SiteNews() {
         </div>
 
         <div className="grid grid-cols-1 gap-7 md:grid-cols-3">
-          {news.map((n, i) => (
-            <article
-              key={n.title}
-              className="card-hover reveal-up group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card"
-              style={{ ["--reveal-delay" as string]: `${i * 80}ms` }}
-            >
-              <div className="relative aspect-[5/3] w-full overflow-hidden">
-                <img
-                  src={n.image}
-                  alt={n.alt}
-                  width={1024}
-                  height={614}
-                  className="h-full w-full object-cover"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <span className={`absolute left-4 top-4 inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-white ${n.badgeBg}`}>
-                  {n.badge}
-                </span>
-              </div>
-              <div className="flex flex-1 flex-col p-6">
-                <h3 className="font-display text-lg font-semibold text-ink">{n.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-body">{n.text}</p>
-                <a
-                  href="#"
-                  className="group mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
-                >
-                  {fixPrepositions("Číst více")}
-                  <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
-                </a>
-              </div>
-            </article>
-          ))}
+          {news.map((n, i) => {
+            const inner = (
+              <>
+                <div className="relative aspect-[5/3] w-full overflow-hidden">
+                  <img
+                    src={n.image}
+                    alt={n.alt}
+                    width={1024}
+                    height={614}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span className={`absolute left-4 top-4 inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-white ${n.badgeBg}`}>
+                    {n.badge}
+                  </span>
+                </div>
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className="font-display text-lg font-semibold text-ink">{n.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-body">{n.text}</p>
+                  <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-blue transition-colors duration-200 group-hover:text-brand-blue/80">
+                    {fixPrepositions("Číst více")}
+                    <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden />
+                  </span>
+                </div>
+              </>
+            );
+            const commonClass = "card-hover reveal-up group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card";
+            const style = { ["--reveal-delay" as string]: `${i * 80}ms` };
+            return n.href ? (
+              <a
+                key={n.title}
+                href={n.href}
+                className={commonClass}
+                style={style}
+              >
+                {inner}
+              </a>
+            ) : (
+              <article
+                key={n.title}
+                className={commonClass}
+                style={style}
+              >
+                {inner}
+              </article>
+            );
+          })}
         </div>
 
         <div className="mt-10 flex justify-center">
