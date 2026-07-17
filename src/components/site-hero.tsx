@@ -11,8 +11,8 @@ import { ArrowRight } from "lucide-react";
 
 const SLIDES = [
   { url: heroKids.url, alt: "Děti si hrají s dřevěnými kostkami na školní zahradě" },
-  { url: heroKids2.url, alt: "Paní učitelka čte dětem pohádku v útulné herně" },
-  { url: heroKids3.url, alt: "Děti si hrají na pískovišti a staví hrad z písku" },
+  { url: heroKids2.url, alt: "Děti si hrají s barevnými plastovými kostkami ve třídě" },
+  { url: heroKids3.url, alt: "Chlapec drží duhového draka na podzimní procházce" },
   { url: heroKids4.url, alt: "Děti malují prsty barvami u stolu ve třídě" },
 ];
 
