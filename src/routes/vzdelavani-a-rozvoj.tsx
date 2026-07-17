@@ -68,6 +68,8 @@ const vzdelavaniAreas: Area[] = [
     photoBg: "#E3EEFB",
     iconColor: "text-brand-blue",
     iconBg: "bg-brand-blue/10",
+    image: anglictinaImg.url,
+    imageAlt: "Děti si hrají s maňásky v dřevěném loutkovém divadle ve třídě",
     activities: [
       {
         icon: Languages,
