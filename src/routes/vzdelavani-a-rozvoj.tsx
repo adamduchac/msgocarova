@@ -12,6 +12,11 @@ import {
 import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
+import anglictinaImg from "@/assets/vzdelavani/anglictina.webp.asset.json";
+import robotImg from "@/assets/vzdelavani/robot-2.webp.asset.json";
+import plavaniImg from "@/assets/vzdelavani/plavani.webp.asset.json";
+import skolaPrirodeImg from "@/assets/vzdelavani/skolavprirode.webp.asset.json";
+import lyzeImg from "@/assets/vzdelavani/lyze.webp.asset.json";
 
 const t = fixPrepositions;
 
@@ -51,6 +56,8 @@ type Area = {
   iconColor: string;
   iconBg: string;
   activities: Activity[];
+  image?: string;
+  imageAlt?: string;
 };
 
 const vzdelavaniAreas: Area[] = [
@@ -61,6 +68,8 @@ const vzdelavaniAreas: Area[] = [
     photoBg: "#E3EEFB",
     iconColor: "text-brand-blue",
     iconBg: "bg-brand-blue/10",
+    image: anglictinaImg.url,
+    imageAlt: "Děti si hrají s maňásky v dřevěném loutkovém divadle ve třídě",
     activities: [
       {
         icon: Languages,
@@ -83,6 +92,8 @@ const vzdelavaniAreas: Area[] = [
     photoBg: "#FCEDED",
     iconColor: "text-brand-red",
     iconBg: "bg-brand-red/10",
+    image: robotImg.url,
+    imageAlt: "Děti si hrají s programovatelným robotem Bee-Bot na herní podložce",
     activities: [
       {
         icon: Brain,
@@ -108,6 +119,8 @@ const aktivityAreas: Area[] = [
     photoBg: "#E3EEFB",
     iconColor: "text-brand-blue",
     iconBg: "bg-brand-blue/10",
+    image: plavaniImg.url,
+    imageAlt: "Děti s plaveckými deskami v bazénu během plaveckého kurzu",
     activities: [
       {
         icon: Waves,
@@ -124,6 +137,8 @@ const aktivityAreas: Area[] = [
     photoBg: "#EAF5EC",
     iconColor: "text-brand-green",
     iconBg: "bg-brand-green/10",
+    image: skolaPrirodeImg.url,
+    imageAlt: "Děti si hrají na dřevěné prolézačce s výhledem na hory",
     activities: [
       {
         icon: Mountain,
@@ -140,6 +155,8 @@ const aktivityAreas: Area[] = [
     photoBg: "#FEF6E6",
     iconColor: "text-brand-yellow",
     iconBg: "bg-brand-yellow/15",
+    image: lyzeImg.url,
+    imageAlt: "Malé dítě s helmou a lyžemi na sjezdovce v lyžařské škole",
     activities: [
       {
         icon: Snowflake,
@@ -152,6 +169,19 @@ const aktivityAreas: Area[] = [
 ];
 
 function AreaPhoto({ area, aspect = "aspect-[4/5]" }: { area: Area; aspect?: string }) {
+  if (area.image) {
+    return (
+      <div className={`${aspect} w-full overflow-hidden rounded-2xl border border-border/60`}>
+        <img
+          src={area.image}
+          alt={t(area.imageAlt ?? area.title)}
+          className="h-full w-full object-cover"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    );
+  }
   return (
     <div
       className={`flex ${aspect} w-full items-end justify-start overflow-hidden rounded-2xl border border-border/60 p-6`}
