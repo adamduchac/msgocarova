@@ -281,7 +281,11 @@ function OSkolcePage() {
         </section>
 
         {/* Vzdělávání a rozvoj */}
-        <section id="vzdelavani" className="section-y-md scroll-mt-28">
+        <section
+          id="vzdelavani"
+          className="section-y-md scroll-mt-28"
+          style={{ background: "linear-gradient(to bottom, var(--blue-soft) 0%, #FFFFFF 100%)" }}
+        >
           <div className="container mx-auto px-6">
             <div className="max-w-4xl">
               <div className="reveal-up">
