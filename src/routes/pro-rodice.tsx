@@ -131,18 +131,26 @@ function DocCard({ doc }: { doc: { title: string; asset: DocAsset } }) {
 }
 
 function ScheduleCard({ rows }: { rows: typeof programDne }) {
+  const half = Math.ceil(rows.length / 2);
+  const columns = [rows.slice(0, half), rows.slice(half)];
   return (
-    <div className="divide-y divide-black/5 rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
-      {rows.map((row) => (
-        <div key={row.time} className="flex items-start gap-4 px-6 py-4">
-          <span className="w-28 shrink-0 font-display font-bold text-ink tabular-nums">
-            {row.time}
-          </span>
-          <span className="text-[15px] leading-relaxed text-body">
-            {t(row.activity)}
-          </span>
-        </div>
-      ))}
+    <div className="overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
+      <div className="grid md:grid-cols-2 md:divide-x md:divide-black/5">
+        {columns.map((col, ci) => (
+          <ul key={ci} className="divide-y divide-black/5">
+            {col.map((row) => (
+              <li key={row.time} className="flex items-start gap-4 px-6 py-4">
+                <span className="w-28 shrink-0 font-display font-bold text-ink tabular-nums">
+                  {row.time}
+                </span>
+                <span className="text-[15px] leading-relaxed text-body">
+                  {t(row.activity)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        ))}
+      </div>
     </div>
   );
 }
@@ -183,7 +191,7 @@ function ProRodicePage() {
               </p>
             </div>
 
-            <div className="mt-10 grid gap-5 md:grid-cols-2">
+            <div className="mt-10 grid gap-5 md:grid-cols-3">
               <div className="rounded-2xl border border-black/[0.06] bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
                 <div className="flex items-center gap-3">
                   <span aria-hidden className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue">
@@ -211,15 +219,20 @@ function ProRodicePage() {
                   27-320530297/0100
                 </p>
               </div>
-            </div>
 
-            <div className="mt-5 flex items-start gap-3 rounded-2xl border border-brand-yellow/40 bg-brand-yellow/10 p-5">
-              <span aria-hidden className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-ink">
-                <Info className="h-4 w-4" />
-              </span>
-              <p className="text-body">
-                {t("Variabilní symbol dítěte je pro všechny platby stejný.")}
-              </p>
+              <div className="rounded-2xl border border-black/[0.06] bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
+                <div className="flex items-center gap-3">
+                  <span aria-hidden className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-yellow/20 text-ink">
+                    <Info className="h-5 w-5" />
+                  </span>
+                  <h3 className="font-display text-base font-bold text-ink">
+                    {t("Variabilní symbol")}
+                  </h3>
+                </div>
+                <p className="mt-4 text-[15px] leading-relaxed text-body">
+                  {t("Variabilní symbol dítěte je pro všechny platby stejný.")}
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -236,21 +249,25 @@ function ProRodicePage() {
               </p>
             </div>
 
-            <div className="mt-10 grid gap-6 md:grid-cols-2">
-              <ScheduleCard rows={programDne.slice(0, 4)} />
-              <ScheduleCard rows={programDne.slice(4)} />
+            <div className="mt-10">
+              <ScheduleCard rows={programDne} />
             </div>
+          </div>
+        </section>
 
-            <div className="mt-14 max-w-3xl">
-              <h3 className="font-display text-[24px] font-extrabold leading-[1.15] text-ink md:text-[28px]">
+        {/* Kroužky a aktivity */}
+        <section id="krouzky" className="section-y-md scroll-mt-28">
+          <div className="container mx-auto px-6">
+            <div className="max-w-3xl">
+              <h2 className="font-display text-[32px] font-extrabold leading-[1.15] text-ink md:text-[40px]">
                 {t("Kroužky a aktivity")}
-              </h3>
-              <p className="mt-3 text-body">
+              </h2>
+              <p className="mt-4 text-lg leading-relaxed text-body">
                 {t("Nabízíme dětem pravidelné aktivity, které rozvíjejí myšlení, soustředění i radost ze hry.")}
               </p>
             </div>
 
-            <div className="mt-8 grid gap-4 md:grid-cols-3">
+            <div className="mt-10 grid gap-4 md:grid-cols-3">
               {krouzky.map(({ image, alt, title, text }) => (
                 <div
                   key={title}
@@ -273,6 +290,8 @@ function ProRodicePage() {
             </div>
           </div>
         </section>
+
+
 
 
         {/* Výbava */}
