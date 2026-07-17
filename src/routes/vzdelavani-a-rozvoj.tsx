@@ -12,6 +12,11 @@ import {
 import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
+import anglictinaImg from "@/assets/vzdelavani/anglictina.webp.asset.json";
+import robotImg from "@/assets/vzdelavani/robot-2.webp.asset.json";
+import plavaniImg from "@/assets/vzdelavani/plavani.webp.asset.json";
+import skolaPrirodeImg from "@/assets/vzdelavani/skolavprirode.webp.asset.json";
+import lyzeImg from "@/assets/vzdelavani/lyze.webp.asset.json";
 
 const t = fixPrepositions;
 
