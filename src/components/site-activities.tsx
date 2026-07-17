@@ -10,7 +10,7 @@ type Activity = {
   text: string;
   image: string;
   alt: string;
-  href: "/pro-rodice" | "/vzdelavani-a-rozvoj" | "/akce-s-rodici";
+  href: "/pro-rodice" | "/vzdelavani-a-rozvoj" | "/akce-s-rodici" | "/predskolacek";
   hash?: string;
 };
 
