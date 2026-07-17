@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Mail, Phone, ClipboardList, FileCheck, ArrowRight } from "lucide-react";
+import { Mail, Phone, ClipboardList, FileCheck, ArrowRight, Sun } from "lucide-react";
 import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
