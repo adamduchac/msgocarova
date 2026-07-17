@@ -124,7 +124,7 @@ function AkceSRodiciPage() {
         {/* Events list */}
         <section className="section-y-md">
           <div className="container mx-auto px-6">
-            <div className="reveal-up mx-auto max-w-3xl">
+            <div className="reveal-up max-w-3xl">
               <h2 className="font-display text-[28px] font-extrabold leading-[1.15] text-ink md:text-[34px]">
                 {t("Přehled akcí")}
               </h2>
