@@ -512,7 +512,7 @@ function OSkolcePage() {
 
               {/* Výdej */}
               <div
-                className="reveal-up flex flex-col rounded-2xl border border-border/70 bg-background p-7 md:p-8"
+                className="reveal-up flex flex-col rounded-2xl border border-border/70 bg-background p-7 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] md:p-8"
                 style={{ ["--reveal-delay" as string]: "200ms" }}
               >
                 <h3 className="font-display text-xl font-bold text-ink">
