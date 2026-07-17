@@ -305,38 +305,36 @@ function ClassSection({ data, isLast }: { data: ClassData; isLast?: boolean }) {
       }
     >
       <div className="container mx-auto px-6">
-        <div className="mx-auto max-w-5xl">
-          {/* Hero foto */}
-          <div className="reveal-fade overflow-hidden rounded-2xl border border-border/60 bg-background">
-            <img
-              src={data.heroPhoto}
-              alt={data.alt}
-              className="aspect-[16/10] w-full object-cover"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
+        <div className="reveal-up rounded-2xl border border-border/60 bg-background p-6 shadow-[0_10px_30px_-20px_rgba(15,23,42,0.18)] md:p-10">
+          {/* Hero ilustrace bez rámečku */}
+          <img
+            src={data.heroPhoto}
+            alt={data.alt}
+            className="aspect-[16/10] w-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
 
           {/* Nadpis + info */}
-          <div className="reveal-up mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-8 flex flex-wrap items-center gap-3">
             <h2
               className={`font-display text-[32px] font-extrabold leading-tight text-ink md:text-[40px]`}
             >
               {fixPrepositions(data.name)}
             </h2>
             <span
-              className={`inline-flex items-center rounded-full border border-border/70 bg-background px-3 py-1 font-display text-[13px] font-semibold ${data.textColor}`}
+              className={`inline-flex items-center rounded-full px-3 py-1 font-display text-[13px] font-semibold ${data.bgColor} ${data.pillText}`}
             >
               {data.ageRange}
             </span>
           </div>
 
-          <p className="reveal-up mt-4 max-w-2xl text-[16px] leading-relaxed text-body">
+          <p className="mt-4 max-w-2xl text-[16px] leading-relaxed text-body">
             {fixPrepositions(data.description)}
           </p>
 
           {data.specialty && (
-            <p className="reveal-up mt-3 max-w-2xl text-[15px] leading-relaxed text-body">
+            <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-body">
               <span className={`font-semibold ${data.textColor}`}>
                 {fixPrepositions(data.specialty.label)}:
               </span>{" "}
@@ -346,7 +344,7 @@ function ClassSection({ data, isLast }: { data: ClassData; isLast?: boolean }) {
 
           <a
             href={data.phoneHref}
-            className="reveal-up mt-5 inline-flex items-center gap-2 rounded-full border border-border/70 bg-background px-4 py-2 font-display text-[14px] font-semibold text-ink transition-colors duration-200 hover:bg-offwhite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="mt-5 inline-flex items-center gap-2 rounded-full border border-border/70 bg-background px-4 py-2 font-display text-[14px] font-semibold text-ink transition-colors duration-200 hover:bg-offwhite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             <Phone className={`h-4 w-4 ${data.textColor}`} aria-hidden />
             <span>
@@ -355,7 +353,7 @@ function ClassSection({ data, isLast }: { data: ClassData; isLast?: boolean }) {
           </a>
 
           {/* Učitelky */}
-          <div className="reveal-up mt-10">
+          <div className="mt-10">
             <h3 className="font-display text-[20px] font-bold text-ink md:text-[22px]">
               {fixPrepositions("Paní učitelky")}
             </h3>
