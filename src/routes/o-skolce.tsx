@@ -50,7 +50,7 @@ const galleryTints = [
 
 function AboutGallery({ startTint = 0 }: { startTint?: number }) {
   const scrollerRef = useRef<HTMLOListElement | null>(null);
-  const tints = [0, 1, 2].map((i) => galleryTints[(startTint + i) % galleryTints.length]);
+  const tints = [0, 1].map((i) => galleryTints[(startTint + i) % galleryTints.length]);
 
   const scrollByCard = (dir: 1 | -1) => {
     const el = scrollerRef.current;
@@ -64,7 +64,7 @@ function AboutGallery({ startTint = 0 }: { startTint?: number }) {
     <div className="reveal-fade">
       <ol
         ref={scrollerRef}
-        className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0"
+        className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0"
       >
         {tints.map((tint, i) => (
           <li
@@ -224,7 +224,7 @@ function OSkolcePage() {
 
       <main>
         {/* Galerie na plnou šířku */}
-        <section id="o-skolce" className="section-y-sm scroll-mt-28">
+        <section id="o-skolce" className="section-y-md scroll-mt-28">
           <div className="container mx-auto px-6">
             <AboutGallery startTint={0} />
           </div>
@@ -233,8 +233,8 @@ function OSkolcePage() {
         {/* Představení a vize */}
         <section
           id="vize"
-          className="section-y-sm scroll-mt-28"
-          style={{ backgroundColor: "#FDFAF6" }}
+          className="section-y-md scroll-mt-28"
+          style={{ background: "linear-gradient(to bottom, #ffffff 0%, #ffffff 10%, var(--blue-soft) 55%, var(--blue-soft) 100%)" }}
         >
           <div className="container mx-auto px-6">
             <div className="max-w-4xl">
@@ -283,7 +283,7 @@ function OSkolcePage() {
         </section>
 
         {/* Vzdělávání a rozvoj */}
-        <section id="vzdelavani" className="section-y-sm scroll-mt-28">
+        <section id="vzdelavani" className="section-y-md scroll-mt-28">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl">
               <div className="reveal-up">
@@ -332,7 +332,7 @@ function OSkolcePage() {
         {/* Náš tým */}
         <section
           id="tym"
-          className="section-y-sm scroll-mt-28"
+          className="section-y-md scroll-mt-28"
           style={{ backgroundColor: "#F8FAFC" }}
         >
           <div className="container mx-auto px-6">
@@ -351,7 +351,7 @@ function OSkolcePage() {
         </section>
 
         {/* Veřejné hřiště */}
-        <section id="hriste" className="section-y-sm scroll-mt-28">
+        <section id="hriste" className="section-y-md scroll-mt-28">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl reveal-up">
               <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-brand-yellow">
@@ -368,40 +368,45 @@ function OSkolcePage() {
             </div>
 
             <div
-              className="reveal-fade mt-10 grid gap-0 overflow-hidden rounded-2xl border border-border/70 bg-background md:grid-cols-2"
+              className="reveal-fade mt-10 overflow-hidden rounded-2xl border border-border/70 bg-background"
               style={{ ["--reveal-delay" as string]: "120ms" }}
             >
-              <div className="border-b border-border/70 p-8 md:border-b-0 md:border-r">
-                <p className="font-display text-xs font-semibold uppercase tracking-[0.18em] text-brand-green">
-                  {t("15. dubna – září")}
+              <div className="px-6 pt-6 md:px-8 md:pt-8">
+                <p className="font-display text-xs font-semibold uppercase tracking-[0.18em] text-brand-yellow">
+                  {t("Sobota, neděle")}
                 </p>
-                <dl className="mt-4 space-y-2 text-ink">
-                  <div className="flex items-baseline justify-between gap-6">
-                    <dt className="text-body">{t("Dopoledne")}</dt>
-                    <dd className="font-display text-xl font-bold">10:00 – 12:00</dd>
-                  </div>
-                  <div className="flex items-baseline justify-between gap-6">
-                    <dt className="text-body">{t("Odpoledne")}</dt>
-                    <dd className="font-display text-xl font-bold">13:00 – 17:00</dd>
-                  </div>
-                </dl>
               </div>
-              <div className="p-8">
-                <p className="font-display text-xs font-semibold uppercase tracking-[0.18em] text-brand-red">
-                  {t("Do 15. října")}
-                </p>
-                <dl className="mt-4 space-y-2 text-ink">
-                  <div className="flex items-baseline justify-between gap-6">
-                    <dt className="text-body">{t("Dopoledne")}</dt>
-                    <dd className="font-display text-xl font-bold">10:00 – 12:00</dd>
-                  </div>
-                  <div className="flex items-baseline justify-between gap-6">
-                    <dt className="text-body">{t("Odpoledne")}</dt>
-                    <dd className="font-display text-xl font-bold">13:00 – 16:00</dd>
-                  </div>
-                </dl>
+              <div className="mt-4 grid grid-cols-[1fr_auto_auto] gap-x-6 gap-y-3 px-6 pb-6 text-[15px] md:gap-x-10 md:px-8 md:pb-8 md:text-base">
+                <span aria-hidden />
+                <span className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-ink/55">
+                  {t("Dopolední")}
+                </span>
+                <span className="font-display text-xs font-semibold uppercase tracking-[0.14em] text-ink/55">
+                  {t("Odpolední")}
+                </span>
+
+                <span className="border-t border-border/60 pt-3 text-body">
+                  {t("od 15. dubna, květen, červen, září")}
+                </span>
+                <span className="border-t border-border/60 pt-3 font-display font-bold text-ink tabular-nums">
+                  10:00 – 12:00
+                </span>
+                <span className="border-t border-border/60 pt-3 font-display font-bold text-ink tabular-nums">
+                  13:00 – 17:00
+                </span>
+
+                <span className="border-t border-border/60 pt-3 text-body">
+                  {t("do 15. října")}
+                </span>
+                <span className="border-t border-border/60 pt-3 font-display font-bold text-ink tabular-nums">
+                  10:00 – 12:00
+                </span>
+                <span className="border-t border-border/60 pt-3 font-display font-bold text-ink tabular-nums">
+                  13:00 – 16:00
+                </span>
               </div>
             </div>
+
 
             <p className="reveal-up mt-5 text-sm text-body/80">
               {t("Ve státní svátky je hřiště uzavřeno.")}
@@ -412,7 +417,7 @@ function OSkolcePage() {
         {/* Školní jídelna */}
         <section
           id="jidelna"
-          className="section-y-sm scroll-mt-28"
+          className="section-y-md scroll-mt-28"
           style={{ background: "linear-gradient(to bottom, #FFFFFF 0%, #FDFAF6 100%)" }}
         >
           <div className="container mx-auto px-6">
