@@ -1,26 +1,32 @@
-Plán úpravy stránky `/vzdelavani-a-rozvoj`:
 
-1. **Změna layoutu na grid 3+2**
-   - Spojit dosavadní sekce Vzdělávání (2 karty) a Aktivity (3 karty) do jednoho gridu.
-   - Použít Tailwind třídy `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3` s mezerami dle stávajícího rytmu.
-   - Poslední pozice druhého řádku zůstane prázdná (přiznaná), tj. 5 karet celkem.
+Úpravy v `src/routes/pro-rodice.tsx`:
 
-2. **Odstranění hlavních nadpisů skupin**
-   - Odstranit komponentu `GroupHeader` pro "Vzdělávání" a "Aktivity".
-   - Sekce se sloučí do jedné hlavní oblasti pod společným úvodním textem.
+## 1) Úvodní odstavec
+Nahradit text pod H1 „Pro rodiče":
+> „Platby, denní program, co s sebou i kroužky – praktické informace, které budete během roku potřebovat nejčastěji. Dokumenty a formuláře najdete dole ke stažení."
 
-3. **Přidání eyebrow labelů nad každou kartu**
-   - Nad každý nadpis karty přidat eyebrow s textem "Vzdělávání" (2×) nebo "Aktivity" (3×).
-   - Styling eyebrow: `font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55`, tedy stejný jako na homepage (SiteClasses, SiteTeachers).
+Zvětšit `max-w-2xl` → `max-w-3xl`, aby se text pěkně vešel.
 
-4. **Jednotná karta**
-   - Všechny 5 karet použijí stejný formát `AreaCard` (foto 4:5, eyebrow, nadpis, odrážky aktivit).
-   - Upravit data/cykly tak, aby se 5 karet vykreslilo jako jeden flat array v předepsaném pořadí: jazyk, příprava/technologie, plavání, škola v přírodě, lyžařský kurz.
+## 2) Program dne — rozvrh místo timeline
+- Odstranit komponentu `TimelineColumn` (tečky, svislá čára, modré časy).
+- Nahradit dvousloupcovým rozvrhem: bílé řádky v jedné kartě (`rounded-2xl` + stín jako ostatní karty), rozdělené jemnou linkou `divide-y divide-black/5`.
+- Každý řádek: čas vlevo (`font-display font-bold text-ink tabular-nums`, **bez modré barvy**, tj. tmavá inková), aktivita vpravo (`text-body`).
+- Layout: `grid md:grid-cols-2 gap-6`, každý sloupec = jedna karta se 4 řádky. Časy dostanou pevnou šířku (`w-28 shrink-0`), aby popisy začínaly zarovnané.
+- Odstranit čísla / kolečka úplně.
 
-5. **Kontrola responzivity**
-   - Na mobilech 1 sloupec, na tabletu 2 sloupce, na desktopu 3 sloupce.
-   - Druhý řádek na desktopu bude mít 2 karty a 1 prázdnou pozici.
+## 3) Kroužky jako checklist + odstranit modré pozadí
+- Ze sekce `#program-dne` odstranit inline `style` s modrým gradientem — sekce zůstane na bílém pozadí (stejně jako Platby a Výbava).
+- Kroužky přestylovat z 3 velkých kartiček s obrázkem 4:3 na kompaktní horizontální checklist podobný sekci Výbava:
+  - `grid gap-4 md:grid-cols-3`
+  - Každá karta: bílá, `rounded-2xl`, jemný border + stín, `p-5`, `flex items-start gap-4`.
+  - Ilustrace vlevo v malém čtverci `h-14 w-14` (`object-contain`, bílé pozadí, bez rámečku) — výrazně menší než dosud.
+  - Vpravo nadpis (`font-display font-bold text-ink`) a pod ním popis (`text-sm text-body`).
+- Zachovat obsah (Šachy / Bystrohlavička / Stolní hry) beze změny textů.
 
-6. **Build a validace**
-   - Po editaci spustit build a ověřit, že stránka prochází bez chyb.
-   - V případě potřeby upravit typ `Area` o volitelné pole `eyebrow: "Vzdělávání" | "Aktivity"`.
+## 4) Rytmus sekcí
+Po odstranění modrého pozadí bude celá stránka na bílé až po žlutý gradient v Dokumentech — to je záměr (kompaktnější, klidnější dojem, jak si přeje uživatel). Krémový gradient nad footerem u Dokumentů zůstává.
+
+## Poznámky
+- Ikony `Wallet`, `CreditCard`, `Check`, `Info`, `FileText`, `Download` zůstávají.
+- Import `programDne` a `krouzky` beze změny.
+- Ostatní sekce (Platby, Výbava, Dokumenty, footer se žlutou kostičkou) beze změny.
