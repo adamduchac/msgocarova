@@ -1,8 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { FileText, Download, Wallet, CreditCard, Check, Info } from "lucide-react";
 import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
+import { fetchDocuments, type DocumentWithUrl } from "@/lib/cms";
 
 import zadostPrijeti from "@/assets/dokumenty/zadost-o-prijeti.pdf.asset.json";
 import zadostPrazdniny from "@/assets/dokumenty/zadost-prazdninovy-provoz.pdf.asset.json";
