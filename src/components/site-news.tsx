@@ -86,7 +86,7 @@ export function SiteNews() {
                 </div>
               </>
             );
-            const commonClass = "card-hover reveal-up group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card";
+            const commonClass = "card-hover reveal-up group flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-border/60 bg-card";
             const style = { ["--reveal-delay" as string]: `${i * 80}ms` };
             return n.href ? (
               <a
