@@ -359,7 +359,7 @@ function OSkolcePage() {
                 {t("Veřejné hřiště")}
               </p>
               <h2 className="mt-3 font-display text-[32px] font-extrabold leading-[1.15] text-ink md:text-[40px]">
-                {t("Zahrada slouží o víkendech veřejnosti")}
+                {t("Naše zahrada o víkendech slouží veřejnosti")}
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-body">
                 {t(
