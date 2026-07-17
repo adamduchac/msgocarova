@@ -256,7 +256,7 @@ function OSkolcePage() {
                 return (
                   <div
                     key={card.title}
-                    className={`card-hover reveal-up flex flex-col rounded-2xl border border-border/70 bg-background p-7 ${
+                    className={`card-hover reveal-up flex flex-col rounded-2xl border border-border/70 bg-background p-7 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] ${
                       isWide ? "lg:col-span-2" : ""
                     }`}
                     style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}
@@ -281,7 +281,11 @@ function OSkolcePage() {
         </section>
 
         {/* Vzdělávání a rozvoj */}
-        <section id="vzdelavani" className="section-y-md scroll-mt-28">
+        <section
+          id="vzdelavani"
+          className="section-y-md scroll-mt-28"
+          style={{ background: "linear-gradient(to bottom, var(--blue-soft) 0%, #FFFFFF 100%)" }}
+        >
           <div className="container mx-auto px-6">
             <div className="max-w-4xl">
               <div className="reveal-up">
@@ -327,7 +331,6 @@ function OSkolcePage() {
         <section
           id="tym"
           className="section-y-md scroll-mt-28"
-          style={{ backgroundColor: "#F8FAFC" }}
         >
           <div className="container mx-auto px-6">
             <div className="mx-auto max-w-3xl text-center">
@@ -345,7 +348,11 @@ function OSkolcePage() {
         </section>
 
         {/* Veřejné hřiště */}
-        <section id="hriste" className="section-y-md scroll-mt-28">
+        <section
+          id="hriste"
+          className="section-y-md scroll-mt-28"
+          style={{ background: "linear-gradient(to bottom, #FFFFFF 0%, #FDFAF6 100%)" }}
+        >
           <div className="container mx-auto px-6">
             <div className="max-w-4xl reveal-up">
               <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-brand-yellow">
@@ -362,7 +369,7 @@ function OSkolcePage() {
             </div>
 
             <div
-              className="reveal-fade mt-10 overflow-hidden rounded-2xl border border-border/70 bg-background"
+              className="reveal-fade mt-10 overflow-hidden rounded-2xl border border-border/70 bg-background shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)]"
               style={{ ["--reveal-delay" as string]: "120ms" }}
             >
               <div className="px-6 pt-6 md:px-8 md:pt-8">
@@ -412,7 +419,7 @@ function OSkolcePage() {
         <section
           id="jidelna"
           className="section-y-md scroll-mt-28"
-          style={{ background: "linear-gradient(to bottom, #FFFFFF 0%, #FDFAF6 100%)" }}
+          style={{ background: "linear-gradient(to bottom, #FDFAF6 0%, #FEF8E7 100%)" }}
         >
           <div className="container mx-auto px-6">
             <div className="max-w-4xl reveal-up">
@@ -426,7 +433,7 @@ function OSkolcePage() {
 
             <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-6">
               {/* Odhlašování */}
-              <div className="reveal-up flex flex-col rounded-2xl border border-border/70 bg-background p-7 md:p-8">
+              <div className="reveal-up flex flex-col rounded-2xl border border-border/70 bg-background p-7 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] md:p-8">
                 <h3 className="font-display text-xl font-bold text-ink">
                   {t("Odhlašování a přihlašování jídel")}
                 </h3>
@@ -477,7 +484,7 @@ function OSkolcePage() {
 
               {/* Platba */}
               <div
-                className="reveal-up flex flex-col rounded-2xl border border-border/70 bg-background p-7 md:p-8"
+                className="reveal-up flex flex-col rounded-2xl border border-border/70 bg-background p-7 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] md:p-8"
                 style={{ ["--reveal-delay" as string]: "100ms" }}
               >
                 <h3 className="font-display text-xl font-bold text-ink">
@@ -505,7 +512,7 @@ function OSkolcePage() {
 
               {/* Výdej */}
               <div
-                className="reveal-up flex flex-col rounded-2xl border border-border/70 bg-background p-7 md:p-8"
+                className="reveal-up flex flex-col rounded-2xl border border-border/70 bg-background p-7 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] md:p-8"
                 style={{ ["--reveal-delay" as string]: "200ms" }}
               >
                 <h3 className="font-display text-xl font-bold text-ink">

@@ -1,30 +1,28 @@
-## Cíl
-Nahradit placeholdery fotek na `/vzdelavani-a-rozvoj` skutečnými fotkami dodanými uživatelem.
+## Úpravy sekce a stínů na /o-skolce
 
-## Mapování fotek na sekce
+### 1. Pozadí sekcí
 
-| Sekce (id) | Fotka |
-|---|---|
-| `jazyk` — Jazyk a komunikace | `anglictina.webp` (děti s maňásky) |
-| `priprava-a-technologie` — Příprava na školu a moderní technologie | `robot-2.webp` (děti s Bee-Bot robotem) |
-| `plavani` — Plavecká výuka | `plavani.webp` |
-| `skola-v-prirode` — Škola v přírodě | `skolavprirode.webp` |
-| `lyzarsky-kurz` — Lyžařský kurz | `lyze.webp` |
+**Vzdělávání a rozvoj** (`#vzdelavani`, řádek 284)
+- Přidat gradient shora dolů: nahoře `var(--blue-soft)` → dole `#FFFFFF`.
 
-## Kroky
+**Náš tým** (`#tym`, řádek 327)
+- Odstranit `backgroundColor: "#F8FAFC"` — sekce bude bez pozadí (bílá).
 
-1. **Nahrát 5 fotek jako Lovable assety** do `src/assets/vzdelavani/`:
-   - `anglictina.webp.asset.json`
-   - `robot-2.webp.asset.json`
-   - `plavani.webp.asset.json`
-   - `skolavprirode.webp.asset.json`
-   - `lyze.webp.asset.json`
+**Žlutý gradient přes hřiště → jídelna**
+- **Veřejné hřiště** (`#hriste`, řádek 348): přidat gradient `#FFFFFF` → `#FDFAF6`.
+- **Školní jídelna** (`#jidelna`, řádek 412): upravit gradient na `#FDFAF6` → `#FEF8E7`, aby plynule navazoval a končil v krémové/žluté před footerem (který už je `#FEF8E7`).
 
-2. **`src/routes/vzdelavani-a-rozvoj.tsx`**
-   - Rozšířit typ `Area` o pole `image` (url) + `imageAlt`.
-   - Naplnit `image`/`imageAlt` u všech pěti oblastí (české alt texty).
-   - Upravit `AreaPhoto` — pokud má oblast `image`, renderovat `<img>` s `object-cover` v poměru 4:5 (`aspect-[4/5]`) resp. tom, který dostane komponenta; jinak zachovat stávající barevný placeholder (fallback).
-   - Zachovat `rounded-2xl`, `border-border/60` a odstranit vnitřní label „Foto brzy doplníme" v případě, že je fotka k dispozici.
+### 2. Stín na kartách (jako na HP)
 
-## Co se nemění
-- Struktura stránky (2+2+1 grid), texty, ikony, hover chování, spacing, navigace, ostatní stránky.
+Přidat základní stín `shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)]` na všechny bílé karty na stránce. Fotografie (galerie, portréty týmu) zůstávají bez stínu.
+
+Konkrétně:
+- 5 karet ve „Vize" (řádek 259).
+- Info karta u hřiště s otevírací dobou (řádek 365).
+- 3 karty v jídelně: Odhlašování (429), Platba (480), Výdej (508).
+
+Karty už mají `.card-hover`, což řeší jen hover přírůstek — přidáním základního stínu získáme stejný klidový vzhled jako na HP.
+
+### Technické detaily
+
+Všechny změny jsou v jediném souboru `src/routes/o-skolce.tsx` — úpravy inline `style` gradientů u čtyř `<section>` prvků a přidání jedné shadow utility třídy do `className` každé z osmi karet. Ostatní obsah, layout ani komponenty se nemění.
