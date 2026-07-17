@@ -256,7 +256,7 @@ function OSkolcePage() {
                 return (
                   <div
                     key={card.title}
-                    className={`card-hover reveal-up flex flex-col rounded-2xl border border-border/70 bg-background p-7 ${
+                    className={`card-hover reveal-up flex flex-col rounded-2xl border border-border/70 bg-background p-7 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] ${
                       isWide ? "lg:col-span-2" : ""
                     }`}
                     style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}
