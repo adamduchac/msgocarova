@@ -395,7 +395,7 @@ function BarevneTridyPage() {
             </h1>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-body">
               {fixPrepositions(
-                "Naše třídy nesou názvy barevných kostiček — symbolu dětské hry. Poznejte je jednu po druhé."
+                "Naše třídy nesou názvy barevných kostiček — symbolu dětské hry, té nejpřirozenější a nejdůležitější činnosti předškoláka. Cílem je podnětné prostředí plné hraček a zajímavých aktivit, kam se děti každý den těší."
               )}
             </p>
           </div>

@@ -207,11 +207,6 @@ function OSkolcePage() {
               </h2>
               <p className="mt-6 text-lg leading-relaxed text-body">
                 {t(
-                  "Naše třídy nesou názvy barevných kostiček — symbolu dětské hry, té nejpřirozenější a nejdůležitější činnosti předškoláka. Cílem je podnětné prostředí plné hraček a zajímavých aktivit, kam se děti každý den těší."
-                )}
-              </p>
-              <p className="mt-4 text-lg leading-relaxed text-body">
-                {t(
                   "Preferujeme osobní přístup ke každému dítěti a rozvíjíme jeho potenciál. Didaktické pomůcky umísťujeme tak, aby si je děti mohly samostatně brát a přirozeně rozvíjet fantazii i celou svou osobnost. Na estetickém prostředí školy se děti podílejí svými výtvory. Všechny učitelky mají odpovídající kvalifikaci a dále se vzdělávají."
                 )}
               </p>
