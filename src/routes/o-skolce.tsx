@@ -5,6 +5,13 @@ import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
 import { teamMembers, getInitials } from "@/data/team";
+import oskolce1 from "@/assets/oskolce-1.webp.asset.json";
+import oskolce2 from "@/assets/oskolce-2.webp.asset.json";
+
+const galleryPhotos = [
+  { url: oskolce1.url, alt: "Děti si hrají na jarní zahradě mateřské školy pod stromy" },
+  { url: oskolce2.url, alt: "Děti s učiteli tvoří ve třídě a vydlabávají dýni" },
+];
 
 const t = fixPrepositions;
 
