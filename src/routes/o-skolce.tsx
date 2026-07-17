@@ -331,7 +331,6 @@ function OSkolcePage() {
         <section
           id="tym"
           className="section-y-md scroll-mt-28"
-          style={{ backgroundColor: "#F8FAFC" }}
         >
           <div className="container mx-auto px-6">
             <div className="mx-auto max-w-3xl text-center">
