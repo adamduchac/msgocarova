@@ -214,10 +214,7 @@ function VzdelavaniPage() {
         <section className="section-y-sm">
           <div className="container mx-auto px-6">
             <div className="reveal-up max-w-3xl">
-              <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-brand-green">
-                {t("O školce")}
-              </p>
-              <h1 className="mt-3 font-display text-[42px] font-extrabold leading-[1.05] text-ink md:text-[56px]">
+              <h1 className="font-display text-[42px] font-extrabold leading-[1.05] text-ink md:text-[56px]">
                 {t("Vzdělávání a rozvoj")}
               </h1>
               <p className="mt-5 text-lg leading-relaxed text-body md:text-xl">
