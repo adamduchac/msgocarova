@@ -348,7 +348,11 @@ function OSkolcePage() {
         </section>
 
         {/* Veřejné hřiště */}
-        <section id="hriste" className="section-y-md scroll-mt-28">
+        <section
+          id="hriste"
+          className="section-y-md scroll-mt-28"
+          style={{ background: "linear-gradient(to bottom, #FFFFFF 0%, #FDFAF6 100%)" }}
+        >
           <div className="container mx-auto px-6">
             <div className="max-w-4xl reveal-up">
               <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-brand-yellow">
