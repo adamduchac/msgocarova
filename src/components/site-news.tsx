@@ -33,7 +33,7 @@ const news: News[] = [
       "Od září otevíráme výtvarný kroužek pro všechny kreativní děti."
     ),
     image: art.url,
-    alt: "Dětské ručky malující vodovkami pestrobarevné květiny",
+    alt: "Děti si hrají a cákají ve venkovním bazénu na školní zahradě",
   },
   {
     badge: fixPrepositions("Rodiče"),
@@ -43,7 +43,7 @@ const news: News[] = [
       "Od podzimního dlabání dýní přes vánoční posezení až po květnové Slavnosti školy — společně si užíváme celý rok."
     ),
     image: openday.url,
-    alt: "Rodiče a děti pohromadě na společné akci školky",
+    alt: "Rodiče s dětmi opékají buřty u ohniště na zahradě školky",
     href: "/akce-s-rodici",
   },
 ];
