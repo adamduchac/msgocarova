@@ -17,14 +17,15 @@ type CheckState =
   | { status: "forbidden" }
   | { status: "ok"; user: User };
 
-const NAV_ITEMS = [
+type NavItem = { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean };
+const NAV_ITEMS: NavItem[] = [
   { to: "/admin", label: "Přehled", icon: LayoutDashboard, exact: true },
   { to: "/admin/zpravy", label: "Top zprávy", icon: Megaphone },
   { to: "/admin/zamestnanci", label: "Zaměstnanci", icon: Users },
   { to: "/admin/dokumenty", label: "Dokumenty", icon: FileText },
   { to: "/admin/predskolacek", label: "Předškoláček", icon: GraduationCap },
   { to: "/admin/zapis", label: "Zápis", icon: ClipboardList },
-] as const;
+];
 
 function AdminLayout() {
   const navigate = useNavigate();
