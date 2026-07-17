@@ -419,7 +419,7 @@ function OSkolcePage() {
         <section
           id="jidelna"
           className="section-y-md scroll-mt-28"
-          style={{ background: "linear-gradient(to bottom, #FFFFFF 0%, #FDFAF6 100%)" }}
+          style={{ background: "linear-gradient(to bottom, #FDFAF6 0%, #FEF8E7 100%)" }}
         >
           <div className="container mx-auto px-6">
             <div className="max-w-4xl reveal-up">
