@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { fixPrepositions } from "@/lib/typography";
 import preschool from "@/assets/activity-preschool.jpg.asset.json";
 import sport from "@/assets/activity-sport.jpg.asset.json";
