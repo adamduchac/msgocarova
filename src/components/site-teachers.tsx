@@ -141,7 +141,7 @@ export function SiteTeachers() {
               {fixPrepositions("POZNEJTE NÁS")}
             </p>
             <h2 className="reveal-up mt-3 font-display text-[34px] text-ink md:text-[40px]">
-              {fixPrepositions("Přestavujeme naše učitelky")}
+              {fixPrepositions("Přestavujeme naše pedagogy")}
             </h2>
           </div>
 
