@@ -45,7 +45,6 @@ type Activity = {
 
 type Area = {
   id: string;
-  eyebrow: string;
   title: string;
   photoLabel: string;
   photoBg: string;
@@ -57,7 +56,6 @@ type Area = {
 const areas: Area[] = [
   {
     id: "jazyk",
-    eyebrow: "Oblast 01",
     title: "Jazyk a komunikace",
     photoLabel: "Angličtina a řeč",
     photoBg: "#E3EEFB",
@@ -80,7 +78,6 @@ const areas: Area[] = [
   },
   {
     id: "mysleni",
-    eyebrow: "Oblast 02",
     title: "Myšlení a příprava na školu",
     photoLabel: "Předškoláci",
     photoBg: "#FCEDED",
@@ -97,7 +94,6 @@ const areas: Area[] = [
   },
   {
     id: "technologie",
-    eyebrow: "Oblast 03",
     title: "Moderní technologie",
     photoLabel: "Digitální pomůcky",
     photoBg: "#EAF5EC",
@@ -114,7 +110,6 @@ const areas: Area[] = [
   },
   {
     id: "pohyb",
-    eyebrow: "Oblast 04",
     title: "Pohyb a pobyt v přírodě",
     photoLabel: "Plavání, hory, sníh",
     photoBg: "#FEF6E6",
@@ -154,7 +149,7 @@ function AreaBlock({ area, index }: { area: Area; index: number }) {
             className={`reveal-fade ${photoRight ? "md:order-2" : "md:order-1"}`}
           >
             <div
-              className="flex aspect-[4/3] w-full items-end justify-start overflow-hidden rounded-2xl border border-border/60 p-6"
+              className="flex aspect-[4/5] w-full items-end justify-start overflow-hidden rounded-2xl border border-border/60 p-6"
               style={{ backgroundColor: area.photoBg }}
             >
               <span className="font-display text-xs font-semibold uppercase tracking-[0.16em] text-ink/40">
@@ -167,10 +162,7 @@ function AreaBlock({ area, index }: { area: Area; index: number }) {
           <div
             className={`reveal-up ${photoRight ? "md:order-1" : "md:order-2"}`}
           >
-            <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
-              {t(area.eyebrow)}
-            </p>
-            <h2 className="mt-3 font-display text-[32px] font-extrabold leading-[1.1] text-ink md:text-[42px]">
+            <h2 className="font-display text-[32px] font-extrabold leading-[1.1] text-ink md:text-[42px]">
               {t(area.title)}
             </h2>
 
@@ -217,10 +209,7 @@ function VzdelavaniPage() {
         <section className="section-y-sm">
           <div className="container mx-auto px-6">
             <div className="reveal-up max-w-3xl">
-              <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-brand-green">
-                {t("O školce")}
-              </p>
-              <h1 className="mt-3 font-display text-[42px] font-extrabold leading-[1.05] text-ink md:text-[56px]">
+              <h1 className="font-display text-[42px] font-extrabold leading-[1.05] text-ink md:text-[56px]">
                 {t("Vzdělávání a rozvoj")}
               </h1>
               <p className="mt-5 text-lg leading-relaxed text-body md:text-xl">
