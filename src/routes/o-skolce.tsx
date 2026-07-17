@@ -434,7 +434,7 @@ function OSkolcePage() {
               {/* Odhlašování */}
               <div className="reveal-up flex flex-col rounded-2xl border border-border/70 bg-background p-7 md:p-8">
                 <h3 className="font-display text-xl font-bold text-ink">
-                  {t("Odhlašování a přihlašování stravy")}
+                  {t("Odhlašování a přihlašování jídel")}
                 </h3>
                 <p className="mt-4 text-[15px] leading-relaxed text-body">
                   {t(
@@ -515,7 +515,7 @@ function OSkolcePage() {
                 style={{ ["--reveal-delay" as string]: "200ms" }}
               >
                 <h3 className="font-display text-xl font-bold text-ink">
-                  {t("Výdej stravy")}
+                  {t("Výdej jídel")}
                 </h3>
                 <ul className="mt-4 divide-y divide-border/60">
                   {canteenSchedule.map((row) => (
