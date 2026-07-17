@@ -320,10 +320,6 @@ function OSkolcePage() {
                 </Link>
               </div>
             </div>
-
-            <div className="mt-14">
-              <AboutGallery startTint={3} />
-            </div>
           </div>
         </section>
 
