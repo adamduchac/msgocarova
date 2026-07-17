@@ -24,13 +24,13 @@ const activities: Activity[] = [
     href: "#predskolacek",
   },
   {
-    title: fixPrepositions("Sport a příroda"),
+    title: fixPrepositions("Vzdělávání a aktivity"),
     text: fixPrepositions(
       "S dětmi nezůstáváme jen za plotem. Pravidelně jezdíme na předplavecký výcvik, pořádáme lyžařské kurzy a jarní školy v přírodě."
     ),
     image: sport.url,
     alt: "Děti s plovacími deskami v bazénu během plaveckého kurzu",
-    href: "#sport",
+    href: "/vzdelavani-a-rozvoj",
   },
   {
     title: fixPrepositions("Akce s rodiči"),
