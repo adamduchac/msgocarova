@@ -18,17 +18,17 @@ const t = fixPrepositions;
 export const Route = createFileRoute("/vzdelavani-a-rozvoj")({
   head: () => ({
     meta: [
-      { title: "Vzdělávání a rozvoj — Mateřská škola Josefa Gočára" },
+      { title: "Vzdělávání a aktivity — Mateřská škola Josefa Gočára" },
       {
         name: "description",
         content:
-          "Pestrý program pro rozvoj jazyka, myšlení, pohybu i vztahu k přírodě a technologiím — angličtina, MIU, plavání, škola v přírodě i lyžařský kurz.",
+          "Jak v naší školce rozvíjíme jazyk, myšlení a technologie a jaké aktivity dětem nabízíme — od plavání přes školu v přírodě po lyžařský kurz.",
       },
-      { property: "og:title", content: "Vzdělávání a rozvoj — Mateřská škola Josefa Gočára" },
+      { property: "og:title", content: "Vzdělávání a aktivity — Mateřská škola Josefa Gočára" },
       {
         property: "og:description",
         content:
-          "Jak v naší školce rozvíjíme jazyk, myšlení, technologie i pohyb — od angličtiny po lyžařský kurz.",
+          "Vzdělávací program a aktivity naší mateřské školy — angličtina, MIU, digitální gramotnost, plavání, škola v přírodě i lyžařský kurz.",
       },
       { property: "og:url", content: "/vzdelavani-a-rozvoj" },
     ],
@@ -53,7 +53,7 @@ type Area = {
   activities: Activity[];
 };
 
-const areas: Area[] = [
+const vzdelavaniAreas: Area[] = [
   {
     id: "jazyk",
     title: "Jazyk a komunikace",
@@ -77,9 +77,9 @@ const areas: Area[] = [
     ],
   },
   {
-    id: "mysleni",
-    title: "Myšlení a příprava na školu",
-    photoLabel: "Předškoláci",
+    id: "priprava-a-technologie",
+    title: "Příprava na školu a moderní technologie",
+    photoLabel: "Předškoláci a digitální pomůcky",
     photoBg: "#FCEDED",
     iconColor: "text-brand-red",
     iconBg: "bg-brand-red/10",
@@ -90,16 +90,6 @@ const areas: Area[] = [
         text:
           "Metoda MIU rozvíjí myšlení a kognitivní funkce a vede děti k uvědomovanému řešení úkolů, plánování a hledání strategií. Pracujeme s instrumentem Spojování bodů.",
       },
-    ],
-  },
-  {
-    id: "technologie",
-    title: "Moderní technologie",
-    photoLabel: "Digitální pomůcky",
-    photoBg: "#EAF5EC",
-    iconColor: "text-brand-green",
-    iconBg: "bg-brand-green/10",
-    activities: [
       {
         icon: Cpu,
         title: "Digitální gramotnost",
@@ -108,29 +98,52 @@ const areas: Area[] = [
       },
     ],
   },
+];
+
+const aktivityAreas: Area[] = [
   {
-    id: "pohyb",
-    title: "Pohyb a pobyt v přírodě",
-    photoLabel: "Plavání, hory, sníh",
+    id: "plavani",
+    title: "Plavecká výuka",
+    photoLabel: "Plavání",
+    photoBg: "#E3EEFB",
+    iconColor: "text-brand-blue",
+    iconBg: "bg-brand-blue/10",
+    activities: [
+      {
+        icon: Waves,
+        title: "Kurz s Plaveckým střediskem Zéva",
+        text:
+          "Děti se bezpečně seznamují s vodou, učí se základní plavecké dovednosti a získávají jistotu, koordinaci i odvahu. Kurz probíhá ve třech navazujících cyklech během roku; každý cyklus má 11 lekcí (á 45 min) včetně návštěvy aquacentra. Hradí rodiče.",
+      },
+    ],
+  },
+  {
+    id: "skola-v-prirode",
+    title: "Škola v přírodě",
+    photoLabel: "Krkonoše",
+    photoBg: "#EAF5EC",
+    iconColor: "text-brand-green",
+    iconBg: "bg-brand-green/10",
+    activities: [
+      {
+        icon: Mountain,
+        title: "Čtyři dny v Krkonoších",
+        text:
+          "Pro děti z Červené a Zelené kostičky organizujeme čtyřdenní školu v přírodě v Krkonoších.",
+      },
+    ],
+  },
+  {
+    id: "lyzarsky-kurz",
+    title: "Lyžařský kurz",
+    photoLabel: "Sníh a lyže",
     photoBg: "#FEF6E6",
     iconColor: "text-brand-yellow",
     iconBg: "bg-brand-yellow/15",
     activities: [
       {
-        icon: Waves,
-        title: "Plavecká výuka",
-        text:
-          "Děti se bezpečně seznamují s vodou, učí se základní plavecké dovednosti a získávají jistotu, koordinaci i odvahu. Kurz zajišťuje Plavecké středisko Zéva z. s. ve třech navazujících cyklech během roku; každý cyklus má 11 lekcí (á 45 min) včetně návštěvy aquacentra. Hradí rodiče.",
-      },
-      {
-        icon: Mountain,
-        title: "Škola v přírodě",
-        text:
-          "Pro děti z Červené a Zelené kostičky organizujeme čtyřdenní školu v přírodě v Krkonoších.",
-      },
-      {
         icon: Snowflake,
-        title: "Lyžařský kurz",
+        title: "Pětidenní lyžařská škola pro předškoláky",
         text:
           "Předškoláci mohou vyjet na pětidenní lyžařskou školu, kde se hravou formou učí základům lyžování a získávají jistotu na sněhu.",
       },
@@ -138,65 +151,93 @@ const areas: Area[] = [
   },
 ];
 
-function AreaBlock({ area, index }: { area: Area; index: number }) {
-  const photoRight = index % 2 === 0;
+function AreaPhoto({ area, aspect = "aspect-[4/5]" }: { area: Area; aspect?: string }) {
   return (
-    <section id={area.id} className="section-y-md scroll-mt-28">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-14">
-          {/* Photo */}
-          <div
-            className={`reveal-fade ${photoRight ? "md:order-2" : "md:order-1"}`}
-          >
-            <div
-              className="flex aspect-[4/5] w-full items-end justify-start overflow-hidden rounded-2xl border border-border/60 p-6"
-              style={{ backgroundColor: area.photoBg }}
+    <div
+      className={`flex ${aspect} w-full items-end justify-start overflow-hidden rounded-2xl border border-border/60 p-6`}
+      style={{ backgroundColor: area.photoBg }}
+    >
+      <span className="font-display text-xs font-semibold uppercase tracking-[0.16em] text-ink/40">
+        {t("Foto brzy doplníme")}
+      </span>
+    </div>
+  );
+}
+
+function AreaActivities({ area }: { area: Area }) {
+  return (
+    <ul className="mt-6 flex flex-col gap-6">
+      {area.activities.map((a) => {
+        const Icon = a.icon;
+        return (
+          <li key={a.title} className="flex gap-4">
+            <span
+              className={`mt-1 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full ${area.iconBg}`}
+              aria-hidden
             >
-              <span className="font-display text-xs font-semibold uppercase tracking-[0.16em] text-ink/40">
-                {t("Foto brzy doplníme")}
-              </span>
+              <Icon className={`h-5 w-5 ${area.iconColor}`} />
+            </span>
+            <div className="flex-1">
+              <h3 className="font-display text-lg font-semibold text-ink">
+                {t(a.title)}
+              </h3>
+              <p className="mt-2 text-[15px] leading-relaxed text-body">
+                {t(a.text)}
+              </p>
             </div>
-          </div>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
 
-          {/* Content */}
-          <div
-            className={`reveal-up ${photoRight ? "md:order-1" : "md:order-2"}`}
-          >
-            <h2 className="font-display text-[32px] font-extrabold leading-[1.1] text-ink md:text-[42px]">
-              {t(area.title)}
-            </h2>
+function AreaCard({ area }: { area: Area }) {
+  return (
+    <article id={area.id} className="reveal-up scroll-mt-28">
+      <AreaPhoto area={area} />
+      <div className="mt-7">
+        <h3 className="font-display text-[26px] font-extrabold leading-[1.15] text-ink md:text-[30px]">
+          {t(area.title)}
+        </h3>
+        <AreaActivities area={area} />
+      </div>
+    </article>
+  );
+}
 
-            <ul className="mt-8 flex flex-col gap-7">
-              {area.activities.map((a) => {
-                const Icon = a.icon;
-                return (
-                  <li key={a.title} className="flex gap-4">
-                    <span
-                      className={`mt-1 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full ${area.iconBg}`}
-                      aria-hidden
-                    >
-                      <Icon className={`h-5 w-5 ${area.iconColor}`} />
-                    </span>
-                    <div className="flex-1">
-                      <h3 className="font-display text-lg font-semibold text-ink md:text-xl">
-                        {t(a.title)}
-                      </h3>
-                      <p className="mt-2 text-[15px] leading-relaxed text-body">
-                        {t(a.text)}
-                      </p>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+function AreaCardWide({ area }: { area: Area }) {
+  return (
+    <article id={area.id} className="reveal-up scroll-mt-28">
+      <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-14">
+        <div>
+          <AreaPhoto area={area} />
+        </div>
+        <div>
+          <h3 className="font-display text-[28px] font-extrabold leading-[1.15] text-ink md:text-[34px]">
+            {t(area.title)}
+          </h3>
+          <AreaActivities area={area} />
         </div>
       </div>
-    </section>
+    </article>
+  );
+}
+
+function GroupHeader({ title }: { title: string }) {
+  return (
+    <div className="reveal-up mb-10 md:mb-14">
+      <h2 className="font-display text-[32px] font-extrabold leading-[1.1] text-ink md:text-[42px]">
+        {t(title)}
+      </h2>
+    </div>
   );
 }
 
 function VzdelavaniPage() {
+  const [lyzak, ...rest] = [...aktivityAreas].reverse();
+  const firstTwoAktivity = rest.reverse();
+
   return (
     <div className="min-h-screen bg-background">
       <SiteNavbar />
@@ -210,7 +251,7 @@ function VzdelavaniPage() {
           <div className="container mx-auto px-6">
             <div className="reveal-up max-w-3xl">
               <h1 className="font-display text-[42px] font-extrabold leading-[1.05] text-ink md:text-[56px]">
-                {t("Vzdělávání a rozvoj")}
+                {t("Vzdělávání a aktivity")}
               </h1>
               <p className="mt-5 text-lg leading-relaxed text-body md:text-xl">
                 {t(
@@ -223,9 +264,32 @@ function VzdelavaniPage() {
       </div>
 
       <main>
-        {areas.map((area, i) => (
-          <AreaBlock key={area.id} area={area} index={i} />
-        ))}
+        {/* Vzdělávání */}
+        <section className="section-y-md">
+          <div className="container mx-auto px-6">
+            <GroupHeader title="Vzdělávání" />
+            <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-14">
+              {vzdelavaniAreas.map((a) => (
+                <AreaCard key={a.id} area={a} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Aktivity */}
+        <section className="section-y-md">
+          <div className="container mx-auto px-6">
+            <GroupHeader title="Aktivity" />
+            <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-14">
+              {firstTwoAktivity.map((a) => (
+                <AreaCard key={a.id} area={a} />
+              ))}
+            </div>
+            <div className="mt-12 md:mt-14">
+              <AreaCardWide area={lyzak} />
+            </div>
+          </div>
+        </section>
 
         <SiteFooter topCubeColor="blue" topCubePosition="right" showBottomCube={false} />
       </main>
