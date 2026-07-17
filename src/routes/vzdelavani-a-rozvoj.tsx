@@ -155,6 +155,8 @@ const aktivityAreas: Area[] = [
     photoBg: "#FEF6E6",
     iconColor: "text-brand-yellow",
     iconBg: "bg-brand-yellow/15",
+    image: lyzeImg.url,
+    imageAlt: "Malé dítě s helmou a lyžemi na sjezdovce v lyžařské škole",
     activities: [
       {
         icon: Snowflake,
