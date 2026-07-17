@@ -270,14 +270,29 @@ function TeacherCard({
   );
 }
 
-function ClassSection({ data }: { data: ClassData }) {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+function ClassSection({ data, isLast }: { data: ClassData; isLast?: boolean }) {
+  const [openIds, setOpenIds] = useState<Set<string>>(new Set());
+
+  const toggle = (id: string) =>
+    setOpenIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
 
   return (
     <section
       id={data.id}
       className="section-y-sm scroll-mt-28"
-      style={{ backgroundColor: data.bgTint }}
+      style={
+        isLast
+          ? {
+              background:
+                "linear-gradient(to bottom, #FFFFFF 0%, #FEF8E7 60%, #FEF8E7 100%)",
+            }
+          : undefined
+      }
     >
       <div className="container mx-auto px-6">
         <div className="mx-auto max-w-5xl">
@@ -334,19 +349,20 @@ function ClassSection({ data }: { data: ClassData }) {
             <h3 className="font-display text-[20px] font-bold text-ink md:text-[22px]">
               {fixPrepositions("Paní učitelky")}
             </h3>
-            <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2">
-              {data.teachers.map((t, i) => (
-                <TeacherCard
-                  key={t.name}
-                  teacher={t}
-                  cardId={`${data.id}-t${i}`}
-                  isOpen={openIndex === i}
-                  onToggle={() =>
-                    setOpenIndex((prev) => (prev === i ? null : i))
-                  }
-                  accentColor={data.textColor}
-                />
-              ))}
+            <div className="mt-4 grid grid-cols-1 items-start gap-3 md:grid-cols-2">
+              {data.teachers.map((t, i) => {
+                const cardId = `${data.id}-t${i}`;
+                return (
+                  <TeacherCard
+                    key={t.name}
+                    teacher={t}
+                    cardId={cardId}
+                    isOpen={openIds.has(cardId)}
+                    onToggle={() => toggle(cardId)}
+                    accentColor={data.textColor}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
