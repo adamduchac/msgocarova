@@ -171,7 +171,7 @@ function OSkolcePage() {
                 </h1>
                 <p className="mt-5 text-lg leading-relaxed text-body md:text-xl">
                   {t(
-                    "Nacházíme se v centru Hradce Králové, v klidné části města u břehu Labe. Pracujeme podle školního vzdělávacího programu „Skládáme svět z kostiček", který vychází ze současných trendů předškolního vzdělávání."
+                    "Nacházíme se v centru Hradce Králové, v klidné části města u břehu Labe. Pracujeme podle školního vzdělávacího programu „Skládáme svět z kostiček“, který vychází ze současných trendů předškolního vzdělávání."
                   )}
                 </p>
               </div>
