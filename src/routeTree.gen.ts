@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ZapisDoSkolkyRouteImport } from './routes/zapis-do-skolky'
+import { Route as VzdelavaniARozvojRouteImport } from './routes/vzdelavani-a-rozvoj'
 import { Route as ProRodiceRouteImport } from './routes/pro-rodice'
 import { Route as OSkolceRouteImport } from './routes/o-skolce'
 import { Route as KontaktyRouteImport } from './routes/kontakty'
@@ -19,6 +20,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const ZapisDoSkolkyRoute = ZapisDoSkolkyRouteImport.update({
   id: '/zapis-do-skolky',
   path: '/zapis-do-skolky',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VzdelavaniARozvojRoute = VzdelavaniARozvojRouteImport.update({
+  id: '/vzdelavani-a-rozvoj',
+  path: '/vzdelavani-a-rozvoj',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProRodiceRoute = ProRodiceRouteImport.update({
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/kontakty': typeof KontaktyRoute
   '/o-skolce': typeof OSkolceRoute
   '/pro-rodice': typeof ProRodiceRoute
+  '/vzdelavani-a-rozvoj': typeof VzdelavaniARozvojRoute
   '/zapis-do-skolky': typeof ZapisDoSkolkyRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/kontakty': typeof KontaktyRoute
   '/o-skolce': typeof OSkolceRoute
   '/pro-rodice': typeof ProRodiceRoute
+  '/vzdelavani-a-rozvoj': typeof VzdelavaniARozvojRoute
   '/zapis-do-skolky': typeof ZapisDoSkolkyRoute
 }
 export interface FileRoutesById {
@@ -70,6 +78,7 @@ export interface FileRoutesById {
   '/kontakty': typeof KontaktyRoute
   '/o-skolce': typeof OSkolceRoute
   '/pro-rodice': typeof ProRodiceRoute
+  '/vzdelavani-a-rozvoj': typeof VzdelavaniARozvojRoute
   '/zapis-do-skolky': typeof ZapisDoSkolkyRoute
 }
 export interface FileRouteTypes {
@@ -80,6 +89,7 @@ export interface FileRouteTypes {
     | '/kontakty'
     | '/o-skolce'
     | '/pro-rodice'
+    | '/vzdelavani-a-rozvoj'
     | '/zapis-do-skolky'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -88,6 +98,7 @@ export interface FileRouteTypes {
     | '/kontakty'
     | '/o-skolce'
     | '/pro-rodice'
+    | '/vzdelavani-a-rozvoj'
     | '/zapis-do-skolky'
   id:
     | '__root__'
@@ -96,6 +107,7 @@ export interface FileRouteTypes {
     | '/kontakty'
     | '/o-skolce'
     | '/pro-rodice'
+    | '/vzdelavani-a-rozvoj'
     | '/zapis-do-skolky'
   fileRoutesById: FileRoutesById
 }
@@ -105,6 +117,7 @@ export interface RootRouteChildren {
   KontaktyRoute: typeof KontaktyRoute
   OSkolceRoute: typeof OSkolceRoute
   ProRodiceRoute: typeof ProRodiceRoute
+  VzdelavaniARozvojRoute: typeof VzdelavaniARozvojRoute
   ZapisDoSkolkyRoute: typeof ZapisDoSkolkyRoute
 }
 
@@ -115,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/zapis-do-skolky'
       fullPath: '/zapis-do-skolky'
       preLoaderRoute: typeof ZapisDoSkolkyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vzdelavani-a-rozvoj': {
+      id: '/vzdelavani-a-rozvoj'
+      path: '/vzdelavani-a-rozvoj'
+      fullPath: '/vzdelavani-a-rozvoj'
+      preLoaderRoute: typeof VzdelavaniARozvojRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pro-rodice': {
@@ -161,6 +181,7 @@ const rootRouteChildren: RootRouteChildren = {
   KontaktyRoute: KontaktyRoute,
   OSkolceRoute: OSkolceRoute,
   ProRodiceRoute: ProRodiceRoute,
+  VzdelavaniARozvojRoute: VzdelavaniARozvojRoute,
   ZapisDoSkolkyRoute: ZapisDoSkolkyRoute,
 }
 export const routeTree = rootRouteImport
