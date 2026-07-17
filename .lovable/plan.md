@@ -1,34 +1,25 @@
-# Dokumenty ke stažení — sekce na /pro-rodice
+Nahradím tři placeholder sekce na `/pro-rodice` reálným obsahem ve stejném stylu jako `/o-skolce` (max-w-4xl, bílé karty s jemným stínem, `section-y-md` mezery, střídání bílé/krémové mezi sekcemi).
 
-## Rozsah
-Přidat 4. sekci `#dokumenty` na konec stránky `/pro-rodice`, ve stylu ostatních sekcí (max-w-4xl, zarovnáno vlevo, `section-y-md`). Poslední sekce dostane gradient bílá → krémová k patičce (jako jinde na webu). Submenu odkaz `/pro-rodice#dokumenty` zůstává beze změny.
+## Sekce
 
-## Obsah — dvě podskupiny, 7 položek
+**#platby — Platby**
+- Úvodní odstavec s výší školného (600 Kč / 300 Kč v létě, do 15. dne, předškoláci neplatí).
+- Dvě bílé karty vedle sebe (na mobilu pod sebou):
+  - Účet školné + plavání: `35-5744160237/0100`
+  - Účet stravné: `27-320530297/0100`
+- Poznámka pod kartami: „Variabilní symbol dítěte je pro všechny platby stejný."
 
-**Formuláře a žádosti**
-- Žádost o přijetí k předškolnímu vzdělávání
-- Žádost o přijetí — prázdninový provoz
-- Žádost o uvolnění dítěte z povinného předškolního vzdělávání
-- Pravidla přijímání dětí — prázdninový provoz 2026
+**#program-dne — Program dne**
+- Nadpis + tabulka časů a činností v bílé kartě (2 sloupce: Čas / Činnost, dělené řádky, stejný styl jako tabulka otevírací doby hřiště na /o-skolce).
+- Podnadpis „Kroužky a aktivity" + tři bílé karty pod sebou (Šachy, Bystrohlavička, Stolní hry), každá s názvem a popiskem.
 
-**Základní dokumenty**
-- Školní řád mateřské školy
-- Vnitřní řád školní výdejny
-- Školní vzdělávací program — Skládáme svět z kostiček
+**#vybava — Co dítě potřebuje do školky**
+- Nadpis + úvodní řádek.
+- Odrážkový seznam v bílé kartě s ikonou check u každé položky (8 položek dle zadání).
 
-## Vizuální řešení
-Řádkový seznam v boxu (bílá karta, `rounded-2xl`, jemný border/stín jako ostatní karty na webu). Každá položka:
-- ikona PDF (Lucide `FileText`) v barevném kroužku
-- název dokumentu (tučný)
-- pod ním malým písmem „PDF" + velikost souboru
-- šipka `Download` vpravo, hover = jemný posun (v souladu s pravidly, žádný scale)
-
-Celý řádek je `<a href="…" target="_blank" rel="noopener noreferrer">` s viditelným focus stavem. Dva boxy pod sebou (Formuláře / Základní dokumenty), každý s vlastním malým nadpisem `h3`.
-
-## Technika
-1. Nahrát 7 PDF přes `lovable-assets create` z `/mnt/user-uploads/…` → `src/assets/dokumenty/{slug}.pdf.asset.json` pointery. Původní binárky nekopírovat do repa.
-2. V `src/routes/pro-rodice.tsx` naimportovat pointery, přidat sekci s `id="dokumenty"` za `#vybava`.
-3. Přesunout gradient na poslední (novou) sekci; ze současné poslední sekce gradient odebrat, aby přechod na footer navazoval jen jednou.
-4. Ověřit build.
-
-Poznámka: pokud PDF s prázdninovým provozem 2026 v budoucnu zestárne, půjde nahradit novou verzí přes `lovable-assets` beze změny kódu.
+## Technické detaily
+- Pouze úprava `src/routes/pro-rodice.tsx` — nahradit `placeholderSections.map(...)` třemi explicitními sekcemi.
+- Střídání pozadí: Platby (bílá) → Program dne (jemný modrý gradient jako na /o-skolce „Představení a vize") → Výbava (bílá) → Dokumenty (krémová, už existuje).
+- Ikony z `lucide-react` (Wallet, Clock, CheckCircle2, Puzzle, apod.).
+- Vše přes `fixPrepositions()` kvůli české typografii.
+- Žádné hover scale efekty, karty `rounded-2xl`.
