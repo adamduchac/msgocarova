@@ -147,10 +147,11 @@ export function SiteClasses() {
           {/* 4×1 grid tříd */}
           <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:mt-12 lg:grid-cols-4">
             {classes.map((c, i) => (
-              <a
-                key={c.name}
-                href="#"
-                aria-label={fixPrepositions(`Vstupte do třídy — ${c.name}`)}
+              <Link
+                key={c.id}
+                to="/barevne-tridy"
+                hash={c.id}
+                aria-label={fixPrepositions(`Přejít na detail — ${c.name}`)}
                 className="reveal-up group relative block overflow-hidden rounded-3xl border border-border/70 bg-background p-5 pb-16 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}
               >
@@ -186,7 +187,7 @@ export function SiteClasses() {
                     <ArrowRight className="h-4 w-4" />
                   </span>
                 </span>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
