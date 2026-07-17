@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { fixPrepositions } from "@/lib/typography";
 import preschool from "@/assets/activity-preschool.jpg.asset.json";
 import sport from "@/assets/activity-sport.jpg.asset.json";
@@ -23,13 +24,13 @@ const activities: Activity[] = [
     href: "#predskolacek",
   },
   {
-    title: fixPrepositions("Sport a příroda"),
+    title: fixPrepositions("Vzdělávání a aktivity"),
     text: fixPrepositions(
       "S dětmi nezůstáváme jen za plotem. Pravidelně jezdíme na předplavecký výcvik, pořádáme lyžařské kurzy a jarní školy v přírodě."
     ),
     image: sport.url,
     alt: "Děti s plovacími deskami v bazénu během plaveckého kurzu",
-    href: "#sport",
+    href: "/vzdelavani-a-rozvoj",
   },
   {
     title: fixPrepositions("Akce s rodiči"),
@@ -77,14 +78,25 @@ export function SiteActivities() {
                 </div>
               </div>
 
-              <a
-                href={a.href}
-                className="activity-cta group/cta absolute inset-x-0 bottom-0 flex items-center justify-center gap-2 px-7 pb-7 pt-3 text-[15px] font-medium text-brand-red opacity-0 translate-y-2 pointer-events-none transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2 motion-reduce:transition-none"
-                aria-label={fixPrepositions(`Číst dále: ${a.title}`)}
-              >
-                {fixPrepositions("Číst dále")}
-                <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-out group-hover/cta:translate-x-1" aria-hidden />
-              </a>
+              {a.href.startsWith("/") ? (
+                <Link
+                  to={a.href}
+                  className="activity-cta group/cta absolute inset-x-0 bottom-0 flex items-center justify-center gap-2 px-7 pb-7 pt-3 text-[15px] font-medium text-brand-red opacity-0 translate-y-2 pointer-events-none transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2 motion-reduce:transition-none"
+                  aria-label={fixPrepositions(`Číst dále: ${a.title}`)}
+                >
+                  {fixPrepositions("Číst dále")}
+                  <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-out group-hover/cta:translate-x-1" aria-hidden />
+                </Link>
+              ) : (
+                <a
+                  href={a.href}
+                  className="activity-cta group/cta absolute inset-x-0 bottom-0 flex items-center justify-center gap-2 px-7 pb-7 pt-3 text-[15px] font-medium text-brand-red opacity-0 translate-y-2 pointer-events-none transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:translate-y-0 group-focus-within:pointer-events-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2 motion-reduce:transition-none"
+                  aria-label={fixPrepositions(`Číst dále: ${a.title}`)}
+                >
+                  {fixPrepositions("Číst dále")}
+                  <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-out group-hover/cta:translate-x-1" aria-hidden />
+                </a>
+              )}
             </article>
           ))}
         </div>
