@@ -191,7 +191,7 @@ function ProRodicePage() {
               </p>
             </div>
 
-            <div className="mt-10 grid gap-5 md:grid-cols-2">
+            <div className="mt-10 grid gap-5 md:grid-cols-3">
               <div className="rounded-2xl border border-black/[0.06] bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
                 <div className="flex items-center gap-3">
                   <span aria-hidden className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue">
@@ -219,15 +219,74 @@ function ProRodicePage() {
                   27-320530297/0100
                 </p>
               </div>
+
+              <div className="rounded-2xl border border-black/[0.06] bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]">
+                <div className="flex items-center gap-3">
+                  <span aria-hidden className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-yellow/20 text-ink">
+                    <Info className="h-5 w-5" />
+                  </span>
+                  <h3 className="font-display text-base font-bold text-ink">
+                    {t("Variabilní symbol")}
+                  </h3>
+                </div>
+                <p className="mt-4 text-[15px] leading-relaxed text-body">
+                  {t("Variabilní symbol dítěte je pro všechny platby stejný.")}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Program dne */}
+        <section id="program-dne" className="section-y-md scroll-mt-28">
+          <div className="container mx-auto px-6">
+            <div className="max-w-3xl">
+              <h2 className="font-display text-[32px] font-extrabold leading-[1.15] text-ink md:text-[40px]">
+                {t("Program dne")}
+              </h2>
+              <p className="mt-4 text-lg leading-relaxed text-body">
+                {t("Den v naší školce má jasný rytmus, ale ponechává dětem prostor pro spontánní hru i klid.")}
+              </p>
             </div>
 
-            <div className="mt-5 flex items-start gap-3 rounded-2xl border border-brand-yellow/40 bg-brand-yellow/10 p-5">
-              <span aria-hidden className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-ink">
-                <Info className="h-4 w-4" />
-              </span>
-              <p className="text-body">
-                {t("Variabilní symbol dítěte je pro všechny platby stejný.")}
+            <div className="mt-10">
+              <ScheduleCard rows={programDne} />
+            </div>
+          </div>
+        </section>
+
+        {/* Kroužky a aktivity */}
+        <section id="krouzky" className="section-y-md scroll-mt-28">
+          <div className="container mx-auto px-6">
+            <div className="max-w-3xl">
+              <h2 className="font-display text-[32px] font-extrabold leading-[1.15] text-ink md:text-[40px]">
+                {t("Kroužky a aktivity")}
+              </h2>
+              <p className="mt-4 text-lg leading-relaxed text-body">
+                {t("Nabízíme dětem pravidelné aktivity, které rozvíjejí myšlení, soustředění i radost ze hry.")}
               </p>
+            </div>
+
+            <div className="mt-10 grid gap-4 md:grid-cols-3">
+              {krouzky.map(({ image, alt, title, text }) => (
+                <div
+                  key={title}
+                  className="flex items-start gap-4 rounded-2xl border border-black/[0.06] bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_-12px_rgba(0,0,0,0.08)]"
+                >
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-white">
+                    <img
+                      src={image}
+                      alt={alt}
+                      loading="lazy"
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <h4 className="font-display font-bold text-ink">{t(title)}</h4>
+                    <p className="mt-1 text-sm leading-relaxed text-body">{t(text)}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
