@@ -15,6 +15,7 @@ import { Route as ProRodiceRouteImport } from './routes/pro-rodice'
 import { Route as OSkolceRouteImport } from './routes/o-skolce'
 import { Route as KontaktyRouteImport } from './routes/kontakty'
 import { Route as BarevneTridyRouteImport } from './routes/barevne-tridy'
+import { Route as AkceSRodiciRouteImport } from './routes/akce-s-rodici'
 import { Route as IndexRouteImport } from './routes/index'
 
 const ZapisDoSkolkyRoute = ZapisDoSkolkyRouteImport.update({
@@ -47,6 +48,11 @@ const BarevneTridyRoute = BarevneTridyRouteImport.update({
   path: '/barevne-tridy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AkceSRodiciRoute = AkceSRodiciRouteImport.update({
+  id: '/akce-s-rodici',
+  path: '/akce-s-rodici',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -55,6 +61,7 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/akce-s-rodici': typeof AkceSRodiciRoute
   '/barevne-tridy': typeof BarevneTridyRoute
   '/kontakty': typeof KontaktyRoute
   '/o-skolce': typeof OSkolceRoute
@@ -64,6 +71,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/akce-s-rodici': typeof AkceSRodiciRoute
   '/barevne-tridy': typeof BarevneTridyRoute
   '/kontakty': typeof KontaktyRoute
   '/o-skolce': typeof OSkolceRoute
@@ -74,6 +82,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/akce-s-rodici': typeof AkceSRodiciRoute
   '/barevne-tridy': typeof BarevneTridyRoute
   '/kontakty': typeof KontaktyRoute
   '/o-skolce': typeof OSkolceRoute
@@ -85,6 +94,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/akce-s-rodici'
     | '/barevne-tridy'
     | '/kontakty'
     | '/o-skolce'
@@ -94,6 +104,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/akce-s-rodici'
     | '/barevne-tridy'
     | '/kontakty'
     | '/o-skolce'
@@ -103,6 +114,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/akce-s-rodici'
     | '/barevne-tridy'
     | '/kontakty'
     | '/o-skolce'
@@ -113,6 +125,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AkceSRodiciRoute: typeof AkceSRodiciRoute
   BarevneTridyRoute: typeof BarevneTridyRoute
   KontaktyRoute: typeof KontaktyRoute
   OSkolceRoute: typeof OSkolceRoute
@@ -165,6 +178,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BarevneTridyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/akce-s-rodici': {
+      id: '/akce-s-rodici'
+      path: '/akce-s-rodici'
+      fullPath: '/akce-s-rodici'
+      preLoaderRoute: typeof AkceSRodiciRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -177,6 +197,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AkceSRodiciRoute: AkceSRodiciRoute,
   BarevneTridyRoute: BarevneTridyRoute,
   KontaktyRoute: KontaktyRoute,
   OSkolceRoute: OSkolceRoute,
