@@ -199,9 +199,9 @@ function ZapisPage() {
               "linear-gradient(to bottom, #FFFFFF 0%, #FEF8E7 40%, #FEF8E7 100%)",
           }}
         >
-          <section className="section-y-md">
+          <section className="section-y-sm">
             <div className="container mx-auto px-6">
-              <div className="reveal-up max-w-4xl">
+              <div className="reveal-up">
                 <h3 className="font-display text-2xl font-extrabold text-ink md:text-3xl">
                   {t("Máte dotaz k zápisu?")}
                 </h3>
