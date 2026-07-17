@@ -344,29 +344,7 @@ function ProRodicePage() {
                 </p>
               </div>
 
-              <div className="mt-10 grid gap-8 md:grid-cols-2">
-                <div>
-                  <h3 className="mb-4 font-display text-lg font-bold text-ink">
-                    {t("Formuláře a žádosti")}
-                  </h3>
-                  <div className="grid gap-4">
-                    {formulare.map((doc) => (
-                      <DocCard key={doc.asset.url} doc={doc} />
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="mb-4 font-display text-lg font-bold text-ink">
-                    {t("Základní dokumenty")}
-                  </h3>
-                  <div className="grid gap-4">
-                    {zakladni.map((doc) => (
-                      <DocCard key={doc.asset.url} doc={doc} />
-                    ))}
-                  </div>
-                </div>
-              </div>
+              <CmsDocumentsGrid />
             </div>
           </section>
 
