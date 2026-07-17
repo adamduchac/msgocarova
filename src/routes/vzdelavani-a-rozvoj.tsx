@@ -50,6 +50,7 @@ type Activity = {
 
 type Area = {
   id: string;
+  eyebrow: string;
   title: string;
   photoLabel: string;
   photoBg: string;
@@ -60,9 +61,10 @@ type Area = {
   imageAlt?: string;
 };
 
-const vzdelavaniAreas: Area[] = [
+const allAreas: Area[] = [
   {
     id: "jazyk",
+    eyebrow: "Vzdělávání",
     title: "Jazyk a komunikace",
     photoLabel: "Angličtina a řeč",
     photoBg: "#E3EEFB",
@@ -87,6 +89,7 @@ const vzdelavaniAreas: Area[] = [
   },
   {
     id: "priprava-a-technologie",
+    eyebrow: "Vzdělávání",
     title: "Příprava na školu a moderní technologie",
     photoLabel: "Předškoláci a digitální pomůcky",
     photoBg: "#FCEDED",
@@ -109,11 +112,9 @@ const vzdelavaniAreas: Area[] = [
       },
     ],
   },
-];
-
-const aktivityAreas: Area[] = [
   {
     id: "plavani",
+    eyebrow: "Aktivity",
     title: "Plavecká výuka",
     photoLabel: "Plavání",
     photoBg: "#E3EEFB",
@@ -132,6 +133,7 @@ const aktivityAreas: Area[] = [
   },
   {
     id: "skola-v-prirode",
+    eyebrow: "Aktivity",
     title: "Škola v přírodě",
     photoLabel: "Krkonoše",
     photoBg: "#EAF5EC",
@@ -150,6 +152,7 @@ const aktivityAreas: Area[] = [
   },
   {
     id: "lyzarsky-kurz",
+    eyebrow: "Aktivity",
     title: "Lyžařský kurz",
     photoLabel: "Sníh a lyže",
     photoBg: "#FEF6E6",
@@ -227,7 +230,10 @@ function AreaCard({ area }: { area: Area }) {
     <article id={area.id} className="reveal-up scroll-mt-28">
       <AreaPhoto area={area} />
       <div className="mt-7">
-        <h3 className="font-display text-[26px] font-extrabold leading-[1.15] text-ink md:text-[30px]">
+        <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
+          {t(area.eyebrow)}
+        </p>
+        <h3 className="mt-3 font-display text-[26px] font-extrabold leading-[1.15] text-ink md:text-[30px]">
           {t(area.title)}
         </h3>
         <AreaActivities area={area} />
@@ -236,38 +242,7 @@ function AreaCard({ area }: { area: Area }) {
   );
 }
 
-function AreaCardWide({ area }: { area: Area }) {
-  return (
-    <article id={area.id} className="reveal-up scroll-mt-28">
-      <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-14">
-        <div>
-          <AreaPhoto area={area} />
-        </div>
-        <div>
-          <h3 className="font-display text-[28px] font-extrabold leading-[1.15] text-ink md:text-[34px]">
-            {t(area.title)}
-          </h3>
-          <AreaActivities area={area} />
-        </div>
-      </div>
-    </article>
-  );
-}
-
-function GroupHeader({ title }: { title: string }) {
-  return (
-    <div className="reveal-up mb-10 md:mb-14">
-      <h2 className="font-display text-[32px] font-extrabold leading-[1.1] text-ink md:text-[42px]">
-        {t(title)}
-      </h2>
-    </div>
-  );
-}
-
 function VzdelavaniPage() {
-  const [lyzak, ...rest] = [...aktivityAreas].reverse();
-  const firstTwoAktivity = rest.reverse();
-
   return (
     <div className="min-h-screen bg-background">
       <SiteNavbar />
@@ -294,29 +269,12 @@ function VzdelavaniPage() {
       </div>
 
       <main>
-        {/* Vzdělávání */}
         <section className="section-y-md">
           <div className="container mx-auto px-6">
-            <GroupHeader title="Vzdělávání" />
-            <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-14">
-              {vzdelavaniAreas.map((a) => (
+            <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3 lg:gap-14">
+              {allAreas.map((a) => (
                 <AreaCard key={a.id} area={a} />
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Aktivity */}
-        <section className="section-y-md">
-          <div className="container mx-auto px-6">
-            <GroupHeader title="Aktivity" />
-            <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-14">
-              {firstTwoAktivity.map((a) => (
-                <AreaCard key={a.id} area={a} />
-              ))}
-            </div>
-            <div className="mt-12 md:mt-14">
-              <AreaCardWide area={lyzak} />
             </div>
           </div>
         </section>
