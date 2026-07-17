@@ -21,7 +21,7 @@ const navItems: NavItem[] = [
     internal: true,
     children: [
       { label: fixPrepositions("Představení a vize"), href: "/o-skolce", hash: "vize", internal: true },
-      { label: fixPrepositions("Vzdělávání a aktivity"), href: "/vzdelavani-a-rozvoj", internal: true },
+      { label: fixPrepositions("Vzdělávání a aktivity"), href: "/o-skolce", hash: "vzdelavani", internal: true },
       { label: fixPrepositions("Náš tým"), href: "/o-skolce", hash: "tym", internal: true },
       { label: fixPrepositions("Veřejné hřiště"), href: "/o-skolce", hash: "hriste", internal: true },
       { label: fixPrepositions("Školní jídelna"), href: "/o-skolce", hash: "jidelna", internal: true },
