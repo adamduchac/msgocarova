@@ -44,6 +44,129 @@ export type Database = {
         }
         Relationships: []
       }
+      documents: {
+        Row: {
+          category: Database["public"]["Enums"]["doc_category"]
+          created_at: string
+          file_path: string
+          id: string
+          is_active: boolean
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category: Database["public"]["Enums"]["doc_category"]
+          created_at?: string
+          file_path: string
+          id?: string
+          is_active?: boolean
+          sort_order?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: Database["public"]["Enums"]["doc_category"]
+          created_at?: string
+          file_path?: string
+          id?: string
+          is_active?: boolean
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      info_boxes: {
+        Row: {
+          body: string
+          capacity_label: string | null
+          created_at: string
+          deadline_label: string | null
+          heading: string
+          id: string
+          note: string | null
+          page_key: Database["public"]["Enums"]["info_page"]
+          state: Database["public"]["Enums"]["info_state"]
+          updated_at: string
+        }
+        Insert: {
+          body?: string
+          capacity_label?: string | null
+          created_at?: string
+          deadline_label?: string | null
+          heading?: string
+          id?: string
+          note?: string | null
+          page_key: Database["public"]["Enums"]["info_page"]
+          state?: Database["public"]["Enums"]["info_state"]
+          updated_at?: string
+        }
+        Update: {
+          body?: string
+          capacity_label?: string | null
+          created_at?: string
+          deadline_label?: string | null
+          heading?: string
+          id?: string
+          note?: string | null
+          page_key?: Database["public"]["Enums"]["info_page"]
+          state?: Database["public"]["Enums"]["info_state"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      staff: {
+        Row: {
+          bio: string | null
+          class_color: Database["public"]["Enums"]["class_color"]
+          created_at: string
+          first_name: string
+          id: string
+          is_active: boolean
+          last_name: string
+          phone: string | null
+          photo_path: string | null
+          position: string
+          sort_order: number
+          title_prefix: string | null
+          title_suffix: string | null
+          updated_at: string
+        }
+        Insert: {
+          bio?: string | null
+          class_color?: Database["public"]["Enums"]["class_color"]
+          created_at?: string
+          first_name: string
+          id?: string
+          is_active?: boolean
+          last_name: string
+          phone?: string | null
+          photo_path?: string | null
+          position?: string
+          sort_order?: number
+          title_prefix?: string | null
+          title_suffix?: string | null
+          updated_at?: string
+        }
+        Update: {
+          bio?: string | null
+          class_color?: Database["public"]["Enums"]["class_color"]
+          created_at?: string
+          first_name?: string
+          id?: string
+          is_active?: boolean
+          last_name?: string
+          phone?: string | null
+          photo_path?: string | null
+          position?: string
+          sort_order?: number
+          title_prefix?: string | null
+          title_suffix?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -80,6 +203,10 @@ export type Database = {
     }
     Enums: {
       app_role: "admin"
+      class_color: "red" | "green" | "blue" | "yellow" | "none"
+      doc_category: "formulare" | "dokumenty"
+      info_page: "predskolacek" | "zapis"
+      info_state: "open" | "upcoming" | "closed"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -208,6 +335,10 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin"],
+      class_color: ["red", "green", "blue", "yellow", "none"],
+      doc_category: ["formulare", "dokumenty"],
+      info_page: ["predskolacek", "zapis"],
+      info_state: ["open", "upcoming", "closed"],
     },
   },
 } as const
