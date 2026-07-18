@@ -53,6 +53,7 @@ const classes: ClassItem[] = [
 ];
 
 export function SiteClasses() {
+  const c = useCopyPage("index");
   const [outside, setOutside] = useState(false);
 
   return (
