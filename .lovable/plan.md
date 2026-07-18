@@ -1,24 +1,17 @@
-Plán úprav stránky `/kontakty` (jediný soubor: `src/routes/kontakty.tsx`).
+## Plán úpravy stránky `/kontakty`
 
-## 1. Hero — kontaktní údaje s eyebrow a většími mezerami
+Cíl: vycentrovat textový sloupec vlevo s mapou vpravo a změnit poměr stran mapy na 4:3.
 
-- Obalit telefon, e-mail a adresu do samostatných skupin (např. `<div>`) s větší vertikální mezerou mezi nimi (`gap-6` místo `gap-2`).
-- Nad každou skupinu přidat eyebrow text `Telefon`, `E-mail`, `Adresa` pomocí existující třídy `eyebrowClass`.
-- Zachovat typografii velkých kontaktních údajů a jejich hover stavy.
-- Adresu ponechat jako tři řádky (název školy, ulice, město) ve stejné velikosti jako telefon/e-mail.
+### 1. Změna poměru stran mapy
+- V hero pravém sloupci najít kontejner mapy (aktuálně `aspect-square`) a změnit na `aspect-[4/3]`.
+- Zachovat `w-full`, zaoblení `rounded-[28px]`, stín a border.
 
-## 2. Rejstřík — strukturovaný layout s boxy
+### 2. Vertikální centrování levého sloupce
+- V gridu hero sekce (aktuálně `lg:grid-cols-2 lg:items-start lg:gap-14`) změnit `lg:items-start` na `lg:items-center`.
+- Tím se levý textový blok (nadpis, lead, kontakty) vertikálně vycentruje s mapou vpravo.
 
-- Ponechat vnější bílý box (stín, zaoblení, padding) jako obal celé sekce.
-- Uvnitř vnějšího boxu vytvořit dvousloupcový layout:
-  - **Levý sloupec:** Vedení školky + Školní jídelna — každá podskupina ve vlastním vnitřním boxu (`boxClass`).
-  - **Pravý sloupec:** Barevné třídy — každá třída ve vlastním vnitřním boxu (`boxClass`), řazeny pod sebou.
-- Upravit `sectionLabelClass` nadpisy, aby fungovaly jako nadpisy uvnitř boxů (bez `col-span-full`).
-- Zachovat obsah, telefonní odkazy, barevné tečky tříd a učitelky.
-
-## Ověření
-
-- Po editaci spustit build (`bun run build` / `bunx vite build`), zkontrolovat, že stránka `/kontakty` kompiluje bez chyb.
-- Volitelně screenshot preview na desktopu pro kontrolu struktury.
+### 3. Ověření
+- Spustit build (`bunx vite build` / `bun run build`) a zkontrolovat, že stránka `/kontakty` kompiluje bez chyb.
+- Volitelně screenshot preview na desktopu pro kontrolu vertikálního zarovnání a poměru stran mapy.
 
 Žádné jiné stránky ani logika se nemění.
