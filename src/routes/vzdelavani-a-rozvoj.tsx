@@ -13,6 +13,7 @@ import {
 import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
+import { siteCopyQueryOptions, useCopyPage } from "@/lib/use-copy";
 import anglictinaImg from "@/assets/vzdelavani/anglictina.webp.asset.json";
 import robotImg from "@/assets/vzdelavani/robot-2.webp.asset.json";
 import plavaniImg from "@/assets/vzdelavani/plavani.webp.asset.json";
