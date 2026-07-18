@@ -140,10 +140,10 @@ export function SiteTeachers() {
           {/* Header */}
           <div className="mx-auto max-w-3xl text-center">
             <p className="reveal-up font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
-              {fixPrepositions("POZNEJTE NÁS")}
+              {c("teachers.eyebrow", "POZNEJTE NÁS")}
             </p>
             <h2 className="reveal-up mt-3 font-display text-[34px] text-ink md:text-[40px]">
-              {fixPrepositions("Přestavujeme naše kolegy")}
+              {c("teachers.h2", "Přestavujeme naše kolegy")}
             </h2>
           </div>
 
