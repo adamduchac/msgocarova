@@ -2,7 +2,7 @@ export function AdminHeader({ title, description, action }: { title: string; des
   return (
     <div className="flex items-start justify-between gap-4">
       <div>
-        <h1 className="text-2xl font-semibold text-foreground">{title}</h1>
+        <h1 className="font-display text-2xl font-semibold text-foreground">{title}</h1>
         {description && <p className="mt-2 text-sm text-muted-foreground max-w-2xl">{description}</p>}
       </div>
       {action}

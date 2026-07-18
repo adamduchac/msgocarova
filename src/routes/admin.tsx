@@ -76,7 +76,7 @@ function AdminLayout() {
 
   if (state.status === "loading") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#F6F1E8]">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-white to-cream">
         <div className="text-sm text-muted-foreground">Načítám…</div>
       </div>
     );
@@ -88,9 +88,9 @@ function AdminLayout() {
 
   if (state.status === "forbidden") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#F6F1E8] px-4">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-white to-cream px-4">
         <div className="max-w-md text-center rounded-2xl bg-white p-8 shadow-sm border border-black/5">
-          <h1 className="text-xl font-semibold">Nemáte přístup</h1>
+          <h1 className="font-display text-xl font-semibold">Nemáte přístup</h1>
           <p className="mt-2 text-sm text-muted-foreground">
             Tento účet nemá roli administrátora.
           </p>
@@ -118,12 +118,12 @@ function AdminShell({ user, onSignOut }: { user: User; onSignOut: () => void }) 
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   return (
-    <div className="min-h-screen flex bg-[#F6F1E8]">
+    <div className="min-h-screen flex bg-gradient-to-b from-white to-cream">
       {/* Sidebar */}
-      <aside className="w-64 shrink-0 border-r border-black/5 bg-white flex flex-col">
-        <div className="px-5 py-5 border-b border-black/5">
-          <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">MŠ Josefa Gočára</div>
-          <div className="mt-1 text-sm font-semibold text-foreground">CMS Administrace</div>
+      <aside className="w-64 shrink-0 bg-ink text-white/85 flex flex-col">
+        <div className="px-5 py-5 border-b border-white/10">
+          <div className="text-[10px] uppercase tracking-[0.18em] text-white/50">MŠ Josefa Gočára</div>
+          <div className="mt-1 font-display text-sm font-semibold text-white">CMS Administrace</div>
         </div>
 
         <nav className="flex-1 px-3 py-4 space-y-0.5">
@@ -134,10 +134,10 @@ function AdminShell({ user, onSignOut }: { user: User; onSignOut: () => void }) 
               <Link
                 key={item.to}
                 to={item.to}
-                className={`flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors ${
+                className={`flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors border-l-2 ${
                   active
-                    ? "bg-primary/10 text-foreground font-medium"
-                    : "text-muted-foreground hover:bg-black/5 hover:text-foreground"
+                    ? "bg-white/[0.07] text-white font-medium border-brand-yellow"
+                    : "text-white/70 hover:bg-white/[0.04] hover:text-white border-transparent"
                 }`}
               >
                 <Icon className="h-4 w-4" />
@@ -147,11 +147,11 @@ function AdminShell({ user, onSignOut }: { user: User; onSignOut: () => void }) 
           })}
         </nav>
 
-        <div className="px-3 py-3 border-t border-black/5">
-          <div className="px-3 py-2 text-xs text-muted-foreground truncate">{user.email}</div>
+        <div className="px-3 py-3 border-t border-white/10">
+          <div className="px-3 py-2 text-xs text-white/50 truncate">{user.email}</div>
           <button
             onClick={onSignOut}
-            className="w-full flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-black/5 hover:text-foreground transition-colors"
+            className="w-full flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-white/70 hover:bg-white/[0.04] hover:text-white transition-colors"
           >
             <LogOut className="h-4 w-4" />
             Odhlásit se
@@ -166,3 +166,4 @@ function AdminShell({ user, onSignOut }: { user: User; onSignOut: () => void }) 
     </div>
   );
 }
+
