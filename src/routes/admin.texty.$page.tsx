@@ -379,7 +379,7 @@ function TextyEditor() {
                               </span>
                             )}
                             {isOverridden && !isDirty && (
-                              <span className="text-[10px] uppercase tracking-wider text-brand-yellow-dark font-semibold">
+                              <span className="text-[10px] uppercase tracking-wider text-ink font-semibold">
                                 upraveno
                               </span>
                             )}
@@ -417,7 +417,7 @@ function TextyEditor() {
 
       {/* Bottom safety warning */}
       <div className="mt-8 flex items-start gap-2 rounded-lg border border-brand-yellow/30 bg-brand-yellow/10 p-3 text-xs text-ink/80">
-        <AlertTriangle className="h-4 w-4 shrink-0 text-brand-yellow-dark mt-0.5" />
+        <AlertTriangle className="h-4 w-4 shrink-0 text-ink mt-0.5" />
         <span>
           Pokročilé nastavení. Změny v textech se okamžitě projeví na veřejné stránce po uložení.
         </span>
