@@ -141,6 +141,7 @@ export function SiteClasses() {
                   {outside
                     ? c("classes.toggleIn", "Vezmi kostičky dovnitř")
                     : c("classes.toggleOut", "Vezmi kostičky ven")}
+                </span>
               </button>
             </div>
           </div>
