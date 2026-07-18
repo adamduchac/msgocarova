@@ -141,130 +141,106 @@ function KontaktyPage() {
       </div>
 
       <main>
-        {/* Kudy k nám */}
-        <section className="section-y-sm">
-          <div className="container mx-auto px-6">
-            <h2 className={`reveal-up mb-6 ${h2Class}`}>{fixPrepositions("Kudy k nám")}</h2>
-            <div
-              className="reveal-fade overflow-hidden rounded-[28px] border border-border/60 shadow-[0_20px_60px_-22px_rgba(16,15,16,0.25)]"
-              style={{ ["--reveal-delay" as string]: "120ms" }}
-            >
-              <iframe
-                title="Mapa — Mateřská škola Josefa Gočára"
-                src="https://mapy.com/s/kovocenope"
-                className="block h-[420px] w-full md:h-[480px]"
-                style={{ border: 0 }}
-                loading="lazy"
-              />
-            </div>
-          </div>
-        </section>
-
         {/* Rejstřík */}
         <section className="section-y-sm pb-section">
           <div className="container mx-auto px-6">
             <h2 className={`reveal-up mb-6 ${h2Class}`}>{fixPrepositions("Rejstřík")}</h2>
 
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-              {/* Vedení školky */}
-              <p className={sectionLabelClass}>{fixPrepositions("Vedení školky")}</p>
+            <div
+              className="reveal-up rounded-[28px] border border-border/60 bg-card p-6 shadow-[0_20px_60px_-22px_rgba(16,15,16,0.25)] md:p-10"
+            >
+              <div className="grid grid-cols-1 gap-x-8 gap-y-5 md:grid-cols-2">
+                {/* Vedení školky */}
+                <p className={sectionLabelClass}>{fixPrepositions("Vedení školky")}</p>
 
-              <div className={`reveal-up ${boxClass}`}>
-                <p className="text-sm text-body">{fixPrepositions("Ředitel ZŠ a MŠ Josefa Gočára")}</p>
-                <p className="mt-1 font-display text-lg font-bold text-ink">
-                  Mgr. Petr Sadílek
-                </p>
-              </div>
-
-              <div
-                className={`reveal-up ${boxClass}`}
-                style={{ ["--reveal-delay" as string]: "60ms" }}
-              >
-                <p className="text-sm text-body">{fixPrepositions("Zástupkyně ředitele pro MŠ")}</p>
-                <p className="mt-1 font-display text-lg font-bold text-ink">
-                  Mgr. Jitka Kouklíková
-                </p>
-                <div className="mt-3 flex flex-col gap-1">
-                  <a
-                    href="tel:+420495444421"
-                    className="text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
-                  >
-                    495 444 421
-                  </a>
-                  <a
-                    href="mailto:kosticky@msjghk.cz"
-                    className="text-[15px] text-ink transition-colors duration-200 hover:text-brand-blue"
-                  >
-                    kosticky@msjghk.cz
-                  </a>
-                </div>
-              </div>
-
-              {/* Školní jídelna */}
-              <p className={`${sectionLabelClass} mt-6`}>{fixPrepositions("Školní jídelna")}</p>
-
-              <div className={`reveal-up ${boxClass}`}>
-                <p className="font-display text-lg font-bold text-ink">
-                  {fixPrepositions("Školní jídelna ZŠ")}
-                </p>
-                <p className="mt-1 text-sm text-body">
-                  {fixPrepositions("Odhlašování obědů nejdéle do 10:00 na příští den.")}
-                </p>
-                <a
-                  href="tel:+420495019050"
-                  className="mt-3 inline-block text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
-                >
-                  495 019 050
-                </a>
-              </div>
-
-              <div
-                className={`reveal-up ${boxClass}`}
-                style={{ ["--reveal-delay" as string]: "60ms" }}
-              >
-                <p className="font-display text-lg font-bold text-ink">
-                  {fixPrepositions("Výdejna obědů MŠ")}
-                </p>
-                <a
-                  href="tel:+420495444422"
-                  className="mt-3 inline-block text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
-                >
-                  495 444 422
-                </a>
-              </div>
-
-              {/* Barevné třídy */}
-              <p className={`${sectionLabelClass} mt-6`}>{fixPrepositions("Barevné třídy")}</p>
-
-              {classes.map((c, i) => (
-                <div
-                  key={c.name}
-                  className={`reveal-up ${boxClass}`}
-                  style={{ ["--reveal-delay" as string]: `${i * 60}ms` }}
-                >
-                  <div className="flex items-center gap-3">
-                    <span
-                      className={`h-2.5 w-2.5 shrink-0 rounded-full ${c.dot}`}
-                      aria-hidden
-                    />
-                    <p className="min-w-0 flex-1 font-display text-lg font-bold text-ink">
-                      {c.name}
-                    </p>
-                    <a
-                      href={`tel:${c.tel}`}
-                      className="text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
-                    >
-                      {c.phone}
-                    </a>
-                  </div>
-                  <p className="mt-2 text-sm leading-relaxed text-body">
-                    {c.teachers}
+                <div>
+                  <p className="text-sm text-body">{fixPrepositions("Ředitel ZŠ a MŠ Josefa Gočára")}</p>
+                  <p className="mt-1 font-display text-lg font-bold text-ink">
+                    Mgr. Petr Sadílek
                   </p>
                 </div>
-              ))}
+
+                <div>
+                  <p className="text-sm text-body">{fixPrepositions("Zástupkyně ředitele pro MŠ")}</p>
+                  <p className="mt-1 font-display text-lg font-bold text-ink">
+                    Mgr. Jitka Kouklíková
+                  </p>
+                  <div className="mt-3 flex flex-col gap-1">
+                    <a
+                      href="tel:+420495444421"
+                      className="text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
+                    >
+                      495 444 421
+                    </a>
+                    <a
+                      href="mailto:kosticky@msjghk.cz"
+                      className="text-[15px] text-ink transition-colors duration-200 hover:text-brand-blue"
+                    >
+                      kosticky@msjghk.cz
+                    </a>
+                  </div>
+                </div>
+
+                {/* Školní jídelna */}
+                <p className={`${sectionLabelClass} mt-6`}>{fixPrepositions("Školní jídelna")}</p>
+
+                <div>
+                  <p className="font-display text-lg font-bold text-ink">
+                    {fixPrepositions("Školní jídelna ZŠ")}
+                  </p>
+                  <p className="mt-1 text-sm text-body">
+                    {fixPrepositions("Odhlašování obědů nejdéle do 10:00 na příští den.")}
+                  </p>
+                  <a
+                    href="tel:+420495019050"
+                    className="mt-3 inline-block text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
+                  >
+                    495 019 050
+                  </a>
+                </div>
+
+                <div>
+                  <p className="font-display text-lg font-bold text-ink">
+                    {fixPrepositions("Výdejna obědů MŠ")}
+                  </p>
+                  <a
+                    href="tel:+420495444422"
+                    className="mt-3 inline-block text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
+                  >
+                    495 444 422
+                  </a>
+                </div>
+
+                {/* Barevné třídy */}
+                <p className={`${sectionLabelClass} mt-6`}>{fixPrepositions("Barevné třídy")}</p>
+
+                {classes.map((c) => (
+                  <div key={c.name}>
+                    <div className="flex items-center gap-3">
+                      <span
+                        className={`h-2.5 w-2.5 shrink-0 rounded-full ${c.dot}`}
+                        aria-hidden
+                      />
+                      <p className="min-w-0 flex-1 font-display text-lg font-bold text-ink">
+                        {c.name}
+                      </p>
+                      <a
+                        href={`tel:${c.tel}`}
+                        className="text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
+                      >
+                        {c.phone}
+                      </a>
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed text-body">
+                      {c.teachers}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
+
 
         <div
           style={{
