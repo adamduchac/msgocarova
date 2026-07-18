@@ -4,6 +4,7 @@ import { ChevronDown, Phone } from "lucide-react";
 import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
+import { siteCopyQueryOptions, useCopyPage } from "@/lib/use-copy";
 import cervenaPhoto from "@/assets/trida-cervena.webp.asset.json";
 import zelenaPhoto from "@/assets/trida-zelena.webp.asset.json";
 import modraPhoto from "@/assets/trida-modra.webp.asset.json";
