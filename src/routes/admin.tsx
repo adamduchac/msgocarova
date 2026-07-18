@@ -129,25 +129,15 @@ function AdminShell({ user, onSignOut }: { user: User; onSignOut: () => void }) 
           <div className="mt-1 font-display text-sm font-semibold text-white">CMS Administrace</div>
         </div>
 
-        <nav className="flex-1 px-3 py-4 space-y-0.5">
-          {NAV_ITEMS.map((item) => {
-            const active = item.exact ? pathname === item.to : pathname === item.to || pathname.startsWith(item.to + "/");
-            const Icon = item.icon;
-            return (
-              <Link
-                key={item.to}
-                to={item.to}
-                className={`flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors border-l-2 ${
-                  active
-                    ? "bg-white/[0.07] text-white font-medium border-brand-yellow"
-                    : "text-white/70 hover:bg-white/[0.04] hover:text-white border-transparent"
-                }`}
-              >
-                <Icon className="h-4 w-4" />
-                {item.label}
-              </Link>
-            );
-          })}
+        <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
+          {NAV_ITEMS.map((item) => renderNav(item, pathname))}
+
+          <div className="mt-4 pt-4 border-t border-white/10">
+            <div className="px-3 pb-2 text-[10px] uppercase tracking-[0.18em] text-white/40">
+              Pokročilé
+            </div>
+            {ADVANCED_NAV_ITEMS.map((item) => renderNav(item, pathname))}
+          </div>
         </nav>
 
         <div className="px-3 py-3 border-t border-white/10">
