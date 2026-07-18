@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ImageIcon } from "lucide-react";
+
 import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
@@ -100,41 +100,40 @@ function KontaktyPage() {
               </p>
 
 
-              <div className="mt-6">
+              <div className="mt-6 flex flex-col gap-2">
                 <a
                   href="tel:+420495444421"
-                  className="block font-display text-[28px] font-extrabold leading-[1.1] tabular-nums text-ink transition-colors duration-200 hover:text-ink/70 md:text-[36px]"
+                  className="block font-display text-[28px] font-extrabold leading-[1.15] tabular-nums text-ink transition-colors duration-200 hover:text-ink/70 md:text-[36px]"
                 >
                   495 444 421
                 </a>
                 <a
                   href="mailto:kosticky@msjghk.cz"
-                  className="mt-1 block break-all font-display text-[28px] font-extrabold leading-[1.1] text-ink transition-colors duration-200 hover:text-ink/70 md:text-[36px]"
+                  className="block break-all font-display text-[28px] font-extrabold leading-[1.15] text-ink transition-colors duration-200 hover:text-ink/70 md:text-[36px]"
                 >
                   kosticky@msjghk.cz
                 </a>
-              </div>
-
-              <div className="mt-6">
-                <p className={eyebrowClass}>{fixPrepositions("Adresa")}</p>
-                <address className="mt-3 not-italic leading-relaxed">
-                  <span className="block font-medium text-ink">
-                    {fixPrepositions("Mateřská škola Josefa Gočára")}
-                  </span>
-                  <span className="block text-body">Škroupova 693</span>
-                  <span className="block text-body">500 02 Hradec Králové 2</span>
+                <address className="font-display text-[28px] font-extrabold not-italic leading-[1.15] text-ink md:text-[36px]">
+                  <span className="block">{fixPrepositions("Mateřská škola Josefa Gočára")}</span>
+                  <span className="block">Škroupova 693</span>
+                  <span className="block">500 02 Hradec Králové 2</span>
                 </address>
               </div>
             </div>
 
-            {/* Pravý sloupec — fotka 1:1 placeholder */}
+            {/* Pravý sloupec — mapa */}
             <div
               className="reveal-fade lg:mt-2"
               style={{ ["--reveal-delay" as string]: "160ms" }}
             >
-              <div className="flex aspect-square w-full flex-col items-center justify-center gap-3 overflow-hidden rounded-[28px] border border-border/60 bg-muted">
-                <ImageIcon className="h-12 w-12 text-ink/25" aria-hidden />
-                <span className="text-sm text-ink/40">{fixPrepositions("Fotka školky")}</span>
+              <div className="aspect-square w-full overflow-hidden rounded-[28px] border border-border/60 shadow-[0_20px_60px_-22px_rgba(16,15,16,0.25)]">
+                <iframe
+                  title="Mapa — Mateřská škola Josefa Gočára"
+                  src="https://mapy.com/s/kovocenope"
+                  className="block h-full w-full"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                />
               </div>
             </div>
           </div>
@@ -142,130 +141,106 @@ function KontaktyPage() {
       </div>
 
       <main>
-        {/* Kudy k nám */}
-        <section className="section-y-sm">
-          <div className="container mx-auto px-6">
-            <h2 className={`reveal-up mb-6 ${h2Class}`}>{fixPrepositions("Kudy k nám")}</h2>
-            <div
-              className="reveal-fade overflow-hidden rounded-[28px] border border-border/60 shadow-[0_20px_60px_-22px_rgba(16,15,16,0.25)]"
-              style={{ ["--reveal-delay" as string]: "120ms" }}
-            >
-              <iframe
-                title="Mapa — Mateřská škola Josefa Gočára"
-                src="https://mapy.com/s/kovocenope"
-                className="block h-[420px] w-full md:h-[480px]"
-                style={{ border: 0 }}
-                loading="lazy"
-              />
-            </div>
-          </div>
-        </section>
-
         {/* Rejstřík */}
         <section className="section-y-sm pb-section">
           <div className="container mx-auto px-6">
             <h2 className={`reveal-up mb-6 ${h2Class}`}>{fixPrepositions("Rejstřík")}</h2>
 
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-              {/* Vedení školky */}
-              <p className={sectionLabelClass}>{fixPrepositions("Vedení školky")}</p>
+            <div
+              className="reveal-up rounded-[28px] border border-border/60 bg-card p-6 shadow-[0_20px_60px_-22px_rgba(16,15,16,0.25)] md:p-10"
+            >
+              <div className="grid grid-cols-1 gap-x-8 gap-y-5 md:grid-cols-2">
+                {/* Vedení školky */}
+                <p className={sectionLabelClass}>{fixPrepositions("Vedení školky")}</p>
 
-              <div className={`reveal-up ${boxClass}`}>
-                <p className="text-sm text-body">{fixPrepositions("Ředitel ZŠ a MŠ Josefa Gočára")}</p>
-                <p className="mt-1 font-display text-lg font-bold text-ink">
-                  Mgr. Petr Sadílek
-                </p>
-              </div>
-
-              <div
-                className={`reveal-up ${boxClass}`}
-                style={{ ["--reveal-delay" as string]: "60ms" }}
-              >
-                <p className="text-sm text-body">{fixPrepositions("Zástupkyně ředitele pro MŠ")}</p>
-                <p className="mt-1 font-display text-lg font-bold text-ink">
-                  Mgr. Jitka Kouklíková
-                </p>
-                <div className="mt-3 flex flex-col gap-1">
-                  <a
-                    href="tel:+420495444421"
-                    className="text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
-                  >
-                    495 444 421
-                  </a>
-                  <a
-                    href="mailto:kosticky@msjghk.cz"
-                    className="text-[15px] text-ink transition-colors duration-200 hover:text-brand-blue"
-                  >
-                    kosticky@msjghk.cz
-                  </a>
-                </div>
-              </div>
-
-              {/* Školní jídelna */}
-              <p className={`${sectionLabelClass} mt-6`}>{fixPrepositions("Školní jídelna")}</p>
-
-              <div className={`reveal-up ${boxClass}`}>
-                <p className="font-display text-lg font-bold text-ink">
-                  {fixPrepositions("Školní jídelna ZŠ")}
-                </p>
-                <p className="mt-1 text-sm text-body">
-                  {fixPrepositions("Odhlašování obědů nejdéle do 10:00 na příští den.")}
-                </p>
-                <a
-                  href="tel:+420495019050"
-                  className="mt-3 inline-block text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
-                >
-                  495 019 050
-                </a>
-              </div>
-
-              <div
-                className={`reveal-up ${boxClass}`}
-                style={{ ["--reveal-delay" as string]: "60ms" }}
-              >
-                <p className="font-display text-lg font-bold text-ink">
-                  {fixPrepositions("Výdejna obědů MŠ")}
-                </p>
-                <a
-                  href="tel:+420495444422"
-                  className="mt-3 inline-block text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
-                >
-                  495 444 422
-                </a>
-              </div>
-
-              {/* Barevné třídy */}
-              <p className={`${sectionLabelClass} mt-6`}>{fixPrepositions("Barevné třídy")}</p>
-
-              {classes.map((c, i) => (
-                <div
-                  key={c.name}
-                  className={`reveal-up ${boxClass}`}
-                  style={{ ["--reveal-delay" as string]: `${i * 60}ms` }}
-                >
-                  <div className="flex items-center gap-3">
-                    <span
-                      className={`h-2.5 w-2.5 shrink-0 rounded-full ${c.dot}`}
-                      aria-hidden
-                    />
-                    <p className="min-w-0 flex-1 font-display text-lg font-bold text-ink">
-                      {c.name}
-                    </p>
-                    <a
-                      href={`tel:${c.tel}`}
-                      className="text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
-                    >
-                      {c.phone}
-                    </a>
-                  </div>
-                  <p className="mt-2 text-sm leading-relaxed text-body">
-                    {c.teachers}
+                <div>
+                  <p className="text-sm text-body">{fixPrepositions("Ředitel ZŠ a MŠ Josefa Gočára")}</p>
+                  <p className="mt-1 font-display text-lg font-bold text-ink">
+                    Mgr. Petr Sadílek
                   </p>
                 </div>
-              ))}
+
+                <div>
+                  <p className="text-sm text-body">{fixPrepositions("Zástupkyně ředitele pro MŠ")}</p>
+                  <p className="mt-1 font-display text-lg font-bold text-ink">
+                    Mgr. Jitka Kouklíková
+                  </p>
+                  <div className="mt-3 flex flex-col gap-1">
+                    <a
+                      href="tel:+420495444421"
+                      className="text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
+                    >
+                      495 444 421
+                    </a>
+                    <a
+                      href="mailto:kosticky@msjghk.cz"
+                      className="text-[15px] text-ink transition-colors duration-200 hover:text-brand-blue"
+                    >
+                      kosticky@msjghk.cz
+                    </a>
+                  </div>
+                </div>
+
+                {/* Školní jídelna */}
+                <p className={`${sectionLabelClass} mt-6`}>{fixPrepositions("Školní jídelna")}</p>
+
+                <div>
+                  <p className="font-display text-lg font-bold text-ink">
+                    {fixPrepositions("Školní jídelna ZŠ")}
+                  </p>
+                  <p className="mt-1 text-sm text-body">
+                    {fixPrepositions("Odhlašování obědů nejdéle do 10:00 na příští den.")}
+                  </p>
+                  <a
+                    href="tel:+420495019050"
+                    className="mt-3 inline-block text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
+                  >
+                    495 019 050
+                  </a>
+                </div>
+
+                <div>
+                  <p className="font-display text-lg font-bold text-ink">
+                    {fixPrepositions("Výdejna obědů MŠ")}
+                  </p>
+                  <a
+                    href="tel:+420495444422"
+                    className="mt-3 inline-block text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
+                  >
+                    495 444 422
+                  </a>
+                </div>
+
+                {/* Barevné třídy */}
+                <p className={`${sectionLabelClass} mt-6`}>{fixPrepositions("Barevné třídy")}</p>
+
+                {classes.map((c) => (
+                  <div key={c.name}>
+                    <div className="flex items-center gap-3">
+                      <span
+                        className={`h-2.5 w-2.5 shrink-0 rounded-full ${c.dot}`}
+                        aria-hidden
+                      />
+                      <p className="min-w-0 flex-1 font-display text-lg font-bold text-ink">
+                        {c.name}
+                      </p>
+                      <a
+                        href={`tel:${c.tel}`}
+                        className="text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
+                      >
+                        {c.phone}
+                      </a>
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed text-body">
+                      {c.teachers}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
+
 
         <div
           style={{
