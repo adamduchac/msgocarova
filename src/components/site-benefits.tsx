@@ -1,4 +1,5 @@
 import { fixPrepositions } from "@/lib/typography";
+import { useCopyPage } from "@/lib/use-copy";
 import zahrada from "@/assets/vyhoda-zahrada.webp.asset.json";
 import robot from "@/assets/vyhoda-robot.webp.asset.json";
 import komunikace from "@/assets/vyhoda-komunikace.webp.asset.json";
@@ -13,50 +14,59 @@ type Benefit = {
   tint: string;
 };
 
-const benefits: Benefit[] = [
-  {
-    titleMain: fixPrepositions("Velká zahrada"),
-    titleSub: fixPrepositions("s dopravním hřištěm"),
-    text: fixPrepositions(
-      "Naše zelená oáza v centru města u Labe žije celý rok — podzimní hrátky, zimní bobování, letní osvěžení v bazénu a prvky přírodní zahrady. Součástí je dopravní hřiště i trampolína. Ven chodíme za každého počasí."
-    ),
-    image: zahrada.url,
-    alt: "Plastelínový strom a malé hřiště se skluzavkou",
-    tint: "bg-mint",
-  },
-  {
-    titleMain: fixPrepositions("Angličtina"),
-    titleSub: fixPrepositions("a moderní technologie"),
-    text: fixPrepositions(
-      "Angličtinu máme přirozeně ve všech třídách. Jdeme s dobou. Tradiční hru doplňujeme o interaktivní tabule, robotické myši, mikroskopy i světelný panel."
-    ),
-    image: robot.url,
-    alt: "Plastelínový robot s britskou vlajkou",
-    tint: "bg-sky",
-  },
-  {
-    titleMain: fixPrepositions("Respektující"),
-    titleSub: fixPrepositions("a individuální přístup"),
-    text: fixPrepositions(
-      "Stavíme na důvěře, bezpečí a partnerské komunikaci mezi dětmi, učiteli i rodiči. Dáváme dětem prostor hledat vlastní řešení, spolupracovat a rozvíjet se vlastním tempem."
-    ),
-    image: komunikace.url,
-    alt: "Plastelínová bublina s usměvavým smajlíkem",
-    tint: "bg-cream",
-  },
-  {
-    titleMain: fixPrepositions("Otevřená"),
-    titleSub: fixPrepositions("a snadná komunikace"),
-    text: fixPrepositions(
-      "Jsme otevřená školka, pro kterou je spolupráce s rodinou klíčová. Pro omlouvání a přehled o dění využíváme aplikaci Naše MŠ, o víkendech otevíráme zahradu veřejnosti."
-    ),
-    image: srdce.url,
-    alt: "Plastelínové červené srdce",
-    tint: "bg-blush",
-  },
-];
+function useBenefits(): Benefit[] {
+  const c = useCopyPage("index");
+  return [
+    {
+      titleMain: c("benefits.card1.titleMain", "Velká zahrada"),
+      titleSub: c("benefits.card1.titleSub", "s dopravním hřištěm"),
+      text: c(
+        "benefits.card1.text",
+        "Naše zelená oáza v centru města u Labe žije celý rok — podzimní hrátky, zimní bobování, letní osvěžení v bazénu a prvky přírodní zahrady. Součástí je dopravní hřiště i trampolína. Ven chodíme za každého počasí."
+      ),
+      image: zahrada.url,
+      alt: "Plastelínový strom a malé hřiště se skluzavkou",
+      tint: "bg-mint",
+    },
+    {
+      titleMain: c("benefits.card2.titleMain", "Angličtina"),
+      titleSub: c("benefits.card2.titleSub", "a moderní technologie"),
+      text: c(
+        "benefits.card2.text",
+        "Angličtinu máme přirozeně ve všech třídách. Jdeme s dobou. Tradiční hru doplňujeme o interaktivní tabule, robotické myši, mikroskopy i světelný panel."
+      ),
+      image: robot.url,
+      alt: "Plastelínový robot s britskou vlajkou",
+      tint: "bg-sky",
+    },
+    {
+      titleMain: c("benefits.card3.titleMain", "Respektující"),
+      titleSub: c("benefits.card3.titleSub", "a individuální přístup"),
+      text: c(
+        "benefits.card3.text",
+        "Stavíme na důvěře, bezpečí a partnerské komunikaci mezi dětmi, učiteli i rodiči. Dáváme dětem prostor hledat vlastní řešení, spolupracovat a rozvíjet se vlastním tempem."
+      ),
+      image: komunikace.url,
+      alt: "Plastelínová bublina s usměvavým smajlíkem",
+      tint: "bg-cream",
+    },
+    {
+      titleMain: c("benefits.card4.titleMain", "Otevřená"),
+      titleSub: c("benefits.card4.titleSub", "a snadná komunikace"),
+      text: c(
+        "benefits.card4.text",
+        "Jsme otevřená školka, pro kterou je spolupráce s rodinou klíčová. Pro omlouvání a přehled o dění využíváme aplikaci Naše MŠ, o víkendech otevíráme zahradu veřejnosti."
+      ),
+      image: srdce.url,
+      alt: "Plastelínové červené srdce",
+      tint: "bg-blush",
+    },
+  ];
+}
 
 export function SiteBenefits() {
+  const c = useCopyPage("index");
+  const benefits = useBenefits();
   return (
     <section
       id="vyhody"
