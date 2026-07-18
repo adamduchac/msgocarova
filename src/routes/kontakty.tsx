@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ImageIcon } from "lucide-react";
+
 import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
@@ -100,41 +100,40 @@ function KontaktyPage() {
               </p>
 
 
-              <div className="mt-6">
+              <div className="mt-6 flex flex-col gap-2">
                 <a
                   href="tel:+420495444421"
-                  className="block font-display text-[28px] font-extrabold leading-[1.1] tabular-nums text-ink transition-colors duration-200 hover:text-ink/70 md:text-[36px]"
+                  className="block font-display text-[28px] font-extrabold leading-[1.15] tabular-nums text-ink transition-colors duration-200 hover:text-ink/70 md:text-[36px]"
                 >
                   495 444 421
                 </a>
                 <a
                   href="mailto:kosticky@msjghk.cz"
-                  className="mt-1 block break-all font-display text-[28px] font-extrabold leading-[1.1] text-ink transition-colors duration-200 hover:text-ink/70 md:text-[36px]"
+                  className="block break-all font-display text-[28px] font-extrabold leading-[1.15] text-ink transition-colors duration-200 hover:text-ink/70 md:text-[36px]"
                 >
                   kosticky@msjghk.cz
                 </a>
-              </div>
-
-              <div className="mt-6">
-                <p className={eyebrowClass}>{fixPrepositions("Adresa")}</p>
-                <address className="mt-3 not-italic leading-relaxed">
-                  <span className="block font-medium text-ink">
-                    {fixPrepositions("Mateřská škola Josefa Gočára")}
-                  </span>
-                  <span className="block text-body">Škroupova 693</span>
-                  <span className="block text-body">500 02 Hradec Králové 2</span>
+                <address className="font-display text-[28px] font-extrabold not-italic leading-[1.15] text-ink md:text-[36px]">
+                  <span className="block">{fixPrepositions("Mateřská škola Josefa Gočára")}</span>
+                  <span className="block">Škroupova 693</span>
+                  <span className="block">500 02 Hradec Králové 2</span>
                 </address>
               </div>
             </div>
 
-            {/* Pravý sloupec — fotka 1:1 placeholder */}
+            {/* Pravý sloupec — mapa */}
             <div
               className="reveal-fade lg:mt-2"
               style={{ ["--reveal-delay" as string]: "160ms" }}
             >
-              <div className="flex aspect-square w-full flex-col items-center justify-center gap-3 overflow-hidden rounded-[28px] border border-border/60 bg-muted">
-                <ImageIcon className="h-12 w-12 text-ink/25" aria-hidden />
-                <span className="text-sm text-ink/40">{fixPrepositions("Fotka školky")}</span>
+              <div className="aspect-square w-full overflow-hidden rounded-[28px] border border-border/60 shadow-[0_20px_60px_-22px_rgba(16,15,16,0.25)]">
+                <iframe
+                  title="Mapa — Mateřská škola Josefa Gočára"
+                  src="https://mapy.com/s/kovocenope"
+                  className="block h-full w-full"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                />
               </div>
             </div>
           </div>

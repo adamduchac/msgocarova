@@ -1,19 +1,21 @@
-## Cíl
-Při otevření/zavření modalu TOP zpráv (klik na box na HP) přidat jednoduchý, k webu ladící fade-in / fade-out přechod.
+## Úpravy stránky /kontakty
 
-## Změny
-Soubor: `src/components/site-announcements.tsx` — komponenta `AnnouncementModal` + její použití v `SiteAnnouncements`.
+**Soubor:** `src/routes/kontakty.tsx`
 
-1. Řídit viditelnost lokálním stavem `visible` (mount/unmount kontrola):
-   - Otevření: mount → další frame nastaví `visible = true` (spustí fade-in).
-   - Zavření: `visible = false`, po ~200 ms zavolat `onClose` (unmount).
-2. Použít Tailwind třídy `transition-opacity duration-200 ease-out` + `opacity-0` / `opacity-100` na:
-   - backdrop (`bg-cream/95 backdrop-blur-sm`)
-   - vnitřní panel (`rounded-2xl bg-white ...`) — kombinace opacity + jemné `translate-y-1` → `translate-y-0` pro decentní pocit.
-3. `respect prefers-reduced-motion`: když je zapnuto, přechod přeskočit (bez trvání) — v souladu s core pravidly projektu.
-4. `Escape` a klik na backdrop zavolají "měkké zavření" (fade-out, pak unmount) místo přímého `onClose`.
+### 1. Hero — mapa místo fotky
+- V pravém sloupci nahradit `ImageIcon` placeholder `<iframe>` mapou (stejný `src` jako sekce „Kudy k nám": `https://mapy.com/s/kovocenope`).
+- Zachovat čtvercový poměr (`aspect-square`), zaoblený rámeček `rounded-[28px]` a stejný stín jako mají boxy na HP (`shadow-[0_20px_60px_-22px_rgba(16,15,16,0.25)]`).
 
-## Co se nemění
-- Žádné hover scale efekty.
-- Žádná změna obsahu, layoutu, API, dat nebo dalších komponent.
-- Trvání 200 ms drží konzistenci s ostatními mikrointerakcemi.
+### 2. Odstranit sekci „Kudy k nám"
+- Kompletně smazat `<section>` s druhou mapou (řádky 146–162).
+
+### 3. Adresa velikostí sjednocená s telefonem/e-mailem
+- Odstranit eyebrow „Adresa".
+- Adresu vysázet stejnou typografií jako telefon a e-mail (`font-display text-[28px]/[36px] font-extrabold`), tři řádky pod sebou (název školy, ulice, město).
+- Sjednotit vertikální odstupy: telefon, e-mail i adresa budou v jednom `flex flex-col` bloku s konzistentní mezerou (např. `gap-2`) místo současného mixu `mt-1` / `mt-6`.
+
+### 4. Rejstřík v jednom bílém boxu
+- Obalit celý obsah sekce „Rejstřík" (nadskupiny Vedení / Jídelna / Barevné třídy) do jednoho vnějšího bílého boxu ve stylu HP karet „barevné kostičky": `rounded-[28px] border border-border/60 bg-card p-6 md:p-10 shadow-[0_20px_60px_-22px_rgba(16,15,16,0.25)]`.
+- Vnitřní jednotlivé položky (dosavadní `boxClass` karty) převést na plain řádky bez vlastního rámečku a pozadí — oddělené jen jemným `divide-y border-border/60` nebo mezerami, aby vnější box působil čistě. Podskupiny „Vedení školky", „Školní jídelna", „Barevné třídy" zůstávají jako `sectionLabelClass` nadpisy uvnitř tohoto boxu.
+
+Žádné jiné stránky ani logika se nemění.
