@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { fixPrepositions } from "@/lib/typography";
+import { useCopyPage } from "@/lib/use-copy";
 import den01 from "@/assets/den-01.webp.asset.json";
 import den02 from "@/assets/den-02.webp.asset.json";
 import den03 from "@/assets/den-03.webp.asset.json";
