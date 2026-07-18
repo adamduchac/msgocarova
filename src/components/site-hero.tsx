@@ -18,6 +18,7 @@ const SLIDES = [
 ];
 
 export function SiteHero() {
+  const c = useCopyPage("index");
   const [index, setIndex] = useState(0);
   const [slides, setSlides] = useState(SLIDES);
   const [cubesFloating, setCubesFloating] = useState(false);
