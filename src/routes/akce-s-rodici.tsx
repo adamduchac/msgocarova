@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
+import { siteCopyQueryOptions, useCopyPage } from "@/lib/use-copy";
 import rodice1 from "@/assets/akce/rodice1.webp.asset.json";
 import rodice2 from "@/assets/akce/rodice2.webp.asset.json";
 import rodice3 from "@/assets/akce/rodice3.webp.asset.json";
@@ -9,6 +10,7 @@ import rodice3 from "@/assets/akce/rodice3.webp.asset.json";
 const t = fixPrepositions;
 
 export const Route = createFileRoute("/akce-s-rodici")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(siteCopyQueryOptions("akce-s-rodici")),
   head: () => ({
     meta: [
       { title: "Akce s rodiči — Mateřská škola Josefa Gočára" },
