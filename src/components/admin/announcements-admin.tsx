@@ -1,9 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { Plus, Pencil, Trash2, Eye, EyeOff, GripVertical } from "lucide-react";
+import { Plus, Pencil, Trash2, Eye, EyeOff, GripVertical, Sparkles } from "lucide-react";
+import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
 import { fetchAllAnnouncements, type Announcement } from "@/lib/cms";
+import { formatAnnouncementContent } from "@/lib/announcements.functions";
 import { AdminHeader } from "@/components/admin/ui";
+
 
 const MAX_ACTIVE = 3;
 
