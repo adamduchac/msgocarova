@@ -103,6 +103,7 @@ function getInitials(name: string): string {
 }
 
 export function SiteTeachers() {
+  const c = useCopyPage("index");
   const [index, setIndex] = useState(0);
   const total = teachers.length;
   const touchStartX = useRef<number | null>(null);
