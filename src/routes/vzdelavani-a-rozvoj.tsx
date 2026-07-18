@@ -267,6 +267,7 @@ function AreaCard({ area }: { area: Area }) {
 }
 
 function VzdelavaniPage() {
+  const c = useCopyPage("vzdelavani-a-rozvoj");
   return (
     <div className="min-h-screen bg-background">
       <SiteNavbar />
@@ -280,10 +281,11 @@ function VzdelavaniPage() {
           <div className="container mx-auto px-6">
             <div className="reveal-up max-w-3xl">
               <h1 className="font-display text-[42px] font-extrabold leading-[1.05] text-ink md:text-[56px]">
-                {t("Vzdělávání a aktivity")}
+                {c("hero.h1", "Vzdělávání a aktivity")}
               </h1>
               <p className="mt-5 text-lg leading-relaxed text-body md:text-xl">
-                {t(
+                {c(
+                  "hero.lead",
                   "Vedle každodenní hry nabízíme dětem pestrý program, který přirozeně rozvíjí jazyk, myšlení, pohyb i vztah k přírodě a technologiím. Aktivity přizpůsobujeme věku dětí a jednotlivým třídám."
                 )}
               </p>
