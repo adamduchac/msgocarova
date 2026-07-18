@@ -40,9 +40,9 @@ export function SiteAnnouncements() {
               type="button"
               onClick={() => setOpen(a)}
               aria-label={`Zobrazit podrobnosti — ${a.title}`}
-              className="group relative block w-full text-left rounded-2xl bg-cream shadow-[0_8px_24px_-18px_rgba(16,15,16,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background px-4 py-5 sm:px-5 sm:py-3.5"
+              className="group relative block w-full cursor-pointer text-left rounded-2xl bg-cream shadow-[0_8px_24px_-18px_rgba(16,15,16,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background px-4 py-5 sm:px-5 sm:py-3.5"
             >
-              <div className="flex flex-col items-center gap-4 sm:hidden">
+              <div className="pointer-events-none flex flex-col items-center gap-4 sm:hidden">
                 <span className="grid h-[72px] w-[72px] shrink-0 place-items-center rounded-full bg-white">
                   <img src={iconNews.url} alt="" aria-hidden className="h-12 w-12 object-contain" loading="lazy" />
                 </span>
@@ -55,8 +55,8 @@ export function SiteAnnouncements() {
                 </span>
               </div>
 
-              <div className="hidden sm:block">
-                <div className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 grid h-20 w-20 shrink-0 place-items-center rounded-full bg-white">
+              <div className="pointer-events-none hidden sm:block">
+                <div className="absolute left-5 top-1/2 -translate-y-1/2 grid h-20 w-20 shrink-0 place-items-center rounded-full bg-white">
                   <img src={iconNews.url} alt="" aria-hidden className="h-14 w-14 object-contain" loading="lazy" />
                 </div>
                 <p className="min-h-20 flex items-center justify-center text-center text-lg leading-relaxed text-ink font-medium px-[112px]">
