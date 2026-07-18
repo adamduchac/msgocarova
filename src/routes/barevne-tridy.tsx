@@ -382,6 +382,7 @@ function ClassSection({ data, isLast }: { data: ClassData; isLast?: boolean }) {
 }
 
 function BarevneTridyPage() {
+  const copy = useCopyPage("barevne-tridy");
   return (
     <div className="min-h-screen bg-background">
       <SiteNavbar />
@@ -393,16 +394,18 @@ function BarevneTridyPage() {
         <section className="section-y">
           <div className="container mx-auto px-6">
             <h1 className="font-display text-[42px] font-extrabold leading-[1.05] text-ink md:text-[56px]">
-              {fixPrepositions("Barevné třídy")}
+              {copy("hero.h1", "Barevné třídy")}
             </h1>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-body">
-              {fixPrepositions(
+              {copy(
+                "hero.lead",
                 "Naše třídy nesou názvy barevných kostiček — symbolu dětské hry, té nejpřirozenější a nejdůležitější činnosti předškoláka. Cílem je podnětné prostředí plné hraček a zajímavých aktivit, kam se děti každý den těší."
               )}
             </p>
           </div>
         </section>
       </div>
+
 
       <main>
         {classes.map((c, i) => (
