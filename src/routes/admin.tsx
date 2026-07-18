@@ -160,3 +160,25 @@ function AdminShell({ user, onSignOut }: { user: User; onSignOut: () => void }) 
   );
 }
 
+function renderNav(item: NavItem, pathname: string) {
+  const active = item.exact ? pathname === item.to : pathname === item.to || pathname.startsWith(item.to + "/");
+  const Icon = item.icon;
+  return (
+    <Link
+      key={item.to}
+      to={item.to}
+      title={item.warn ? "Pokročilé — mění strojově texty na webu. Používejte opatrně." : undefined}
+      className={`flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors border-l-2 ${
+        active
+          ? "bg-white/[0.07] text-white font-medium border-brand-yellow"
+          : "text-white/70 hover:bg-white/[0.04] hover:text-white border-transparent"
+      }`}
+    >
+      <Icon className="h-4 w-4" />
+      <span className="flex-1">{item.label}</span>
+      {item.warn && <AlertTriangle className="h-3.5 w-3.5 text-brand-yellow" />}
+    </Link>
+  );
+}
+
+
