@@ -2,7 +2,7 @@ import { createFileRoute, Link, Outlet, useNavigate, useRouterState } from "@tan
 import { useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
-import { LayoutDashboard, Megaphone, Users, FileText, GraduationCap, ClipboardList, Type, LogOut } from "lucide-react";
+import { LayoutDashboard, Megaphone, Users, FileText, GraduationCap, ClipboardList, Type, LogOut, AlertTriangle } from "lucide-react";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -17,15 +17,17 @@ type CheckState =
   | { status: "forbidden" }
   | { status: "ok"; user: User };
 
-type NavItem = { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean };
+type NavItem = { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean; warn?: boolean };
 const NAV_ITEMS: NavItem[] = [
   { to: "/admin", label: "Přehled", icon: LayoutDashboard, exact: true },
   { to: "/admin/zpravy", label: "Top zprávy", icon: Megaphone },
   { to: "/admin/zamestnanci", label: "Zaměstnanci", icon: Users },
   { to: "/admin/dokumenty", label: "Dokumenty", icon: FileText },
-  { to: "/admin/texty", label: "Texty na webu", icon: Type },
   { to: "/admin/predskolacek", label: "Předškoláček", icon: GraduationCap },
   { to: "/admin/zapis", label: "Zápis", icon: ClipboardList },
+];
+const ADVANCED_NAV_ITEMS: NavItem[] = [
+  { to: "/admin/texty", label: "Texty na webu", icon: Type, warn: true },
 ];
 
 function AdminLayout() {
@@ -127,25 +129,15 @@ function AdminShell({ user, onSignOut }: { user: User; onSignOut: () => void }) 
           <div className="mt-1 font-display text-sm font-semibold text-white">CMS Administrace</div>
         </div>
 
-        <nav className="flex-1 px-3 py-4 space-y-0.5">
-          {NAV_ITEMS.map((item) => {
-            const active = item.exact ? pathname === item.to : pathname === item.to || pathname.startsWith(item.to + "/");
-            const Icon = item.icon;
-            return (
-              <Link
-                key={item.to}
-                to={item.to}
-                className={`flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors border-l-2 ${
-                  active
-                    ? "bg-white/[0.07] text-white font-medium border-brand-yellow"
-                    : "text-white/70 hover:bg-white/[0.04] hover:text-white border-transparent"
-                }`}
-              >
-                <Icon className="h-4 w-4" />
-                {item.label}
-              </Link>
-            );
-          })}
+        <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
+          {NAV_ITEMS.map((item) => renderNav(item, pathname))}
+
+          <div className="mt-4 pt-4 border-t border-white/10">
+            <div className="px-3 pb-2 text-[10px] uppercase tracking-[0.18em] text-white/40">
+              Pokročilé
+            </div>
+            {ADVANCED_NAV_ITEMS.map((item) => renderNav(item, pathname))}
+          </div>
         </nav>
 
         <div className="px-3 py-3 border-t border-white/10">
@@ -167,4 +159,26 @@ function AdminShell({ user, onSignOut }: { user: User; onSignOut: () => void }) 
     </div>
   );
 }
+
+function renderNav(item: NavItem, pathname: string) {
+  const active = item.exact ? pathname === item.to : pathname === item.to || pathname.startsWith(item.to + "/");
+  const Icon = item.icon;
+  return (
+    <Link
+      key={item.to}
+      to={item.to}
+      title={item.warn ? "Pokročilé — mění strojově texty na webu. Používejte opatrně." : undefined}
+      className={`flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors border-l-2 ${
+        active
+          ? "bg-white/[0.07] text-white font-medium border-brand-yellow"
+          : "text-white/70 hover:bg-white/[0.04] hover:text-white border-transparent"
+      }`}
+    >
+      <Icon className="h-4 w-4" />
+      <span className="flex-1">{item.label}</span>
+      {item.warn && <AlertTriangle className="h-3.5 w-3.5 text-brand-yellow" />}
+    </Link>
+  );
+}
+
 
