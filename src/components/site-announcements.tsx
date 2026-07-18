@@ -84,6 +84,27 @@ export function SiteAnnouncements() {
 
 
 function AnnouncementModal({ announcement, onClose }: { announcement: Announcement; onClose: () => void }) {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const raf = requestAnimationFrame(() => setVisible(true));
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  const close = () => {
+    setVisible(false);
+    window.setTimeout(onClose, 200);
+  };
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div
       role="dialog"
@@ -94,13 +115,15 @@ function AnnouncementModal({ announcement, onClose }: { announcement: Announceme
       <button
         type="button"
         aria-label="Zavřít"
-        onClick={onClose}
-        className="absolute inset-0 bg-cream/95 backdrop-blur-sm"
+        onClick={close}
+        className={`absolute inset-0 bg-cream/95 backdrop-blur-sm transition-opacity duration-200 ease-out motion-reduce:transition-none ${visible ? "opacity-100" : "opacity-0"}`}
       />
-      <div className="relative z-10 max-w-2xl w-full rounded-2xl bg-white shadow-[0_20px_60px_-10px_rgba(0,0,0,0.25)] border border-black/[0.06] max-h-[85vh] overflow-y-auto">
+      <div
+        className={`relative z-10 max-w-2xl w-full rounded-2xl bg-white shadow-[0_20px_60px_-10px_rgba(0,0,0,0.25)] border border-black/[0.06] max-h-[85vh] overflow-y-auto transition-[opacity,transform] duration-200 ease-out motion-reduce:transition-none ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"}`}
+      >
         <button
           type="button"
-          onClick={onClose}
+          onClick={close}
           aria-label="Zavřít"
           className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-ink/5 text-ink hover:bg-ink/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue transition-colors"
         >
@@ -119,3 +142,4 @@ function AnnouncementModal({ announcement, onClose }: { announcement: Announceme
     </div>
   );
 }
+
