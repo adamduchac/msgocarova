@@ -138,8 +138,9 @@ export function SiteClasses() {
                   key={outside ? "out" : "in"}
                   className="min-w-[9rem] text-center font-display text-[13px] font-semibold leading-tight text-ink animate-fade-in md:text-[14px]"
                 >
-                  {outside ? fixPrepositions("Vezmi kostičky dovnitř") : fixPrepositions("Vezmi kostičky ven")}
-                </span>
+                  {outside
+                    ? c("classes.toggleIn", "Vezmi kostičky dovnitř")
+                    : c("classes.toggleOut", "Vezmi kostičky ven")}
               </button>
             </div>
           </div>
