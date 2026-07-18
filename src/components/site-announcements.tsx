@@ -3,7 +3,9 @@ import { ArrowRight, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { fetchActiveAnnouncements, type Announcement } from "@/lib/cms";
 import { fixPrepositions } from "@/lib/typography";
+import { renderRichText } from "@/lib/rich-text";
 import iconNews from "@/assets/icon-news-claymation.webp.asset.json";
+
 
 export function SiteAnnouncements() {
   const { data } = useQuery({
