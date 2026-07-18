@@ -74,6 +74,7 @@ const events: { title: string; text: string }[] = [
 ];
 
 function AkceSRodiciPage() {
+  const c = useCopyPage("akce-s-rodici");
   return (
     <div className="min-h-screen bg-background">
       <SiteNavbar />
@@ -87,10 +88,11 @@ function AkceSRodiciPage() {
           <div className="container mx-auto px-6">
             <div className="reveal-up max-w-3xl">
               <h1 className="font-display text-[42px] font-extrabold leading-[1.05] text-ink md:text-[56px]">
-                {t("Akce s rodiči")}
+                {c("hero.h1", "Akce s rodiči")}
               </h1>
               <p className="mt-5 text-lg leading-relaxed text-body md:text-xl">
-                {t(
+                {c(
+                  "hero.lead",
                   "Během roku se ve školce potkávají nejen děti s učitelkami, ale i celé rodiny — od podzimního dlabání dýní přes vánoční posezení až po květnové Slavnosti školy na zahradě. Některé akce se opakují každý rok, jiné vznikají i z nápadů a nabídek samotných rodičů. Aktuální termíny najdete v aplikaci Naše MŠ."
                 )}
               </p>
