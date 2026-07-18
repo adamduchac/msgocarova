@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { fixPrepositions } from "@/lib/typography";
+import { useCopyPage } from "@/lib/use-copy";
 import heroKids from "@/assets/hero-kids.jpg.asset.json";
 import heroKids2 from "@/assets/hero-kids-2.webp.asset.json";
 import heroKids3 from "@/assets/hero-kids-3.webp.asset.json";
