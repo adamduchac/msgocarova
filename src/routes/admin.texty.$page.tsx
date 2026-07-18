@@ -19,8 +19,15 @@ export const Route = createFileRoute("/admin/texty/$page")({
 });
 
 const PAGE_TITLES: Record<string, string> = {
+  "index": "Úvod (HP)",
   "o-skolce": "O školce",
   "pro-rodice": "Pro rodiče",
+  "barevne-tridy": "Barevné třídy",
+  "vzdelavani-a-rozvoj": "Vzdělávání a aktivity",
+  "akce-s-rodici": "Akce s rodiči",
+  "predskolacek": "Předškoláček",
+  "zapis-do-skolky": "Zápis do školky",
+  "kontakty": "Kontakty",
 };
 
 const GROUP_LABELS: Record<string, string> = {
@@ -35,6 +42,35 @@ const GROUP_LABELS: Record<string, string> = {
   clubs: "Kroužky a aktivity",
   equipment: "Co dítě potřebuje",
   documents: "Dokumenty",
+  benefits: "Výhody",
+  rhythm: "Jeden den ve školce",
+  classes: "Barevné třídy (sekce)",
+  activities: "Zážitky",
+  teachers: "Tým — hlavička",
+  cervena: "Červená kostička",
+  zelena: "Zelená kostička",
+  modra: "Modrá kostička",
+  zluta: "Žlutá kostička",
+  labels: "Popisky",
+  jazyk: "Jazyk a komunikace",
+  priprava: "Příprava a technologie",
+  plavani: "Plavání",
+  priroda: "Škola v přírodě",
+  lyze: "Lyžařský kurz",
+  akce: "Tradiční akce",
+  events: "Akce s rodiči",
+  status: "Status box",
+  how: "Jak to probíhá",
+  focus: "Na co se zaměřujeme",
+  bring: "Co si přinést",
+  signup: "Přihlášení",
+  contact: "Kontakt CTA",
+  prepare: "Co si připravit",
+  summer: "Prázdninový provoz",
+  after: "Po přijetí",
+  map: "Mapa",
+  rejstrik: "Rejstřík",
+  address: "Adresa",
   other: "Ostatní",
 };
 
