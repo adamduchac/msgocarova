@@ -1,36 +1,43 @@
-
 ## Cíl
-Zpřehlednit editor **Texty na webu** a viditelně oddělit tuto sekci od běžné administrace v levém menu.
+Rozšířit CMS "Texty na webu" o všechny zbývající stránky webu, aby šla přes admin editovat jakákoli hlavní textová část webu.
 
-## Změny
+## Rozsah
+Přidat do site-copy registru sekce pro 7 stránek:
+- **index** (HP): hero, benefits (4 karty), rhythm nadpis, classes eyebrow/H2/toggle, activities (3 karty), teachers eyebrow/H2
+- **barevne-tridy**: H1, lead, popis + specialita + telefon pro 4 třídy, popisky "Paní učitelky" a "Telefon do třídy"
+- **vzdelavani-a-rozvoj**: H1, lead, všech 6 oblastí (eyebrow + title + 1–2 aktivity každá)
+- **akce-s-rodici**: H1, lead, přehled 8 akcí + "a další…"
+- **predskolacek**: eyebrow, H1, lead, výchozí texty status boxu, 3 karty (nadpisy + body/odrážky), přihlášení, kontakt CTA
+- **zapis-do-skolky**: obdobně jako predskolacek + prázdninový provoz + "Po přijetí"
+- **kontakty**: H1, lead, telefon/email/adresa, nadpisy sekcí a labely rejstříku
 
-### 1. Kompaktní layout editoru (`src/routes/admin.texty.$page.tsx`)
-- Nahradit velké karty se dvěma tlačítky u každého pole **kompaktním řádkovým vzhledem**: label nahoře, auto-resize textarea, pod ní jednořádkově kurzívou výchozí text (truncate + tooltip / title s plným zněním).
-- **Per-pole tlačítka „Uložit" / „Obnovit" pryč.** Nahradí je:
-  - Globální sticky lišta nahoře s tlačítky **„Uložit vše"** (počítadlo neuložených změn) a **„Zahodit změny"**.
-  - U upravených polí malý badge „upraveno" s ikonou reset (jednoklik = smazat override).
-- Vizuální rozlišení: **neupravené pole = jemný rámeček**, **upravené = žlutý levý pruh + jemné žluté podbarvení**. Na první pohled je vidět, co se liší od defaultu.
-- **Seskupení podle prefixu klíče** (např. `hero.*`, `vzdelavani.*`, `jidelna.*`) do sbalitelných sekcí. Klíče bez prefixu do skupiny „Ostatní".
+Ponecháváme mimo (data/DB):
+- Medailonky učitelů (v tabulce `staff` – editovatelné přes admin.zamestnanci)
+- Zprávy (`announcements`), dokumenty (`documents`), info-boxy (`info_boxes`)
+- Fotografie/alt texty, mikrostringy typu čas plavecké lekce v datech aktivit
 
-### 2. Floating search nad editorem
-- Sticky vyhledávací pole nahoře („Najít text na stránce…").
-- Fulltext přes `defaultText` i aktuální `draft`; při shodě zvýrazní odpovídající pole a ztlumí ostatní. Přepínač „Jen shody" volitelně skryje nesouvisející.
-- Enter / klik na výsledek scrolluje k prvnímu poli a nastaví fokus do textarey.
-- Řeší use-case: „vidím text na webu, chci najít místo, kde ho v CMS upravit".
+## Soubory
+1. `src/lib/site-copy/registry.ts` — velké rozšíření o 7 nových stránek (~250 klíčů celkem)
+2. `src/routes/admin.texty.index.tsx` — doplnit `PAGE_TITLES` pro všech 9 stránek
+3. `src/routes/admin.texty.$page.tsx` — doplnit `PAGE_TITLES` a `GROUP_LABELS` (nové prefixy: hero, benefits, rhythm, activities, classes, teachers, cervena, zelena, modra, zluta, labels, jazyk, priprava, plavani, priroda, lyze, akce, events, status, how, focus, bring, signup, contact, prepare, summer, after, map, index, address)
 
-### 3. Oddělení v levém menu (`src/routes/admin.tsx`)
-- Rozdělit `NAV_ITEMS` do dvou skupin s vizuálním předělem (`border-t border-white/10` + label „Pokročilé" malým uppercase):
-  - **Obsah**: Přehled, Top zprávy, Zaměstnanci, Dokumenty, Předškoláček, Zápis
-  - **Pokročilé**: Texty na webu
-- U položky „Texty na webu" přidat **žlutou ikonu vykřičníku** (`AlertTriangle` z lucide, `text-brand-yellow`) a title tooltip: „Pokročilé — mění strojové texty na webu. Používejte opatrně."
+**Wire useCopy do frontendu (`useCopyPage(page)` + loader `ensureQueryData`):**
 
-## Mimo rozsah
-- **AI asistent** odložen / zrušen dle upřesnění uživatele.
-- Beze změny schématu DB, `registry.ts`, `use-copy.ts` i server functions.
+4. `src/routes/index.tsx` — přidat loader; SiteHero, SiteBenefits, SiteDailyRhythm, SiteClasses, SiteActivities, SiteTeachers upravit tak, aby přijímaly hodnoty přes `useCopy("index", ...)` nebo přes props z routy
+5. `src/components/site-hero.tsx`, `site-benefits.tsx`, `site-daily-rhythm.tsx`, `site-classes.tsx`, `site-activities.tsx`, `site-teachers.tsx` — nahradit hardcoded texty voláním `useCopy("index", "<key>", fallback)`
+6. `src/routes/barevne-tridy.tsx` — loader + `useCopyPage("barevne-tridy")` pro hero, jednotlivé třídy (popis, specialita, telefon), a popisky
+7. `src/routes/vzdelavani-a-rozvoj.tsx` — loader + hook, plus mapování na eyebrow/title/aktivity per oblast
+8. `src/routes/akce-s-rodici.tsx` — loader + hook, mapování na 8 událostí
+9. `src/routes/predskolacek.tsx` — loader + hook, plus předání `fallbackTitle`/`fallbackBody` z CMS textu do `CmsStatusBlock`
+10. `src/routes/zapis-do-skolky.tsx` — analogicky
+11. `src/routes/kontakty.tsx` — loader + hook pro H1, lead, adresu a nadpisy sekcí
 
-## Technické detaily
-- Auto-resize textarea přes CSS `field-sizing: content` s fallbackem na `useLayoutEffect` + `scrollHeight`.
-- Sticky search: `sticky top-0 z-10 bg-white/90 backdrop-blur` v mainu, pod ní sticky action bar s „Uložit vše".
-- Skupiny: split klíče na první `.`; label skupiny odvodit z registry (nebo použít prefix, pokud nic explicitního není).
-- Dirty state: `Set<string>` klíčů, které se liší od aktuálního `overrides`. „Uložit vše" iteruje `upsertSiteCopy` sekvenčně, na konci jeden `invalidateQueries`. „Zahodit změny" resetuje drafty zpět na `overrides`.
-- Zvýraznění při vyhledávání: přidat class na kontejner pole podle match stavu, žádná manipulace obsahu textarey.
+## Neměnit
+- Datové struktury Supabase, staff/announcements/documents/info_boxes CRUD
+- SiteFooter/SiteNavbar (napříč všemi stránkami — mimo scope)
+- Layouty, animace, komponenty CmsStatusBlock (jen předávat texty)
+- AI (per zadání zrušeno)
+
+## Kontrola
+- Typecheck + build musí projít
+- Vizuální kontrola provede uživatel ručně
