@@ -160,7 +160,7 @@ function PredskolacekPage() {
               </h3>
               <p className="mt-3 text-[15px] leading-relaxed text-body">
                 {t(
-                  "Přihlásit se můžete v aplikaci Naše MŠ nebo osobně ve své třídě, nejpozději do [DOPLNIT datum]. Kvůli přípravě pomůcek je přihlášení předem nutné — počítáme s vámi na všechna 3 setkání."
+                  "Přihlásit se můžete v aplikaci Naše MŠ nebo osobně ve své třídě. Kvůli přípravě pomůcek je přihlášení předem nutné — počítáme s vámi na všechna 3 setkání."
                 )}
               </p>
             </div>
