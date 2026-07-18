@@ -114,10 +114,9 @@ function AnnouncementModal({ announcement, onClose }: { announcement: Announceme
             {fixPrepositions(announcement.title)}
           </h2>
           <div className="mt-5 space-y-4 text-[16px] leading-relaxed text-body">
-            {announcement.content.split(/\n{2,}/).map((para, i) => (
-              <p key={i} className="whitespace-pre-line">{fixPrepositions(para)}</p>
-            ))}
+            {renderRichText(announcement.content)}
           </div>
+
         </div>
       </div>
     </div>
