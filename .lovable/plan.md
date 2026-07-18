@@ -1,42 +1,72 @@
-## Cíl
+## Změny v Top zprávách
 
-Přenést stávající obsah frontendu do CMS tabulek, aby administrace ukazovala reálná data (ne prázdné stavy). Frontend zůstane beze změny — má už dnes fallbacky, takže nic „nezmizí".
+### 1) Náhled = jen titulek
+V `src/components/site-announcements.tsx` odstranit vykreslení `previewContent(a.content)` v desktop variantě a pomocnou funkci `previewContent`. V náhledu bude jen titulek; obsah pouze v modálu.
 
-## Co se vloží do databáze
+### 2) Tlačítko „Podrobnosti" — vrátit původní expand-on-hover
+V klidu jen tmavá kulatá kapsle se šipkou. Po `group-hover` / `group-focus-visible` (celá karta jako spouštěč) se kapsle plynule rozšíří doleva a odhalí text „Podrobnosti".
 
-### 1) Top zprávy (`announcements`) — 1 záznam
-- **Titulek:** „Poslední den školky 26. 6. 2026."
-- **Obsah:** „Těšíme se na viděnou v novém školním roce. Užijte si prázdniny!"
-- aktivní, pozice 0
+- Text ve vnitřním `<span>` s `max-w-0 opacity-0` → `group-hover:max-w-[160px] group-hover:opacity-100`, `transition-[max-width,opacity] duration-300 ease-out whitespace-nowrap`
+- Šipka: mírný `group-hover:translate-x-0.5 transition-transform`
+- Bez scale, bez posunu karty (dle Core memory)
+- Respektuje `focus-visible`
+- Mobil (`sm:hidden`) ponechat s plným tlačítkem
 
-### 2) Infoboxy (`info_boxes`) — 2 záznamy (placeholdery)
-Vloženo přesně to, co dnes ukazuje fallback:
+### 3) Bold + odrážky v obsahu (rich rendering v modálu)
+Malá utilita `src/lib/rich-text.tsx` (bez závislostí):
+- `**text**` → `<strong>`
+- Řádky začínající `- ` nebo `* ` → sloučit do `<ul class="list-disc pl-5 space-y-1">`
+- Prázdný řádek = nový odstavec
 
-- **`predskolacek`** — stav `closed`, titulek „Termíny Předškoláčka pro rok 2027 zatím nebyly vyhlášeny", tělo z fallbacku.
-- **`zapis`** — stav `closed`, titulek „Zápis pro školní rok 2026/2027 je uzavřen", tělo z fallbacku.
+Použití v `AnnouncementModal` místo současného `.split(/\n{2,}/).map(...)`.
 
-### 3) Zaměstnanci (`staff`) — 10 záznamů podle `src/data/team.ts`
-Jméno, tituly, role a barva třídy (červená / zelená / modrá / žlutá / none). **Bez fotografií** — foto sloupec zůstane prázdný, protože aktuální fotky jsou bundlované assety, ne soubory v Storage. V administraci se u každého zaměstnance objeví „nahrát fotku" a paní ředitelka postupně nahraje.
+### 4) Tlačítko „Vyladit přes AI" v editoru zprávy
+V `src/components/admin/announcements-admin.tsx` do `EditorModal` přidat nad textareu obsahu tlačítko se sparkles ikonou:
 
-Seznam osob (rozdělení pedagog/provoz + přiřazená třída):
-- Mgr. Jitka Kouklíková — Zástupkyně ředitele pro MŠ (bez třídy)
-- Mgr. Nikola Šorfová — Červená
-- Jana Tuharská — Zelená
-- Kristýna Vaňátková, DiS. — Zelená
-- Bc. Veronika Kremláčková — Modrá
-- Milena Svobodová, DiS. — Žlutá
-- Martina Bartošová — bez třídy
-- Lenka Petráčková, Lucie Košťálová, Věra Marková — Provozní
+- Klik → potvrzení „AI přeformátuje aktuální text — obsah zůstane stejný, upraví se jen struktura (odstavce, odrážky, tučné pojmy). Pokračovat?"
+- Volá server function `formatAnnouncementContent({ text })` → nahradí `content` výsledkem
+- Během běhu `disabled`, label „Ladím…", textarea `disabled`
+- Chyby (429, 402, ostatní) zobrazit jako malou červenou zprávu pod tlačítkem
+- Helper text pod textareou: „Podporováno: **tučně**, odrážky začínající `- `. Odstavce oddělte prázdným řádkem. Titulek se zobrazí v náhledu, obsah pouze v modálu po kliknutí."
+- Label titulku upravit na: „Titulek (zobrazí se v náhledu na webu)"
 
-### 4) Dokumenty (`documents`) — vynecháno
-7 PDF je dnes bundlovaných v `src/assets/dokumenty/`. Vložit je do CMS by znamenalo nahrát binárky do Storage bucketu — což nedokážu udělat čistě z SQL. Frontend přitom už zobrazuje bundlované PDF *i* dokumenty z CMS naráz, takže admin sekce zůstane prázdná dokud tam někdo první dokument nenahraje. Alternativu (viz níže) můžeš schválit.
+### 5) Server function pro AI formátování — pouze struktura, žádná změna obsahu
+Nový soubor `src/lib/announcements.functions.ts`:
 
-## Technický postup
-Jedna Supabase migrace (INSERT statements pro announcements, info_boxes, staff). Žádné změny schématu, žádné změny frontendu.
+- `formatAnnouncementContent` = `createServerFn({ method: "POST" }).middleware([requireSupabaseAuth])` s `.inputValidator(z.object({ text: z.string().min(1).max(8000) }).parse)`
+- Ověření admin role přes `context.supabase.rpc('has_role', { _user_id: context.userId, _role: 'admin' })` — jinak 403
+- Provider `createLovableAiGatewayProvider(process.env.LOVABLE_API_KEY!)` (`src/lib/ai-gateway.server.ts`; pokud neexistuje, vytvořit dle `ai-sdk-lovable-gateway` — přesně tvar helperu)
+- Ověřit přítomnost `LOVABLE_API_KEY` (v případě potřeby `ai_gateway--create`)
+- Model: `google/gemini-3.5-flash`
+- `generateText` s tímto systémovým promptem (přísně zakázat přepis obsahu):
 
-## Otevřená otázka (volitelné rozšíření)
-Chceš, abych zároveň:
-- **A)** nic navíc — dokumenty necháme prázdné, admin je bude nahrávat postupně,
-- **B)** přidal 7 „stub" záznamů v `documents` s názvy stávajících PDF a poznámkou, aby paní ředitelka věděla, co má nahradit reálným souborem? (Vyžadovalo by dočasně vypnout `NOT NULL` na `file_path`, což je zbytečná úlitba — proto A doporučuji.)
+  > „Jsi český editor pro mateřskou školu. Dostaneš plain-text zprávu a vrátíš přesně tentýž text, jen lépe naformátovaný pro čtení.
+  >
+  > POVINNĚ ZACHOVEJ:
+  > - všechna slova, čísla, data, jména, e-maily, telefony, odkazy — nic nepřidávej, nic nemaž, nic nepřepisuj do synonym, neopravuj pravopis ani stylistiku
+  > - pořadí informací
+  >
+  > SMÍŠ pouze:
+  > - rozdělit text do odstavců oddělených prázdným řádkem
+  > - výčty převést na řádky začínající `- `
+  > - zvýraznit **tučně** klíčové pojmy (max. 2–3 na odstavec), pokud v textu přirozeně vystupují
+  >
+  > ZAKÁZÁNO: nadpisy, HTML, jiné značky, uvozovky kolem výsledku, úvodní/závěrečné věty od tebe.
+  >
+  > Vrať pouze výsledný text."
 
-Pokud plán potvrdíš, spustím migraci s variantou A.
+- `temperature: 0.2`, `maxTokens` úměrné vstupu
+- Vrací `{ text: string }` (trim, ořezané případné wrapping uvozovky)
+- Chyby z gateway propaguje se statusem/messagem, aby je frontend uměl zobrazit
+
+### 6) Volání z klienta
+V `EditorModal` `useServerFn(formatAnnouncementContent)` → `setForm({ ...form, content: result.text })`.
+
+### Dotčené soubory
+- `src/components/site-announcements.tsx` — 1 + 2
+- `src/lib/rich-text.tsx` (nový) — 3
+- `src/components/admin/announcements-admin.tsx` — 4 + 6
+- `src/lib/announcements.functions.ts` (nový) — 5
+- Případně `src/lib/ai-gateway.server.ts` (jen pokud ještě neexistuje)
+
+Bez změn v DB. Bez edge function — v TanStack Start přes `createServerFn`.

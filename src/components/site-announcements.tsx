@@ -3,7 +3,9 @@ import { ArrowRight, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { fetchActiveAnnouncements, type Announcement } from "@/lib/cms";
 import { fixPrepositions } from "@/lib/typography";
+import { renderRichText } from "@/lib/rich-text";
 import iconNews from "@/assets/icon-news-claymation.webp.asset.json";
+
 
 export function SiteAnnouncements() {
   const { data } = useQuery({
@@ -58,18 +60,17 @@ export function SiteAnnouncements() {
                   <img src={iconNews.url} alt="" aria-hidden className="h-14 w-14 object-contain" loading="lazy" />
                 </div>
                 <p className="min-h-20 flex items-center justify-center text-center text-lg leading-relaxed text-ink font-medium px-[112px]">
-                  <span>
-                    <span className="font-semibold">{fixPrepositions(a.title)}</span>
-                    {a.content && (
-                      <span className="text-body font-normal">{"  "}{fixPrepositions(previewContent(a.content))}</span>
-                    )}
-                  </span>
+                  <span className="font-semibold">{fixPrepositions(a.title)}</span>
                 </p>
-                <span className="absolute right-5 top-1/2 -translate-y-1/2 flex">
+                <span className="absolute right-5 top-1/2 -translate-y-1/2 flex" aria-hidden>
                   <span className="inline-flex items-center h-12 rounded-full bg-ink text-white overflow-hidden">
-                    <span className="px-5 text-sm font-medium">{fixPrepositions("Podrobnosti")}</span>
-                    <span className="pr-4">
-                      <ArrowRight className="h-4 w-4" />
+                    <span
+                      className="inline-block max-w-0 opacity-0 whitespace-nowrap overflow-hidden group-hover:max-w-[160px] group-hover:opacity-100 group-hover:pl-5 group-focus-visible:max-w-[160px] group-focus-visible:opacity-100 group-focus-visible:pl-5 transition-[max-width,opacity,padding] duration-300 ease-out text-sm font-medium"
+                    >
+                      {fixPrepositions("Podrobnosti")}
+                    </span>
+                    <span className="px-4">
+                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-focus-visible:translate-x-0.5" />
                     </span>
                   </span>
                 </span>
@@ -84,10 +85,6 @@ export function SiteAnnouncements() {
   );
 }
 
-function previewContent(text: string): string {
-  const first = text.split("\n").find((l) => l.trim().length > 0) ?? "";
-  return first.length > 140 ? first.slice(0, 137) + "…" : first;
-}
 
 function AnnouncementModal({ announcement, onClose }: { announcement: Announcement; onClose: () => void }) {
   return (
@@ -117,10 +114,9 @@ function AnnouncementModal({ announcement, onClose }: { announcement: Announceme
             {fixPrepositions(announcement.title)}
           </h2>
           <div className="mt-5 space-y-4 text-[16px] leading-relaxed text-body">
-            {announcement.content.split(/\n{2,}/).map((para, i) => (
-              <p key={i} className="whitespace-pre-line">{fixPrepositions(para)}</p>
-            ))}
+            {renderRichText(announcement.content)}
           </div>
+
         </div>
       </div>
     </div>
