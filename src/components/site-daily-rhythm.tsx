@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { fixPrepositions } from "@/lib/typography";
+import { useCopyPage } from "@/lib/use-copy";
 import den01 from "@/assets/den-01.webp.asset.json";
 import den02 from "@/assets/den-02.webp.asset.json";
 import den03 from "@/assets/den-03.webp.asset.json";
@@ -98,6 +99,7 @@ const desktopTransforms = [
 
 
 export function SiteDailyRhythm() {
+  const c = useCopyPage("index");
   const scrollerRef = useRef<HTMLOListElement | null>(null);
 
   const scrollByCard = (dir: 1 | -1) => {
@@ -120,10 +122,10 @@ export function SiteDailyRhythm() {
       <div className="container mx-auto px-6">
         <header className="reveal-up section-header-gap mx-auto max-w-2xl text-center">
           <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
-            {fixPrepositions("Zažijte to s námi")}
+            {c("rhythm.eyebrow", "Zažijte to s námi")}
           </p>
           <h2 className="mt-3 whitespace-pre-line font-display text-[34px] text-ink md:text-[40px]">
-            {fixPrepositions("Jeden den v\u00A0Mateřské škole\u00A0\nJosefa Gočára")}
+            {c("rhythm.h2", "Jeden den v\u00A0Mateřské škole\u00A0\nJosefa Gočára")}
           </h2>
         </header>
 

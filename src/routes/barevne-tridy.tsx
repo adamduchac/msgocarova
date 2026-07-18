@@ -4,6 +4,7 @@ import { ChevronDown, Phone } from "lucide-react";
 import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
+import { siteCopyQueryOptions, useCopyPage } from "@/lib/use-copy";
 import cervenaPhoto from "@/assets/trida-cervena.webp.asset.json";
 import zelenaPhoto from "@/assets/trida-zelena.webp.asset.json";
 import modraPhoto from "@/assets/trida-modra.webp.asset.json";
@@ -13,6 +14,7 @@ import nikolaPhoto from "@/assets/teacher-nikola-sorfova-v2.webp.asset.json";
 import janaPhoto from "@/assets/teacher-jana-tuharska-v2.webp.asset.json";
 
 export const Route = createFileRoute("/barevne-tridy")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(siteCopyQueryOptions("barevne-tridy")),
   head: () => ({
     meta: [
       { title: "Barevné třídy — Mateřská škola Josefa Gočára" },
@@ -380,6 +382,7 @@ function ClassSection({ data, isLast }: { data: ClassData; isLast?: boolean }) {
 }
 
 function BarevneTridyPage() {
+  const copy = useCopyPage("barevne-tridy");
   return (
     <div className="min-h-screen bg-background">
       <SiteNavbar />
@@ -391,16 +394,18 @@ function BarevneTridyPage() {
         <section className="section-y">
           <div className="container mx-auto px-6">
             <h1 className="font-display text-[42px] font-extrabold leading-[1.05] text-ink md:text-[56px]">
-              {fixPrepositions("Barevné třídy")}
+              {copy("hero.h1", "Barevné třídy")}
             </h1>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-body">
-              {fixPrepositions(
+              {copy(
+                "hero.lead",
                 "Naše třídy nesou názvy barevných kostiček — symbolu dětské hry, té nejpřirozenější a nejdůležitější činnosti předškoláka. Cílem je podnětné prostředí plné hraček a zajímavých aktivit, kam se děti každý den těší."
               )}
             </p>
           </div>
         </section>
       </div>
+
 
       <main>
         {classes.map((c, i) => (

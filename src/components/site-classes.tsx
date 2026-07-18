@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ArrowRight, Home, Trees } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { fixPrepositions } from "@/lib/typography";
+import { useCopyPage } from "@/lib/use-copy";
 import kostickyA from "@/assets/kosticky-tridy-a.webp.asset.json";
 import kostickyB from "@/assets/kosticky-tridy-b.webp.asset.json";
 
@@ -52,6 +53,7 @@ const classes: ClassItem[] = [
 ];
 
 export function SiteClasses() {
+  const c = useCopyPage("index");
   const [outside, setOutside] = useState(false);
 
   return (
@@ -62,10 +64,10 @@ export function SiteClasses() {
           {/* Eyebrow + nadpis */}
           <div className="mx-auto max-w-3xl text-center">
             <p className="reveal-up font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
-              {fixPrepositions("Barevné kostičky")}
+              {c("classes.eyebrow", "Barevné kostičky")}
             </p>
             <h2 className="reveal-up mt-3 font-display text-[34px] text-ink md:text-[40px]">
-              {fixPrepositions("Čtyři třídy, jeden")}{" "}
+              {c("classes.h2.line1", "Čtyři třídy, jeden")}{" "}
               <span
                 className="bg-clip-text text-transparent"
                 style={{
@@ -73,7 +75,7 @@ export function SiteClasses() {
                     "linear-gradient(105deg, #2563EB 0%, #38BDF8 100%)",
                 }}
               >
-                {fixPrepositions("skvělý tým")}
+                {c("classes.h2.line2", "skvělý tým")}
               </span>
             </h2>
           </div>
@@ -136,7 +138,9 @@ export function SiteClasses() {
                   key={outside ? "out" : "in"}
                   className="min-w-[9rem] text-center font-display text-[13px] font-semibold leading-tight text-ink animate-fade-in md:text-[14px]"
                 >
-                  {outside ? fixPrepositions("Vezmi kostičky dovnitř") : fixPrepositions("Vezmi kostičky ven")}
+                  {outside
+                    ? c("classes.toggleIn", "Vezmi kostičky dovnitř")
+                    : c("classes.toggleOut", "Vezmi kostičky ven")}
                 </span>
               </button>
             </div>

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { fixPrepositions } from "@/lib/typography";
+import { useCopyPage } from "@/lib/use-copy";
 import janaPhoto from "@/assets/teacher-jana-tuharska-v2.webp.asset.json";
 import jitkaPhoto from "@/assets/teacher-jitka-kouklikova-v2.webp.asset.json";
 import nikolaPhoto from "@/assets/teacher-nikola-sorfova-v2.webp.asset.json";
@@ -102,6 +103,7 @@ function getInitials(name: string): string {
 }
 
 export function SiteTeachers() {
+  const c = useCopyPage("index");
   const [index, setIndex] = useState(0);
   const total = teachers.length;
   const touchStartX = useRef<number | null>(null);
@@ -138,10 +140,10 @@ export function SiteTeachers() {
           {/* Header */}
           <div className="mx-auto max-w-3xl text-center">
             <p className="reveal-up font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
-              {fixPrepositions("POZNEJTE NÁS")}
+              {c("teachers.eyebrow", "POZNEJTE NÁS")}
             </p>
             <h2 className="reveal-up mt-3 font-display text-[34px] text-ink md:text-[40px]">
-              {fixPrepositions("Přestavujeme naše kolegy")}
+              {c("teachers.h2", "Přestavujeme naše kolegy")}
             </h2>
           </div>
 

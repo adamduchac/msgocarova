@@ -3,8 +3,10 @@ import { ImageIcon } from "lucide-react";
 import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
+import { siteCopyQueryOptions, useCopyPage } from "@/lib/use-copy";
 
 export const Route = createFileRoute("/kontakty")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(siteCopyQueryOptions("kontakty")),
   head: () => ({
     meta: [
       { title: "Kontakty — Mateřská škola Josefa Gočára" },
@@ -76,6 +78,7 @@ const h2Class =
   "font-display text-[28px] font-extrabold text-ink md:text-[32px]";
 
 function KontaktyPage() {
+  const c = useCopyPage("kontakty");
   return (
     <div className="min-h-screen bg-background">
       <SiteNavbar />
@@ -90,11 +93,12 @@ function KontaktyPage() {
             {/* Levý sloupec */}
             <div className="reveal-up">
               <h1 className="font-display text-[42px] font-extrabold leading-[1.05] text-ink md:text-[56px]">
-                {fixPrepositions("Kontakty")}
+                {c("hero.h1", "Kontakty")}
               </h1>
               <p className="mt-4 text-lg leading-relaxed text-body">
-                {fixPrepositions("Rádi vás uvítáme osobně, nebo se ozvěte telefonem či e-mailem.")}
+                {c("hero.lead", "Rádi vás uvítáme osobně, nebo se ozvěte telefonem či e-mailem.")}
               </p>
+
 
               <div className="mt-6">
                 <a

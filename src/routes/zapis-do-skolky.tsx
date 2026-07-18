@@ -4,8 +4,10 @@ import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
 import { CmsStatusBlock } from "@/components/cms-status-block";
+import { siteCopyQueryOptions, useCopyPage } from "@/lib/use-copy";
 
 export const Route = createFileRoute("/zapis-do-skolky")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(siteCopyQueryOptions("zapis-do-skolky")),
   head: () => ({
     meta: [
       { title: "Zápis do školky — Mateřská škola Josefa Gočára" },
@@ -29,6 +31,7 @@ export const Route = createFileRoute("/zapis-do-skolky")({
 const t = fixPrepositions;
 
 function ZapisPage() {
+  const c = useCopyPage("zapis-do-skolky");
   return (
     <div className="min-h-screen bg-background">
       <SiteNavbar />
@@ -43,13 +46,14 @@ function ZapisPage() {
             <div className="reveal-up max-w-4xl">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-blue">
                 <span className="mr-2 inline-block h-1.5 w-1.5 translate-y-[-2px] rounded-full bg-brand-blue align-middle" />
-                {t("Pro rodiče")}
+                {c("hero.eyebrow", "Pro rodiče")}
               </p>
               <h1 className="mt-3 font-display text-[42px] font-extrabold leading-[1.05] text-ink md:text-[56px]">
-                {t("Zápis do mateřské školy")}
+                {c("hero.h1", "Zápis do mateřské školy")}
               </h1>
               <p className="mt-5 text-lg leading-relaxed text-body">
-                {t(
+                {c(
+                  "hero.lead",
                   "Zápis do naší školky probíhá jednou ročně, zpravidla na jaře. Na této stránce najdete aktuální termín, kritéria a vše, co je k zápisu potřeba. Přihlašování i komunikaci vedeme přes aplikaci Naše MŠ."
                 )}
               </p>
