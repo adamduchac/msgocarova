@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { fixPrepositions } from "@/lib/typography";
+import { useCopyPage } from "@/lib/use-copy";
 import janaPhoto from "@/assets/teacher-jana-tuharska-v2.webp.asset.json";
 import jitkaPhoto from "@/assets/teacher-jitka-kouklikova-v2.webp.asset.json";
 import nikolaPhoto from "@/assets/teacher-nikola-sorfova-v2.webp.asset.json";
