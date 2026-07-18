@@ -8,8 +8,15 @@ export const Route = createFileRoute("/admin/texty/")({
 });
 
 const PAGE_TITLES: Record<string, string> = {
+  "index": "Úvod (HP)",
   "o-skolce": "O školce",
   "pro-rodice": "Pro rodiče",
+  "barevne-tridy": "Barevné třídy",
+  "vzdelavani-a-rozvoj": "Vzdělávání a aktivity",
+  "akce-s-rodici": "Akce s rodiči",
+  "predskolacek": "Předškoláček",
+  "zapis-do-skolky": "Zápis do školky",
+  "kontakty": "Kontakty",
 };
 
 function TextyOverview() {
