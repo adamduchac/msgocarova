@@ -2,7 +2,7 @@ import { createFileRoute, Link, Outlet, useNavigate, useRouterState } from "@tan
 import { useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
-import { LayoutDashboard, Megaphone, Users, FileText, GraduationCap, ClipboardList, LogOut } from "lucide-react";
+import { LayoutDashboard, Megaphone, Users, FileText, GraduationCap, ClipboardList, Type, LogOut } from "lucide-react";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -23,6 +23,7 @@ const NAV_ITEMS: NavItem[] = [
   { to: "/admin/zpravy", label: "Top zprávy", icon: Megaphone },
   { to: "/admin/zamestnanci", label: "Zaměstnanci", icon: Users },
   { to: "/admin/dokumenty", label: "Dokumenty", icon: FileText },
+  { to: "/admin/texty", label: "Texty na webu", icon: Type },
   { to: "/admin/predskolacek", label: "Předškoláček", icon: GraduationCap },
   { to: "/admin/zapis", label: "Zápis", icon: ClipboardList },
 ];

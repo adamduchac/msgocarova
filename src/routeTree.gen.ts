@@ -24,8 +24,11 @@ import { Route as AdminLoginRouteImport } from './routes/admin_.login'
 import { Route as AdminZpravyRouteImport } from './routes/admin.zpravy'
 import { Route as AdminZapisRouteImport } from './routes/admin.zapis'
 import { Route as AdminZamestnanciRouteImport } from './routes/admin.zamestnanci'
+import { Route as AdminTextyRouteImport } from './routes/admin.texty'
 import { Route as AdminPredskolacekRouteImport } from './routes/admin.predskolacek'
 import { Route as AdminDokumentyRouteImport } from './routes/admin.dokumenty'
+import { Route as AdminTextyIndexRouteImport } from './routes/admin.texty.index'
+import { Route as AdminTextyPageRouteImport } from './routes/admin.texty.$page'
 
 const ZapisDoSkolkyRoute = ZapisDoSkolkyRouteImport.update({
   id: '/zapis-do-skolky',
@@ -102,6 +105,11 @@ const AdminZamestnanciRoute = AdminZamestnanciRouteImport.update({
   path: '/zamestnanci',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminTextyRoute = AdminTextyRouteImport.update({
+  id: '/texty',
+  path: '/texty',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminPredskolacekRoute = AdminPredskolacekRouteImport.update({
   id: '/predskolacek',
   path: '/predskolacek',
@@ -111,6 +119,16 @@ const AdminDokumentyRoute = AdminDokumentyRouteImport.update({
   id: '/dokumenty',
   path: '/dokumenty',
   getParentRoute: () => AdminRoute,
+} as any)
+const AdminTextyIndexRoute = AdminTextyIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminTextyRoute,
+} as any)
+const AdminTextyPageRoute = AdminTextyPageRouteImport.update({
+  id: '/$page',
+  path: '/$page',
+  getParentRoute: () => AdminTextyRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -126,11 +144,14 @@ export interface FileRoutesByFullPath {
   '/zapis-do-skolky': typeof ZapisDoSkolkyRoute
   '/admin/dokumenty': typeof AdminDokumentyRoute
   '/admin/predskolacek': typeof AdminPredskolacekRoute
+  '/admin/texty': typeof AdminTextyRouteWithChildren
   '/admin/zamestnanci': typeof AdminZamestnanciRoute
   '/admin/zapis': typeof AdminZapisRoute
   '/admin/zpravy': typeof AdminZpravyRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
+  '/admin/texty/$page': typeof AdminTextyPageRoute
+  '/admin/texty/': typeof AdminTextyIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -149,6 +170,8 @@ export interface FileRoutesByTo {
   '/admin/zpravy': typeof AdminZpravyRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin': typeof AdminIndexRoute
+  '/admin/texty/$page': typeof AdminTextyPageRoute
+  '/admin/texty': typeof AdminTextyIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -164,11 +187,14 @@ export interface FileRoutesById {
   '/zapis-do-skolky': typeof ZapisDoSkolkyRoute
   '/admin/dokumenty': typeof AdminDokumentyRoute
   '/admin/predskolacek': typeof AdminPredskolacekRoute
+  '/admin/texty': typeof AdminTextyRouteWithChildren
   '/admin/zamestnanci': typeof AdminZamestnanciRoute
   '/admin/zapis': typeof AdminZapisRoute
   '/admin/zpravy': typeof AdminZpravyRoute
   '/admin_/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
+  '/admin/texty/$page': typeof AdminTextyPageRoute
+  '/admin/texty/': typeof AdminTextyIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -185,11 +211,14 @@ export interface FileRouteTypes {
     | '/zapis-do-skolky'
     | '/admin/dokumenty'
     | '/admin/predskolacek'
+    | '/admin/texty'
     | '/admin/zamestnanci'
     | '/admin/zapis'
     | '/admin/zpravy'
     | '/admin/login'
     | '/admin/'
+    | '/admin/texty/$page'
+    | '/admin/texty/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -208,6 +237,8 @@ export interface FileRouteTypes {
     | '/admin/zpravy'
     | '/admin/login'
     | '/admin'
+    | '/admin/texty/$page'
+    | '/admin/texty'
   id:
     | '__root__'
     | '/'
@@ -222,11 +253,14 @@ export interface FileRouteTypes {
     | '/zapis-do-skolky'
     | '/admin/dokumenty'
     | '/admin/predskolacek'
+    | '/admin/texty'
     | '/admin/zamestnanci'
     | '/admin/zapis'
     | '/admin/zpravy'
     | '/admin_/login'
     | '/admin/'
+    | '/admin/texty/$page'
+    | '/admin/texty/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -350,6 +384,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminZamestnanciRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/texty': {
+      id: '/admin/texty'
+      path: '/texty'
+      fullPath: '/admin/texty'
+      preLoaderRoute: typeof AdminTextyRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/predskolacek': {
       id: '/admin/predskolacek'
       path: '/predskolacek'
@@ -364,12 +405,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDokumentyRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/texty/': {
+      id: '/admin/texty/'
+      path: '/'
+      fullPath: '/admin/texty/'
+      preLoaderRoute: typeof AdminTextyIndexRouteImport
+      parentRoute: typeof AdminTextyRoute
+    }
+    '/admin/texty/$page': {
+      id: '/admin/texty/$page'
+      path: '/$page'
+      fullPath: '/admin/texty/$page'
+      preLoaderRoute: typeof AdminTextyPageRouteImport
+      parentRoute: typeof AdminTextyRoute
+    }
   }
 }
+
+interface AdminTextyRouteChildren {
+  AdminTextyPageRoute: typeof AdminTextyPageRoute
+  AdminTextyIndexRoute: typeof AdminTextyIndexRoute
+}
+
+const AdminTextyRouteChildren: AdminTextyRouteChildren = {
+  AdminTextyPageRoute: AdminTextyPageRoute,
+  AdminTextyIndexRoute: AdminTextyIndexRoute,
+}
+
+const AdminTextyRouteWithChildren = AdminTextyRoute._addFileChildren(
+  AdminTextyRouteChildren,
+)
 
 interface AdminRouteChildren {
   AdminDokumentyRoute: typeof AdminDokumentyRoute
   AdminPredskolacekRoute: typeof AdminPredskolacekRoute
+  AdminTextyRoute: typeof AdminTextyRouteWithChildren
   AdminZamestnanciRoute: typeof AdminZamestnanciRoute
   AdminZapisRoute: typeof AdminZapisRoute
   AdminZpravyRoute: typeof AdminZpravyRoute
@@ -379,6 +449,7 @@ interface AdminRouteChildren {
 const AdminRouteChildren: AdminRouteChildren = {
   AdminDokumentyRoute: AdminDokumentyRoute,
   AdminPredskolacekRoute: AdminPredskolacekRoute,
+  AdminTextyRoute: AdminTextyRouteWithChildren,
   AdminZamestnanciRoute: AdminZamestnanciRoute,
   AdminZapisRoute: AdminZapisRoute,
   AdminZpravyRoute: AdminZpravyRoute,
