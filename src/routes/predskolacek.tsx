@@ -32,6 +32,7 @@ export const Route = createFileRoute("/predskolacek")({
 const t = fixPrepositions;
 
 function PredskolacekPage() {
+  const c = useCopyPage("predskolacek");
   return (
     <div className="min-h-screen bg-background">
       <SiteNavbar />
@@ -46,13 +47,14 @@ function PredskolacekPage() {
             <div className="reveal-up max-w-4xl">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-red">
                 <span className="mr-2 inline-block h-1.5 w-1.5 translate-y-[-2px] rounded-full bg-brand-red align-middle" />
-                {t("Pro rodiče")}
+                {c("hero.eyebrow", "Pro rodiče")}
               </p>
               <h1 className="mt-3 font-display text-[42px] font-extrabold leading-[1.05] text-ink md:text-[56px]">
-                {t("Předškoláček")}
+                {c("hero.h1", "Předškoláček")}
               </h1>
               <p className="mt-5 text-lg leading-relaxed text-body">
-                {t(
+                {c(
+                  "hero.lead",
                   "Předškoláček je program pro budoucí prvňáčky a jejich rodiče. Hravou formou v něm procvičujeme dovednosti důležité pro vstup do první třídy — a zároveň je to společně strávený čas dítěte s rodičem. Setkání vedou naše učitelky v malých skupinkách přibližně deseti dětí."
                 )}
               </p>
