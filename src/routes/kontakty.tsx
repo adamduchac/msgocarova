@@ -3,8 +3,10 @@ import { ImageIcon } from "lucide-react";
 import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
+import { siteCopyQueryOptions, useCopyPage } from "@/lib/use-copy";
 
 export const Route = createFileRoute("/kontakty")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(siteCopyQueryOptions("kontakty")),
   head: () => ({
     meta: [
       { title: "Kontakty — Mateřská škola Josefa Gočára" },
