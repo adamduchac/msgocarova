@@ -1,72 +1,65 @@
-## Změny v Top zprávách
+## Cíl
 
-### 1) Náhled = jen titulek
-V `src/components/site-announcements.tsx` odstranit vykreslení `previewContent(a.content)` v desktop variantě a pomocnou funkci `previewContent`. V náhledu bude jen titulek; obsah pouze v modálu.
+Přidat do CMS modul **„Texty na webu"** — možnost přepsat libovolný textový blok na stránce. Pilot, plain text, bez AI. V každém editačním boxu bude nad textareou vidět **současný výchozí text** (šedá kurzíva) jako reference.
 
-### 2) Tlačítko „Podrobnosti" — vrátit původní expand-on-hover
-V klidu jen tmavá kulatá kapsle se šipkou. Po `group-hover` / `group-focus-visible` (celá karta jako spouštěč) se kapsle plynule rozšíří doleva a odhalí text „Podrobnosti".
+## Rozsah pilotu
 
-- Text ve vnitřním `<span>` s `max-w-0 opacity-0` → `group-hover:max-w-[160px] group-hover:opacity-100`, `transition-[max-width,opacity] duration-300 ease-out whitespace-nowrap`
-- Šipka: mírný `group-hover:translate-x-0.5 transition-transform`
-- Bez scale, bez posunu karty (dle Core memory)
-- Respektuje `focus-visible`
-- Mobil (`sm:hidden`) ponechat s plným tlačítkem
+Dvě stránky:
+- `/o-skolce`
+- `/pro-rodice`
 
-### 3) Bold + odrážky v obsahu (rich rendering v modálu)
-Malá utilita `src/lib/rich-text.tsx` (bez závislostí):
-- `**text**` → `<strong>`
-- Řádky začínající `- ` nebo `* ` → sloučit do `<ul class="list-disc pl-5 space-y-1">`
-- Prázdný řádek = nový odstavec
+Ostatní stránky přidáme až po odzkoušení. Registry je navržen tak, aby přidat další stránku znamenalo jen doplnit další soubor s klíči a fallbacky.
 
-Použití v `AnnouncementModal` místo současného `.split(/\n{2,}/).map(...)`.
+## Jak to funguje
 
-### 4) Tlačítko „Vyladit přes AI" v editoru zprávy
-V `src/components/admin/announcements-admin.tsx` do `EditorModal` přidat nad textareu obsahu tlačítko se sparkles ikonou:
+1. Zdrojový text zůstává v `.tsx` jako **fallback** (nic nezmizí, když je CMS prázdný).
+2. V CMS je pro každý identifikovaný textový blok jedno pole s klíčem `(page, key)` — např. `("o-skolce", "hero.h1")`.
+3. Hook `useCopy("o-skolce", "hero.h1", "O školce")` vrátí přepis z databáze, nebo fallback z třetího argumentu.
+4. Prázdné pole v CMS = smazání přepisu = návrat k výchozímu textu.
 
-- Klik → potvrzení „AI přeformátuje aktuální text — obsah zůstane stejný, upraví se jen struktura (odstavce, odrážky, tučné pojmy). Pokračovat?"
-- Volá server function `formatAnnouncementContent({ text })` → nahradí `content` výsledkem
-- Během běhu `disabled`, label „Ladím…", textarea `disabled`
-- Chyby (429, 402, ostatní) zobrazit jako malou červenou zprávu pod tlačítkem
-- Helper text pod textareou: „Podporováno: **tučně**, odrážky začínající `- `. Odstavce oddělte prázdným řádkem. Titulek se zobrazí v náhledu, obsah pouze v modálu po kliknutí."
-- Label titulku upravit na: „Titulek (zobrazí se v náhledu na webu)"
+## CMS UI
 
-### 5) Server function pro AI formátování — pouze struktura, žádná změna obsahu
-Nový soubor `src/lib/announcements.functions.ts`:
+- Nová položka **„Texty na webu"** v levém menu admina (dole, ikona pero).
+- Rozcestník s dvěma dlaždicemi: **O školce** a **Pro rodiče**.
+- Na detailu stránky **žlutý warning banner** nahoře:
+  > „Pokročilá funkce. Změny se projeví na webu okamžitě. Prosím zachovejte původní strukturu (délku, formátování) — texty jsou navržené pro konkrétní layout. Prázdné pole = návrat k výchozímu textu."
+- Pod ním seznam bloků (nadpis, odstavce, popisky karet, položky odrážek). Každý blok:
+  - **Label** vlevo nahoře (např. „Hero — nadpis" nebo „Vzdělávání — 3. odrážka").
+  - **Šedá kurzíva** s výchozím textem (`text-body/60 italic text-sm`) — viditelný fallback jako reference.
+  - **Textarea** pod tím, prázdná dokud není přepis; když existuje přepis, předvyplněná jím.
+  - Tlačítko **„Vrátit výchozí"** vedle textarey (smaže řádek v DB, pole se vyprázdní).
+- Dole **„Uložit změny"** — pošle jen změněné klíče.
 
-- `formatAnnouncementContent` = `createServerFn({ method: "POST" }).middleware([requireSupabaseAuth])` s `.inputValidator(z.object({ text: z.string().min(1).max(8000) }).parse)`
-- Ověření admin role přes `context.supabase.rpc('has_role', { _user_id: context.userId, _role: 'admin' })` — jinak 403
-- Provider `createLovableAiGatewayProvider(process.env.LOVABLE_API_KEY!)` (`src/lib/ai-gateway.server.ts`; pokud neexistuje, vytvořit dle `ai-sdk-lovable-gateway` — přesně tvar helperu)
-- Ověřit přítomnost `LOVABLE_API_KEY` (v případě potřeby `ai_gateway--create`)
-- Model: `google/gemini-3.5-flash`
-- `generateText` s tímto systémovým promptem (přísně zakázat přepis obsahu):
+## Technicky (pro dev)
 
-  > „Jsi český editor pro mateřskou školu. Dostaneš plain-text zprávu a vrátíš přesně tentýž text, jen lépe naformátovaný pro čtení.
-  >
-  > POVINNĚ ZACHOVEJ:
-  > - všechna slova, čísla, data, jména, e-maily, telefony, odkazy — nic nepřidávej, nic nemaž, nic nepřepisuj do synonym, neopravuj pravopis ani stylistiku
-  > - pořadí informací
-  >
-  > SMÍŠ pouze:
-  > - rozdělit text do odstavců oddělených prázdným řádkem
-  > - výčty převést na řádky začínající `- `
-  > - zvýraznit **tučně** klíčové pojmy (max. 2–3 na odstavec), pokud v textu přirozeně vystupují
-  >
-  > ZAKÁZÁNO: nadpisy, HTML, jiné značky, uvozovky kolem výsledku, úvodní/závěrečné věty od tebe.
-  >
-  > Vrať pouze výsledný text."
+### Databáze
+Migrace `site_copy`:
+- `page` (text, not null), `key` (text, not null), `value` (text, not null)
+- `unique (page, key)`, index na `page`
+- RLS: SELECT pro `anon` + `authenticated` (texty jsou veřejné), INSERT/UPDATE/DELETE jen pro `admin` přes `has_role(auth.uid(), 'admin')`
+- GRANT: SELECT to anon + authenticated; ALL to service_role
 
-- `temperature: 0.2`, `maxTokens` úměrné vstupu
-- Vrací `{ text: string }` (trim, ořezané případné wrapping uvozovky)
-- Chyby z gateway propaguje se statusem/messagem, aby je frontend uměl zobrazit
+### Frontend
+- `src/lib/site-copy/registry.ts` — objekt `{ [page]: { [key]: { label, defaultText } } }`. V pilotu jen `o-skolce` a `pro-rodice`.
+- `src/lib/site-copy.functions.ts` — server functions:
+  - `getSiteCopy({ page })` — veřejná, čte přes server publishable client (žádné `requireSupabaseAuth`, aby to fungovalo v SSR loaderu).
+  - `upsertSiteCopy({ page, key, value })` a `deleteSiteCopy({ page, key })` — `requireSupabaseAuth` + kontrola `has_role`.
+- `src/lib/use-copy.ts` — hook `useCopy(page, key, fallback)` — čte z React Query cache (`queryKey: ["site-copy", page]`), vrací fallback pokud přepis chybí.
+- Loader stránek `/o-skolce` a `/pro-rodice` zavolá `ensureQueryData` na `getSiteCopy` — obsah je předrenderovaný v SSR.
+- Postupně nahradím literály na obou stránkách voláním `useCopy(...)`. Původní český text jde jako `fallback` argument — stránka funguje i bez DB.
 
-### 6) Volání z klienta
-V `EditorModal` `useServerFn(formatAnnouncementContent)` → `setForm({ ...form, content: result.text })`.
+### Admin
+- `src/routes/admin.texty.tsx` — rozcestník (2 dlaždice).
+- `src/routes/admin.texty.$page.tsx` — editor jedné stránky. Ověří, že `$page` je v registry, jinak `notFound()`.
+- Menu link v `src/routes/admin.tsx` sidebar.
+- Reuse `src/components/admin/ui.tsx` styly.
 
-### Dotčené soubory
-- `src/components/site-announcements.tsx` — 1 + 2
-- `src/lib/rich-text.tsx` (nový) — 3
-- `src/components/admin/announcements-admin.tsx` — 4 + 6
-- `src/lib/announcements.functions.ts` (nový) — 5
-- Případně `src/lib/ai-gateway.server.ts` (jen pokud ještě neexistuje)
+### Extrakce klíčů (nejpracnější část)
+Projdu `src/routes/o-skolce.tsx` a `src/routes/pro-rodice.tsx` a pro každý viditelný textový string vytvořím záznam v registry (`hero.h1`, `hero.lead`, `vision.card1.title`, `vision.card1.body`, `education.bullet.1`, …). U dlouhých seznamů (např. odrážky) jeden klíč = jeden řádek, aby se dalo editovat každý zvlášť.
 
-Bez změn v DB. Bez edge function — v TanStack Start přes `createServerFn`.
+Vynechávám: navbar, footer, ikony, texty spravované jinými CMS moduly (top zprávy, medailonky, dokumenty, infoboxy).
+
+## Co bude potřeba doplnit později (mimo pilot)
+
+- Zbývajících 7 stránek (`/`, `/barevne-tridy`, `/vzdelavani-a-rozvoj`, `/akce-s-rodici`, `/predskolacek`, `/zapis-do-skolky`, `/kontakty`) — stejným postupem.
+- Případně bulk „Export/Import JSON" pro rychlé zálohy.

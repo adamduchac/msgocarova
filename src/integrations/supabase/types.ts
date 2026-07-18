@@ -116,6 +116,33 @@ export type Database = {
         }
         Relationships: []
       }
+      site_copy: {
+        Row: {
+          created_at: string
+          id: string
+          key: string
+          page: string
+          updated_at: string
+          value: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          key: string
+          page: string
+          updated_at?: string
+          value: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          key?: string
+          page?: string
+          updated_at?: string
+          value?: string
+        }
+        Relationships: []
+      }
       staff: {
         Row: {
           bio: string | null
