@@ -99,6 +99,7 @@ const desktopTransforms = [
 
 
 export function SiteDailyRhythm() {
+  const c = useCopyPage("index");
   const scrollerRef = useRef<HTMLOListElement | null>(null);
 
   const scrollByCard = (dir: 1 | -1) => {
