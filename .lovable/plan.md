@@ -1,21 +1,24 @@
-## Úpravy stránky /kontakty
+Plán úprav stránky `/kontakty` (jediný soubor: `src/routes/kontakty.tsx`).
 
-**Soubor:** `src/routes/kontakty.tsx`
+## 1. Hero — kontaktní údaje s eyebrow a většími mezerami
 
-### 1. Hero — mapa místo fotky
-- V pravém sloupci nahradit `ImageIcon` placeholder `<iframe>` mapou (stejný `src` jako sekce „Kudy k nám": `https://mapy.com/s/kovocenope`).
-- Zachovat čtvercový poměr (`aspect-square`), zaoblený rámeček `rounded-[28px]` a stejný stín jako mají boxy na HP (`shadow-[0_20px_60px_-22px_rgba(16,15,16,0.25)]`).
+- Obalit telefon, e-mail a adresu do samostatných skupin (např. `<div>`) s větší vertikální mezerou mezi nimi (`gap-6` místo `gap-2`).
+- Nad každou skupinu přidat eyebrow text `Telefon`, `E-mail`, `Adresa` pomocí existující třídy `eyebrowClass`.
+- Zachovat typografii velkých kontaktních údajů a jejich hover stavy.
+- Adresu ponechat jako tři řádky (název školy, ulice, město) ve stejné velikosti jako telefon/e-mail.
 
-### 2. Odstranit sekci „Kudy k nám"
-- Kompletně smazat `<section>` s druhou mapou (řádky 146–162).
+## 2. Rejstřík — strukturovaný layout s boxy
 
-### 3. Adresa velikostí sjednocená s telefonem/e-mailem
-- Odstranit eyebrow „Adresa".
-- Adresu vysázet stejnou typografií jako telefon a e-mail (`font-display text-[28px]/[36px] font-extrabold`), tři řádky pod sebou (název školy, ulice, město).
-- Sjednotit vertikální odstupy: telefon, e-mail i adresa budou v jednom `flex flex-col` bloku s konzistentní mezerou (např. `gap-2`) místo současného mixu `mt-1` / `mt-6`.
+- Ponechat vnější bílý box (stín, zaoblení, padding) jako obal celé sekce.
+- Uvnitř vnějšího boxu vytvořit dvousloupcový layout:
+  - **Levý sloupec:** Vedení školky + Školní jídelna — každá podskupina ve vlastním vnitřním boxu (`boxClass`).
+  - **Pravý sloupec:** Barevné třídy — každá třída ve vlastním vnitřním boxu (`boxClass`), řazeny pod sebou.
+- Upravit `sectionLabelClass` nadpisy, aby fungovaly jako nadpisy uvnitř boxů (bez `col-span-full`).
+- Zachovat obsah, telefonní odkazy, barevné tečky tříd a učitelky.
 
-### 4. Rejstřík v jednom bílém boxu
-- Obalit celý obsah sekce „Rejstřík" (nadskupiny Vedení / Jídelna / Barevné třídy) do jednoho vnějšího bílého boxu ve stylu HP karet „barevné kostičky": `rounded-[28px] border border-border/60 bg-card p-6 md:p-10 shadow-[0_20px_60px_-22px_rgba(16,15,16,0.25)]`.
-- Vnitřní jednotlivé položky (dosavadní `boxClass` karty) převést na plain řádky bez vlastního rámečku a pozadí — oddělené jen jemným `divide-y border-border/60` nebo mezerami, aby vnější box působil čistě. Podskupiny „Vedení školky", „Školní jídelna", „Barevné třídy" zůstávají jako `sectionLabelClass` nadpisy uvnitř tohoto boxu.
+## Ověření
+
+- Po editaci spustit build (`bun run build` / `bunx vite build`), zkontrolovat, že stránka `/kontakty` kompiluje bez chyb.
+- Volitelně screenshot preview na desktopu pro kontrolu struktury.
 
 Žádné jiné stránky ani logika se nemění.

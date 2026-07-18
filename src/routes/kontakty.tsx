@@ -71,11 +71,13 @@ const classes: ClassRow[] = [
 const eyebrowClass =
   "font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55";
 const sectionLabelClass =
-  "col-span-full font-display text-xs font-semibold uppercase tracking-[0.16em] text-ink/50";
+  "font-display text-xs font-semibold uppercase tracking-[0.16em] text-ink/50";
 const boxClass =
   "rounded-2xl border border-border/60 bg-card p-5 md:p-6";
 const h2Class =
   "font-display text-[28px] font-extrabold text-ink md:text-[32px]";
+const contactValueClass =
+  "block font-display text-[28px] font-extrabold leading-[1.15] text-ink transition-colors duration-200 hover:text-ink/70 md:text-[36px]";
 
 function KontaktyPage() {
   const c = useCopyPage("kontakty");
@@ -99,25 +101,35 @@ function KontaktyPage() {
                 {c("hero.lead", "Rádi vás uvítáme osobně, nebo se ozvěte telefonem či e-mailem.")}
               </p>
 
+              <div className="mt-10 flex flex-col gap-8">
+                <div>
+                  <p className={eyebrowClass}>Telefon</p>
+                  <a
+                    href="tel:+420495444421"
+                    className={`${contactValueClass} tabular-nums mt-2`}
+                  >
+                    495 444 421
+                  </a>
+                </div>
 
-              <div className="mt-6 flex flex-col gap-2">
-                <a
-                  href="tel:+420495444421"
-                  className="block font-display text-[28px] font-extrabold leading-[1.15] tabular-nums text-ink transition-colors duration-200 hover:text-ink/70 md:text-[36px]"
-                >
-                  495 444 421
-                </a>
-                <a
-                  href="mailto:kosticky@msjghk.cz"
-                  className="block break-all font-display text-[28px] font-extrabold leading-[1.15] text-ink transition-colors duration-200 hover:text-ink/70 md:text-[36px]"
-                >
-                  kosticky@msjghk.cz
-                </a>
-                <address className="font-display text-[28px] font-extrabold not-italic leading-[1.15] text-ink md:text-[36px]">
-                  <span className="block">{fixPrepositions("Mateřská škola Josefa Gočára")}</span>
-                  <span className="block">Škroupova 693</span>
-                  <span className="block">500 02 Hradec Králové 2</span>
-                </address>
+                <div>
+                  <p className={eyebrowClass}>E-mail</p>
+                  <a
+                    href="mailto:kosticky@msjghk.cz"
+                    className={`${contactValueClass} break-all mt-2`}
+                  >
+                    kosticky@msjghk.cz
+                  </a>
+                </div>
+
+                <div>
+                  <p className={eyebrowClass}>Adresa</p>
+                  <address className={`${contactValueClass} not-italic mt-2`}>
+                    <span className="block">{fixPrepositions("Mateřská škola Josefa Gočára")}</span>
+                    <span className="block">Škroupova 693</span>
+                    <span className="block">500 02 Hradec Králové 2</span>
+                  </address>
+                </div>
               </div>
             </div>
 
@@ -149,98 +161,109 @@ function KontaktyPage() {
             <div
               className="reveal-up rounded-[28px] border border-border/60 bg-card p-6 shadow-[0_20px_60px_-22px_rgba(16,15,16,0.25)] md:p-10"
             >
-              <div className="grid grid-cols-1 gap-x-8 gap-y-5 md:grid-cols-2">
-                {/* Vedení školky */}
-                <p className={sectionLabelClass}>{fixPrepositions("Vedení školky")}</p>
+              <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+                {/* Levý sloupec */}
+                <div className="flex flex-col gap-5">
+                  {/* Vedení školky */}
+                  <div className={boxClass}>
+                    <p className={sectionLabelClass}>{fixPrepositions("Vedení školky")}</p>
+                    <div className="mt-5 flex flex-col gap-5">
+                      <div>
+                        <p className="text-sm text-body">{fixPrepositions("Ředitel ZŠ a MŠ Josefa Gočára")}</p>
+                        <p className="mt-1 font-display text-lg font-bold text-ink">
+                          Mgr. Petr Sadílek
+                        </p>
+                      </div>
 
-                <div>
-                  <p className="text-sm text-body">{fixPrepositions("Ředitel ZŠ a MŠ Josefa Gočára")}</p>
-                  <p className="mt-1 font-display text-lg font-bold text-ink">
-                    Mgr. Petr Sadílek
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-sm text-body">{fixPrepositions("Zástupkyně ředitele pro MŠ")}</p>
-                  <p className="mt-1 font-display text-lg font-bold text-ink">
-                    Mgr. Jitka Kouklíková
-                  </p>
-                  <div className="mt-3 flex flex-col gap-1">
-                    <a
-                      href="tel:+420495444421"
-                      className="text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
-                    >
-                      495 444 421
-                    </a>
-                    <a
-                      href="mailto:kosticky@msjghk.cz"
-                      className="text-[15px] text-ink transition-colors duration-200 hover:text-brand-blue"
-                    >
-                      kosticky@msjghk.cz
-                    </a>
-                  </div>
-                </div>
-
-                {/* Školní jídelna */}
-                <p className={`${sectionLabelClass} mt-6`}>{fixPrepositions("Školní jídelna")}</p>
-
-                <div>
-                  <p className="font-display text-lg font-bold text-ink">
-                    {fixPrepositions("Školní jídelna ZŠ")}
-                  </p>
-                  <p className="mt-1 text-sm text-body">
-                    {fixPrepositions("Odhlašování obědů nejdéle do 10:00 na příští den.")}
-                  </p>
-                  <a
-                    href="tel:+420495019050"
-                    className="mt-3 inline-block text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
-                  >
-                    495 019 050
-                  </a>
-                </div>
-
-                <div>
-                  <p className="font-display text-lg font-bold text-ink">
-                    {fixPrepositions("Výdejna obědů MŠ")}
-                  </p>
-                  <a
-                    href="tel:+420495444422"
-                    className="mt-3 inline-block text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
-                  >
-                    495 444 422
-                  </a>
-                </div>
-
-                {/* Barevné třídy */}
-                <p className={`${sectionLabelClass} mt-6`}>{fixPrepositions("Barevné třídy")}</p>
-
-                {classes.map((c) => (
-                  <div key={c.name}>
-                    <div className="flex items-center gap-3">
-                      <span
-                        className={`h-2.5 w-2.5 shrink-0 rounded-full ${c.dot}`}
-                        aria-hidden
-                      />
-                      <p className="min-w-0 flex-1 font-display text-lg font-bold text-ink">
-                        {c.name}
-                      </p>
-                      <a
-                        href={`tel:${c.tel}`}
-                        className="text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
-                      >
-                        {c.phone}
-                      </a>
+                      <div>
+                        <p className="text-sm text-body">{fixPrepositions("Zástupkyně ředitele pro MŠ")}</p>
+                        <p className="mt-1 font-display text-lg font-bold text-ink">
+                          Mgr. Jitka Kouklíková
+                        </p>
+                        <div className="mt-3 flex flex-col gap-1">
+                          <a
+                            href="tel:+420495444421"
+                            className="text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
+                          >
+                            495 444 421
+                          </a>
+                          <a
+                            href="mailto:kosticky@msjghk.cz"
+                            className="text-[15px] text-ink transition-colors duration-200 hover:text-brand-blue"
+                          >
+                            kosticky@msjghk.cz
+                          </a>
+                        </div>
+                      </div>
                     </div>
-                    <p className="mt-2 text-sm leading-relaxed text-body">
-                      {c.teachers}
-                    </p>
                   </div>
-                ))}
+
+                  {/* Školní jídelna */}
+                  <div className={boxClass}>
+                    <p className={sectionLabelClass}>{fixPrepositions("Školní jídelna")}</p>
+                    <div className="mt-5 flex flex-col gap-5">
+                      <div>
+                        <p className="font-display text-lg font-bold text-ink">
+                          {fixPrepositions("Školní jídelna ZŠ")}
+                        </p>
+                        <p className="mt-1 text-sm text-body">
+                          {fixPrepositions("Odhlašování obědů nejdéle do 10:00 na příští den.")}
+                        </p>
+                        <a
+                          href="tel:+420495019050"
+                          className="mt-3 inline-block text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
+                        >
+                          495 019 050
+                        </a>
+                      </div>
+
+                      <div>
+                        <p className="font-display text-lg font-bold text-ink">
+                          {fixPrepositions("Výdejna obědů MŠ")}
+                        </p>
+                        <a
+                          href="tel:+420495444422"
+                          className="mt-3 inline-block text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
+                        >
+                          495 444 422
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Pravý sloupec — Barevné třídy */}
+                <div className={boxClass}>
+                  <p className={sectionLabelClass}>{fixPrepositions("Barevné třídy")}</p>
+                  <div className="mt-5 flex flex-col gap-5">
+                    {classes.map((c) => (
+                      <div key={c.name}>
+                        <div className="flex items-center gap-3">
+                          <span
+                            className={`h-2.5 w-2.5 shrink-0 rounded-full ${c.dot}`}
+                            aria-hidden
+                          />
+                          <p className="min-w-0 flex-1 font-display text-lg font-bold text-ink">
+                            {c.name}
+                          </p>
+                          <a
+                            href={`tel:${c.tel}`}
+                            className="text-[15px] font-semibold tabular-nums text-brand-blue transition-colors duration-200 hover:text-brand-blue/80"
+                          >
+                            {c.phone}
+                          </a>
+                        </div>
+                        <p className="mt-2 text-sm leading-relaxed text-body">
+                          {c.teachers}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
-
 
         <div
           style={{
