@@ -4,8 +4,10 @@ import { fixPrepositions } from "@/lib/typography";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
 import { CmsStatusBlock } from "@/components/cms-status-block";
+import { siteCopyQueryOptions, useCopyPage } from "@/lib/use-copy";
 
 export const Route = createFileRoute("/predskolacek")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(siteCopyQueryOptions("predskolacek")),
   head: () => ({
     meta: [
       { title: "Předškoláček — Mateřská škola Josefa Gočára" },
