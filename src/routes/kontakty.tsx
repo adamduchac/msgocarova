@@ -91,7 +91,7 @@ function KontaktyPage() {
       >
         {/* Hero */}
         <section className="section-y">
-          <div className="container mx-auto grid gap-10 px-6 lg:grid-cols-2 lg:items-start lg:gap-14">
+          <div className="container mx-auto grid gap-10 px-6 lg:grid-cols-2 lg:items-center lg:gap-14">
             {/* Levý sloupec */}
             <div className="reveal-up">
               <h1 className="font-display text-[42px] font-extrabold leading-[1.05] text-ink md:text-[56px]">
@@ -138,7 +138,7 @@ function KontaktyPage() {
               className="reveal-fade lg:mt-2"
               style={{ ["--reveal-delay" as string]: "160ms" }}
             >
-              <div className="aspect-square w-full overflow-hidden rounded-[28px] border border-border/60 shadow-[0_20px_60px_-22px_rgba(16,15,16,0.25)]">
+              <div className="aspect-[4/3] w-full overflow-hidden rounded-[28px] border border-border/60 shadow-[0_20px_60px_-22px_rgba(16,15,16,0.25)]">
                 <iframe
                   title="Mapa — Mateřská škola Josefa Gočára"
                   src="https://mapy.com/s/kovocenope"
