@@ -149,6 +149,31 @@ function EditorModal({ value, onClose, onSave, saving }: {
   saving: boolean;
 }) {
   const [form, setForm] = useState(value);
+  const [aiBusy, setAiBusy] = useState(false);
+  const [aiError, setAiError] = useState<string | null>(null);
+  const formatFn = useServerFn(formatAnnouncementContent);
+
+  const runAi = async () => {
+    const text = (form.content ?? "").trim();
+    if (!text) {
+      setAiError("Nejdřív napište obsah zprávy.");
+      return;
+    }
+    if (!confirm("AI přeformátuje aktuální text — obsah zůstane stejný, upraví se jen struktura (odstavce, odrážky, tučné pojmy). Pokračovat?")) {
+      return;
+    }
+    setAiError(null);
+    setAiBusy(true);
+    try {
+      const res = await formatFn({ data: { text } });
+      setForm((f) => ({ ...f, content: res.text }));
+    } catch (err) {
+      setAiError(err instanceof Error ? err.message : "AI selhala.");
+    } finally {
+      setAiBusy(false);
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
@@ -157,22 +182,40 @@ function EditorModal({ value, onClose, onSave, saving }: {
           <h2 className="text-lg font-semibold">{form.id ? "Upravit zprávu" : "Nová zpráva"}</h2>
         </div>
         <div className="p-6 space-y-4">
-          <Field label="Titulek">
+          <Field label="Titulek (zobrazí se v náhledu na webu)">
             <input
               value={form.title ?? ""}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
               className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </Field>
-          <Field label="Obsah (zobrazí se v modálním okně po kliknutí)">
+          <div>
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="block text-sm font-medium text-foreground">Obsah (zobrazí se v modálním okně po kliknutí)</label>
+              <button
+                type="button"
+                onClick={runAi}
+                disabled={aiBusy || !(form.content ?? "").trim()}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-input bg-background px-3 py-1.5 text-xs font-medium text-foreground hover:bg-black/5 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                <Sparkles className="h-3.5 w-3.5" />
+                {aiBusy ? "Ladím…" : "Vyladit přes AI"}
+              </button>
+            </div>
             <textarea
               value={form.content ?? ""}
               onChange={(e) => setForm({ ...form, content: e.target.value })}
-              rows={8}
-              className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-              placeholder="Odstavce oddělte prázdným řádkem."
+              rows={10}
+              disabled={aiBusy}
+              className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-60"
+              placeholder="Napište text zprávy. Odstavce oddělte prázdným řádkem."
             />
-          </Field>
+            <p className="mt-1.5 text-xs text-muted-foreground">
+              Podporováno: <code>**tučně**</code>, odrážky začínající <code>- </code>. Odstavce oddělte prázdným řádkem. AI vyladí jen strukturu, obsah zůstane stejný.
+            </p>
+            {aiError && <p className="mt-1.5 text-xs text-red-600">{aiError}</p>}
+          </div>
+
           <div className="grid grid-cols-2 gap-4">
             <Field label="Pořadí (nižší = výše)">
               <input
