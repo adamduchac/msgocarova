@@ -1,65 +1,36 @@
+
 ## Cíl
+Zpřehlednit editor **Texty na webu** a viditelně oddělit tuto sekci od běžné administrace v levém menu.
 
-Přidat do CMS modul **„Texty na webu"** — možnost přepsat libovolný textový blok na stránce. Pilot, plain text, bez AI. V každém editačním boxu bude nad textareou vidět **současný výchozí text** (šedá kurzíva) jako reference.
+## Změny
 
-## Rozsah pilotu
+### 1. Kompaktní layout editoru (`src/routes/admin.texty.$page.tsx`)
+- Nahradit velké karty se dvěma tlačítky u každého pole **kompaktním řádkovým vzhledem**: label nahoře, auto-resize textarea, pod ní jednořádkově kurzívou výchozí text (truncate + tooltip / title s plným zněním).
+- **Per-pole tlačítka „Uložit" / „Obnovit" pryč.** Nahradí je:
+  - Globální sticky lišta nahoře s tlačítky **„Uložit vše"** (počítadlo neuložených změn) a **„Zahodit změny"**.
+  - U upravených polí malý badge „upraveno" s ikonou reset (jednoklik = smazat override).
+- Vizuální rozlišení: **neupravené pole = jemný rámeček**, **upravené = žlutý levý pruh + jemné žluté podbarvení**. Na první pohled je vidět, co se liší od defaultu.
+- **Seskupení podle prefixu klíče** (např. `hero.*`, `vzdelavani.*`, `jidelna.*`) do sbalitelných sekcí. Klíče bez prefixu do skupiny „Ostatní".
 
-Dvě stránky:
-- `/o-skolce`
-- `/pro-rodice`
+### 2. Floating search nad editorem
+- Sticky vyhledávací pole nahoře („Najít text na stránce…").
+- Fulltext přes `defaultText` i aktuální `draft`; při shodě zvýrazní odpovídající pole a ztlumí ostatní. Přepínač „Jen shody" volitelně skryje nesouvisející.
+- Enter / klik na výsledek scrolluje k prvnímu poli a nastaví fokus do textarey.
+- Řeší use-case: „vidím text na webu, chci najít místo, kde ho v CMS upravit".
 
-Ostatní stránky přidáme až po odzkoušení. Registry je navržen tak, aby přidat další stránku znamenalo jen doplnit další soubor s klíči a fallbacky.
+### 3. Oddělení v levém menu (`src/routes/admin.tsx`)
+- Rozdělit `NAV_ITEMS` do dvou skupin s vizuálním předělem (`border-t border-white/10` + label „Pokročilé" malým uppercase):
+  - **Obsah**: Přehled, Top zprávy, Zaměstnanci, Dokumenty, Předškoláček, Zápis
+  - **Pokročilé**: Texty na webu
+- U položky „Texty na webu" přidat **žlutou ikonu vykřičníku** (`AlertTriangle` z lucide, `text-brand-yellow`) a title tooltip: „Pokročilé — mění strojové texty na webu. Používejte opatrně."
 
-## Jak to funguje
+## Mimo rozsah
+- **AI asistent** odložen / zrušen dle upřesnění uživatele.
+- Beze změny schématu DB, `registry.ts`, `use-copy.ts` i server functions.
 
-1. Zdrojový text zůstává v `.tsx` jako **fallback** (nic nezmizí, když je CMS prázdný).
-2. V CMS je pro každý identifikovaný textový blok jedno pole s klíčem `(page, key)` — např. `("o-skolce", "hero.h1")`.
-3. Hook `useCopy("o-skolce", "hero.h1", "O školce")` vrátí přepis z databáze, nebo fallback z třetího argumentu.
-4. Prázdné pole v CMS = smazání přepisu = návrat k výchozímu textu.
-
-## CMS UI
-
-- Nová položka **„Texty na webu"** v levém menu admina (dole, ikona pero).
-- Rozcestník s dvěma dlaždicemi: **O školce** a **Pro rodiče**.
-- Na detailu stránky **žlutý warning banner** nahoře:
-  > „Pokročilá funkce. Změny se projeví na webu okamžitě. Prosím zachovejte původní strukturu (délku, formátování) — texty jsou navržené pro konkrétní layout. Prázdné pole = návrat k výchozímu textu."
-- Pod ním seznam bloků (nadpis, odstavce, popisky karet, položky odrážek). Každý blok:
-  - **Label** vlevo nahoře (např. „Hero — nadpis" nebo „Vzdělávání — 3. odrážka").
-  - **Šedá kurzíva** s výchozím textem (`text-body/60 italic text-sm`) — viditelný fallback jako reference.
-  - **Textarea** pod tím, prázdná dokud není přepis; když existuje přepis, předvyplněná jím.
-  - Tlačítko **„Vrátit výchozí"** vedle textarey (smaže řádek v DB, pole se vyprázdní).
-- Dole **„Uložit změny"** — pošle jen změněné klíče.
-
-## Technicky (pro dev)
-
-### Databáze
-Migrace `site_copy`:
-- `page` (text, not null), `key` (text, not null), `value` (text, not null)
-- `unique (page, key)`, index na `page`
-- RLS: SELECT pro `anon` + `authenticated` (texty jsou veřejné), INSERT/UPDATE/DELETE jen pro `admin` přes `has_role(auth.uid(), 'admin')`
-- GRANT: SELECT to anon + authenticated; ALL to service_role
-
-### Frontend
-- `src/lib/site-copy/registry.ts` — objekt `{ [page]: { [key]: { label, defaultText } } }`. V pilotu jen `o-skolce` a `pro-rodice`.
-- `src/lib/site-copy.functions.ts` — server functions:
-  - `getSiteCopy({ page })` — veřejná, čte přes server publishable client (žádné `requireSupabaseAuth`, aby to fungovalo v SSR loaderu).
-  - `upsertSiteCopy({ page, key, value })` a `deleteSiteCopy({ page, key })` — `requireSupabaseAuth` + kontrola `has_role`.
-- `src/lib/use-copy.ts` — hook `useCopy(page, key, fallback)` — čte z React Query cache (`queryKey: ["site-copy", page]`), vrací fallback pokud přepis chybí.
-- Loader stránek `/o-skolce` a `/pro-rodice` zavolá `ensureQueryData` na `getSiteCopy` — obsah je předrenderovaný v SSR.
-- Postupně nahradím literály na obou stránkách voláním `useCopy(...)`. Původní český text jde jako `fallback` argument — stránka funguje i bez DB.
-
-### Admin
-- `src/routes/admin.texty.tsx` — rozcestník (2 dlaždice).
-- `src/routes/admin.texty.$page.tsx` — editor jedné stránky. Ověří, že `$page` je v registry, jinak `notFound()`.
-- Menu link v `src/routes/admin.tsx` sidebar.
-- Reuse `src/components/admin/ui.tsx` styly.
-
-### Extrakce klíčů (nejpracnější část)
-Projdu `src/routes/o-skolce.tsx` a `src/routes/pro-rodice.tsx` a pro každý viditelný textový string vytvořím záznam v registry (`hero.h1`, `hero.lead`, `vision.card1.title`, `vision.card1.body`, `education.bullet.1`, …). U dlouhých seznamů (např. odrážky) jeden klíč = jeden řádek, aby se dalo editovat každý zvlášť.
-
-Vynechávám: navbar, footer, ikony, texty spravované jinými CMS moduly (top zprávy, medailonky, dokumenty, infoboxy).
-
-## Co bude potřeba doplnit později (mimo pilot)
-
-- Zbývajících 7 stránek (`/`, `/barevne-tridy`, `/vzdelavani-a-rozvoj`, `/akce-s-rodici`, `/predskolacek`, `/zapis-do-skolky`, `/kontakty`) — stejným postupem.
-- Případně bulk „Export/Import JSON" pro rychlé zálohy.
+## Technické detaily
+- Auto-resize textarea přes CSS `field-sizing: content` s fallbackem na `useLayoutEffect` + `scrollHeight`.
+- Sticky search: `sticky top-0 z-10 bg-white/90 backdrop-blur` v mainu, pod ní sticky action bar s „Uložit vše".
+- Skupiny: split klíče na první `.`; label skupiny odvodit z registry (nebo použít prefix, pokud nic explicitního není).
+- Dirty state: `Set<string>` klíčů, které se liší od aktuálního `overrides`. „Uložit vše" iteruje `upsertSiteCopy` sekvenčně, na konci jeden `invalidateQueries`. „Zahodit změny" resetuje drafty zpět na `overrides`.
+- Zvýraznění při vyhledávání: přidat class na kontejner pole podle match stavu, žádná manipulace obsahu textarey.
