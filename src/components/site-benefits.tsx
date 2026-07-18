@@ -79,10 +79,10 @@ export function SiteBenefits() {
       <div className="container mx-auto px-6">
         <div className="reveal-up section-header-gap mx-auto max-w-2xl text-center">
           <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-ink/55">
-            {fixPrepositions("Přijďte se podívat")}
+            {c("benefits.eyebrow", "Přijďte se podívat")}
           </p>
           <h2 className="mt-3 font-display text-[34px] text-ink md:text-[40px]">
-            {fixPrepositions("To pravé místo pro vaše děti")}
+            {c("benefits.h2", "To pravé místo pro vaše děti")}
           </h2>
 
         </div>
