@@ -14,6 +14,7 @@ import nikolaPhoto from "@/assets/teacher-nikola-sorfova-v2.webp.asset.json";
 import janaPhoto from "@/assets/teacher-jana-tuharska-v2.webp.asset.json";
 
 export const Route = createFileRoute("/barevne-tridy")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(siteCopyQueryOptions("barevne-tridy")),
   head: () => ({
     meta: [
       { title: "Barevné třídy — Mateřská škola Josefa Gočára" },
