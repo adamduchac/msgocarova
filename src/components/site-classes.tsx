@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ArrowRight, Home, Trees } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { fixPrepositions } from "@/lib/typography";
+import { useCopyPage } from "@/lib/use-copy";
 import kostickyA from "@/assets/kosticky-tridy-a.webp.asset.json";
 import kostickyB from "@/assets/kosticky-tridy-b.webp.asset.json";
 
