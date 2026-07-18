@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { fixPrepositions } from "@/lib/typography";
+import { useCopyPage } from "@/lib/use-copy";
 import preschool from "@/assets/activity-preschool.jpg.asset.json";
 import box2 from "@/assets/box2-2.webp.asset.json";
 import box3 from "@/assets/box3-2.webp.asset.json";
@@ -14,43 +15,51 @@ type Activity = {
   hash?: string;
 };
 
-const activities: Activity[] = [
-  {
-    title: fixPrepositions("Klub Předškoláček"),
-    text: fixPrepositions(
-      "Cílená a hravá příprava na zápis do 1. třídy. Trénujeme grafomotoriku, soustředění a logiku tak, aby se děti do školy těšily."
-    ),
-    image: preschool.url,
-    alt: "Soustředěný předškolák kreslí tužkou u stolu",
-    href: "/predskolacek",
-  },
-  {
-    title: fixPrepositions("Vzdělávání a aktivity"),
-    text: fixPrepositions(
-      "S dětmi nezůstáváme jen za plotem. Pravidelně jezdíme na předplavecký výcvik, pořádáme lyžařské kurzy a jarní školy v přírodě."
-    ),
-    image: box2.url,
-    alt: "Děti si hrají a cákají ve venkovním bazénu na školní zahradě",
-    href: "/vzdelavani-a-rozvoj",
-  },
-  {
-    title: fixPrepositions("Akce s rodiči"),
-    text: fixPrepositions(
-      "Školka pro nás nekončí odpoledním vyzvednutím. Pořádáme společné tvořivé dílničky, „Večer se strašidly“ nebo jarní zahradní brigády."
-    ),
-    image: box3.url,
-    alt: "Rodiče s dětmi opékají buřty u ohniště na zahradě školky",
-    href: "/akce-s-rodici",
-  },
-];
+function useActivities(): Activity[] {
+  const c = useCopyPage("index");
+  return [
+    {
+      title: c("activities.card1.title", "Klub Předškoláček"),
+      text: c(
+        "activities.card1.text",
+        "Cílená a hravá příprava na zápis do 1. třídy. Trénujeme grafomotoriku, soustředění a logiku tak, aby se děti do školy těšily."
+      ),
+      image: preschool.url,
+      alt: "Soustředěný předškolák kreslí tužkou u stolu",
+      href: "/predskolacek",
+    },
+    {
+      title: c("activities.card2.title", "Vzdělávání a aktivity"),
+      text: c(
+        "activities.card2.text",
+        "S dětmi nezůstáváme jen za plotem. Pravidelně jezdíme na předplavecký výcvik, pořádáme lyžařské kurzy a jarní školy v přírodě."
+      ),
+      image: box2.url,
+      alt: "Děti si hrají a cákají ve venkovním bazénu na školní zahradě",
+      href: "/vzdelavani-a-rozvoj",
+    },
+    {
+      title: c("activities.card3.title", "Akce s rodiči"),
+      text: c(
+        "activities.card3.text",
+        "Školka pro nás nekončí odpoledním vyzvednutím. Pořádáme společné tvořivé dílničky, „Večer se strašidly“ nebo jarní zahradní brigády."
+      ),
+      image: box3.url,
+      alt: "Rodiče s dětmi opékají buřty u ohniště na zahradě školky",
+      href: "/akce-s-rodici",
+    },
+  ];
+}
 
 export function SiteActivities() {
+  const c = useCopyPage("index");
+  const activities = useActivities();
   return (
     <section id="aktuality" className="section-y">
       <div className="container mx-auto px-6">
         <div className="reveal-up section-header-gap mx-auto max-w-2xl text-center">
           <h2 className="font-display text-[34px] font-extrabold text-ink md:text-[40px]">
-            {fixPrepositions("Zážitky, které si děti odnáší")}
+            {c("activities.h2", "Zážitky, které si děti odnáší")}
           </h2>
         </div>
 
