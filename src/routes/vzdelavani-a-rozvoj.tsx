@@ -25,6 +25,7 @@ import karnevalImg from "@/assets/vzdelavani/karneval.webp.asset.json";
 const t = fixPrepositions;
 
 export const Route = createFileRoute("/vzdelavani-a-rozvoj")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(siteCopyQueryOptions("vzdelavani-a-rozvoj")),
   head: () => ({
     meta: [
       { title: "Vzdělávání a aktivity — Mateřská škola Josefa Gočára" },
