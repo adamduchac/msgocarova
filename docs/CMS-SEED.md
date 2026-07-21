@@ -9,48 +9,29 @@ původním obsahem webu automaticky (10 členů týmu vč. medailonků, 7 PDF). 
 PDF se nikam nekopírují — databáze odkazuje na soubory, které web už hostuje;
 nové soubory nahrané později přes admin se ukládají normálně do Supabase Storage.
 
-## Kroky — POŘADÍ JE DŮLEŽITÉ
+## Záznam nasazení (červenec 2026)
 
-Dvě cesty podle toho, jaký máte přístup k databázi:
+Provedeno přes Lovable (DB jede na Lovable Cloud, bez přímého přístupu do
+Supabase):
 
-- **A) Lovable Cloud** (nemáte přímý přístup do Supabase) → postup níže.
-- **B) Přímý přístup do Supabase SQL Editoru** → viz „Cesta B" na konci sekce.
+1. Záloha DB ✅
+2. Migrace `20260721000000` (sloupec `staff_group`) ✅ — **až na buckety**:
+   workspace nepovoluje veřejné buckety (`public_buckets_blocked`), takže část
+   `public = true` nebyla aplikována.
+3. Náhradní řešení úložiště: anon **čtecí RLS politiky** na bucketech
+   (`20260721120000_storage_read_policies.sql`) + kód servíruje admin-nahrané
+   soubory přes **podepsané URL**. Expozice obsahu je stejná — soubory jsou
+   určené veřejnému webu.
+4. Tabulka `staff` obsahovala 10 starých prázdných řádků (bez bio/fotek) →
+   `TRUNCATE public.staff` a nové spuštění seedu.
+5. Seed `supabase/seed-cms-content.sql`: `staff = 10` (7 pedagog + 3 provoz,
+   bio + fotky), `documents = 7` ✅
 
-### 1. Záloha databáze
-Zálohu databáze si ověřte/pořiďte (Lovable Cloud ji spravuje; při přímém
-přístupu Supabase → Database → Backups). Změny jsou additivní a tabulky prázdné,
-ale snapshot mějte vždy.
-
-### 2. Merge větve do main
-Mergněte PR — Lovable web automaticky nasadí a uvidí oba SQL soubory v repu.
-(Do provedení kroku 3 jede web dál postaru díky fallbacku; jen ukládání
-zaměstnanců v adminu by hlásilo chybu — proto krok 3 proveďte hned po merge.)
-
-### 3. Jeden prompt do Lovable (migrace + naplnění)
-Do chatu v Lovable vložte doslova tento příkaz:
-
-> Potřebuji pouze zásah do databáze, žádné změny kódu. V repu jsou dva SQL
-> soubory:
->
-> 1. Pokud tabulka `public.staff` ještě nemá sloupec `staff_group`, aplikuj
->    migraci `supabase/migrations/20260721000000_staff_group_and_public_buckets.sql`.
-> 2. Potom spusť celý obsah souboru `supabase/seed-cms-content.sql` beze změn
->    (je idempotentní, plní jen prázdné tabulky).
->
-> Na závěr vypiš kontrolu: počet řádků v `public.staff` (očekávám 10) a
-> `public.documents` (očekávám 7) a potvrď, že buckety `staff-photos` a
-> `documents` mají `public = true`. Neupravuj žádný kód ani jiné části databáze.
-
-### Cesta B (přímý přístup do Supabase)
-Stejné SQL ručně: 1) záloha, 2) SQL Editor → obsah migrace → Run, 3) merge PR,
-4) SQL Editor → obsah `seed-cms-content.sql` → Run (vypíše `staff_rows = 10`,
-`document_rows = 7`).
-
-### 4. Ověřit
+### Ověření po nasazení
 - Úvod → carousel týmu, `/o-skolce` → sekce týmu (pedagogický + provozní),
   `/pro-rodice` → dokumenty.
 - `/admin/zamestnanci` a `/admin/dokumenty` → obsah je vidět a dá se upravovat.
-- Od této chvíle web zobrazuje to, co je v adminu; úpravy děláte tam.
+- Od této chvíle web zobrazuje to, co je v adminu; úpravy se dělají tam.
 
 ## Jak funguje fallback (pro pozdější ruční úpravy)
 
