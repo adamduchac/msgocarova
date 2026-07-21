@@ -1,5 +1,7 @@
+import { queryOptions } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
+import { fixPrepositions } from "./typography";
 
 export type Announcement = Database["public"]["Tables"]["announcements"]["Row"];
 export type StaffRow = Database["public"]["Tables"]["staff"]["Row"];
@@ -9,8 +11,7 @@ export type ClassColor = Database["public"]["Enums"]["class_color"];
 export type DocCategory = Database["public"]["Enums"]["doc_category"];
 export type InfoState = Database["public"]["Enums"]["info_state"];
 export type InfoPage = Database["public"]["Enums"]["info_page"];
-
-const SIGN_EXPIRES = 60 * 60; // 1h
+export type StaffGroup = Database["public"]["Enums"]["staff_group"];
 
 // -------------------- ANNOUNCEMENTS --------------------
 
@@ -52,6 +53,13 @@ export async function fetchInfoBox(page: InfoPage): Promise<InfoBox | null> {
 
 export type DocumentWithUrl = DocumentRow & { url: string | null };
 
+// Rows seeded from the pre-CMS content (supabase/seed-cms-content.sql) reference
+// the site's already-hosted asset URLs directly; admin uploads store bucket paths.
+function storagePublicUrl(bucket: "staff-photos" | "documents", path: string): string {
+  if (path.startsWith("/") || path.startsWith("http")) return path;
+  return supabase.storage.from(bucket).getPublicUrl(path).data.publicUrl;
+}
+
 export async function fetchDocuments(activeOnly = true): Promise<DocumentWithUrl[]> {
   let q = supabase
     .from("documents")
@@ -63,15 +71,12 @@ export async function fetchDocuments(activeOnly = true): Promise<DocumentWithUrl
   const { data, error } = await q;
   if (error) throw error;
   if (!data || data.length === 0) return [];
-  const withUrls = await Promise.all(
-    data.map(async (d) => {
-      const { data: signed } = await supabase.storage
-        .from("documents")
-        .createSignedUrl(d.file_path, SIGN_EXPIRES);
-      return { ...d, url: signed?.signedUrl ?? null };
-    })
-  );
-  return withUrls;
+  // Buckets are public (migration 20260721000000) — build stable public URLs
+  // instead of signing each file (removes an N+1 round-trip per row).
+  return data.map((d) => ({
+    ...d,
+    url: storagePublicUrl("documents", d.file_path),
+  }));
 }
 
 // -------------------- STAFF --------------------
@@ -88,16 +93,10 @@ export async function fetchStaff(activeOnly = true): Promise<StaffWithPhoto[]> {
   const { data, error } = await q;
   if (error) throw error;
   if (!data) return [];
-  const withUrls = await Promise.all(
-    data.map(async (s) => {
-      if (!s.photo_path) return { ...s, photo_url: null };
-      const { data: signed } = await supabase.storage
-        .from("staff-photos")
-        .createSignedUrl(s.photo_path, SIGN_EXPIRES);
-      return { ...s, photo_url: signed?.signedUrl ?? null };
-    })
-  );
-  return withUrls;
+  return data.map((s) => ({
+    ...s,
+    photo_url: s.photo_path ? storagePublicUrl("staff-photos", s.photo_path) : null,
+  }));
 }
 
 export function staffFullName(s: Pick<StaffRow, "title_prefix" | "first_name" | "last_name" | "title_suffix">): string {
@@ -146,3 +145,43 @@ export const CLASS_COLOR_TEXT: Record<ClassColor, string> = {
   yellow: "text-brand-yellow",
   none: "text-ink/70",
 };
+
+// -------------------- TEAM VIEW (public rendering) --------------------
+
+// Shape shared by the homepage teacher carousel and the "o školce" team grid.
+export type TeamMemberView = {
+  name: string;
+  role: string;
+  roleColor: string;
+  photo: string | null;
+  alt: string;
+  group: StaffGroup;
+  bio: string;
+};
+
+export function staffToTeamMember(s: StaffWithPhoto): TeamMemberView {
+  const name = staffFullName(s);
+  return {
+    name,
+    role: fixPrepositions(s.position || ""),
+    roleColor: CLASS_COLOR_TEXT[s.class_color],
+    photo: s.photo_url,
+    alt: `Portrét — ${name}`,
+    group: s.staff_group,
+    bio: fixPrepositions(s.bio ?? ""),
+  };
+}
+
+// -------------------- SHARED QUERY OPTIONS (loaders + components) --------------------
+
+export const staffPublicQueryOptions = queryOptions({
+  queryKey: ["staff", "active"],
+  queryFn: () => fetchStaff(true),
+  staleTime: 60_000,
+});
+
+export const documentsPublicQueryOptions = queryOptions({
+  queryKey: ["documents", "active"],
+  queryFn: () => fetchDocuments(true),
+  staleTime: 60_000,
+});

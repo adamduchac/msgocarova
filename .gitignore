@@ -20,6 +20,12 @@ dist-ssr
 .wrangler/
 .dev.vars
 
+# Local env overrides. NOTE: `.env` itself is intentionally tracked — Lovable
+# generates it and the build reads VITE_* values from it; it contains only
+# publishable (public) keys. Never put real secrets in any committed file.
+.env.local
+.env.*.local
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

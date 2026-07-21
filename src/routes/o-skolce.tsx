@@ -1,9 +1,11 @@
 import { useRef } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ChevronLeft, ChevronRight, Heart, Sparkles, Trees, Activity, UtensilsCrossed } from "lucide-react";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
-import { teamMembers, getInitials } from "@/data/team";
+import { teamMembers, getInitials, type TeamMember } from "@/data/team";
+import { staffPublicQueryOptions, staffToTeamMember } from "@/lib/cms";
 import { useCopyPage, siteCopyQueryOptions } from "@/lib/use-copy";
 import oskolce1 from "@/assets/oskolce-1.webp.asset.json";
 import oskolce2 from "@/assets/oskolce-2.webp.asset.json";
@@ -104,6 +106,14 @@ function AboutGallery() {
 
 function OSkolcePage() {
   const c = useCopyPage("o-skolce");
+  const { data: dbStaff } = useQuery(staffPublicQueryOptions);
+  const dbMembers = (dbStaff ?? []).map(staffToTeamMember);
+  // Per-group fallback (matches the homepage carousel): a group switches to DB
+  // only once it has rows, so neither group can render as an empty grid.
+  const byGroup = (group: TeamMember["group"]): TeamMember[] => {
+    const db = dbMembers.filter((m) => m.group === group);
+    return db.length > 0 ? db : teamMembers.filter((m) => m.group === group);
+  };
 
   const visionCards = [
     {
@@ -318,10 +328,10 @@ function OSkolcePage() {
               </h2>
             </div>
 
-            <TeamGroup title={c("team.pedagogTitle", "Pedagogický tým")} members={teamMembers.filter((m) => m.group === "pedagog")} />
+            <TeamGroup title={c("team.pedagogTitle", "Pedagogický tým")} members={byGroup("pedagog")} />
 
             <div className="mt-16">
-              <TeamGroup title={c("team.provozTitle", "Provozní tým")} members={teamMembers.filter((m) => m.group === "provoz")} />
+              <TeamGroup title={c("team.provozTitle", "Provozní tým")} members={byGroup("provoz")} />
             </div>
           </div>
         </section>

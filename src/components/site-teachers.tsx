@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 
+import { useQuery } from "@tanstack/react-query";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { fixPrepositions } from "@/lib/typography";
 import { useCopyPage } from "@/lib/use-copy";
+import { staffPublicQueryOptions, staffToTeamMember } from "@/lib/cms";
 import janaPhoto from "@/assets/teacher-jana-tuharska-v2.webp.asset.json";
 import jitkaPhoto from "@/assets/teacher-jitka-kouklikova-v2.webp.asset.json";
 import nikolaPhoto from "@/assets/teacher-nikola-sorfova-v2.webp.asset.json";
@@ -17,7 +19,8 @@ type Teacher = {
   bio: string;
 };
 
-const teachers: Teacher[] = [
+// Fallback used until the CMS `staff` table is populated (see docs/CMS-SEED.md).
+const FALLBACK_TEACHERS: Teacher[] = [
   {
     name: "Mgr. Jitka Kouklíková",
     role: fixPrepositions("Zástupkyně ředitele pro MŠ"),
@@ -104,12 +107,23 @@ function getInitials(name: string): string {
 
 export function SiteTeachers() {
   const c = useCopyPage("index");
+  const { data: dbStaff } = useQuery(staffPublicQueryOptions);
+  const dbTeachers = (dbStaff ?? [])
+    .map(staffToTeamMember)
+    .filter((m) => m.group === "pedagog");
+  const teachers: Teacher[] = dbTeachers.length > 0 ? dbTeachers : FALLBACK_TEACHERS;
   const [index, setIndex] = useState(0);
   const total = teachers.length;
   const touchStartX = useRef<number | null>(null);
 
   const go = (dir: 1 | -1) => setIndex((i) => (i + dir + total) % total);
   const goTo = (i: number) => setIndex(((i % total) + total) % total);
+
+  // The list can shrink when DB data replaces the fallback after load;
+  // keep the current slide in bounds so the carousel never shows a blank frame.
+  useEffect(() => {
+    if (index >= total) setIndex(0);
+  }, [index, total]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
