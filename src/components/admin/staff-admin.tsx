@@ -119,7 +119,7 @@ export function StaffAdmin() {
                       <div className="text-xs text-muted-foreground truncate">{s.position}</div>
                       <div className="mt-2 flex gap-1">
                         <IconBtn onClick={() => toggle.mutate({ id: s.id, is_active: !s.is_active })} title={s.is_active ? "Skrýt" : "Zobrazit"}>
-                          {s.is_active ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                          {s.is_active ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
                         </IconBtn>
                         <IconBtn onClick={() => setEditing(s)} title="Upravit"><Pencil className="h-4 w-4" /></IconBtn>
                         <IconBtn onClick={() => { if (confirm(`Smazat ${staffFullName(s)}?`)) del.mutate(s); }} title="Smazat" danger><Trash2 className="h-4 w-4" /></IconBtn>
