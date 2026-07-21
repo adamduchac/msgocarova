@@ -46,7 +46,7 @@ const GROUP_LABELS: Record<string, string> = {
   rhythm: "Jeden den ve školce",
   classes: "Barevné třídy (sekce)",
   activities: "Zážitky",
-  teachers: "Tým — hlavička",
+  teachers: "Tým – hlavička",
   cervena: "Červená kostička",
   zelena: "Zelená kostička",
   modra: "Modrá kostička",
@@ -136,7 +136,7 @@ function TextyEditor() {
     setDrafts((prev) => ({ ...prev, [key]: value }));
   };
 
-  // Persisted (server) override for each key — empty string when none.
+  // Persisted (server) override for each key – empty string when none.
   const persisted = (key: string) => overrides?.[key] ?? "";
 
   // Dirty = draft differs from persisted.

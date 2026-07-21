@@ -14,13 +14,13 @@ export const Route = createFileRoute("/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(siteCopyQueryOptions("index")),
   head: () => ({
     meta: [
-      { title: "Mateřská škola Josefa Gočára — Hradec Králové" },
+      { title: "Mateřská škola Josefa Gočára – Hradec Králové" },
       {
         name: "description",
         content:
-          "Mateřská škola Josefa Gočára v centru Hradce Králové. Místo, kde si děti hrají, objevují a rostou — bezpečné zázemí, velká zahrada a respektující přístup.",
+          "Mateřská škola Josefa Gočára v centru Hradce Králové. Místo, kde si děti hrají, objevují a rostou – bezpečné zázemí, velká zahrada a respektující přístup.",
       },
-      { property: "og:title", content: "Mateřská škola Josefa Gočára — Hradec Králové" },
+      { property: "og:title", content: "Mateřská škola Josefa Gočára – Hradec Králové" },
       {
         property: "og:description",
         content:

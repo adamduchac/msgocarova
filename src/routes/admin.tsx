@@ -167,7 +167,7 @@ function renderNav(item: NavItem, pathname: string) {
     <Link
       key={item.to}
       to={item.to}
-      title={item.warn ? "Pokročilé — mění strojově texty na webu. Používejte opatrně." : undefined}
+      title={item.warn ? "Pokročilé – mění strojově texty na webu. Používejte opatrně." : undefined}
       className={`flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors border-l-2 ${
         active
           ? "bg-white/[0.07] text-white font-medium border-brand-yellow"

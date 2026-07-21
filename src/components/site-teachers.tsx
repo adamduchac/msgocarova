@@ -25,7 +25,7 @@ const teachers: Teacher[] = [
     photo: jitkaPhoto.url,
     alt: "Portrét paní Mgr. Jitky Kouklíkové",
     bio: fixPrepositions(
-      "Jako zástupkyně ředitele pro MŠ propojuji každodenní práci s dětmi s vedením týmu mateřské školy a organizací provozu. Velkou radostí je pro mě vidět aktivní děti a spokojené paní učitelky, kterým se daří připravovat pro děti zajímavé aktivity a vytvářet smysluplné, podnětné prostředí — ve třídách i na školní zahradě. Vzdělávám se v oblasti předškolního vzdělávání, aby naše mateřská škola mohla stále růst a rozvíjet se. Dětem nejraději připravuji aktivity podporující jejich myšlení, tvořivost a radost z objevování. Všímám si toho, co děti zajímá a snažím se jim to nabídnout. Záleží mi na tom, aby jim u nás bylo opravdu dobře. Mám ráda zpěv, hudbu, přírodu a cestování."
+      "Jako zástupkyně ředitele pro MŠ propojuji každodenní práci s dětmi s vedením týmu mateřské školy a organizací provozu. Velkou radostí je pro mě vidět aktivní děti a spokojené paní učitelky, kterým se daří připravovat pro děti zajímavé aktivity a vytvářet smysluplné, podnětné prostředí – ve třídách i na školní zahradě. Vzdělávám se v oblasti předškolního vzdělávání, aby naše mateřská škola mohla stále růst a rozvíjet se. Dětem nejraději připravuji aktivity podporující jejich myšlení, tvořivost a radost z objevování. Všímám si toho, co děti zajímá a snažím se jim to nabídnout. Záleží mi na tom, aby jim u nás bylo opravdu dobře. Mám ráda zpěv, hudbu, přírodu a cestování."
     ),
   },
   {

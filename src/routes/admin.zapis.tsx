@@ -5,7 +5,7 @@ export const Route = createFileRoute("/admin/zapis")({
   component: () => (
     <InfoBoxAdmin
       page="zapis"
-      heading="Zápis — infobox"
+      heading="Zápis – infobox"
       description="Řídí stavový box na stránce /zapis-do-skolky. Pokud je vyplněný titulek, přepíše statický obsah."
     />
   ),

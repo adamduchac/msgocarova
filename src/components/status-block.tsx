@@ -14,7 +14,7 @@ type StatusBlockProps = {
  * Prominent, decently styled status card used on /zapis-do-skolky and
  * /predskolacek. Two variants:
  * - "closed" → uses brand-yellow accent (neběží / uzavřeno)
- * - "open"   → uses brand-green accent (běží — připraveno pro CMS)
+ * - "open"   → uses brand-green accent (běží – připraveno pro CMS)
  */
 export function StatusBlock({
   variant = "closed",
@@ -25,7 +25,7 @@ export function StatusBlock({
   const isOpen = variant === "open";
   const isUpcoming = variant === "upcoming";
   const defaultLabel =
-    isOpen ? "Aktuální stav — právě běží" : isUpcoming ? "Aktuální stav — připravujeme" : "Aktuální stav";
+    isOpen ? "Aktuální stav – právě běží" : isUpcoming ? "Aktuální stav – připravujeme" : "Aktuální stav";
   const label = eyebrow ?? defaultLabel;
   const Icon = isOpen ? CalendarCheck : isUpcoming ? Clock : AlertCircle;
   const accent = isOpen ? "bg-brand-green" : isUpcoming ? "bg-brand-blue" : "bg-brand-yellow";

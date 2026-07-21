@@ -13,17 +13,17 @@ export const Route = createFileRoute("/akce-s-rodici")({
   loader: ({ context }) => context.queryClient.ensureQueryData(siteCopyQueryOptions("akce-s-rodici")),
   head: () => ({
     meta: [
-      { title: "Akce s rodiči — Mateřská škola Josefa Gočára" },
+      { title: "Akce s rodiči – Mateřská škola Josefa Gočára" },
       {
         name: "description",
         content:
-          "Společná setkání rodin ve školce — od podzimního dlabání dýní přes vánoční posezení až po květnové Slavnosti školy na zahradě.",
+          "Společná setkání rodin ve školce – od podzimního dlabání dýní přes vánoční posezení až po květnové Slavnosti školy na zahradě.",
       },
-      { property: "og:title", content: "Akce s rodiči — Mateřská škola Josefa Gočára" },
+      { property: "og:title", content: "Akce s rodiči – Mateřská škola Josefa Gočára" },
       {
         property: "og:description",
         content:
-          "Přehled tradičních akcí, kdy se ve školce potkávají celé rodiny — tvoření, slavnosti, výlety a další společné události.",
+          "Přehled tradičních akcí, kdy se ve školce potkávají celé rodiny – tvoření, slavnosti, výlety a další společné události.",
       },
       { property: "og:url", content: "/akce-s-rodici" },
     ],
@@ -93,7 +93,7 @@ function AkceSRodiciPage() {
               <p className="mt-5 text-lg leading-relaxed text-body md:text-xl">
                 {c(
                   "hero.lead",
-                  "Během roku se ve školce potkávají nejen děti s učitelkami, ale i celé rodiny — od podzimního dlabání dýní přes vánoční posezení až po květnové Slavnosti školy na zahradě. Některé akce se opakují každý rok, jiné vznikají i z nápadů a nabídek samotných rodičů. Aktuální termíny najdete v aplikaci Naše MŠ."
+                  "Během roku se ve školce potkávají nejen děti s učitelkami, ale i celé rodiny – od podzimního dlabání dýní přes vánoční posezení až po květnové Slavnosti školy na zahradě. Některé akce se opakují každý rok, jiné vznikají i z nápadů a nabídek samotných rodičů. Aktuální termíny najdete v aplikaci Naše MŠ."
                 )}
               </p>
             </div>
@@ -137,7 +137,7 @@ function AkceSRodiciPage() {
                   <li key={e.title} className="py-5">
                     <p className="font-display text-lg font-semibold text-ink">
                       {t(e.title)}
-                      <span className="font-normal text-body"> — {t(e.text)}</span>
+                      <span className="font-normal text-body"> – {t(e.text)}</span>
                     </p>
                   </li>
                 ))}
