@@ -156,6 +156,7 @@ export type Database = {
           photo_path: string | null
           position: string
           sort_order: number
+          staff_group: Database["public"]["Enums"]["staff_group"]
           title_prefix: string | null
           title_suffix: string | null
           updated_at: string
@@ -172,6 +173,7 @@ export type Database = {
           photo_path?: string | null
           position?: string
           sort_order?: number
+          staff_group?: Database["public"]["Enums"]["staff_group"]
           title_prefix?: string | null
           title_suffix?: string | null
           updated_at?: string
@@ -188,6 +190,7 @@ export type Database = {
           photo_path?: string | null
           position?: string
           sort_order?: number
+          staff_group?: Database["public"]["Enums"]["staff_group"]
           title_prefix?: string | null
           title_suffix?: string | null
           updated_at?: string
@@ -234,6 +237,7 @@ export type Database = {
       doc_category: "formulare" | "dokumenty"
       info_page: "predskolacek" | "zapis"
       info_state: "open" | "upcoming" | "closed"
+      staff_group: "pedagog" | "provoz"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -366,6 +370,7 @@ export const Constants = {
       doc_category: ["formulare", "dokumenty"],
       info_page: ["predskolacek", "zapis"],
       info_state: ["open", "upcoming", "closed"],
+      staff_group: ["pedagog", "provoz"],
     },
   },
 } as const

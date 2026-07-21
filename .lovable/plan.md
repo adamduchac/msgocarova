@@ -1,11 +1,27 @@
-Prohodit status ikony oka v administraci medailonků zaměstnanců (`src/components/admin/staff-admin.tsx`).
+Databázový zásah dle zadání – žádné změny kódu.
 
-Aktuální stav:
-- Aktivní zaměstnanec zobrazuje tlačítko s ikonou EyeOff (přeškrtnuté oko) a title „Skrýt".
-- Skrytý zaměstnanec zobrazuje tlačítko s ikonou Eye (plné oko) a title „Zobrazit".
+## Kroky
+1. **Migrace** `staff_group` + veřejné buckety (obsah shodný se souborem `supabase/migrations/20260721000000_...`, jen s `IF NOT EXISTS` ochranou proti duplicitě):
+   ```sql
+   DO $$ BEGIN
+     CREATE TYPE public.staff_group AS ENUM ('pedagog','provoz');
+   EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+   ALTER TABLE public.staff
+     ADD COLUMN IF NOT EXISTS staff_group public.staff_group NOT NULL DEFAULT 'pedagog';
+   INSERT INTO storage.buckets (id, name, public)
+   VALUES ('staff-photos','staff-photos',true), ('documents','documents',true)
+   ON CONFLICT (id) DO UPDATE SET public = true;
+   ```
+2. **Seed** – spustím celý `supabase/seed-cms-content.sql` beze změn (idempotentní, `staff` má 10 řádků → přeskočí; `documents` je prázdné → doplní 7 řádků).
+3. **Skrytí stávajících 10 řádků staff** (fallback web bude nadále ukazovat vestavěný obsah):
+   ```sql
+   UPDATE public.staff SET is_active = false;
+   ```
+4. **Kontroly**:
+   - `SELECT count(*) FROM public.staff;` (očekávám 10)
+   - `SELECT count(*) FROM public.documents;` (očekávám 7)
+   - `SELECT id, public FROM storage.buckets WHERE id IN ('staff-photos','documents');` (obojí `true`)
+   - Výpis všech 10 řádků `public.staff`: `first_name, last_name, position, class_color, staff_group, sort_order, photo_path, length(bio)`.
 
-Cílový stav:
-- Aktivní zaměstnanec = plné oko (Eye) – reprezentuje, že je viditelný na webu.
-- Skrytý zaměstnanec = přeškrtnuté oko (EyeOff) – reprezentuje, že je skrytý.
-
-Změna se týká pouze prohození ikon `<Eye />` a `<EyeOff />` uvnitř podmínky `s.is_active ? … : …` na řádku 122. Title tlačítek a akce (toggle) zůstávají stejné.
+## Poznámka k nástrojům
+Krok 1 spustím přes `supabase--migration` (schema změny). Krok 2 a 3 přes `supabase--insert` (data). Kontroly v kroku 4 přes `supabase--read_query`. Přepněte prosím do build módu.
