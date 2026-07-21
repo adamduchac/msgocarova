@@ -119,6 +119,12 @@ export function SiteTeachers() {
   const go = (dir: 1 | -1) => setIndex((i) => (i + dir + total) % total);
   const goTo = (i: number) => setIndex(((i % total) + total) % total);
 
+  // The list can shrink when DB data replaces the fallback after load;
+  // keep the current slide in bounds so the carousel never shows a blank frame.
+  useEffect(() => {
+    if (index >= total) setIndex(0);
+  }, [index, total]);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft") go(-1);

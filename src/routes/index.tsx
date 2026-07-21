@@ -9,14 +9,9 @@ import { SiteActivities } from "@/components/site-activities";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteTeachers } from "@/components/site-teachers";
 import { siteCopyQueryOptions } from "@/lib/use-copy";
-import { staffPublicQueryOptions } from "@/lib/cms";
 
 export const Route = createFileRoute("/")({
-  loader: ({ context }) =>
-    Promise.all([
-      context.queryClient.ensureQueryData(siteCopyQueryOptions("index")),
-      context.queryClient.ensureQueryData(staffPublicQueryOptions),
-    ]),
+  loader: ({ context }) => context.queryClient.ensureQueryData(siteCopyQueryOptions("index")),
   head: () => ({
     meta: [
       { title: "Mateřská škola Josefa Gočára — Hradec Králové" },

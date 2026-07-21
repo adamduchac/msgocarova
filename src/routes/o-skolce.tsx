@@ -34,11 +34,7 @@ export const Route = createFileRoute("/o-skolce")({
     ],
     links: [{ rel: "canonical", href: "/o-skolce" }],
   }),
-  loader: ({ context }) =>
-    Promise.all([
-      context.queryClient.ensureQueryData(siteCopyQueryOptions("o-skolce")),
-      context.queryClient.ensureQueryData(staffPublicQueryOptions),
-    ]),
+  loader: ({ context }) => context.queryClient.ensureQueryData(siteCopyQueryOptions("o-skolce")),
   component: OSkolcePage,
 });
 
@@ -112,7 +108,12 @@ function OSkolcePage() {
   const c = useCopyPage("o-skolce");
   const { data: dbStaff } = useQuery(staffPublicQueryOptions);
   const dbMembers = (dbStaff ?? []).map(staffToTeamMember);
-  const team: TeamMember[] = dbMembers.length > 0 ? dbMembers : teamMembers;
+  // Per-group fallback (matches the homepage carousel): a group switches to DB
+  // only once it has rows, so neither group can render as an empty grid.
+  const byGroup = (group: TeamMember["group"]): TeamMember[] => {
+    const db = dbMembers.filter((m) => m.group === group);
+    return db.length > 0 ? db : teamMembers.filter((m) => m.group === group);
+  };
 
   const visionCards = [
     {
@@ -327,10 +328,10 @@ function OSkolcePage() {
               </h2>
             </div>
 
-            <TeamGroup title={c("team.pedagogTitle", "Pedagogický tým")} members={team.filter((m) => m.group === "pedagog")} />
+            <TeamGroup title={c("team.pedagogTitle", "Pedagogický tým")} members={byGroup("pedagog")} />
 
             <div className="mt-16">
-              <TeamGroup title={c("team.provozTitle", "Provozní tým")} members={team.filter((m) => m.group === "provoz")} />
+              <TeamGroup title={c("team.provozTitle", "Provozní tým")} members={byGroup("provoz")} />
             </div>
           </div>
         </section>

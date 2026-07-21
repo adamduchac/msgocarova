@@ -45,6 +45,7 @@ export function DocumentsAdmin() {
       qc.invalidateQueries({ queryKey: ["documents", "active"] });
       setEditing(null);
     },
+    onError: (e) => alert(`Uložení se nezdařilo: ${e instanceof Error ? e.message : e}`),
   });
 
   const del = useMutation({
@@ -57,6 +58,7 @@ export function DocumentsAdmin() {
       qc.invalidateQueries({ queryKey: ["admin", "documents"] });
       qc.invalidateQueries({ queryKey: ["documents", "active"] });
     },
+    onError: (e) => alert(`Smazání se nezdařilo: ${e instanceof Error ? e.message : e}`),
   });
 
   const toggle = useMutation({

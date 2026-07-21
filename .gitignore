@@ -20,10 +20,11 @@ dist-ssr
 .wrangler/
 .dev.vars
 
-# Local environment (never commit real keys — use .env.example as the template)
-.env
-.env.*
-!.env.example
+# Local env overrides. NOTE: `.env` itself is intentionally tracked — Lovable
+# generates it and the build reads VITE_* values from it; it contains only
+# publishable (public) keys. Never put real secrets in any committed file.
+.env.local
+.env.*.local
 
 # Editor directories and files
 .vscode/*

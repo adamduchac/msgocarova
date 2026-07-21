@@ -48,6 +48,7 @@ export function StaffAdmin() {
       qc.invalidateQueries({ queryKey: ["staff"] });
       setEditing(null);
     },
+    onError: (e) => alert(`Uložení se nezdařilo: ${e instanceof Error ? e.message : e}`),
   });
 
   const del = useMutation({
@@ -60,6 +61,7 @@ export function StaffAdmin() {
       qc.invalidateQueries({ queryKey: ["admin", "staff"] });
       qc.invalidateQueries({ queryKey: ["staff"] });
     },
+    onError: (e) => alert(`Smazání se nezdařilo: ${e instanceof Error ? e.message : e}`),
   });
 
   const toggle = useMutation({
@@ -71,6 +73,7 @@ export function StaffAdmin() {
       qc.invalidateQueries({ queryKey: ["admin", "staff"] });
       qc.invalidateQueries({ queryKey: ["staff"] });
     },
+    onError: (e) => alert(`Změna viditelnosti se nezdařila: ${e instanceof Error ? e.message : e}`),
   });
 
   const grouped = CLASS_ORDER.map((c) => ({

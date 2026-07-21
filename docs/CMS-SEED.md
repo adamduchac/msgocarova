@@ -9,28 +9,40 @@ Render je hotový v kódu. Tento návod je o tom, co spustit **na živé databá
 
 ## Jak fallback funguje (důležité pro pořadí kroků)
 
-- **Tým:** jakmile existuje **první aktivní pedagog**, carousel i sekce týmu se
-  přepnou celé na DB. Proto přidejte **všechny** zaměstnance najednou (nebo je držte
-  jako skryté, dokud nebudou zadaní všichni), jinak se dočasně zobrazí jen ti zadaní.
+- **Tým:** fallback je **per skupina** (pedagogický / provozní tým zvlášť). Jakmile
+  má skupina prvního aktivního člena, přepne se celá na DB. Proto přidejte vždy
+  **celou skupinu najednou** (nebo držte členy jako skryté, dokud nebudou zadaní
+  všichni), jinak se ve skupině dočasně zobrazí jen ti zadaní.
 - **Dokumenty:** fallback je **per kategorie**. Jakmile má kategorie
   („Formuláře a žádosti" nebo „Základní dokumenty") aspoň jeden CMS záznam,
   natvrdo psané dokumenty té kategorie se skryjí. Zadávejte celou kategorii najednou.
 
-## Kroky
+## Kroky — POŘADÍ JE DŮLEŽITÉ
+
+Migrace se aplikuje **dřív, než se tento kód dostane na web** (merge do main).
+Důvod: nový admin ukládá sloupec `staff_group` a web čte soubory z veřejných
+bucketů — obojí vyžaduje migraci. Opačné pořadí je bezpečné pro návštěvníky
+(fallback), ale admin by do aplikace migrace hlásil chybu při ukládání
+zaměstnanců a nahrané dokumenty by měly nefunkční odkazy. Starému (aktuálnímu)
+kódu migrace nevadí — jen přidává sloupec a otevírá čtení bucketů.
 
 ### 1. Záloha databáze
 Supabase dashboard → **Database → Backups** (nebo `pg_dump`). Migrace je additivní a
 tabulky jsou prázdné, ale snapshot udělejte vždy.
 
-### 2. Aplikovat migraci
+### 2. Aplikovat migraci (před mergem!)
 `supabase/migrations/20260721000000_staff_group_and_public_buckets.sql`
 - přidá sloupec `staff_group` (pedagog/provoz) do `staff`,
 - nastaví buckety `staff-photos` a `documents` jako **veřejné** (web je čte přes
   `getPublicUrl`).
 
-Aplikuje se přes Lovable / Supabase (push migrace nebo `supabase db push`).
+Nejjednodušší cesta bez nástrojů: Supabase dashboard → **SQL Editor** → vložit
+obsah souboru → Run. (Alternativně `supabase db push` / přes Lovable.)
 
-### 3. Zadat obsah přes admin
+### 3. Merge větve do main
+Teprve po úspěšné migraci mergněte tuto větev — Lovable web automaticky nasadí.
+
+### 4. Zadat obsah přes admin
 Přihlaste se do `/admin` (účet s rolí admin).
 
 **Zaměstnanci** — `/admin/zamestnanci` → „Nový medailonek":
@@ -45,12 +57,12 @@ Přihlaste se do `/admin` (účet s rolí admin).
 - Seznam původních PDF a jejich názvy: `src/routes/pro-rodice.tsx`
   (pole `formulare` a `zakladni`).
 
-### 4. Ověřit
+### 5. Ověřit
 - Úvod → carousel týmu, `/o-skolce` → sekce týmu (pedagog + provoz),
   `/pro-rodice` → dokumenty. Vše musí ukazovat data z DB (fotky/PDF se načtou
   z veřejných bucketů).
 
-### 5. Úklid (volitelně, později)
+### 6. Úklid (volitelně, později)
 Až budete jistí, že vše jede z DB, lze odstranit fallback data a asset importy:
 - `FALLBACK_TEACHERS` v `src/components/site-teachers.tsx`,
 - `src/data/team.ts` a jeho použití v `src/routes/o-skolce.tsx`,

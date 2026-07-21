@@ -36,11 +36,7 @@ export const Route = createFileRoute("/pro-rodice")({
     ],
     links: [{ rel: "canonical", href: "/pro-rodice" }],
   }),
-  loader: ({ context }) =>
-    Promise.all([
-      context.queryClient.ensureQueryData(siteCopyQueryOptions("pro-rodice")),
-      context.queryClient.ensureQueryData(documentsPublicQueryOptions),
-    ]),
+  loader: ({ context }) => context.queryClient.ensureQueryData(siteCopyQueryOptions("pro-rodice")),
   component: ProRodicePage,
 });
 
