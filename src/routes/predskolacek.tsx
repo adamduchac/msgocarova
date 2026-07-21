@@ -10,13 +10,13 @@ export const Route = createFileRoute("/predskolacek")({
   loader: ({ context }) => context.queryClient.ensureQueryData(siteCopyQueryOptions("predskolacek")),
   head: () => ({
     meta: [
-      { title: "Předškoláček — Mateřská škola Josefa Gočára" },
+      { title: "Předškoláček – Mateřská škola Josefa Gočára" },
       {
         name: "description",
         content:
           "Program Předškoláček pro budoucí prvňáčky a jejich rodiče. Aktuální termíny, průběh setkání a na co se zaměřujeme.",
       },
-      { property: "og:title", content: "Předškoláček — Mateřská škola Josefa Gočára" },
+      { property: "og:title", content: "Předškoláček – Mateřská škola Josefa Gočára" },
       {
         property: "og:description",
         content:
@@ -55,7 +55,7 @@ function PredskolacekPage() {
               <p className="mt-5 text-lg leading-relaxed text-body">
                 {c(
                   "hero.lead",
-                  "Předškoláček je program pro budoucí prvňáčky a jejich rodiče. Hravou formou v něm procvičujeme dovednosti důležité pro vstup do první třídy — a zároveň je to společně strávený čas dítěte s rodičem. Setkání vedou naše učitelky v malých skupinkách přibližně deseti dětí."
+                  "Předškoláček je program pro budoucí prvňáčky a jejich rodiče. Hravou formou v něm procvičujeme dovednosti důležité pro vstup do první třídy – a zároveň je to společně strávený čas dítěte s rodičem. Setkání vedou naše učitelky v malých skupinkách přibližně deseti dětí."
                 )}
               </p>
             </div>
@@ -95,7 +95,7 @@ function PredskolacekPage() {
                 </div>
                 <p className="mt-4 text-[15px] leading-relaxed text-body">
                   {t(
-                    "Program probíhá v Červené i Zelené kostičce, vždy 3× v období únor až březen, od 15:30 do 16:20. Rodiče jsou u toho — vidí své dítě při práci a odnášejí si náměty pro společné aktivity doma. Z každého setkání si děti odnášejí 10 úkolů. Aktivity jsou pestré a přiměřené věku; účast je dobrovolná. Prosíme, aby se setkání neúčastnili mladší sourozenci."
+                    "Program probíhá v Červené i Zelené kostičce, vždy 3× v období únor až březen, od 15:30 do 16:20. Rodiče jsou u toho – vidí své dítě při práci a odnášejí si náměty pro společné aktivity doma. Z každého setkání si děti odnášejí 10 úkolů. Aktivity jsou pestré a přiměřené věku; účast je dobrovolná. Prosíme, aby se setkání neúčastnili mladší sourozenci."
                   )}
                 </p>
               </article>
@@ -114,12 +114,12 @@ function PredskolacekPage() {
                 </div>
                 <ul className="mt-4 space-y-2 text-[15px] leading-relaxed text-body">
                   {[
-                    "grafomotorika — jemná i hrubá motorika, správný úchop tužky",
-                    "řeč — komunikace, výslovnost, slovní zásoba",
-                    "sluch — vnímání rytmu a melodie řeči (příprava na čtení a psaní)",
-                    "zrak — rozlišování tvarů a barev, zraková paměť",
-                    "prostorová a pravolevá orientace — důležitá pro čtení zleva doprava",
-                    "matematické představy — základní tvary a jejich třídění",
+                    "grafomotorika – jemná i hrubá motorika, správný úchop tužky",
+                    "řeč – komunikace, výslovnost, slovní zásoba",
+                    "sluch – vnímání rytmu a melodie řeči (příprava na čtení a psaní)",
+                    "zrak – rozlišování tvarů a barev, zraková paměť",
+                    "prostorová a pravolevá orientace – důležitá pro čtení zleva doprava",
+                    "matematické představy – základní tvary a jejich třídění",
                   ].map((item) => (
                     <li key={item} className="flex gap-2">
                       <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-green" />
@@ -164,7 +164,7 @@ function PredskolacekPage() {
               </h3>
               <p className="mt-3 text-[15px] leading-relaxed text-body">
                 {t(
-                  "Přihlásit se můžete v aplikaci Naše MŠ nebo osobně ve své třídě. Kvůli přípravě pomůcek je přihlášení předem nutné — počítáme s vámi na všechna 3 setkání."
+                  "Přihlásit se můžete v aplikaci Naše MŠ nebo osobně ve své třídě. Kvůli přípravě pomůcek je přihlášení předem nutné – počítáme s vámi na všechna 3 setkání."
                 )}
               </p>
             </div>

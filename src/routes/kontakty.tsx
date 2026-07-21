@@ -9,13 +9,13 @@ export const Route = createFileRoute("/kontakty")({
   loader: ({ context }) => context.queryClient.ensureQueryData(siteCopyQueryOptions("kontakty")),
   head: () => ({
     meta: [
-      { title: "Kontakty — Mateřská škola Josefa Gočára" },
+      { title: "Kontakty – Mateřská škola Josefa Gočára" },
       {
         name: "description",
         content:
-          "Kontakty na Mateřskou školu Josefa Gočára v Hradci Králové — telefon, e-mail, adresa a čísla na jednotlivé třídy.",
+          "Kontakty na Mateřskou školu Josefa Gočára v Hradci Králové – telefon, e-mail, adresa a čísla na jednotlivé třídy.",
       },
-      { property: "og:title", content: "Kontakty — Mateřská škola Josefa Gočára" },
+      { property: "og:title", content: "Kontakty – Mateřská škola Josefa Gočára" },
       {
         property: "og:description",
         content: "Škroupova 693, 500 02 Hradec Králové. Telefon 495 444 421, kosticky@msjghk.cz.",
@@ -133,14 +133,14 @@ function KontaktyPage() {
               </div>
             </div>
 
-            {/* Pravý sloupec — mapa */}
+            {/* Pravý sloupec – mapa */}
             <div
               className="reveal-fade lg:mt-2"
               style={{ ["--reveal-delay" as string]: "160ms" }}
             >
               <div className="aspect-[4/3] w-full overflow-hidden rounded-[28px] border border-border/60 shadow-[0_20px_60px_-22px_rgba(16,15,16,0.25)]">
                 <iframe
-                  title="Mapa — Mateřská škola Josefa Gočára"
+                  title="Mapa – Mateřská škola Josefa Gočára"
                   src="https://mapy.com/s/kovocenope"
                   className="block h-full w-full"
                   style={{ border: 0 }}
@@ -232,7 +232,7 @@ function KontaktyPage() {
                   </div>
                 </div>
 
-                {/* Pravý sloupec — Barevné třídy */}
+                {/* Pravý sloupec – Barevné třídy */}
                 <div className={boxClass}>
                   <p className={sectionLabelClass}>{fixPrepositions("Barevné třídy")}</p>
                   <div className="mt-5 flex flex-col gap-5">

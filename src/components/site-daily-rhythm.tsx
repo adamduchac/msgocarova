@@ -129,7 +129,7 @@ export function SiteDailyRhythm() {
           </h2>
         </header>
 
-        {/* Polaroidy — mobile: horizontal snap slider (10) / md: grid 3x3 (9) / lg: grid 5x2 (10) */}
+        {/* Polaroidy – mobile: horizontal snap slider (10) / md: grid 3x3 (9) / lg: grid 5x2 (10) */}
         <ol
           ref={scrollerRef}
           className="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-10 pt-10 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-4 md:pt-14 lg:grid-cols-5"

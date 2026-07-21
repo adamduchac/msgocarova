@@ -28,17 +28,17 @@ export const Route = createFileRoute("/vzdelavani-a-rozvoj")({
   loader: ({ context }) => context.queryClient.ensureQueryData(siteCopyQueryOptions("vzdelavani-a-rozvoj")),
   head: () => ({
     meta: [
-      { title: "Vzdělávání a aktivity — Mateřská škola Josefa Gočára" },
+      { title: "Vzdělávání a aktivity – Mateřská škola Josefa Gočára" },
       {
         name: "description",
         content:
-          "Jak v naší školce rozvíjíme jazyk, myšlení a technologie a jaké aktivity dětem nabízíme — od plavání přes školu v přírodě po lyžařský kurz.",
+          "Jak v naší školce rozvíjíme jazyk, myšlení a technologie a jaké aktivity dětem nabízíme – od plavání přes školu v přírodě po lyžařský kurz.",
       },
-      { property: "og:title", content: "Vzdělávání a aktivity — Mateřská škola Josefa Gočára" },
+      { property: "og:title", content: "Vzdělávání a aktivity – Mateřská škola Josefa Gočára" },
       {
         property: "og:description",
         content:
-          "Vzdělávací program a aktivity naší mateřské školy — angličtina, MIU, digitální gramotnost, plavání, škola v přírodě i lyžařský kurz.",
+          "Vzdělávací program a aktivity naší mateřské školy – angličtina, MIU, digitální gramotnost, plavání, škola v přírodě i lyžařský kurz.",
       },
       { property: "og:url", content: "/vzdelavani-a-rozvoj" },
     ],
@@ -105,7 +105,7 @@ const allAreas: Area[] = [
     activities: [
       {
         icon: Brain,
-        title: "MIU — předškoláci (Červená kostička)",
+        title: "MIU – předškoláci (Červená kostička)",
         text:
           "Metoda MIU rozvíjí myšlení a kognitivní funkce a vede děti k uvědomovanému řešení úkolů, plánování a hledání strategií. Pracujeme s instrumentem Spojování bodů.",
       },

@@ -207,7 +207,7 @@ function StaffEditor({ value, onClose, onSave, saving }: { value: Draft; onClose
           <AdminField label="Pořadí"><AdminInput type="number" value={form.sort_order ?? 0} onChange={(e) => setForm({ ...form, sort_order: parseInt(e.target.value) || 0 })} /></AdminField>
         </div>
 
-        <AdminField label="Text (bio) — zobrazí se v carouselu a na stránce třídy">
+        <AdminField label="Text (bio) – zobrazí se v carouselu a na stránce třídy">
           <AdminTextarea rows={5} value={form.bio ?? ""} onChange={(e) => setForm({ ...form, bio: e.target.value })} />
         </AdminField>
 

@@ -41,7 +41,7 @@ const news: News[] = [
     badgeBg: "bg-brand-red",
     title: fixPrepositions("Akce s rodiči"),
     text: fixPrepositions(
-      "Od podzimního dlabání dýní přes vánoční posezení až po květnové Slavnosti školy — společně si užíváme celý rok."
+      "Od podzimního dlabání dýní přes vánoční posezení až po květnové Slavnosti školy – společně si užíváme celý rok."
     ),
     image: box3.url,
     alt: "Rodiče s dětmi opékají buřty u ohniště na zahradě školky",

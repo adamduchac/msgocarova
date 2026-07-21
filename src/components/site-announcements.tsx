@@ -36,7 +36,7 @@ export function SiteAnnouncements() {
               key={a.id}
               type="button"
               onClick={() => setOpen(a)}
-              aria-label={`Zobrazit podrobnosti — ${a.title}`}
+              aria-label={`Zobrazit podrobnosti – ${a.title}`}
               className="group relative block w-full cursor-pointer text-left rounded-2xl bg-cream shadow-[0_8px_24px_-18px_rgba(16,15,16,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background px-4 py-5 sm:px-5 sm:py-3.5"
             >
               <div className="pointer-events-none flex flex-col items-center gap-4 sm:hidden">

@@ -22,7 +22,7 @@ function useBenefits(): Benefit[] {
       titleSub: c("benefits.card1.titleSub", "s dopravním hřištěm"),
       text: c(
         "benefits.card1.text",
-        "Naše zelená oáza v centru města u Labe žije celý rok — podzimní hrátky, zimní bobování, letní osvěžení v bazénu a prvky přírodní zahrady. Součástí je dopravní hřiště i trampolína. Ven chodíme za každého počasí."
+        "Naše zelená oáza v centru města u Labe žije celý rok – podzimní hrátky, zimní bobování, letní osvěžení v bazénu a prvky přírodní zahrady. Součástí je dopravní hřiště i trampolína. Ven chodíme za každého počasí."
       ),
       image: zahrada.url,
       alt: "Plastelínový strom a malé hřiště se skluzavkou",

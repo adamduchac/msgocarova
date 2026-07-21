@@ -159,7 +159,7 @@ function EditorModal({ value, onClose, onSave, saving }: {
       setAiError("Nejdřív napište obsah zprávy.");
       return;
     }
-    if (!confirm("AI přeformátuje aktuální text — obsah zůstane stejný, upraví se jen struktura (odstavce, odrážky, tučné pojmy). Pokračovat?")) {
+    if (!confirm("AI přeformátuje aktuální text – obsah zůstane stejný, upraví se jen struktura (odstavce, odrážky, tučné pojmy). Pokračovat?")) {
       return;
     }
     setAiError(null);

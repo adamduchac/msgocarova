@@ -21,13 +21,13 @@ import pexesoImg from "@/assets/krouzky/pexeso.webp.asset.json";
 export const Route = createFileRoute("/pro-rodice")({
   head: () => ({
     meta: [
-      { title: "Pro rodiče — Mateřská škola Josefa Gočára" },
+      { title: "Pro rodiče – Mateřská škola Josefa Gočára" },
       {
         name: "description",
         content:
-          "Praktické informace pro rodiče — platby, program dne, výbava do školky a dokumenty ke stažení.",
+          "Praktické informace pro rodiče – platby, program dne, výbava do školky a dokumenty ke stažení.",
       },
-      { property: "og:title", content: "Pro rodiče — Mateřská škola Josefa Gočára" },
+      { property: "og:title", content: "Pro rodiče – Mateřská škola Josefa Gočára" },
       {
         property: "og:description",
         content: "Vše potřebné pro pohodový nástup i každodenní chod v naší školce.",
@@ -46,9 +46,9 @@ type DocCardProps = { title: string; asset: DocAsset };
 
 const formulare: DocCardProps[] = [
   { title: "Žádost o přijetí k předškolnímu vzdělávání", asset: zadostPrijeti },
-  { title: "Žádost o přijetí — prázdninový provoz", asset: zadostPrazdniny },
+  { title: "Žádost o přijetí – prázdninový provoz", asset: zadostPrazdniny },
   { title: "Žádost o uvolnění dítěte z povinného předškolního vzdělávání", asset: zadostUvolneni },
-  { title: "Pravidla přijímání dětí — prázdninový provoz 2026", asset: pravidlaPrazdniny },
+  { title: "Pravidla přijímání dětí – prázdninový provoz 2026", asset: pravidlaPrazdniny },
 ];
 
 const zakladni: DocCardProps[] = [

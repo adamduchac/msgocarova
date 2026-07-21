@@ -1,0 +1,2 @@
+UPDATE public.site_copy SET value = REPLACE(value, '—', '–') WHERE value LIKE '%—%';
+UPDATE public.announcements SET title = REPLACE(title, '—', '–'), content = REPLACE(content, '—', '–') WHERE title LIKE '%—%' OR content LIKE '%—%';
