@@ -53,11 +53,20 @@ export async function fetchInfoBox(page: InfoPage): Promise<InfoBox | null> {
 
 export type DocumentWithUrl = DocumentRow & { url: string | null };
 
+const SIGN_EXPIRES = 60 * 60; // 1h
+
 // Rows seeded from the pre-CMS content (supabase/seed-cms-content.sql) reference
 // the site's already-hosted asset URLs directly; admin uploads store bucket paths.
-function storagePublicUrl(bucket: "staff-photos" | "documents", path: string): string {
+// The workspace disallows public buckets (public_buckets_blocked), so bucket
+// paths are served via signed URLs — anon read policies on the two buckets
+// (migration 20260721120000) make signing work for the anonymous client too.
+async function storageFileUrl(
+  bucket: "staff-photos" | "documents",
+  path: string,
+): Promise<string | null> {
   if (path.startsWith("/") || path.startsWith("http")) return path;
-  return supabase.storage.from(bucket).getPublicUrl(path).data.publicUrl;
+  const { data } = await supabase.storage.from(bucket).createSignedUrl(path, SIGN_EXPIRES);
+  return data?.signedUrl ?? null;
 }
 
 export async function fetchDocuments(activeOnly = true): Promise<DocumentWithUrl[]> {
@@ -71,12 +80,12 @@ export async function fetchDocuments(activeOnly = true): Promise<DocumentWithUrl
   const { data, error } = await q;
   if (error) throw error;
   if (!data || data.length === 0) return [];
-  // Buckets are public (migration 20260721000000) — build stable public URLs
-  // instead of signing each file (removes an N+1 round-trip per row).
-  return data.map((d) => ({
-    ...d,
-    url: storagePublicUrl("documents", d.file_path),
-  }));
+  return Promise.all(
+    data.map(async (d) => ({
+      ...d,
+      url: await storageFileUrl("documents", d.file_path),
+    })),
+  );
 }
 
 // -------------------- STAFF --------------------
@@ -93,10 +102,12 @@ export async function fetchStaff(activeOnly = true): Promise<StaffWithPhoto[]> {
   const { data, error } = await q;
   if (error) throw error;
   if (!data) return [];
-  return data.map((s) => ({
-    ...s,
-    photo_url: s.photo_path ? storagePublicUrl("staff-photos", s.photo_path) : null,
-  }));
+  return Promise.all(
+    data.map(async (s) => ({
+      ...s,
+      photo_url: s.photo_path ? await storageFileUrl("staff-photos", s.photo_path) : null,
+    })),
+  );
 }
 
 export function staffFullName(s: Pick<StaffRow, "title_prefix" | "first_name" | "last_name" | "title_suffix">): string {
