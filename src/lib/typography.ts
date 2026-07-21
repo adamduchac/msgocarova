@@ -6,5 +6,5 @@
  * Ovlivňuje pouze samostatná jednopísmenná slova následovaná mezerou.
  */
 export function fixPrepositions(text: string): string {
-  return text.replace(/(?<!\S)([k-svzouai])\s+(?=\S)/gi, "$1\u00A0");
+  return text.replace(/(?<!\S)([ksvzouai])\s+(?=\S)/gi, "$1\u00A0");
 }
