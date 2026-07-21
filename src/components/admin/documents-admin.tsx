@@ -116,7 +116,7 @@ export function DocumentsAdmin() {
                           <a href={d.url} target="_blank" rel="noopener noreferrer" className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-black/5 text-muted-foreground" title="Otevřít"><ExternalLink className="h-4 w-4" /></a>
                         )}
                         <IconBtn onClick={() => toggle.mutate({ id: d.id, is_active: !d.is_active })} title={d.is_active ? "Skrýt" : "Zobrazit"}>
-                          {d.is_active ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                          {d.is_active ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
                         </IconBtn>
                         <IconBtn onClick={() => setEditing(d)} title="Upravit"><Pencil className="h-4 w-4" /></IconBtn>
                         <IconBtn onClick={() => { if (confirm(`Smazat "${d.title}"?`)) del.mutate(d); }} title="Smazat" danger><Trash2 className="h-4 w-4" /></IconBtn>
