@@ -190,7 +190,7 @@ export function SiteHero() {
             ))}
           </div>
 
-          {/* Floating cube A — top-left, closer to centre */}
+          {/* Floating cube A – top-left, closer to centre */}
           <div
             ref={cubeAWrapRef}
             className="hero-cube-wrap pointer-events-none absolute left-[-4%] top-[-3%] z-10 w-[6.3rem] sm:left-[4%] sm:top-[2%] sm:w-[7.35rem] lg:w-[10.5rem]"
@@ -207,7 +207,7 @@ export function SiteHero() {
               }}
             />
           </div>
-          {/* Floating cube B — lower-right, pulled in toward centre */}
+          {/* Floating cube B – lower-right, pulled in toward centre */}
           <div
             ref={cubeBWrapRef}
             className="hero-cube-wrap pointer-events-none absolute bottom-[2%] right-[-9%] z-10 w-[6.6rem] sm:bottom-[6%] sm:right-[-3%] sm:w-[7.55rem] lg:w-[10.4rem]"

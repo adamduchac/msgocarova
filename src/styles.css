@@ -222,7 +222,7 @@
   transform: none;
 }
 
-/* Mobile / touch — shorter, lighter reveal to keep 60fps on coarse-pointer GPUs. */
+/* Mobile / touch – shorter, lighter reveal to keep 60fps on coarse-pointer GPUs. */
 @media (max-width: 767px), (pointer: coarse) {
   :where(.reveal-up, .reveal-right, .reveal-fade, .reveal-scale) {
     transition-duration: 380ms;
@@ -233,7 +233,7 @@
   .reveal-scale { transform: none; }
 }
 
-/* Daily-rhythm horizontal slider on mobile: skip per-card reveal — cards are
+/* Daily-rhythm horizontal slider on mobile: skip per-card reveal – cards are
    horizontally off-screen when IntersectionObserver fires vertically, so the
    animation would happen unseen. Header reveal stays intact. */
 @media (max-width: 767px) {
@@ -332,7 +332,7 @@
 
 }
 
-/* Navbar — animated underline on desktop nav items ------------------- */
+/* Navbar – animated underline on desktop nav items ------------------- */
 .nav-link {
   position: relative;
 }
@@ -354,7 +354,7 @@
   transform: scaleX(1);
 }
 
-/* Mobile nav — stagger reveal of items ------------------------------- */
+/* Mobile nav – stagger reveal of items ------------------------------- */
 .mobile-nav-item {
   opacity: 0;
   transform: translate3d(0, -4px, 0);
@@ -377,7 +377,7 @@
   .nav-submenu, .nav-submenu-item { transition: none !important; transform: none !important; opacity: 1 !important; }
 }
 
-/* Desktop submenu — box + staggered items ---------------------------- */
+/* Desktop submenu – box + staggered items ---------------------------- */
 .nav-submenu {
   opacity: 0;
   transform: translate3d(0, -6px, 0);
@@ -426,7 +426,7 @@ html { scroll-behavior: smooth; }
 .hero-slide[data-active="false"] { opacity: 0; z-index: 1; }
 
 
-/* Hero cubes — enter + float ----------------------------------------- */
+/* Hero cubes – enter + float ----------------------------------------- */
 @keyframes hero-cube-in {
   0%   { opacity: 0; transform: scale(0.3); }
   65%  { opacity: 1; transform: scale(1.14); }
@@ -462,7 +462,7 @@ html { scroll-behavior: smooth; }
   animation: var(--cube-float, hero-cube-float-a) var(--cube-float-duration, 5s) ease-in-out infinite;
 }
 
-/* Disable the infinite cube float on touch devices — composite cost stacks
+/* Disable the infinite cube float on touch devices – composite cost stacks
    with the hero crossfade and drags the whole page's framerate down. */
 @media (pointer: coarse) {
   .hero-cube.is-floating { animation: none; }

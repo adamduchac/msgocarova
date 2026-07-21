@@ -55,7 +55,7 @@ export function SiteFooter({
     <footer className="relative bg-transparent pt-24 md:pt-32 pb-16 md:pb-20">
       <div className="container mx-auto px-6 relative z-10">
         <div className="relative">
-          {/* Horní kostička — sedí na horní hraně tmavé karty */}
+          {/* Horní kostička – sedí na horní hraně tmavé karty */}
           <img
             src={topCube.url}
             alt=""
@@ -131,7 +131,7 @@ export function SiteFooter({
                       <a
                         href={c.href}
                         className="group flex items-center gap-3 transition-colors duration-200 hover:text-brand-yellow focus-visible:outline-none"
-                        aria-label={fixPrepositions(`${c.name} — telefon ${c.phone}, vstup do třídy`)}
+                        aria-label={fixPrepositions(`${c.name} – telefon ${c.phone}, vstup do třídy`)}
                       >
                         <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${c.dotClass}`} aria-hidden />
                         <span className="flex-1 font-display text-[15px] font-medium text-white group-hover:text-brand-yellow transition-colors duration-200">

@@ -89,7 +89,7 @@ export function SiteClasses() {
             <div className="relative aspect-[4/3] w-full">
               <img
                 src={kostickyA.url}
-                alt="Plastelínové kostičky doma — červená, modrá, zelená a žlutá"
+                alt="Plastelínové kostičky doma – červená, modrá, zelená a žlutá"
                 data-active={!outside}
                 className="classes-illu absolute inset-0 h-full w-full select-none object-contain"
                 loading="lazy"
@@ -107,7 +107,7 @@ export function SiteClasses() {
               />
             </div>
 
-            {/* Glass switch — mobile: centered below image; md+: absolute right of image */}
+            {/* Glass switch – mobile: centered below image; md+: absolute right of image */}
             <div className="mt-4 flex justify-center md:mt-0 md:absolute md:right-0 md:top-1/2 md:block md:-translate-y-1/2 lg:right-2">
               <button
                 type="button"
@@ -155,7 +155,7 @@ export function SiteClasses() {
                 key={c.id}
                 to="/barevne-tridy"
                 hash={c.id}
-                aria-label={fixPrepositions(`Přejít na detail — ${c.name}`)}
+                aria-label={fixPrepositions(`Přejít na detail – ${c.name}`)}
                 className="reveal-up group relative block overflow-hidden rounded-3xl border border-border/70 bg-background p-5 pb-16 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}
               >

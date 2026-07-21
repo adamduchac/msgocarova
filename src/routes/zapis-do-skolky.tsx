@@ -10,13 +10,13 @@ export const Route = createFileRoute("/zapis-do-skolky")({
   loader: ({ context }) => context.queryClient.ensureQueryData(siteCopyQueryOptions("zapis-do-skolky")),
   head: () => ({
     meta: [
-      { title: "Zápis do školky — Mateřská škola Josefa Gočára" },
+      { title: "Zápis do školky – Mateřská škola Josefa Gočára" },
       {
         name: "description",
         content:
           "Termíny, kritéria a dokumenty k zápisu do Mateřské školy Josefa Gočára. Aktuální stav zápisu, průběh a co si připravit.",
       },
-      { property: "og:title", content: "Zápis do školky — Mateřská škola Josefa Gočára" },
+      { property: "og:title", content: "Zápis do školky – Mateřská škola Josefa Gočára" },
       {
         property: "og:description",
         content: "Aktuální stav zápisu, průběh, potřebné dokumenty a informace o prázdninovém provozu.",

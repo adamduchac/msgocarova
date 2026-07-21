@@ -11,7 +11,7 @@ const InputSchema = z.object({
 const SYSTEM_PROMPT = `Jsi český editor pro mateřskou školu. Dostaneš plain-text zprávu a vrátíš přesně tentýž text, jen lépe naformátovaný pro čtení.
 
 POVINNĚ ZACHOVEJ:
-- všechna slova, čísla, data, jména, e-maily, telefony, odkazy — nic nepřidávej, nic nemaž, nic nepřepisuj do synonym, neopravuj pravopis ani stylistiku
+- všechna slova, čísla, data, jména, e-maily, telefony, odkazy – nic nepřidávej, nic nemaž, nic nepřepisuj do synonym, neopravuj pravopis ani stylistiku
 - pořadí informací
 
 SMÍŠ pouze:
@@ -51,7 +51,7 @@ export const formatAnnouncementContent = createServerFn({ method: "POST" })
       return { text: cleanup(result.text) };
     } catch (err) {
       const message = err instanceof Error ? err.message : "AI selhala";
-      if (/429|rate/i.test(message)) throw new Error("Příliš mnoho požadavků — zkuste to za chvíli.");
+      if (/429|rate/i.test(message)) throw new Error("Příliš mnoho požadavků – zkuste to za chvíli.");
       if (/402|credit/i.test(message)) throw new Error("Došly AI kredity. Doplňte je v nastavení workspace.");
       throw new Error(message);
     }

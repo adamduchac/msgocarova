@@ -102,7 +102,7 @@ export function AnnouncementsAdmin() {
               </div>
               <div className="flex gap-1">
                 <IconBtn onClick={() => toggle.mutate({ id: a.id, is_active: !a.is_active })} title={a.is_active ? "Deaktivovat" : "Aktivovat"}>
-                  {a.is_active ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  {a.is_active ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
                 </IconBtn>
                 <IconBtn onClick={() => setEditing(a)} title="Upravit"><Pencil className="h-4 w-4" /></IconBtn>
                 <IconBtn onClick={() => { if (confirm("Opravdu smazat zprávu?")) del.mutate(a.id); }} title="Smazat" danger><Trash2 className="h-4 w-4" /></IconBtn>
@@ -159,7 +159,7 @@ function EditorModal({ value, onClose, onSave, saving }: {
       setAiError("Nejdřív napište obsah zprávy.");
       return;
     }
-    if (!confirm("AI přeformátuje aktuální text — obsah zůstane stejný, upraví se jen struktura (odstavce, odrážky, tučné pojmy). Pokračovat?")) {
+    if (!confirm("AI přeformátuje aktuální text – obsah zůstane stejný, upraví se jen struktura (odstavce, odrážky, tučné pojmy). Pokračovat?")) {
       return;
     }
     setAiError(null);

@@ -17,17 +17,17 @@ export const Route = createFileRoute("/barevne-tridy")({
   loader: ({ context }) => context.queryClient.ensureQueryData(siteCopyQueryOptions("barevne-tridy")),
   head: () => ({
     meta: [
-      { title: "Barevné třídy — Mateřská škola Josefa Gočára" },
+      { title: "Barevné třídy – Mateřská škola Josefa Gočára" },
       {
         name: "description",
         content:
-          "Poznejte naše čtyři třídy — Červená, Zelená, Modrá a Žlutá kostička. Paní učitelky, věkové skupiny a kontaktní telefony.",
+          "Poznejte naše čtyři třídy – Červená, Zelená, Modrá a Žlutá kostička. Paní učitelky, věkové skupiny a kontaktní telefony.",
       },
-      { property: "og:title", content: "Barevné třídy — Mateřská škola Josefa Gočára" },
+      { property: "og:title", content: "Barevné třídy – Mateřská škola Josefa Gočára" },
       {
         property: "og:description",
         content:
-          "Čtyři barevné kostičky — Červená, Zelená, Modrá a Žlutá třída Mateřské školy Josefa Gočára.",
+          "Čtyři barevné kostičky – Červená, Zelená, Modrá a Žlutá třída Mateřské školy Josefa Gočára.",
       },
       { property: "og:url", content: "/barevne-tridy" },
     ],
@@ -68,7 +68,7 @@ const classes: ClassData[] = [
       "Třída pro starší děti, která podporuje samostatnost, spolupráci a předškolní dovednosti.",
     specialty: {
       label: "Specialita třídy",
-      text: "MIU pro předškoláky — rozvoj myšlení a strategií.",
+      text: "MIU pro předškoláky – rozvoj myšlení a strategií.",
     },
     phone: "495 444 425",
     phoneHref: "tel:+420495444425",
@@ -88,7 +88,7 @@ const classes: ClassData[] = [
         name: "Mgr. Jitka Kouklíková",
         role: "Zástupkyně ředitele pro MŠ",
         photo: jitkaPhoto.url,
-        bio: "Jako zástupkyně ředitele pro MŠ propojuji každodenní práci s dětmi s vedením týmu mateřské školy a organizací provozu. Velkou radostí je pro mě vidět aktivní děti a spokojené paní učitelky, kterým se daří připravovat pro děti zajímavé aktivity a vytvářet smysluplné, podnětné prostředí — ve třídách i na školní zahradě. Dětem nejraději připravuji aktivity podporující jejich myšlení, tvořivost a radost z objevování. Záleží mi na tom, aby jim u nás bylo opravdu dobře.",
+        bio: "Jako zástupkyně ředitele pro MŠ propojuji každodenní práci s dětmi s vedením týmu mateřské školy a organizací provozu. Velkou radostí je pro mě vidět aktivní děti a spokojené paní učitelky, kterým se daří připravovat pro děti zajímavé aktivity a vytvářet smysluplné, podnětné prostředí – ve třídách i na školní zahradě. Dětem nejraději připravuji aktivity podporující jejich myšlení, tvořivost a radost z objevování. Záleží mi na tom, aby jim u nás bylo opravdu dobře.",
       },
       {
         name: "Hana Hloušková",
@@ -106,7 +106,7 @@ const classes: ClassData[] = [
       "Třída pro starší děti se zaměřením na samostatnost a přípravu na školu.",
     specialty: {
       label: "Specialita třídy",
-      text: "Jazykové hrátky — rozvoj řeči a komunikace.",
+      text: "Jazykové hrátky – rozvoj řeči a komunikace.",
     },
     phone: "495 444 426",
     phoneHref: "tel:+420495444426",
@@ -233,7 +233,7 @@ function TeacherCard({
           {teacher.photo ? (
             <img
               src={teacher.photo}
-              alt={`Portrét — ${teacher.name}`}
+              alt={`Portrét – ${teacher.name}`}
               className="h-full w-full object-cover"
               loading="lazy"
               decoding="async"
@@ -266,7 +266,7 @@ function TeacherCard({
         <div
           id={panelId}
           role="region"
-          aria-label={`Medailonek — ${teacher.name}`}
+          aria-label={`Medailonek – ${teacher.name}`}
           className={`grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none ${
             isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
           }`}
@@ -399,7 +399,7 @@ function BarevneTridyPage() {
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-body">
               {copy(
                 "hero.lead",
-                "Naše třídy nesou názvy barevných kostiček — symbolu dětské hry, té nejpřirozenější a nejdůležitější činnosti předškoláka. Cílem je podnětné prostředí plné hraček a zajímavých aktivit, kam se děti každý den těší."
+                "Naše třídy nesou názvy barevných kostiček – symbolu dětské hry, té nejpřirozenější a nejdůležitější činnosti předškoláka. Cílem je podnětné prostředí plné hraček a zajímavých aktivit, kam se děti každý den těší."
               )}
             </p>
           </div>

@@ -18,13 +18,13 @@ const galleryPhotos = [
 export const Route = createFileRoute("/o-skolce")({
   head: () => ({
     meta: [
-      { title: "O školce — Mateřská škola Josefa Gočára" },
+      { title: "O školce – Mateřská škola Josefa Gočára" },
       {
         name: "description",
         content:
-          "Kdo jsme, jak vzděláváme, kdo se stará o vaše děti a co dalšího nabízíme — od zahrady až po školní jídelnu.",
+          "Kdo jsme, jak vzděláváme, kdo se stará o vaše děti a co dalšího nabízíme – od zahrady až po školní jídelnu.",
       },
-      { property: "og:title", content: "O školce — Mateřská škola Josefa Gočára" },
+      { property: "og:title", content: "O školce – Mateřská škola Josefa Gočára" },
       {
         property: "og:description",
         content:
@@ -147,7 +147,7 @@ function OSkolcePage() {
     {
       icon: UtensilsCrossed,
       title: c("vision.card5.title", "Stravování a pitný režim"),
-      text: c("vision.card5.text", "Děti se stravují třikrát denně — svačinky připravuje paní kuchařka, obědy dovážíme ze ZŠ Josefa Gočára. Po celý den mají neomezený pitný režim."),
+      text: c("vision.card5.text", "Děti se stravují třikrát denně – svačinky připravuje paní kuchařka, obědy dovážíme ze ZŠ Josefa Gočára. Po celý den mají neomezený pitný režim."),
       color: "text-ink/70",
       bg: "#FDFAF6",
     },

@@ -5,7 +5,7 @@ import { useEffect } from "react";
  * `.reveal-fade`, or `.reveal-scale` and adds `.is-visible` when it enters the
  * viewport. One-shot per element.
  *
- * Re-scans on demand via `window.dispatchEvent(new Event("reveal:rescan"))` —
+ * Re-scans on demand via `window.dispatchEvent(new Event("reveal:rescan"))` –
  * call from any carousel/dynamic content that mounts after initial paint.
  * We deliberately avoid a body-wide MutationObserver: on mobile it causes
  * measurable jank during scroll.
@@ -52,7 +52,7 @@ export function useRevealOnScroll() {
     const onRescan = () => observeAll();
     window.addEventListener("reveal:rescan", onRescan);
 
-    // Lightweight MutationObserver — only childList on body, no subtree
+    // Lightweight MutationObserver – only childList on body, no subtree
     // attribute watching (that was the original jank source). Re-scans are
     // throttled via requestIdleCallback so they happen during browser idle.
     type IdleScheduler = (cb: () => void, opts?: { timeout?: number }) => number;

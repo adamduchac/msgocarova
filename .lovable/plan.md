@@ -1,17 +1,11 @@
-## Plán úpravy stránky `/kontakty`
+Prohodit status ikony oka v administraci medailonků zaměstnanců (`src/components/admin/staff-admin.tsx`).
 
-Cíl: vycentrovat textový sloupec vlevo s mapou vpravo a změnit poměr stran mapy na 4:3.
+Aktuální stav:
+- Aktivní zaměstnanec zobrazuje tlačítko s ikonou EyeOff (přeškrtnuté oko) a title „Skrýt".
+- Skrytý zaměstnanec zobrazuje tlačítko s ikonou Eye (plné oko) a title „Zobrazit".
 
-### 1. Změna poměru stran mapy
-- V hero pravém sloupci najít kontejner mapy (aktuálně `aspect-square`) a změnit na `aspect-[4/3]`.
-- Zachovat `w-full`, zaoblení `rounded-[28px]`, stín a border.
+Cílový stav:
+- Aktivní zaměstnanec = plné oko (Eye) – reprezentuje, že je viditelný na webu.
+- Skrytý zaměstnanec = přeškrtnuté oko (EyeOff) – reprezentuje, že je skrytý.
 
-### 2. Vertikální centrování levého sloupce
-- V gridu hero sekce (aktuálně `lg:grid-cols-2 lg:items-start lg:gap-14`) změnit `lg:items-start` na `lg:items-center`.
-- Tím se levý textový blok (nadpis, lead, kontakty) vertikálně vycentruje s mapou vpravo.
-
-### 3. Ověření
-- Spustit build (`bunx vite build` / `bun run build`) a zkontrolovat, že stránka `/kontakty` kompiluje bez chyb.
-- Volitelně screenshot preview na desktopu pro kontrolu vertikálního zarovnání a poměru stran mapy.
-
-Žádné jiné stránky ani logika se nemění.
+Změna se týká pouze prohození ikon `<Eye />` a `<EyeOff />` uvnitř podmínky `s.is_active ? … : …` na řádku 122. Title tlačítek a akce (toggle) zůstávají stejné.
