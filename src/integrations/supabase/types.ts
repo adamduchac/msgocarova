@@ -147,7 +147,6 @@ export type Database = {
         Row: {
           bio: string | null
           class_color: Database["public"]["Enums"]["class_color"]
-          staff_group: Database["public"]["Enums"]["staff_group"]
           created_at: string
           first_name: string
           id: string
@@ -164,7 +163,6 @@ export type Database = {
         Insert: {
           bio?: string | null
           class_color?: Database["public"]["Enums"]["class_color"]
-          staff_group?: Database["public"]["Enums"]["staff_group"]
           created_at?: string
           first_name: string
           id?: string
@@ -181,7 +179,6 @@ export type Database = {
         Update: {
           bio?: string | null
           class_color?: Database["public"]["Enums"]["class_color"]
-          staff_group?: Database["public"]["Enums"]["staff_group"]
           created_at?: string
           first_name?: string
           id?: string
@@ -237,7 +234,6 @@ export type Database = {
       doc_category: "formulare" | "dokumenty"
       info_page: "predskolacek" | "zapis"
       info_state: "open" | "upcoming" | "closed"
-      staff_group: "pedagog" | "provoz"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -370,7 +366,6 @@ export const Constants = {
       doc_category: ["formulare", "dokumenty"],
       info_page: ["predskolacek", "zapis"],
       info_state: ["open", "upcoming", "closed"],
-      staff_group: ["pedagog", "provoz"],
     },
   },
 } as const
