@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { FileText, Download, Wallet, CreditCard, Check, Info } from "lucide-react";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
-import { fetchDocuments, type DocumentWithUrl } from "@/lib/cms";
+import { documentsPublicQueryOptions, type DocumentWithUrl } from "@/lib/cms";
 import { useCopyPage, siteCopyQueryOptions } from "@/lib/use-copy";
 
 import zadostPrijeti from "@/assets/dokumenty/zadost-o-prijeti.pdf.asset.json";
@@ -36,7 +36,11 @@ export const Route = createFileRoute("/pro-rodice")({
     ],
     links: [{ rel: "canonical", href: "/pro-rodice" }],
   }),
-  loader: ({ context }) => context.queryClient.ensureQueryData(siteCopyQueryOptions("pro-rodice")),
+  loader: ({ context }) =>
+    Promise.all([
+      context.queryClient.ensureQueryData(siteCopyQueryOptions("pro-rodice")),
+      context.queryClient.ensureQueryData(documentsPublicQueryOptions),
+    ]),
   component: ProRodicePage,
 });
 
@@ -137,27 +141,27 @@ function CmsDocCard({ doc }: { doc: DocumentWithUrl }) {
 }
 
 function CmsDocumentsGrid({ c }: { c: (key: string, fallback: string) => string }) {
-  const { data: cmsDocs } = useQuery({
-    queryKey: ["documents", "active"],
-    queryFn: () => fetchDocuments(true),
-    staleTime: 60_000,
-  });
+  const { data: cmsDocs } = useQuery(documentsPublicQueryOptions);
   const cmsFormulare = (cmsDocs ?? []).filter((d) => d.category === "formulare");
   const cmsZakladni = (cmsDocs ?? []).filter((d) => d.category === "dokumenty");
+  // CMS is the source of truth once a category has rows; otherwise fall back to
+  // the bundled defaults so the section is never empty before seeding.
   return (
     <div className="mt-10 grid gap-8 md:grid-cols-2">
       <div>
         <h3 className="mb-4 font-display text-lg font-bold text-ink">{c("documents.formsTitle", "Formuláře a žádosti")}</h3>
         <div className="grid gap-4">
-          {formulare.map((doc) => (<DocCard key={doc.asset.url} doc={doc} />))}
-          {cmsFormulare.map((doc) => (<CmsDocCard key={doc.id} doc={doc} />))}
+          {cmsFormulare.length > 0
+            ? cmsFormulare.map((doc) => (<CmsDocCard key={doc.id} doc={doc} />))
+            : formulare.map((doc) => (<DocCard key={doc.asset.url} doc={doc} />))}
         </div>
       </div>
       <div>
         <h3 className="mb-4 font-display text-lg font-bold text-ink">{c("documents.basicTitle", "Základní dokumenty")}</h3>
         <div className="grid gap-4">
-          {zakladni.map((doc) => (<DocCard key={doc.asset.url} doc={doc} />))}
-          {cmsZakladni.map((doc) => (<CmsDocCard key={doc.id} doc={doc} />))}
+          {cmsZakladni.length > 0
+            ? cmsZakladni.map((doc) => (<CmsDocCard key={doc.id} doc={doc} />))
+            : zakladni.map((doc) => (<DocCard key={doc.asset.url} doc={doc} />))}
         </div>
       </div>
     </div>

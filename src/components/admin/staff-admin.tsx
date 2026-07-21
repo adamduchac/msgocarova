@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState, useRef } from "react";
 import { Plus, Pencil, Trash2, Eye, EyeOff, Upload, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { fetchStaff, staffFullName, uploadToBucket, removeFromBucket, CLASS_COLOR_LABEL, type StaffWithPhoto, type ClassColor } from "@/lib/cms";
+import { fetchStaff, staffFullName, uploadToBucket, removeFromBucket, CLASS_COLOR_LABEL, type StaffWithPhoto, type ClassColor, type StaffGroup } from "@/lib/cms";
 import { AdminHeader, AdminField, AdminInput, AdminTextarea, AdminSelect, AdminModal } from "@/components/admin/ui";
 
 type Draft = Partial<StaffWithPhoto> & { _file?: File | null };
@@ -28,6 +28,7 @@ export function StaffAdmin() {
         title_suffix: draft.title_suffix || null,
         position: draft.position || "Učitelka",
         class_color: (draft.class_color ?? "none") as ClassColor,
+        staff_group: (draft.staff_group ?? "pedagog") as StaffGroup,
         phone: draft.phone || null,
         bio: draft.bio || null,
         photo_path,
@@ -84,7 +85,7 @@ export function StaffAdmin() {
         description="Fotky, jména a texty učitelek a personálu. Zobrazují se v carouselu na úvodní stránce a na stránkách jednotlivých tříd."
         action={
           <button
-            onClick={() => setEditing({ is_active: true, class_color: "none", position: "Učitelka", sort_order: 0 })}
+            onClick={() => setEditing({ is_active: true, class_color: "none", staff_group: "pedagog", position: "Učitelka", sort_order: 0 })}
             className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
           >
             <Plus className="h-4 w-4" /> Nový medailonek
@@ -201,6 +202,12 @@ function StaffEditor({ value, onClose, onSave, saving }: { value: Draft; onClose
           <AdminField label="Třída">
             <AdminSelect value={form.class_color ?? "none"} onChange={(e) => setForm({ ...form, class_color: e.target.value as ClassColor })}>
               {CLASS_ORDER.map((c) => <option key={c} value={c}>{CLASS_COLOR_LABEL[c]}</option>)}
+            </AdminSelect>
+          </AdminField>
+          <AdminField label="Tým">
+            <AdminSelect value={form.staff_group ?? "pedagog"} onChange={(e) => setForm({ ...form, staff_group: e.target.value as StaffGroup })}>
+              <option value="pedagog">Pedagogický tým</option>
+              <option value="provoz">Provozní tým</option>
             </AdminSelect>
           </AdminField>
           <AdminField label="Telefon"><AdminInput value={form.phone ?? ""} onChange={(e) => setForm({ ...form, phone: e.target.value })} /></AdminField>

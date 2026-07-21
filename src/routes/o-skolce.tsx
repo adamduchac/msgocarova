@@ -1,9 +1,11 @@
 import { useRef } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ChevronLeft, ChevronRight, Heart, Sparkles, Trees, Activity, UtensilsCrossed } from "lucide-react";
 import { SiteNavbar } from "@/components/site-navbar";
 import { SiteFooter } from "@/components/site-footer";
-import { teamMembers, getInitials } from "@/data/team";
+import { teamMembers, getInitials, type TeamMember } from "@/data/team";
+import { staffPublicQueryOptions, staffToTeamMember } from "@/lib/cms";
 import { useCopyPage, siteCopyQueryOptions } from "@/lib/use-copy";
 import oskolce1 from "@/assets/oskolce-1.webp.asset.json";
 import oskolce2 from "@/assets/oskolce-2.webp.asset.json";
@@ -32,7 +34,11 @@ export const Route = createFileRoute("/o-skolce")({
     ],
     links: [{ rel: "canonical", href: "/o-skolce" }],
   }),
-  loader: ({ context }) => context.queryClient.ensureQueryData(siteCopyQueryOptions("o-skolce")),
+  loader: ({ context }) =>
+    Promise.all([
+      context.queryClient.ensureQueryData(siteCopyQueryOptions("o-skolce")),
+      context.queryClient.ensureQueryData(staffPublicQueryOptions),
+    ]),
   component: OSkolcePage,
 });
 
@@ -104,6 +110,9 @@ function AboutGallery() {
 
 function OSkolcePage() {
   const c = useCopyPage("o-skolce");
+  const { data: dbStaff } = useQuery(staffPublicQueryOptions);
+  const dbMembers = (dbStaff ?? []).map(staffToTeamMember);
+  const team: TeamMember[] = dbMembers.length > 0 ? dbMembers : teamMembers;
 
   const visionCards = [
     {
@@ -318,10 +327,10 @@ function OSkolcePage() {
               </h2>
             </div>
 
-            <TeamGroup title={c("team.pedagogTitle", "Pedagogický tým")} members={teamMembers.filter((m) => m.group === "pedagog")} />
+            <TeamGroup title={c("team.pedagogTitle", "Pedagogický tým")} members={team.filter((m) => m.group === "pedagog")} />
 
             <div className="mt-16">
-              <TeamGroup title={c("team.provozTitle", "Provozní tým")} members={teamMembers.filter((m) => m.group === "provoz")} />
+              <TeamGroup title={c("team.provozTitle", "Provozní tým")} members={team.filter((m) => m.group === "provoz")} />
             </div>
           </div>
         </section>
