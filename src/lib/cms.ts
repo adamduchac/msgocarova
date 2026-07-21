@@ -53,6 +53,13 @@ export async function fetchInfoBox(page: InfoPage): Promise<InfoBox | null> {
 
 export type DocumentWithUrl = DocumentRow & { url: string | null };
 
+// Rows seeded from the pre-CMS content (supabase/seed-cms-content.sql) reference
+// the site's already-hosted asset URLs directly; admin uploads store bucket paths.
+function storagePublicUrl(bucket: "staff-photos" | "documents", path: string): string {
+  if (path.startsWith("/") || path.startsWith("http")) return path;
+  return supabase.storage.from(bucket).getPublicUrl(path).data.publicUrl;
+}
+
 export async function fetchDocuments(activeOnly = true): Promise<DocumentWithUrl[]> {
   let q = supabase
     .from("documents")
@@ -68,7 +75,7 @@ export async function fetchDocuments(activeOnly = true): Promise<DocumentWithUrl
   // instead of signing each file (removes an N+1 round-trip per row).
   return data.map((d) => ({
     ...d,
-    url: supabase.storage.from("documents").getPublicUrl(d.file_path).data.publicUrl,
+    url: storagePublicUrl("documents", d.file_path),
   }));
 }
 
@@ -88,9 +95,7 @@ export async function fetchStaff(activeOnly = true): Promise<StaffWithPhoto[]> {
   if (!data) return [];
   return data.map((s) => ({
     ...s,
-    photo_url: s.photo_path
-      ? supabase.storage.from("staff-photos").getPublicUrl(s.photo_path).data.publicUrl
-      : null,
+    photo_url: s.photo_path ? storagePublicUrl("staff-photos", s.photo_path) : null,
   }));
 }
 
